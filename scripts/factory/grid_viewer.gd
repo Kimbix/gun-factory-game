@@ -1,19 +1,15 @@
 class_name GridViewer
 extends Node2D
-## Draws a Grid and runs its simulation at a steady tick interval for the demo.
-
-@export_range(0, INT8_MAX) var width: int
-@export_range(0, INT8_MAX) var height: int
-@export_range(0.01, 10.0) var tick_interval: float = 0.3
+## Draws a Grid given to it. Does NOT own or tick the grid — the owner is responsible.
+## Used as a debug overlay. Position this node where you want the overlay to appear.
+## The owner calls `update_interp(t)` each frame with the tick progress [0,1] so items
+## smooth between cells; `bind(grid)` after placement; `mark_dirty()` after layout changes.
 
 var grid: Grid
 
 var _empty_sprite: Texture2D
+var _interp_t: float = 1.0
 
-var _timer: float = 0.0
-
-# Cached draw layers, rebuilt whenever grid layout changes (placement/removal).
-# Each entry: {cell: Vector2i, tex: Texture2D}.
 var _bg_cells: Array[Dictionary] = []
 var _port_cells: Array[Dictionary] = []
 var _comps: Array[Component] = []
@@ -21,31 +17,46 @@ var _comps: Array[Component] = []
 
 func _ready() -> void:
 	_empty_sprite = load("uid://6n77yeqc2uc3")
+	if grid != null:
+		_rebuild_layers()
 
-	var input_type := load("res://assets/components/input_port.tres") as ComponentType
-	var output_type := load("res://assets/components/output_port.tres") as ComponentType
-	var conveyor_type := load("res://assets/components/conveyor.tres") as ComponentType
 
-	grid = Grid.new()
-	grid.build_rect(width, height)
-	
-	var mid_y: int = int(height / 2.0)
-	grid.place(Component.new(input_type), Vector2i(0, mid_y), 0)
-	grid.place(Component.new(output_type), Vector2i(width - 1, mid_y), 0)
-	for x in range(1, width - 1):
-		grid.place(Component.new(conveyor_type), Vector2i(x, mid_y), 0)
-
+## Assigns the grid to render and rebuilds caches. Call after the grid layout is set.
+func bind(p_grid: Grid) -> void:
+	grid = p_grid
 	_rebuild_layers()
 	queue_redraw()
 
 
+func update_interp(t: float) -> void:
+	_interp_t = t
+	queue_redraw()
+
+
+func mark_dirty() -> void:
+	_rebuild_layers()
+	queue_redraw()
+
+
+func _draw() -> void:
+	if grid == null:
+		return
+	for entry in _bg_cells:
+		_draw_sprite(entry[&"tex"], entry[&"cell"], entry[&"rot"])
+	for comp in _comps:
+		if comp.item != null:
+			_draw_item(comp, _interp_t)
+	for entry in _port_cells:
+		_draw_sprite(entry[&"tex"], entry[&"cell"], entry[&"rot"])
+
+
 ## Rebuilds the cached draw layers from `grid`. Call after any placement/removal.
-## Components are grouped by their `ComponentType.render_layer`. Empty cells go to
-## the background layer.
 func _rebuild_layers() -> void:
 	_bg_cells.clear()
 	_port_cells.clear()
 	_comps.clear()
+	if grid == null:
+		return
 	_comps.assign(grid.all_components())
 	for cell in grid.contents:
 		var comp: Component = grid.component_at(cell)
@@ -59,34 +70,6 @@ func _rebuild_layers() -> void:
 			_port_cells.append(entry)
 		else:
 			_bg_cells.append(entry)
-
-
-func _process(delta: float) -> void:
-	_timer += delta
-	if tick_interval > 0.0:
-		while _timer >= tick_interval:
-			_timer -= tick_interval
-			grid.tick()
-	queue_redraw()
-
-
-func _draw() -> void:
-	if grid == null:
-		return
-	var t: float = clampf(_timer / tick_interval, 0.0, 1.0)
-
-	# Layer 1: background sprites (empty cells + non-port components).
-	for entry in _bg_cells:
-		_draw_sprite(entry[&"tex"], entry[&"cell"], entry[&"rot"])
-
-	# Layer 2: all items.
-	for comp in _comps:
-		if comp.item != null:
-			_draw_item(comp, t)
-
-	# Layer 3: port sprites on top.
-	for entry in _port_cells:
-		_draw_sprite(entry[&"tex"], entry[&"cell"], entry[&"rot"])
 
 
 func _draw_sprite(tex: Texture2D, cell: Vector2i, rot: int) -> void:

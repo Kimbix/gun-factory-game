@@ -5,6 +5,7 @@ extends CharacterBody2D
 @export var speed: float = 100.0
 
 var inventory: Inventory = Inventory.new()
+var coins: int = 0
 var _interact_area: Area2D
 
 const STARTING_ITEMS := {

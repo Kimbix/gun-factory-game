@@ -46,6 +46,8 @@ var chamber: Array[Item] = []
 
 var grid: Grid
 var overlay_viewer: GridViewer
+var _coin_icon: Node2D
+var _coin_label: Label
 var _ammo_label: Label
 
 var edit_mode: bool = false
@@ -108,11 +110,31 @@ func _process(delta: float) -> void:
 		if _fire_timer <= 0.0 and not _fire_queue.is_empty():
 			_on_fire(_fire_queue.pop_front())
 			_fire_timer = fire_stagger
+	_update_coin_label()
 	_update_ammo_label()
+
+
+func _update_coin_label() -> void:
+	if _coin_label == null:
+		return
+	var player := get_parent() as Player
+	if player == null:
+		return
+	_coin_label.text = "%d" % player.coins
 
 
 func _add_overlay_to_scene() -> void:
 	var cl := CanvasLayer.new()
+	_coin_icon = Node2D.new()
+	_coin_icon.position = Vector2(4, 4)
+	var coin_sprite := Sprite2D.new()
+	coin_sprite.texture = load("res://assets/world/spr_coin.png")
+	_coin_icon.add_child(coin_sprite)
+	_coin_label = Label.new()
+	_coin_label.position = Vector2(6, -4)
+	_coin_label.add_theme_font_size_override(&"font_size", 8)
+	_coin_icon.add_child(_coin_label)
+	cl.add_child(_coin_icon)
 	cl.add_child(overlay_viewer)
 	get_tree().current_scene.add_child(cl)
 	tree_exiting.connect(func(): cl.queue_free())

@@ -3,6 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://ebp2kbcqqaso" path="res://player.tscn" id="1_player_scene"]
 [ext_resource type="PackedScene" uid="uid://x4x73fufhfjf" path="res://target_dummy.tscn" id="2_target"]
 [ext_resource type="PackedScene" uid="uid://draegw5d5jk4x" path="res://item_pickup.tscn" id="3_1bvp3"]
+[ext_resource type="Script" path="res://scripts/items/coin_pickup.gd" id="5_coin"]
 [ext_resource type="Resource" uid="uid://btqfkhvfby77p" path="res://assets/components/damage_processor.tres" id="4_272bh"]
 
 [node name="Main" type="Node2D" unique_id=1436259564]
@@ -27,3 +28,7 @@ component_type = ExtResource("4_272bh")
 [node name="ItemPickup4" parent="." unique_id=547948646 instance=ExtResource("3_1bvp3")]
 position = Vector2(111, 25)
 component_type = ExtResource("4_272bh")
+
+[node name="CoinPickup" type="Node2D" parent="."]
+script = ExtResource("5_coin")
+position = Vector2(86, 68)

@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://x4x73fufhfjf" path="res://target_dummy.tscn" id="2_target"]
 [ext_resource type="PackedScene" path="res://coin_pickup.tscn" id="3_coin"]
 [ext_resource type="PackedScene" uid="uid://c1kky74w3bq7x" path="res://chest.tscn" id="4_chest"]
+[ext_resource type="Resource" path="res://assets/loot/chest_loot.tres" id="5_loot"]
 
 [node name="Main" type="Node2D" unique_id=1436259564]
 
@@ -26,3 +27,4 @@ position = Vector2(78, 71)
 
 [node name="Chest" parent="." unique_id=240597928 instance=ExtResource("4_chest")]
 position = Vector2(130, 67)
+loot_table = ExtResource("5_loot")

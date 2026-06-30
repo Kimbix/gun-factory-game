@@ -1,0 +1,31 @@
+[gd_resource type="Resource" script_class="LootTable" format=3]
+
+[ext_resource type="Script" path="res://scripts/world/loot_table.gd" id="1_script"]
+[ext_resource type="Script" path="res://scripts/world/loot_table_entry.gd" id="2_entry_script"]
+[ext_resource type="Resource" path="res://assets/components/conveyor.tres" id="3_conveyor"]
+[ext_resource type="Resource" path="res://assets/components/splitter.tres" id="4_splitter"]
+[ext_resource type="Resource" path="res://assets/components/fast_conveyor.tres" id="5_fast"]
+
+[sub_resource type="Resource" id="Entry_conveyor"]
+script = ExtResource("2_entry_script")
+item_type = ExtResource("3_conveyor")
+chance = 0.8
+count = 2
+
+[sub_resource type="Resource" id="Entry_splitter"]
+script = ExtResource("2_entry_script")
+item_type = ExtResource("4_splitter")
+chance = 0.3
+count = 1
+
+[sub_resource type="Resource" id="Entry_fast"]
+script = ExtResource("2_entry_script")
+item_type = ExtResource("5_fast")
+chance = 0.5
+count = 1
+
+[resource]
+script = ExtResource("1_script")
+coin_min = 2
+coin_max = 6
+entries = Array[Resource]([SubResource("Entry_conveyor"), SubResource("Entry_splitter"), SubResource("Entry_fast")])

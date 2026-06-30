@@ -1,9 +1,7 @@
 class_name Chest
 extends Node2D
 
-@export var coin_min: int = 1
-@export var coin_max: int = 5
-@export var loot_table: Array[Dictionary] = []
+@export var loot_table: LootTable
 
 var _opened: bool = false
 var _area: Area2D
@@ -33,18 +31,19 @@ func open() -> void:
 	_opened = true
 	visible = false
 	_area.queue_free()
-	var count := randi_range(coin_min, coin_max)
+
+	if loot_table == null:
+		return
+	var count := randi_range(loot_table.coin_min, loot_table.coin_max)
 	for i in count:
 		_spawn_coin()
-	for entry in loot_table:
-		var type := entry.get(&"type") as ComponentType
-		if type == null:
+	for entry in loot_table.entries:
+		if entry.item_type == null:
 			continue
-		if randf() >= entry.get(&"chance", 1.0):
+		if randf() >= entry.chance:
 			continue
-		var item_count: int = entry.get(&"count", 1)
-		for j in item_count:
-			_spawn_item(type)
+		for j in entry.count:
+			_spawn_item(entry.item_type)
 
 
 func _spawn_coin() -> void:

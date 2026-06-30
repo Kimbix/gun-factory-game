@@ -46,7 +46,8 @@ func _spawn_random_entry() -> void:
 		return
 	if randf() >= entry.chance:
 		return
-	for j in entry.count:
+	var count := randi_range(entry.min_count, entry.max_count)
+	for j in count:
 		var pickup: ItemPickup = ITEM_SCENE.instantiate()
 		pickup.component_type = entry.item_type
 		pickup.position = global_position + Vector2(randf_range(-12.0, 12.0), randf_range(-12.0, 12.0))

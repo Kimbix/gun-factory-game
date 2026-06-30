@@ -1,8 +1,8 @@
-[gd_resource type="Resource" script_class="ComponentType" format=3]
+[gd_resource type="Resource" script_class="ComponentType" format=3 uid="uid://tfkvh418ux0"]
 
 [ext_resource type="Script" uid="uid://cbwmkgllydyeh" path="res://scripts/factory/component_type.gd" id="1_script"]
-[ext_resource type="Texture2D" path="res://assets/components/spr_3waySplitter.png" id="2_sprite"]
-[ext_resource type="Script" path="res://scripts/factory/behaviors/splitter_behavior.gd" id="3_behavior"]
+[ext_resource type="Texture2D" uid="uid://do6qo60embgop" path="res://assets/components/spr_3waySplitter.png" id="2_sprite"]
+[ext_resource type="Script" uid="uid://b2ywa8v6reiai" path="res://scripts/factory/behaviors/splitter_behavior.gd" id="3_behavior"]
 
 [sub_resource type="Resource" id="SplitterBehavior_sub"]
 script = ExtResource("3_behavior")

@@ -31,6 +31,8 @@ func open() -> void:
 	if _opened:
 		return
 	_opened = true
+	visible = false
+	_area.queue_free()
 	var count := randi_range(coin_min, coin_max)
 	for i in count:
 		_spawn_coin()

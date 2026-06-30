@@ -40,8 +40,20 @@ func facing_vector() -> Vector2i:
 	return Vector2i.ZERO
 
 
-func _rotate(v: Vector2i, rotation: int) -> Vector2i:
-	match rotation % 4:
+## Returns this component's ports with faces rotated by `rotation`.
+## Each entry: {face: Vector2i (relative offset), role: StringName (&"in" | &"out")}.
+func rotated_ports() -> Array[Dictionary]:
+	var out: Array[Dictionary] = []
+	for port in type.ports:
+		out.append({
+			&"face": _rotate(port.face, rotation),
+			&"role": port.role,
+		})
+	return out
+
+
+func _rotate(v: Vector2i, p_rotation: int) -> Vector2i:
+	match p_rotation % 4:
 		0:
 			return v
 		1:

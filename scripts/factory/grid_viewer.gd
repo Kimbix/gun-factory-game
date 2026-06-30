@@ -9,33 +9,56 @@ extends Node2D
 var grid: Grid
 
 var _empty_sprite: Texture2D
-var _input_port_sprite: Texture2D
-var _output_port_sprite: Texture2D
-var _conveyor_sprite: Texture2D
 
 var _timer: float = 0.0
 
+# Cached draw layers, rebuilt whenever grid layout changes (placement/removal).
+# Each entry: {cell: Vector2i, tex: Texture2D}.
+var _bg_cells: Array[Dictionary] = []
+var _port_cells: Array[Dictionary] = []
+var _comps: Array[Component] = []
+
 
 func _ready() -> void:
-	_empty_sprite = load("res://assets/components/spr_emptyGridSpot.png")
-	_input_port_sprite = load("res://assets/components/spr_inputPort.png")
-	_output_port_sprite = load("res://assets/components/spr_outputPort.png")
-	_conveyor_sprite = load("res://assets/components/spr_conveyor.png")
+	_empty_sprite = load("uid://6n77yeqc2uc3")
+
+	var input_type := load("res://assets/components/input_port.tres") as ComponentType
+	var output_type := load("res://assets/components/output_port.tres") as ComponentType
+	var conveyor_type := load("res://assets/components/conveyor.tres") as ComponentType
 
 	grid = Grid.new()
 	grid.build_rect(width, height)
-
-	var mid_y: int = height / 2
-	var input_type := _build_type(_input_port_sprite, &"input_port", &"bullet")
-	var output_type := _build_type(_output_port_sprite, &"output_port", &"finished_round")
-	var conveyor_type := _build_type(_conveyor_sprite, &"conveyor")
-
+	
+	var mid_y: int = int(height / 2.0)
 	grid.place(Component.new(input_type), Vector2i(0, mid_y), 0)
 	grid.place(Component.new(output_type), Vector2i(width - 1, mid_y), 0)
 	for x in range(1, width - 1):
 		grid.place(Component.new(conveyor_type), Vector2i(x, mid_y), 0)
 
+	_rebuild_layers()
 	queue_redraw()
+
+
+## Rebuilds the cached draw layers from `grid`. Call after any placement/removal.
+## Components are grouped by their `ComponentType.render_layer`. Empty cells go to
+## the background layer.
+func _rebuild_layers() -> void:
+	_bg_cells.clear()
+	_port_cells.clear()
+	_comps.clear()
+	_comps.assign(grid.all_components())
+	for cell in grid.contents:
+		var comp: Component = grid.component_at(cell)
+		if comp == null:
+			_bg_cells.append({&"cell": cell, &"tex": _empty_sprite, &"rot": 0})
+			continue
+		if comp.type == null:
+			continue
+		var entry := {&"cell": cell, &"tex": comp.type.sprite, &"rot": comp.rotation}
+		if comp.type.render_layer == ComponentType.RenderLayer.OVERLAY:
+			_port_cells.append(entry)
+		else:
+			_bg_cells.append(entry)
 
 
 func _process(delta: float) -> void:
@@ -52,28 +75,29 @@ func _draw() -> void:
 		return
 	var t: float = clampf(_timer / tick_interval, 0.0, 1.0)
 
-	# Pass 1: sprites + items-above-conveyors (items render ON TOP of conveyors).
-	for cell in grid.contents:
-		var comp: Component = grid.component_at(cell)
-		var pos := Vector2(cell) * Grid.CELL_SIZE
-		var tex: Texture2D = comp.type.sprite if comp != null and comp.type != null else _empty_sprite
-		draw_texture(tex, pos)
-		if comp != null and comp.type != null and comp.type.kind == &"conveyor" and comp.item != null:
+	# Layer 1: background sprites (empty cells + non-port components).
+	for entry in _bg_cells:
+		_draw_sprite(entry[&"tex"], entry[&"cell"], entry[&"rot"])
+
+	# Layer 2: all items.
+	for comp in _comps:
+		if comp.item != null:
 			_draw_item(comp, t)
 
-	# Pass 2: items-BEHIND-ports (items render UNDER ports).
-	# Since port sprites were already drawn, the visual stacking is "port over item"
-	# only if we draw the port again here after the item. Redraw port sprites for ports
-	# that currently own an item so the item pokes out from underneath.
-	for cell in grid.contents:
-		var comp: Component = grid.component_at(cell)
-		if comp == null or comp.type == null:
-			continue
-		var is_port := comp.type.kind == &"input_port" or comp.type.kind == &"output_port"
-		if not is_port or comp.item == null:
-			continue
-		_draw_item(comp, t)
-		draw_texture(comp.type.sprite, Vector2(comp.origin) * Grid.CELL_SIZE)
+	# Layer 3: port sprites on top.
+	for entry in _port_cells:
+		_draw_sprite(entry[&"tex"], entry[&"cell"], entry[&"rot"])
+
+
+func _draw_sprite(tex: Texture2D, cell: Vector2i, rot: int) -> void:
+	if rot == 0:
+		draw_texture(tex, Vector2(cell) * Grid.CELL_SIZE)
+		return
+	var center := Vector2(cell) * Grid.CELL_SIZE + Vector2.ONE * (Grid.CELL_SIZE / 2.0)
+	var tf := Transform2D(rot * (PI / 2.0), center)
+	draw_set_transform_matrix(tf)
+	draw_texture(tex, -Vector2.ONE * (Grid.CELL_SIZE / 2.0))
+	draw_set_transform_matrix(Transform2D.IDENTITY)
 
 
 func _draw_item(comp: Component, t: float) -> void:
@@ -83,11 +107,3 @@ func _draw_item(comp: Component, t: float) -> void:
 	var center := visual_pos + Vector2.ONE * (Grid.CELL_SIZE / 2.0)
 	var half := Vector2.ONE * 2.0
 	draw_rect(Rect2(center - half, half * 2.0), Color.YELLOW, true)
-
-
-func _build_type(sprite: Texture2D, kind: StringName, material: StringName = &"") -> ComponentType:
-	var t := ComponentType.new()
-	t.sprite = sprite
-	t.kind = kind
-	t.material = material
-	return t

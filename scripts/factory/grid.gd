@@ -85,57 +85,34 @@ func all_components() -> Array[Component]:
 	return out
 
 
-## Advances the simulation by one discrete tick. Three phases:
-##   A. Output ports consume any item sitting on them.
-##   B. Conveyors push their item to the next cell (snapshot-based so each item moves at
-##      most one cell per tick).
-##   C. Input ports emit a new item onto their facing neighbor if there is space.
+## Advances the simulation by one discrete tick. Three phases dispatched per
+## component via its ComponentType.behavior:
+##   A. consume_phase — drain finished items (output ports, etc.).
+##   B. push_phase    — conveyors (and similar) push items out. Repeated passes
+##                      until no behavior moves anything (train-shift semantics).
+##   C. emit_phase    — input ports (and similar) inject new items.
 func tick() -> void:
 	var comps: Array[Component] = all_components()
 
-	# Phase A: output ports consume.
 	for comp in comps:
-		if comp.type != null and comp.type.kind == &"output_port" and comp.item != null:
-			comp.item = null
+		if comp.type != null and comp.type.behavior != null:
+			comp.type.behavior.consume_phase(comp, self)
 
-	# Snapshot: every surviving item records where it starts this tick (its owning
-	# component's origin). Used by the viewer to interpolate movement.
 	for comp in comps:
 		if comp.item != null:
 			comp.item.from_cell = comp.origin
 
-	# Phase B: conveyor push, train-shift semantics.
-	# Each item may move at most one cell per tick (tracked by `moved`). Within a tick we
-	# do passes until no further move is possible, so downstream moves free up cells for
-	# upstream conveyors in the same tick. This makes a packed belt shift one full step
-	# per tick instead of "bubbling" at half speed.
-	var conveyors: Array[Component] = []
-	for comp in comps:
-		if comp.type != null and comp.type.kind == &"conveyor":
-			conveyors.append(comp)
-	var moved: Dictionary[Item, bool] = { }
-	for _pass in range(conveyors.size()):
+	var moved: Dictionary[Item, bool] = {}
+	for _pass in range(comps.size()):
 		var any_moved := false
-		for conv in conveyors:
-			if conv.item == null or moved.has(conv.item):
+		for comp in comps:
+			if comp.type == null or comp.type.behavior == null:
 				continue
-			var next_comp: Component = component_at(conv.origin + conv.facing_vector())
-			if next_comp == null or next_comp.item != null:
-				continue
-			next_comp.item = conv.item
-			conv.item = null
-			moved[next_comp.item] = true
-			any_moved = true
+			if comp.type.behavior.push_phase(comp, self, moved):
+				any_moved = true
 		if not any_moved:
 			break
 
-	# Phase C: input ports emit. New item's from_cell is itself (no slide-in yet).
 	for comp in comps:
-		if comp.type == null or comp.type.kind != &"input_port":
-			continue
-		var next_cell: Vector2i = comp.origin + comp.facing_vector()
-		var next_comp: Component = component_at(next_cell)
-		if next_comp != null and next_comp.item == null:
-			var new_item := Item.new(comp.type.material, { })
-			new_item.from_cell = comp.origin # slide from input port into the conveyor
-			next_comp.item = new_item
+		if comp.type != null and comp.type.behavior != null:
+			comp.type.behavior.emit_phase(comp, self)

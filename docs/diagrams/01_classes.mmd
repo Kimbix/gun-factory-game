@@ -1,0 +1,84 @@
+classDiagram
+    direction LR
+
+    class ComponentType {
+        <<Resource>>
+        +sprite: Texture2D
+        +footprint: Array~Vector2i~
+        +ports: Array~Dictionary~
+        +kind: StringName
+        +material: StringName
+        +fixed: bool
+        +render_layer: RenderLayer
+        +behavior: ComponentBehavior
+    }
+    note for ComponentType "Authored as .tres files:\nconveyor.tres, input_port.tres, output_port.tres"
+
+    class ComponentBehavior {
+        <<Resource>>
+        +consume_phase(comp, grid)
+        +push_phase(comp, grid, moved) bool
+        +emit_phase(comp, grid)
+    }
+
+    class InputPortBehavior {
+        +emit_phase(comp, grid)
+    }
+
+    class OutputPortBehavior {
+        +consume_phase(comp, grid)
+    }
+
+    class ConveyorBehavior {
+        +push_phase(comp, grid, moved) bool
+    }
+
+    class Component {
+        <<RefCounted>>
+        +type: ComponentType
+        +origin: Vector2i
+        +rotation: int
+        +item: Item
+        +footprint_cells(origin, rotation) Array~Vector2i~
+        +facing_vector() Vector2i
+        +rotated_ports() Array~Dictionary~
+    }
+
+    class Item {
+        <<RefCounted>>
+        +material_id: StringName
+        +stats: Dictionary
+        +from_cell: Vector2i
+    }
+
+    class Grid {
+        <<RefCounted>>
+        +contents: Dictionary~Vector2i,Component~
+        +build_rect(w, h)
+        +place(comp, origin, rotation) bool
+        +remove(comp)
+        +all_components() Array~Component~
+        +tick()
+    }
+
+    class GridViewer {
+        <<Node2D>>
+        +grid: Grid
+        +tick_interval: float
+        -_bg_cells: Array~Dictionary~
+        -_port_cells: Array~Dictionary~
+        -_comps: Array~Component~
+        -_rebuild_layers()
+        -_draw()
+        -_draw_sprite(tex, cell, rot)
+        -_process(delta)
+    }
+
+    ComponentType "1" --o "1" ComponentBehavior : strategy
+    ComponentBehavior <|-- InputPortBehavior
+    ComponentBehavior <|-- OutputPortBehavior
+    ComponentBehavior <|-- ConveyorBehavior
+    ComponentType "1" --o "*" Component : defines
+    Component "1" o-- "0..1" Item : holds
+    Grid "1" *-- "*" Component : contains
+    GridViewer "1" o-- "1" Grid : renders

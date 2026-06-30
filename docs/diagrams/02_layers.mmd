@@ -1,0 +1,25 @@
+flowchart TD
+    subgraph RES[Resource layer - authored .tres files]
+        T[ComponentType.tres]
+        B[ComponentBehavior sub-resource]
+        T --> B
+    end
+
+    subgraph SIM[Sim layer - RefCounted, no rendering]
+        G[Grid]
+        C[Component]
+        I[Item]
+    end
+
+    subgraph VIEW[View layer - Node2D, scene tree]
+        V[GridViewer]
+    end
+
+    T -->|load by UID| C
+    B -->|calls consume/push/emit during tick| G
+    C -->|grid.place| G
+    G -->|tick: 3-phase behavior dispatch| I
+    I -->|carried by| C
+
+    G -->|read-only| V
+    V -->|cached layers by render_layer + sprite rotation| V

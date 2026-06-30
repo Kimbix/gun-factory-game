@@ -130,7 +130,9 @@ func _draw_sprite(tex: Texture2D, cell: Vector2i, rot: int) -> void:
 func _draw_item(comp: Component, t: float) -> void:
 	var from := Vector2(comp.item.from_cell)
 	var to := Vector2(comp.origin)
-	var visual_pos := from.lerp(to, t) * Grid.CELL_SIZE
+	var speed: float = comp.item.stats.get("interp_speed", 1.0)
+	var clamped_t := clampf(t * speed, 0.0, 1.0)
+	var visual_pos := from.lerp(to, clamped_t) * Grid.CELL_SIZE
 	var center := visual_pos + Vector2.ONE * (Grid.CELL_SIZE / 2.0)
 	var half := Vector2.ONE * 2.0
 	draw_rect(Rect2(center - half, half * 2.0), Color.YELLOW, true)

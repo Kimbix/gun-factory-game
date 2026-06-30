@@ -14,3 +14,4 @@ texture = ExtResource("1_player_sprite")
 position = Vector2(8, 0)
 max_alive_items = 3
 chamber_capacity = 3
+magazine_size = 128

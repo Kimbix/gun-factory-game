@@ -1,0 +1,28 @@
+[gd_resource type="Resource" script_class="ComponentType" format=3]
+
+[ext_resource type="Script" uid="uid://cbwmkgllydyeh" path="res://scripts/factory/component_type.gd" id="1_script"]
+[ext_resource type="Texture2D" path="res://assets/components/spr_speedierConveyor.png" id="2_sprite"]
+[ext_resource type="Script" path="res://scripts/factory/behaviors/express_conveyor_behavior.gd" id="3_behavior"]
+
+[sub_resource type="Resource" id="ExpressBehavior_sub"]
+script = ExtResource("3_behavior")
+interp_speed = 4.0
+
+[resource]
+script = ExtResource("1_script")
+sprite = ExtResource("2_sprite")
+ports = Array[Dictionary]([{
+"face": Vector2i(-1, 0),
+"role": &"in"
+}, {
+"face": Vector2i(0, -1),
+"role": &"in"
+}, {
+"face": Vector2i(0, 1),
+"role": &"in"
+}, {
+"face": Vector2i(1, 0),
+"role": &"out"
+}])
+behavior = SubResource("ExpressBehavior_sub")
+kind = &"turbo_conveyor"

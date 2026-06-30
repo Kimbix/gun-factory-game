@@ -11,6 +11,7 @@ const STARTING_ITEMS := {
 	"res://assets/components/conveyor.tres": 10,
 	"res://assets/components/damage_processor.tres": 10,
 	"res://assets/components/speed_processor.tres": 10,
+	"res://assets/components/splitter.tres": 10,
 }
 
 

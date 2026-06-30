@@ -52,6 +52,15 @@ func rotated_ports() -> Array[Dictionary]:
 	return out
 
 
+## Whether this component accepts items pushed from the given cell.
+func can_receive_from(from_cell: Vector2i) -> bool:
+	var dir := from_cell - origin
+	for port in rotated_ports():
+		if port.role == &"in" and port.face == dir:
+			return true
+	return false
+
+
 func _rotate(v: Vector2i, p_rotation: int) -> Vector2i:
 	match p_rotation % 4:
 		0:

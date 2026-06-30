@@ -12,3 +12,5 @@ texture = ExtResource("1_player_sprite")
 
 [node name="Gun" parent="." unique_id=618134886 instance=ExtResource("3_gun_scene")]
 position = Vector2(8, 0)
+max_alive_items = 3
+chamber_capacity = 3

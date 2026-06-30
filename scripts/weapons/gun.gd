@@ -22,6 +22,7 @@ extends Node2D
 @export var conveyor_type: ComponentType
 @export var damage_processor_type: ComponentType
 @export var speed_processor_type: ComponentType
+@export var splitter_type: ComponentType
 
 @export_group("Chassis")
 @export var sprite_texture: Texture2D

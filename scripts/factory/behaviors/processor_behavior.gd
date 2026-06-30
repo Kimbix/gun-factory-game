@@ -29,6 +29,8 @@ func push_phase(comp: Component, grid: Grid, moved: Dictionary) -> bool:
 		var next_comp: Component = grid.component_at(next_cell)
 		if next_comp == null or next_comp.item != null:
 			continue
+		if not next_comp.can_receive_from(comp.origin):
+			continue
 		var item := comp.item
 		item.stats.erase("_process_ticks")
 		next_comp.item = item

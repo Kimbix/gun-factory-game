@@ -6,6 +6,11 @@ extends Node2D
 ## smooth between cells; `bind(grid)` after placement; `mark_dirty()` after layout changes.
 
 var grid: Grid
+var cursor_cell: Vector2i = Vector2i(-1, -1)
+var inventory: Inventory
+var selected_slot: int = 0
+var preview_rotation: int = 0
+var inventory_y: int = 28
 
 var _empty_sprite: Texture2D
 var _interp_t: float = 1.0
@@ -48,6 +53,45 @@ func _draw() -> void:
 			_draw_item(comp, _interp_t)
 	for entry in _port_cells:
 		_draw_sprite(entry[&"tex"], entry[&"cell"], entry[&"rot"])
+	if cursor_cell.x >= 0 and grid != null and grid.has_cell(cursor_cell):
+		var pos := Vector2(cursor_cell) * Grid.CELL_SIZE
+		draw_rect(Rect2(pos, Vector2.ONE * Grid.CELL_SIZE), Color(1, 1, 1, 0.3), true)
+		draw_rect(Rect2(pos, Vector2.ONE * Grid.CELL_SIZE), Color.WHITE, false, 1.0)
+		if grid.is_empty(cursor_cell) and inventory != null:
+			var slot := inventory.get_slot(selected_slot)
+			if slot != null and not slot.is_empty() and slot.component_type.sprite != null:
+				var tex := slot.component_type.sprite
+				var cell := Vector2.ONE * Grid.CELL_SIZE
+				if preview_rotation == 0:
+					draw_texture_rect(tex, Rect2(pos, cell), false, Color(0.6, 0.6, 0.6, 0.6))
+				else:
+					var center := pos + cell / 2.0
+					var half := cell / 2.0
+					draw_set_transform(center, preview_rotation * (PI / 2.0))
+					draw_texture_rect(tex, Rect2(-half, cell), false, Color(0.6, 0.6, 0.6, 0.6))
+					draw_set_transform(Vector2.ZERO, 0.0)
+	if inventory == null:
+		return
+	var slot_pos := Vector2(0, inventory_y)
+	var slot_size := Vector2.ONE * Grid.CELL_SIZE
+	var font := ThemeDB.fallback_font
+	var font_size := 4
+	var gap := 2
+	for i in Inventory.MAX_SLOTS:
+		var rect := Rect2(slot_pos + Vector2(i * (Grid.CELL_SIZE + gap), 0), slot_size)
+		var slot := inventory.get_slot(i)
+		if slot.is_empty():
+			draw_texture(_empty_sprite, rect.position)
+		else:
+			draw_texture(slot.component_type.sprite, rect.position)
+			var amt := "x%d" % slot.count
+			var amt_w := font.get_string_size(amt, HORIZONTAL_ALIGNMENT_LEFT, -1, font_size).x
+			draw_string(font, rect.position + Vector2(slot_size.x - amt_w, slot_size.y - 1), amt, HORIZONTAL_ALIGNMENT_LEFT, -1, font_size)
+		var num := str(i + 1)
+		var num_w := font.get_string_size(num, HORIZONTAL_ALIGNMENT_LEFT, -1, font_size).x
+		draw_string(font, rect.position + Vector2(slot_size.x - num_w, font_size), num, HORIZONTAL_ALIGNMENT_LEFT, -1, font_size)
+		if i == selected_slot:
+			draw_rect(rect, Color.YELLOW, false, 1.0)
 
 
 ## Rebuilds the cached draw layers from `grid`. Call after any placement/removal.

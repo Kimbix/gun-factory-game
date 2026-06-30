@@ -4,12 +4,21 @@ extends CharacterBody2D
 
 @export var speed: float = 100.0
 
-var inventory: Inventory
+var inventory: Inventory = Inventory.new()
 var _interact_area: Area2D
+
+const STARTING_ITEMS := {
+	"res://assets/components/conveyor.tres": 10,
+	"res://assets/components/damage_processor.tres": 10,
+	"res://assets/components/speed_processor.tres": 10,
+}
 
 
 func _ready() -> void:
-	inventory = Inventory.new()
+	for path in STARTING_ITEMS:
+		var type := load(path) as ComponentType
+		if type != null:
+			inventory.add_item(type, STARTING_ITEMS[path])
 
 	_interact_area = Area2D.new()
 	_interact_area.collision_mask = 8

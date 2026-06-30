@@ -47,6 +47,11 @@ var grid: Grid
 var overlay_viewer: GridViewer
 var _ammo_label: Label
 
+var edit_mode: bool = false
+var cursor_cell: Vector2i = Vector2i.ZERO
+var selected_slot: int = 0
+var preview_rotation: int = 0
+
 var _timer: float = 0.0
 var _fire_queue: Array[Item] = []
 var _fire_timer: float = 0.0
@@ -63,14 +68,15 @@ func _ready() -> void:
 	var mid_y: int = int(grid_height / 2.0)
 	grid.place(Component.new(input_port_type), Vector2i(0, mid_y), 0)
 	grid.place(Component.new(output_port_type), Vector2i(grid_width - 1, mid_y), 0)
-	grid.place(Component.new(damage_processor_type), Vector2i(1, mid_y), 0)
-	grid.place(Component.new(damage_processor_type), Vector2i(2, mid_y), 0)
-	grid.place(Component.new(damage_processor_type), Vector2i(3, mid_y), 0)
 
 	overlay_viewer = GridViewer.new()
-	overlay_viewer.position = Vector2(10, 10)
-	add_child(overlay_viewer)
+	overlay_viewer.position = Vector2(4, 120)
+	overlay_viewer.inventory_y = grid_height * Grid.CELL_SIZE + 4
 	overlay_viewer.bind(grid)
+	var player := get_parent() as Player
+	if player != null and player.inventory != null:
+		overlay_viewer.inventory = player.inventory
+	_add_overlay_to_scene.call_deferred()
 
 	_ammo_label = Label.new()
 	_ammo_label.position = Vector2(-16, -18)
@@ -104,6 +110,13 @@ func _process(delta: float) -> void:
 	_update_ammo_label()
 
 
+func _add_overlay_to_scene() -> void:
+	var cl := CanvasLayer.new()
+	cl.add_child(overlay_viewer)
+	get_tree().current_scene.add_child(cl)
+	tree_exiting.connect(func(): cl.queue_free())
+
+
 func _fill_input_chamber() -> void:
 	input_chamber.clear()
 	var base_stats := {
@@ -118,8 +131,80 @@ func _fill_input_chamber() -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed(&"fire"):
 		try_fire()
-	if event is InputEventKey and event.pressed and event.keycode == KEY_F1:
-		overlay_viewer.visible = not overlay_viewer.visible
+	if not (event is InputEventKey and event.pressed):
+		return
+	match event.keycode:
+		KEY_F1:
+			overlay_viewer.visible = not overlay_viewer.visible
+		KEY_F2:
+			edit_mode = not edit_mode
+			if not edit_mode:
+				overlay_viewer.cursor_cell = Vector2i(-1, -1)
+				overlay_viewer.queue_redraw()
+			else:
+				preview_rotation = 0
+				overlay_viewer.cursor_cell = cursor_cell
+				overlay_viewer.queue_redraw()
+		_:
+			if not edit_mode:
+				return
+			_handle_edit_input(event)
+
+
+func _handle_edit_input(event: InputEventKey) -> void:
+	match event.keycode:
+		KEY_UP:
+			cursor_cell.y = maxi(cursor_cell.y - 1, 0)
+		KEY_DOWN:
+			cursor_cell.y = mini(cursor_cell.y + 1, grid_height - 1)
+		KEY_LEFT:
+			cursor_cell.x = maxi(cursor_cell.x - 1, 0)
+		KEY_RIGHT:
+			cursor_cell.x = mini(cursor_cell.x + 1, grid_width - 1)
+		KEY_1, KEY_2, KEY_3, KEY_4, KEY_5, KEY_6, KEY_7, KEY_8:
+			selected_slot = event.keycode - KEY_1
+		KEY_R:
+			preview_rotation = (preview_rotation + 1) % 4
+		KEY_ENTER, KEY_KP_ENTER:
+			_place_at_cursor()
+		KEY_BACKSPACE, KEY_DELETE:
+			_remove_at_cursor()
+		_:
+			return
+	overlay_viewer.cursor_cell = cursor_cell
+	overlay_viewer.selected_slot = selected_slot
+	overlay_viewer.preview_rotation = preview_rotation
+	overlay_viewer.queue_redraw()
+
+
+func _place_at_cursor() -> void:
+	var player := get_parent() as Player
+	if player == null or player.inventory == null:
+		return
+	var slot := player.inventory.get_slot(selected_slot)
+	if slot == null or slot.is_empty():
+		return
+	if not grid.is_empty(cursor_cell):
+		return
+	var comp := Component.new(slot.component_type)
+	if not grid.place(comp, cursor_cell, preview_rotation):
+		return
+	player.inventory.remove_item(slot.component_type, 1)
+	overlay_viewer.mark_dirty()
+
+
+func _remove_at_cursor() -> void:
+	var player := get_parent() as Player
+	if player == null or player.inventory == null:
+		return
+	var comp := grid.component_at(cursor_cell)
+	if comp == null or comp.type == null:
+		return
+	if comp.type.fixed:
+		return
+	grid.remove(comp)
+	player.inventory.add_item(comp.type, 1)
+	overlay_viewer.mark_dirty()
 
 
 ## Pre-tick: pull one item from input_chamber into the input port's facing neighbor,

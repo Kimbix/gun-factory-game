@@ -5,14 +5,14 @@ extends Node2D
 
 var _attracted: bool = false
 var _player: Node2D
-var _sprite: Sprite2D
 
 
 func _ready() -> void:
-	_sprite = Sprite2D.new()
-	_sprite.texture = load("res://assets/world/spr_coin.png")
-	add_child(_sprite)
-
+	if not has_node(NodePath("Sprite2D")):
+		var s := Sprite2D.new()
+		s.name = &"Sprite2D"
+		s.texture = load("res://assets/world/spr_coin.png")
+		add_child(s)
 	var area := Area2D.new()
 	area.collision_layer = 8
 	area.collision_mask = 1

@@ -7,7 +7,12 @@ const CELL_SIZE := 8
 
 ## Every cell in the chassis -> the Component placed there, or null if empty.
 ## Missing key means outside the chassis.
-var contents: Dictionary[Vector2i, Component] = { }
+var contents: Dictionary[Vector2i, Component] = {}
+
+## Emit quota: how many new items input ports may inject this tick. Set by the Gun
+## before calling tick() to enforce the max-alive-items limit. InputPortBehavior
+## decrements this each time it emits.
+var emit_quota: int = 0
 
 
 func _to_string() -> String:

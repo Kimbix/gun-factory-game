@@ -20,6 +20,8 @@ extends Node2D
 @export var input_port_type: ComponentType
 @export var output_port_type: ComponentType
 @export var conveyor_type: ComponentType
+@export var damage_processor_type: ComponentType
+@export var speed_processor_type: ComponentType
 
 @export_group("Chassis")
 @export var sprite_texture: Texture2D
@@ -61,8 +63,9 @@ func _ready() -> void:
 	var mid_y: int = int(grid_height / 2.0)
 	grid.place(Component.new(input_port_type), Vector2i(0, mid_y), 0)
 	grid.place(Component.new(output_port_type), Vector2i(grid_width - 1, mid_y), 0)
-	for x in range(1, grid_width - 1):
-		grid.place(Component.new(conveyor_type), Vector2i(x, mid_y), 0)
+	grid.place(Component.new(damage_processor_type), Vector2i(1, mid_y), 0)
+	grid.place(Component.new(damage_processor_type), Vector2i(2, mid_y), 0)
+	grid.place(Component.new(damage_processor_type), Vector2i(3, mid_y), 0)
 
 	overlay_viewer = GridViewer.new()
 	overlay_viewer.position = Vector2(10, 10)
@@ -103,8 +106,13 @@ func _process(delta: float) -> void:
 
 func _fill_input_chamber() -> void:
 	input_chamber.clear()
+	var base_stats := {
+		damage = 1.0,
+		speed_mod = 1.0,
+		effects = {},
+	}
 	for i in magazine_size:
-		input_chamber.append(Item.new(input_port_type.material, {}))
+		input_chamber.append(Item.new(input_port_type.material, base_stats))
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -192,14 +200,12 @@ func _gun_is_empty() -> bool:
 	return true
 
 
-func _on_fire(round: Item) -> void:
+func _on_fire(item: Item) -> void:
 	var dir := get_global_mouse_position() - global_position
 	if dir == Vector2.ZERO:
 		dir = Vector2.RIGHT
 	var proj := Projectile.new()
-	proj.setup(dir.normalized(), round.stats)
-	proj.speed = projectile_speed
-	proj.lifetime = projectile_lifetime
+	proj.setup(dir.normalized(), item.stats, projectile_speed, projectile_lifetime)
 	var world := get_tree().current_scene
 	world.add_child(proj)
 	proj.global_position = global_position

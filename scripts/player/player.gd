@@ -4,6 +4,12 @@ extends CharacterBody2D
 
 @export var speed: float = 100.0
 
+var inventory: Inventory
+
+
+func _ready() -> void:
+	inventory = Inventory.new()
+
 
 func _physics_process(_delta: float) -> void:
 	var dir := Vector2.ZERO

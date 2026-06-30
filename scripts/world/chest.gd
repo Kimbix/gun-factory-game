@@ -6,7 +6,6 @@ extends Node2D
 var _opened: bool = false
 var _area: Area2D
 
-const COIN_SCENE := preload("res://coin_pickup.tscn")
 const ITEM_SCENE := preload("res://item_pickup.tscn")
 
 
@@ -34,27 +33,21 @@ func open() -> void:
 
 	if loot_table == null:
 		return
-	var count := randi_range(loot_table.coin_min, loot_table.coin_max)
+	var count := randi_range(loot_table.drop_min, loot_table.drop_max)
 	for i in count:
-		_spawn_coin()
-	for entry in loot_table.entries:
-		if entry.item_type == null:
-			continue
-		if randf() >= entry.chance:
-			continue
-		for j in entry.count:
-			_spawn_item(entry.item_type)
+		_spawn_random_entry()
 
 
-func _spawn_coin() -> void:
-	var coin := COIN_SCENE.instantiate()
-	coin.value = 1
-	coin.position = global_position + Vector2(randf_range(-12.0, 12.0), randf_range(-12.0, 12.0))
-	get_parent().add_child(coin)
-
-
-func _spawn_item(type: ComponentType) -> void:
-	var pickup := ITEM_SCENE.instantiate()
-	pickup.component_type = type
-	pickup.position = global_position + Vector2(randf_range(-12.0, 12.0), randf_range(-12.0, 12.0))
-	get_parent().add_child(pickup)
+func _spawn_random_entry() -> void:
+	if loot_table.entries.is_empty():
+		return
+	var entry: LootTableEntry = loot_table.entries.pick_random()
+	if entry.item_type == null:
+		return
+	if randf() >= entry.chance:
+		return
+	for j in entry.count:
+		var pickup: ItemPickup = ITEM_SCENE.instantiate()
+		pickup.component_type = entry.item_type
+		pickup.position = global_position + Vector2(randf_range(-12.0, 12.0), randf_range(-12.0, 12.0))
+		get_parent().add_child(pickup)

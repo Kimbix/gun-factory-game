@@ -26,6 +26,6 @@ count = 1
 
 [resource]
 script = ExtResource("1_script")
-coin_min = 2
-coin_max = 6
+drop_min = 1
+drop_max = 3
 entries = Array[Resource]([SubResource("Entry_conveyor"), SubResource("Entry_splitter"), SubResource("Entry_fast")])

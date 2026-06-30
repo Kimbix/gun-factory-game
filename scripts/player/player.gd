@@ -35,6 +35,12 @@ func _ready() -> void:
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed(&"interact"):
+		for area in _interact_area.get_overlapping_areas():
+			var chest := area.get_parent() as Chest
+			if chest != null:
+				chest.open()
+				_spawn_pickup_message("Chest Opened")
+				return
 		var closest: ItemPickup = null
 		var closest_dist := INF
 		for area in _interact_area.get_overlapping_areas():

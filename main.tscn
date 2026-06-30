@@ -2,9 +2,8 @@
 
 [ext_resource type="PackedScene" uid="uid://ebp2kbcqqaso" path="res://player.tscn" id="1_player_scene"]
 [ext_resource type="PackedScene" uid="uid://x4x73fufhfjf" path="res://target_dummy.tscn" id="2_target"]
-[ext_resource type="PackedScene" uid="uid://draegw5d5jk4x" path="res://item_pickup.tscn" id="3_1bvp3"]
-[ext_resource type="Script" path="res://scripts/items/coin_pickup.gd" id="5_coin"]
-[ext_resource type="Resource" uid="uid://btqfkhvfby77p" path="res://assets/components/damage_processor.tres" id="4_272bh"]
+[ext_resource type="Script" uid="uid://b2b34ita7bub0" path="res://scripts/items/coin_pickup.gd" id="5_coin"]
+[ext_resource type="Script" path="res://scripts/world/chest.gd" id="6_chest"]
 
 [node name="Main" type="Node2D" unique_id=1436259564]
 
@@ -13,22 +12,22 @@
 [node name="TargetDummy" parent="." unique_id=1211591133 instance=ExtResource("2_target")]
 position = Vector2(157, 96)
 
-[node name="ItemPickup" parent="." unique_id=270444595 instance=ExtResource("3_1bvp3")]
-position = Vector2(86, 48)
-component_type = ExtResource("4_272bh")
-
-[node name="ItemPickup2" parent="." unique_id=788022050 instance=ExtResource("3_1bvp3")]
-position = Vector2(107, 45)
-component_type = ExtResource("4_272bh")
-
-[node name="ItemPickup3" parent="." unique_id=1675306936 instance=ExtResource("3_1bvp3")]
-position = Vector2(94, 37)
-component_type = ExtResource("4_272bh")
-
-[node name="ItemPickup4" parent="." unique_id=547948646 instance=ExtResource("3_1bvp3")]
-position = Vector2(111, 25)
-component_type = ExtResource("4_272bh")
-
-[node name="CoinPickup" type="Node2D" parent="."]
-script = ExtResource("5_coin")
+[node name="CoinPickup" type="Node2D" parent="." unique_id=292352377]
 position = Vector2(86, 68)
+script = ExtResource("5_coin")
+
+[node name="CoinPickup2" type="Node2D" parent="." unique_id=2117673025]
+position = Vector2(91, 61)
+script = ExtResource("5_coin")
+
+[node name="CoinPickup3" type="Node2D" parent="." unique_id=1872969959]
+position = Vector2(80, 60)
+script = ExtResource("5_coin")
+
+[node name="CoinPickup4" type="Node2D" parent="." unique_id=1489734727]
+position = Vector2(78, 71)
+script = ExtResource("5_coin")
+
+[node name="Chest" type="Node2D" parent="."]
+script = ExtResource("6_chest")
+position = Vector2(130, 67)

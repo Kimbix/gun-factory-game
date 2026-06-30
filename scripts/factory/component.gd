@@ -1,6 +1,5 @@
 class_name Component
 extends RefCounted
-
 ## A placed factory component. Holds a reference to its ComponentType + position.
 
 var type: ComponentType
@@ -30,17 +29,25 @@ func footprint_cells(p_origin: Vector2i, p_rotation: int) -> Array[Vector2i]:
 ## Unit vector for this component's facing direction (East / South / West / North).
 func facing_vector() -> Vector2i:
 	match rotation % 4:
-		0: return Vector2i(1, 0)
-		1: return Vector2i(0, 1)
-		2: return Vector2i(-1, 0)
-		3: return Vector2i(0, -1)
+		0:
+			return Vector2i(1, 0)
+		1:
+			return Vector2i(0, 1)
+		2:
+			return Vector2i(-1, 0)
+		3:
+			return Vector2i(0, -1)
 	return Vector2i.ZERO
 
 
 func _rotate(v: Vector2i, rotation: int) -> Vector2i:
 	match rotation % 4:
-		0: return v
-		1: return Vector2i(v.y, -v.x)
-		2: return -v
-		3: return Vector2i(-v.y, v.x)
+		0:
+			return v
+		1:
+			return Vector2i(-v.y, v.x)
+		2:
+			return -v
+		3:
+			return Vector2i(v.y, -v.x)
 	return v

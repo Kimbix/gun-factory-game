@@ -1,6 +1,5 @@
 class_name Grid
 extends RefCounted
-
 ## Pure simulation state for a gun's factory grid. No rendering.
 ## Single source of truth: every cell is either empty (null) or holds a Component.
 
@@ -8,7 +7,7 @@ const CELL_SIZE := 8
 
 ## Every cell in the chassis -> the Component placed there, or null if empty.
 ## Missing key means outside the chassis.
-var contents: Dictionary[Vector2i, Component] = {}
+var contents: Dictionary[Vector2i, Component] = { }
 
 
 func _to_string() -> String:
@@ -18,8 +17,8 @@ func _to_string() -> String:
 			n += 1
 	return "Grid(cells=%d, occupied=%d)" % [contents.size(), n]
 
-
 # --- Construction -----------------------------------------------------------
+
 
 ## Builds a rectangular walkable grid of size `w` x `h`. All cells start empty.
 func build_rect(w: int, h: int) -> void:
@@ -40,8 +39,8 @@ func component_at(cell: Vector2i) -> Component:
 func is_empty(cell: Vector2i) -> bool:
 	return contents.get(cell) == null
 
-
 # --- Placement --------------------------------------------------------------
+
 
 func can_place(component: Component, origin: Vector2i, rotation: int) -> bool:
 	for c in component.footprint_cells(origin, rotation):
@@ -77,7 +76,7 @@ func remove_at(cell: Vector2i) -> Component:
 
 
 func all_components() -> Array[Component]:
-	var seen: Dictionary = {}
+	var seen: Dictionary = { }
 	var out: Array[Component] = []
 	for c in contents.values():
 		if c != null and not seen.has(c):
@@ -114,7 +113,7 @@ func tick() -> void:
 	for comp in comps:
 		if comp.type != null and comp.type.kind == &"conveyor":
 			conveyors.append(comp)
-	var moved: Dictionary[Item, bool] = {}
+	var moved: Dictionary[Item, bool] = { }
 	for _pass in range(conveyors.size()):
 		var any_moved := false
 		for conv in conveyors:
@@ -137,6 +136,6 @@ func tick() -> void:
 		var next_cell: Vector2i = comp.origin + comp.facing_vector()
 		var next_comp: Component = component_at(next_cell)
 		if next_comp != null and next_comp.item == null:
-			var new_item := Item.new(comp.type.material, {})
-			new_item.from_cell = comp.origin  # slide from input port into the conveyor
+			var new_item := Item.new(comp.type.material, { })
+			new_item.from_cell = comp.origin # slide from input port into the conveyor
 			next_comp.item = new_item

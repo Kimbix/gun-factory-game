@@ -1,7 +1,6 @@
 @tool
 class_name ComponentType
 extends Resource
-
 ## Static definition of a factory component. Authored as a .tres per component kind.
 ## Holds everything the viewer/sim needs to identify and render the component.
 

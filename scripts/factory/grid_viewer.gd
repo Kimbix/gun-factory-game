@@ -1,11 +1,10 @@
 class_name GridViewer
 extends Node2D
-
 ## Draws a Grid and runs its simulation at a steady tick interval for the demo.
 
 @export_range(0, INT8_MAX) var width: int
 @export_range(0, INT8_MAX) var height: int
-@export var tick_interval: float = 0.3
+@export_range(0.01, 10.0) var tick_interval: float = 0.3
 
 var grid: Grid
 
@@ -41,9 +40,10 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	_timer += delta
-	while _timer >= tick_interval:
-		_timer -= tick_interval
-		grid.tick()
+	if tick_interval > 0.0:
+		while _timer >= tick_interval:
+			_timer -= tick_interval
+			grid.tick()
 	queue_redraw()
 
 

@@ -1,6 +1,5 @@
 class_name Item
 extends RefCounted
-
 ## A discrete item traveling through the factory. Carries its material id + mutable stats.
 
 var material_id: StringName
@@ -9,7 +8,7 @@ var stats: Dictionary
 var from_cell: Vector2i = Vector2i.ZERO
 
 
-func _init(p_material: StringName = &"", p_stats: Dictionary = {}) -> void:
+func _init(p_material: StringName = &"", p_stats: Dictionary = { }) -> void:
 	material_id = p_material
 	stats = p_stats.duplicate()
 

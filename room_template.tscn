@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://cbyvb84i44lmg"]
+
+[ext_resource type="Script" path="res://scripts/terrain/room.gd" id="1_script"]
+[ext_resource type="TileSet" path="res://assets/terrain/terrain_tileset.tres" id="2_tileset"]
+
+[node name="Room" type="Node2D"]
+script = ExtResource("1_script")
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = ExtResource("2_tileset")
+format = 2
+layer_0/name = "floor"
+layer_0/enabled = true
+layer_0/tile_data = PackedInt32Array()
+layer_1/name = "walls"
+layer_1/enabled = true
+layer_1/tile_data = PackedInt32Array()
+
+[node name="Connection" type="Marker2D" parent="."]
+position = Vector2(8, 0)
+
+[node name="Connection2" type="Marker2D" parent="."]
+position = Vector2(0, 8)

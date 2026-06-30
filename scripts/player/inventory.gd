@@ -17,15 +17,18 @@ func add_item(type: ComponentType, count: int = 1) -> int:
 	for slot in slots:
 		if remaining <= 0:
 			break
-		if slot.is_empty():
-			slot.component_type = type
-			slot.count = mini(remaining, MAX_STACK)
-			remaining -= slot.count
-		elif slot.component_type == type and slot.count < MAX_STACK:
+		if not slot.is_empty() and slot.component_type == type and slot.count < MAX_STACK:
 			var space := MAX_STACK - slot.count
 			var add := mini(remaining, space)
 			slot.count += add
 			remaining -= add
+	for slot in slots:
+		if remaining <= 0:
+			break
+		if slot.is_empty():
+			slot.component_type = type
+			slot.count = mini(remaining, MAX_STACK)
+			remaining -= slot.count
 	return remaining
 
 

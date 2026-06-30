@@ -5,10 +5,56 @@ extends CharacterBody2D
 @export var speed: float = 100.0
 
 var inventory: Inventory
+var _interact_area: Area2D
 
 
 func _ready() -> void:
 	inventory = Inventory.new()
+
+	_interact_area = Area2D.new()
+	_interact_area.collision_mask = 8
+	var shape := CollisionShape2D.new()
+	shape.shape = CircleShape2D.new()
+	shape.shape.radius = 16.0
+	_interact_area.add_child(shape)
+	add_child(_interact_area)
+
+
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed(&"interact"):
+		var closest: ItemPickup = null
+		var closest_dist := INF
+		for area in _interact_area.get_overlapping_areas():
+			var pickup := area.get_parent() as ItemPickup
+			if pickup == null:
+				continue
+			var dist := global_position.distance_squared_to(pickup.global_position)
+			if dist < closest_dist:
+				closest_dist = dist
+				closest = pickup
+		if closest == null or closest.component_type == null:
+			return
+		var remaining := inventory.add_item(closest.component_type, 1)
+		if remaining == 0:
+			var name := String(closest.component_type.kind).capitalize()
+			_spawn_pickup_message("+1 " + name)
+			closest.queue_free()
+		else:
+			_spawn_pickup_message("Inventory Full")
+
+
+func _spawn_pickup_message(text: String) -> void:
+	var label := Label.new()
+	label.text = text
+	label.add_theme_font_size_override(&"font_size", 10)
+	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	label.position = Vector2(-40, -28)
+	add_child(label)
+	var tween := create_tween()
+	tween.set_parallel(true)
+	tween.tween_property(label, "position:y", label.position.y - 16, 1.0)
+	tween.tween_property(label, "modulate:a", 0.0, 1.0)
+	tween.finished.connect(label.queue_free)
 
 
 func _physics_process(_delta: float) -> void:

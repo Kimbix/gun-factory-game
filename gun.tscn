@@ -5,6 +5,8 @@
 [ext_resource type="Resource" path="res://assets/components/input_port.tres" id="3_input_port"]
 [ext_resource type="Resource" path="res://assets/components/output_port.tres" id="4_output_port"]
 [ext_resource type="Resource" path="res://assets/components/conveyor.tres" id="5_conveyor"]
+[ext_resource type="Resource" path="res://assets/components/damage_processor.tres" id="6_damage_proc"]
+[ext_resource type="Resource" path="res://assets/components/speed_processor.tres" id="7_speed_proc"]
 
 [node name="Gun" type="Node2D"]
 script = ExtResource("2_gun_script")
@@ -15,6 +17,8 @@ sprite_texture = ExtResource("1_gun_sprite")
 input_port_type = ExtResource("3_input_port")
 output_port_type = ExtResource("4_output_port")
 conveyor_type = ExtResource("5_conveyor")
+damage_processor_type = ExtResource("6_damage_proc")
+speed_processor_type = ExtResource("7_speed_proc")
 max_alive_items = 1
 chamber_capacity = 1
 magazine_size = 6

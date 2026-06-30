@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://x4x73fufhfjf"]
+
+[ext_resource type="Script" uid="uid://b52blqmbd3vvo" path="res://scripts/enemies/target_dummy.gd" id="1_script"]
+[ext_resource type="Texture2D" uid="uid://bflvtdeynx8uu" path="res://assets/entities/spr_targetDummy.png" id="2_sprite"]
+
+[sub_resource type="RectangleShape2D" id="RectShape"]
+size = Vector2(11, 13)
+
+[node name="TargetDummy" type="StaticBody2D" unique_id=1581074960]
+collision_layer = 2
+script = ExtResource("1_script")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1444082340]
+texture = ExtResource("2_sprite")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1198406592]
+position = Vector2(-0.5, 1.5)
+shape = SubResource("RectShape")

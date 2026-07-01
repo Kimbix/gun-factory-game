@@ -1,8 +1,0 @@
-[gd_scene format=3 uid="uid://dnjc68apxhkt0"]
-
-[ext_resource type="Script" uid="uid://dal7olu8yy4rl" path="res://scripts/factory/grid_viewer.gd" id="1_7xnt1"]
-
-[node name="GridViewer" type="Node2D" unique_id=1626470263]
-script = ExtResource("1_7xnt1")
-width = 5
-height = 3

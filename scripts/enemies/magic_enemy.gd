@@ -4,13 +4,17 @@ extends CharacterBody2D
 @export var health: float = 3.0
 @export var speed: float = 40.0
 @export var slow_radius: float = 250.0
+@export var contact_damage: float = 1.0
 @export var coin_drop_min: int = 2
 @export var coin_drop_max: int = 4
 
 var _player: Node2D
 var _gun: Node2D
 var _hit_flash_timer: float = 0.0
+var _contact_timer: float = 0.0
 var _debuff_applied: bool = false
+
+const CONTACT_COOLDOWN := 0.5
 
 const COIN_PICKUP := preload("res://coin_pickup.tscn")
 
@@ -52,6 +56,13 @@ func _physics_process(delta: float) -> void:
 		velocity = strafe * speed * side + dir.normalized() * speed * 0.3
 
 	move_and_slide()
+
+	_contact_timer = maxf(_contact_timer - delta, 0.0)
+	for i in get_slide_collision_count():
+		var col := get_slide_collision(i)
+		if col.get_collider() is Player and _contact_timer <= 0.0:
+			_contact_timer = CONTACT_COOLDOWN
+			col.get_collider().take_damage(contact_damage)
 
 	if not _debuff_applied and dist <= slow_radius and _gun != null and _gun.has_method(&"apply_slow"):
 		_gun.apply_slow()

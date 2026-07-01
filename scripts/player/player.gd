@@ -55,8 +55,8 @@ func _unhandled_input(event: InputEvent) -> void:
 			return
 		var remaining := inventory.add_item(closest.component_type, 1)
 		if remaining == 0:
-			var name := String(closest.component_type.kind).capitalize()
-			_spawn_pickup_message("+1 " + name)
+			var item_name := String(closest.component_type.kind).capitalize()
+			_spawn_pickup_message("+1 " + item_name)
 			closest.queue_free()
 		else:
 			_spawn_pickup_message("Inventory Full")

@@ -15,8 +15,6 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
-	_update_hit_flash(delta)
-
 	if player == null:
 		return
 

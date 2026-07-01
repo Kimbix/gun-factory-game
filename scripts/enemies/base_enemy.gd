@@ -8,7 +8,6 @@ signal was_hit(amount: float)
 
 var health: float
 var player: Node2D
-var _hit_flash_timer: float = 0.0
 
 
 func _ready() -> void:
@@ -35,7 +34,6 @@ func _search_player(node: Node) -> bool:
 func hit(stats: Dictionary) -> void:
 	var dmg: float = stats.get("damage", 1.0) + stats.get("damage_bonus", 0.0)
 	health -= dmg
-	_hit_flash_timer = 0.15
 	was_hit.emit(dmg)
 	if health <= 0.0:
 		call_deferred(&"_die")
@@ -44,11 +42,3 @@ func hit(stats: Dictionary) -> void:
 func _die() -> void:
 	died.emit()
 	queue_free()
-
-
-func _update_hit_flash(delta: float) -> void:
-	if _hit_flash_timer > 0.0:
-		_hit_flash_timer -= delta
-		modulate = Color.WHITE.lerp(Color.RED, _hit_flash_timer / 0.15)
-	elif modulate != Color.WHITE:
-		modulate = Color.WHITE

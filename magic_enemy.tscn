@@ -3,6 +3,8 @@
 [ext_resource type="Texture2D" path="res://assets/entities/spr_magicEnemy.png" id="1"]
 [ext_resource type="Script" path="res://scripts/enemies/magic_enemy.gd" id="2"]
 [ext_resource type="Script" path="res://scripts/enemies/components/spawn_coins_on_death.gd" id="3"]
+[ext_resource type="Script" path="res://scripts/enemies/components/contact_damage.gd" id="4"]
+[ext_resource type="Script" path="res://scripts/enemies/components/hit_flash.gd" id="5"]
 
 [sub_resource type="RectangleShape2D" id="RectShape"]
 size = Vector2(16, 16)
@@ -20,3 +22,9 @@ shape = SubResource("RectShape")
 
 [node name="SpawnCoinsOnDeath" type="Node" parent="."]
 script = ExtResource("3")
+
+[node name="ContactDamage" type="Node" parent="."]
+script = ExtResource("4")
+
+[node name="HitFlash" type="Node" parent="."]
+script = ExtResource("5")

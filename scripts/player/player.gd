@@ -3,10 +3,15 @@ extends CharacterBody2D
 ## Top-down player character. WASD movement.
 
 @export var speed: float = 100.0
+@export var max_health: float = 10.0
 
 var inventory: Inventory = Inventory.new()
 var coins: int = 0
+var health: float
 var _interact_area: Area2D
+var _invincible_timer: float = 0.0
+
+const INVINCIBLE_TIME := 0.5
 
 const STARTING_ITEMS := {
 	"res://assets/components/conveyor.tres": 10,
@@ -19,6 +24,7 @@ const STARTING_ITEMS := {
 
 
 func _ready() -> void:
+	health = max_health
 	for path in STARTING_ITEMS:
 		var type := load(path) as ComponentType
 		if type != null:
@@ -76,7 +82,19 @@ func _spawn_pickup_message(text: String) -> void:
 	tween.finished.connect(label.queue_free)
 
 
-func _physics_process(_delta: float) -> void:
+func take_damage(amount: float) -> void:
+	if _invincible_timer > 0.0:
+		return
+	health -= amount
+	_invincible_timer = INVINCIBLE_TIME
+	_spawn_pickup_message("Ouch!")
+	if health <= 0.0:
+		health = max_health
+
+
+func _physics_process(delta: float) -> void:
+	_invincible_timer = maxf(_invincible_timer - delta, 0.0)
+	modulate = Color.WHITE if int(_invincible_timer / 0.1) % 2 == 0 else Color(1, 1, 1, 0.5)
 	var dir := Vector2.ZERO
 	dir.x = Input.get_axis(&"move_left", &"move_right")
 	dir.y = Input.get_axis(&"move_up", &"move_down")

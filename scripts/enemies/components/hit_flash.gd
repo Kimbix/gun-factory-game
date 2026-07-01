@@ -9,7 +9,6 @@ func _ready() -> void:
 	if enemy != null:
 		enemy.was_hit.connect(_on_hit)
 		enemy.ready.connect(_sync_modulate, CONNECT_ONE_SHOT)
-	process_mode = PROCESS_MODE_WHEN_EMPTY
 
 
 func _sync_modulate() -> void:

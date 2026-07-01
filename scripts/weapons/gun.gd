@@ -339,7 +339,7 @@ func _update_ammo_label() -> void:
 func apply_slow() -> void:
 	_slow_count += 1
 	if _slow_count == 1:
-		speed_multiplier = 0.25
+		speed_multiplier = 0.5
 
 
 func remove_slow() -> void:

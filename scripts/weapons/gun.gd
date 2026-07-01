@@ -59,6 +59,9 @@ var _timer: float = 0.0
 var _fire_queue: Array[Item] = []
 var _fire_timer: float = 0.0
 
+var speed_multiplier: float = 1.0
+var _slow_count: int = 0
+
 
 func _ready() -> void:
 	var sprite := Sprite2D.new()
@@ -91,14 +94,15 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
+	var effective_interval := tick_interval / speed_multiplier
 	_timer += delta
 	if tick_interval > 0.0:
-		while _timer >= tick_interval:
-			_timer -= tick_interval
+		while _timer >= effective_interval:
+			_timer -= effective_interval
 			_inject_from_input_chamber()
 			_drain_output_ports()
 			grid.tick()
-		overlay_viewer.update_interp(clampf(_timer / tick_interval, 0.0, 1.0))
+		overlay_viewer.update_interp(clampf(_timer / effective_interval, 0.0, 1.0))
 	if _reload_state == ReloadState.DELAY:
 		_reload_timer -= delta
 		if _reload_timer <= 0.0:
@@ -330,3 +334,16 @@ func _update_ammo_label() -> void:
 		if comp.item != null:
 			remaining += 1
 	_ammo_label.text = "%d/%d" % [remaining, magazine_size]
+
+
+func apply_slow() -> void:
+	_slow_count += 1
+	if _slow_count == 1:
+		speed_multiplier = 0.75
+
+
+func remove_slow() -> void:
+	_slow_count -= 1
+	if _slow_count <= 0:
+		_slow_count = 0
+		speed_multiplier = 1.0

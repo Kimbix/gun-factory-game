@@ -1,27 +1,24 @@
 [gd_scene format=3 uid="uid://pq3cqj71vpcx"]
 
 [ext_resource type="PackedScene" uid="uid://ebp2kbcqqaso" path="res://player.tscn" id="1_player_scene"]
-[ext_resource type="TileSet" uid="uid://dqvd7ylmjb4lg" path="res://assets/terrain/terrain_tileset.tres" id="2_tileset"]
-[ext_resource type="Script" path="res://scripts/terrain/dungeon_generator.gd" id="3_gen"]
+[ext_resource type="TileSet" uid="uid://bakby8fee5i1o" path="res://assets/terrain/terrain_tileset.tres" id="2_tileset"]
+[ext_resource type="Script" uid="uid://gjbynh16spnu" path="res://scripts/terrain/dungeon_generator.gd" id="3_gen"]
 
-[node name="Main" type="Node2D"]
+[node name="Main" type="Node2D" unique_id=2060440580]
 
-[node name="TileMap" type="TileMap" parent="."]
+[node name="FloorLayer" type="TileMapLayer" parent="." unique_id=689907050]
 tile_set = ExtResource("2_tileset")
-format = 2
-layer_0/name = "floor"
-layer_0/enabled = true
-layer_0/tile_data = PackedInt32Array()
-layer_1/name = "walls"
-layer_1/enabled = true
-layer_1/tile_data = PackedInt32Array()
 
-[node name="DungeonGenerator" type="Node2D" parent="."]
+[node name="WallLayer" type="TileMapLayer" parent="." unique_id=244137145]
+tile_set = ExtResource("2_tileset")
+
+[node name="DungeonGenerator" type="Node2D" parent="." unique_id=62906219]
 script = ExtResource("3_gen")
 room_count = 6
 extra_connections = 2
 corridor_width = 2
-tilemap = NodePath("../TileMap")
+floor_layer = NodePath("../FloorLayer")
+wall_layer = NodePath("../WallLayer")
 player = NodePath("../Player")
 
 [node name="Player" parent="." unique_id=37915717 instance=ExtResource("1_player_scene")]

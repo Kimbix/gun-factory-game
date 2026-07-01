@@ -2,23 +2,29 @@ class_name Room
 extends Node2D
 
 @export var room_id: StringName = &""
-@export var floor_layer: int = 0
-@export var wall_layer: int = 1
 
 
-func get_tilemap() -> TileMap:
+func get_floor_layer() -> TileMapLayer:
 	for child in get_children():
-		var tm := child as TileMap
-		if tm != null:
-			return tm
+		var tml := child as TileMapLayer
+		if tml != null and tml.name == &"FloorLayer":
+			return tml
+	return null
+
+
+func get_wall_layer() -> TileMapLayer:
+	for child in get_children():
+		var tml := child as TileMapLayer
+		if tml != null and tml.name == &"WallLayer":
+			return tml
 	return null
 
 
 func get_used_tile_rect() -> Rect2i:
-	var tm := get_tilemap()
-	if tm == null:
+	var floor := get_floor_layer()
+	if floor == null:
 		return Rect2i()
-	return tm.get_used_rect()
+	return floor.get_used_rect()
 
 
 func get_connection_points_global() -> Array[Vector2i]:

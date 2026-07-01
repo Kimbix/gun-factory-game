@@ -69,19 +69,19 @@ func _unlock_room() -> void:
 
 func _start_next_wave() -> void:
 	_current_wave += 1
-	var to_spawn: Array[Node2D] = []
+	var spawned := false
 	for sp in _spawn_points:
-		var indices: Variant = sp.get("wave_indices")
-		if indices != null and _current_wave in indices:
-			to_spawn.append(sp)
-	if to_spawn.is_empty():
+		if not sp.has_method("get_spawns_for_wave"):
+			continue
+		var scenes: Array = sp.call("get_spawns_for_wave", _current_wave)
+		for s in scenes:
+			_spawn_enemy(s, sp)
+			_active_enemies += 1
+			spawned = true
+	if not spawned:
 		await get_tree().create_timer(clear_delay).timeout
 		_unlock_room()
 		room_cleared.emit()
-		return
-	for sp in to_spawn:
-		_spawn_enemy(sp.get("enemy") as PackedScene, sp)
-		_active_enemies += 1
 
 
 func _spawn_enemy(scene: PackedScene, at: Node2D) -> void:

@@ -71,8 +71,8 @@ func _start_next_wave() -> void:
 	_current_wave += 1
 	var to_spawn: Array[Node2D] = []
 	for sp in _spawn_points:
-		var wi: Variant = sp.get("wave_index")
-		if wi != null and wi == _current_wave:
+		var indices: Variant = sp.get("wave_indices")
+		if indices != null and _current_wave in indices:
 			to_spawn.append(sp)
 	if to_spawn.is_empty():
 		await get_tree().create_timer(clear_delay).timeout

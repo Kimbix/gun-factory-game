@@ -77,20 +77,21 @@ func _start_next_wave() -> void:
 		room_cleared.emit()
 		return
 	var wave := waves[_current_wave]
-	for entry in wave.entries:
-		for i in entry.count:
-			_spawn_enemy(entry.enemy)
-			if entry.count > 1:
-				await get_tree().create_timer(0.15).timeout
-	_active_enemies += wave.total_count()
+	var entries := wave.entries
+	if entries.is_empty() or _spawn_points.is_empty():
+		_active_enemies += 0
+	else:
+		for i in _spawn_points.size():
+			var entry := entries[i % entries.size()]
+			_spawn_enemy(entry.enemy, _spawn_points[i])
+			_active_enemies += 1()
 
 
-func _spawn_enemy(scene: PackedScene) -> void:
+func _spawn_enemy(scene: PackedScene, at: Marker2D) -> void:
 	if scene == null:
 		return
 	var enemy := scene.instantiate()
-	var pos := _pick_spawn_position()
-	enemy.position = pos
+	enemy.position = at.global_position
 	var parent := get_parent()
 	if parent != null:
 		parent.add_child(enemy)
@@ -99,12 +100,6 @@ func _spawn_enemy(scene: PackedScene) -> void:
 	var be := enemy as BaseEnemy
 	if be != null and not be.died.is_connected(_on_enemy_died):
 		be.died.connect(_on_enemy_died)
-
-
-func _pick_spawn_position() -> Vector2:
-	if _spawn_points.is_empty():
-		return position + Vector2(randi_range(-32, 32), randi_range(-32, 32))
-	return _spawn_points.pick_random().global_position
 
 
 func _on_enemy_died() -> void:

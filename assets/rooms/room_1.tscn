@@ -6,26 +6,9 @@
 [ext_resource type="Resource" uid="uid://dmk4wvxx8aurd" path="res://assets/loot/chest_loot.tres" id="4_33g14"]
 [ext_resource type="PackedScene" uid="uid://b2w52twuygrpi" path="res://chase_enemy.tscn" id="5_33g14"]
 [ext_resource type="Script" uid="uid://3sykxnduwbpn" path="res://scripts/world/room_activator.gd" id="6_3n1bf"]
-[ext_resource type="Script" uid="uid://c4jc1lx7hnxh5" path="res://scripts/world/wave.gd" id="6_7b23q"]
-[ext_resource type="Script" uid="uid://us1mxv43lo2o" path="res://scripts/world/spawn_entry.gd" id="7_i5pad"]
+[ext_resource type="Script" path="res://scripts/world/spawn_point.gd" id="7_i5pad"]
 [ext_resource type="PackedScene" path="res://door_barrier.tscn" id="7_xg7ad"]
 [ext_resource type="PackedScene" uid="uid://b2g2wddb01e4m" path="res://slime_fire.tscn" id="8_u8nfi"]
-
-[sub_resource type="Resource" id="Resource_r3t7o"]
-script = ExtResource("7_i5pad")
-enemy = ExtResource("8_u8nfi")
-
-[sub_resource type="Resource" id="Resource_x0ron"]
-script = ExtResource("6_7b23q")
-entries = Array[ExtResource("7_i5pad")]([SubResource("Resource_r3t7o")])
-
-[sub_resource type="Resource" id="Resource_t03ab"]
-script = ExtResource("7_i5pad")
-enemy = ExtResource("5_33g14")
-
-[sub_resource type="Resource" id="Resource_7htgb"]
-script = ExtResource("6_7b23q")
-entries = Array[ExtResource("7_i5pad")]([SubResource("Resource_t03ab")])
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_x0ron"]
 size = Vector2(16, 48)
@@ -54,7 +37,6 @@ loot_table = ExtResource("4_33g14")
 [node name="RoomActivator" type="Area2D" parent="." unique_id=1587240890]
 position = Vector2(24, 72)
 script = ExtResource("6_3n1bf")
-waves = Array[ExtResource("6_7b23q")]([SubResource("Resource_x0ron"), SubResource("Resource_7htgb")])
 
 [node name="LeftEntrance" type="CollisionShape2D" parent="RoomActivator" unique_id=193775687]
 position = Vector2(8, 0)
@@ -65,28 +47,23 @@ position = Vector2(216, 32)
 shape = SubResource("RectangleShape2D_x0ron")
 
 [node name="DoorBarrier" parent="." unique_id=1801586300 instance=ExtResource("7_xg7ad")]
-visible = true
 position = Vector2(8, 56)
 
 [node name="DoorBarrier2" parent="." unique_id=48602143 instance=ExtResource("7_xg7ad")]
-visible = true
 position = Vector2(8, 72)
 
 [node name="DoorBarrier3" parent="." unique_id=1560287351 instance=ExtResource("7_xg7ad")]
-visible = true
 position = Vector2(8, 88)
 
 [node name="DoorBarrier4" parent="." unique_id=1942317064 instance=ExtResource("7_xg7ad")]
-visible = true
 position = Vector2(264, 88)
 
 [node name="DoorBarrier5" parent="." unique_id=1182574227 instance=ExtResource("7_xg7ad")]
-visible = true
 position = Vector2(264, 104)
 
 [node name="DoorBarrier6" parent="." unique_id=1773585851 instance=ExtResource("7_xg7ad")]
-visible = true
 position = Vector2(264, 120)
 
 [node name="SpawnPoint" type="Marker2D" parent="." unique_id=1745821132]
 position = Vector2(128, 88)
+script = ExtResource("7_i5pad")

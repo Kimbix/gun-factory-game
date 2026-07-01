@@ -183,11 +183,12 @@ func _copy_room_tiles(r: Dictionary) -> void:
 		_copy_layer_tiles(src_wall, wall_layer, origin, xform, min_corner, room_w, room_h)
 	var box_origin := Vector2i(min_corner * TILE_SIZE)
 	for child in room_node.get_children():
-		if child is TileMapLayer:
+		if child is TileMapLayer or child is Marker2D:
 			continue
 		var child2d := child as Node2D
 		if child2d == null:
 			continue
+		child2d.owner = null
 		var offset := Vector2i(child2d.position) - box_origin
 		var xformed := _xform_point(offset.x, offset.y, room_w, room_h, xform)
 		var world_pos := Vector2(origin) + Vector2(xformed)

@@ -1,7 +1,7 @@
 class_name SlimeFire
 extends Area2D
 
-@export var damage: float = 0.5
+@export var damage: float = 1.0
 @export var lifetime: float = 5.0
 
 var _timer: float = 0.0

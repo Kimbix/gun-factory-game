@@ -4,7 +4,7 @@
 [ext_resource type="TileSet" uid="uid://bakby8fee5i1o" path="res://assets/terrain/terrain_tileset.tres" id="2_is5ow"]
 [ext_resource type="PackedScene" uid="uid://c1kky74w3bq7x" path="res://chest.tscn" id="3_pxa42"]
 [ext_resource type="Resource" uid="uid://dmk4wvxx8aurd" path="res://assets/loot/chest_loot.tres" id="4_33g14"]
-[ext_resource type="PackedScene" path="res://magic_enemy.tscn" id="5_33g14"]
+[ext_resource type="PackedScene" path="res://slime_enemy.tscn" id="5_33g14"]
 
 [node name="Room" type="Node2D" unique_id=650232048]
 script = ExtResource("1_4ikea")
@@ -27,5 +27,5 @@ position = Vector2(272, 112)
 position = Vector2(40, 40)
 loot_table = ExtResource("4_33g14")
 
-[node name="MagicEnemy" parent="." unique_id=482536777 instance=ExtResource("5_33g14")]
-position = Vector2(152, 80)
+[node name="SlimeEnemy" parent="." unique_id=1546651383 instance=ExtResource("5_33g14")]
+position = Vector2(160, 96)

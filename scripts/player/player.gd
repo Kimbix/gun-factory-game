@@ -68,12 +68,13 @@ func _unhandled_input(event: InputEvent) -> void:
 			_spawn_pickup_message("Inventory Full")
 
 
-func _spawn_pickup_message(text: String) -> void:
+func _spawn_pickup_message(text: String, color: Color = Color.WHITE) -> void:
 	var label := Label.new()
 	label.text = text
 	label.add_theme_font_size_override(&"font_size", 10)
 	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	label.position = Vector2(-40, -28)
+	label.modulate = color
 	add_child(label)
 	var tween := create_tween()
 	tween.set_parallel(true)
@@ -87,7 +88,7 @@ func take_damage(amount: float) -> void:
 		return
 	health -= amount
 	_invincible_timer = INVINCIBLE_TIME
-	_spawn_pickup_message("Ouch!")
+	_spawn_pickup_message("-%d" % amount, Color.RED)
 	if health <= 0.0:
 		health = max_health
 

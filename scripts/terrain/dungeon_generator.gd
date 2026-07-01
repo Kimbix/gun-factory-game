@@ -181,6 +181,18 @@ func _copy_room_tiles(r: Dictionary) -> void:
 		var cells := src_wall.get_used_cells()
 		print("    wall: %d tiles" % cells.size())
 		_copy_layer_tiles(src_wall, wall_layer, origin, xform, min_corner, room_w, room_h)
+	var box_origin := Vector2i(min_corner * TILE_SIZE)
+	for child in room_node.get_children():
+		if child is TileMapLayer:
+			continue
+		var child2d := child as Node2D
+		if child2d == null:
+			continue
+		var offset := Vector2i(child2d.position) - box_origin
+		var xformed := _xform_point(offset.x, offset.y, room_w, room_h, xform)
+		var world_pos := Vector2(origin) + Vector2(xformed)
+		child2d.reparent(self)
+		child2d.position = world_pos
 
 
 func _copy_layer_tiles(src: TileMapLayer, dst: TileMapLayer, origin: Vector2i, xf: int, min_corner: Vector2i, w: int, h: int) -> void:

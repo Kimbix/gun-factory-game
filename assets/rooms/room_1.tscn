@@ -2,6 +2,8 @@
 
 [ext_resource type="Script" uid="uid://8tdiluy084li" path="res://scripts/terrain/room.gd" id="1_4ikea"]
 [ext_resource type="TileSet" uid="uid://bakby8fee5i1o" path="res://assets/terrain/terrain_tileset.tres" id="2_is5ow"]
+[ext_resource type="PackedScene" uid="uid://c1kky74w3bq7x" path="res://chest.tscn" id="3_pxa42"]
+[ext_resource type="Resource" uid="uid://dmk4wvxx8aurd" path="res://assets/loot/chest_loot.tres" id="4_33g14"]
 
 [node name="Room" type="Node2D" unique_id=650232048]
 script = ExtResource("1_4ikea")
@@ -19,3 +21,7 @@ position = Vector2(0, 80)
 
 [node name="Connection2" type="Marker2D" parent="." unique_id=1903146396]
 position = Vector2(272, 112)
+
+[node name="Chest" parent="." unique_id=1648900392 instance=ExtResource("3_pxa42")]
+position = Vector2(40, 40)
+loot_table = ExtResource("4_33g14")

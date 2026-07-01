@@ -8,22 +8,9 @@ var _player: Node2D
 
 
 func _ready() -> void:
-	if not has_node(NodePath("Sprite2D")):
-		var s := Sprite2D.new()
-		s.name = &"Sprite2D"
-		s.texture = load("res://assets/world/spr_coin.png")
-		add_child(s)
-	var area := Area2D.new()
-	area.collision_layer = 8
-	area.collision_mask = 1
-	area.monitoring = false
-	var shape := CollisionShape2D.new()
-	shape.shape = RectangleShape2D.new()
-	shape.shape.size = Vector2(8, 8)
-	area.add_child(shape)
-	add_child(area)
-	area.area_entered.connect(_on_area_entered)
-	area.set_deferred(&"monitoring", true)
+	var area: Area2D = $PickupArea
+	if area != null:
+		area.area_entered.connect(_on_area_entered)
 
 
 func _on_area_entered(area: Area2D) -> void:

@@ -61,10 +61,17 @@ func hit(stats: Dictionary) -> void:
 
 
 func _die() -> void:
+	call_deferred(&"_spawn_coins_and_free")
+
+
+func _spawn_coins_and_free() -> void:
+	var parent := get_parent()
+	if parent == null:
+		return
 	for i in randi_range(coin_drop_min, coin_drop_max):
 		var coin := COIN_PICKUP.instantiate()
 		coin.position = position + Vector2(randi_range(-8, 8), randi_range(-8, 8))
-		get_parent().add_child(coin)
+		parent.add_child(coin)
 	queue_free()
 
 

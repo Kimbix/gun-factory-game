@@ -2,7 +2,7 @@ class_name BaseEnemy
 extends CharacterBody2D
 
 signal died
-signal hit(amount: float)
+signal was_hit(amount: float)
 
 @export var max_health: float = 3.0
 
@@ -36,7 +36,7 @@ func hit(stats: Dictionary) -> void:
 	var dmg: float = stats.get("damage", 1.0) + stats.get("damage_bonus", 0.0)
 	health -= dmg
 	_hit_flash_timer = 0.15
-	hit.emit(dmg)
+	was_hit.emit(dmg)
 	if health <= 0.0:
 		call_deferred(&"_die")
 

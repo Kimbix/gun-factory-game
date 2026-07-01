@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://cslpgoiius6e2"]
+
+[ext_resource type="Script" uid="uid://8tdiluy084li" path="res://scripts/terrain/room.gd" id="1_4ikea"]
+[ext_resource type="TileSet" uid="uid://bakby8fee5i1o" path="res://assets/terrain/terrain_tileset.tres" id="2_is5ow"]
+
+[node name="Room" type="Node2D" unique_id=650232048]
+script = ExtResource("1_4ikea")
+
+[node name="FloorLayer" type="TileMapLayer" parent="." unique_id=1008914220]
+tile_set = ExtResource("2_is5ow")
+
+[node name="WallLayer" type="TileMapLayer" parent="." unique_id=115199159]
+tile_set = ExtResource("2_is5ow")
+
+[node name="Connection" type="Marker2D" parent="." unique_id=848202162]
+position = Vector2(8, 0)
+
+[node name="Connection2" type="Marker2D" parent="." unique_id=1903146396]
+position = Vector2(0, 8)

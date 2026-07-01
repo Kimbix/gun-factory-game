@@ -294,8 +294,8 @@ func _random_connection_on_wall(origin: Vector2i, w: int, h: int) -> Vector2i:
 func _build_room_tiles(r: Dictionary) -> void:
 	var room_rect: Rect2i = r.rect
 	var room_origin: Vector2i = r.origin
-	var w: int = room_rect.size.x / TILE_SIZE
-	var h: int = room_rect.size.y / TILE_SIZE
+	var w: int = int(room_rect.size.x / float(TILE_SIZE))
+	var h: int = int(room_rect.size.y / float(TILE_SIZE))
 	var origin_cell := _pixel_to_cell(room_origin)
 
 	for x in range(w):
@@ -367,8 +367,8 @@ func _pick_point(r: Dictionary) -> Vector2i:
 
 
 func _snap_to_tile(p: Vector2i) -> Vector2i:
-	return Vector2i(floori(float(p.x) / TILE_SIZE) * TILE_SIZE + TILE_SIZE / 2,
-					floori(float(p.y) / TILE_SIZE) * TILE_SIZE + TILE_SIZE / 2)
+	return Vector2i(floori(float(p.x) / TILE_SIZE) * TILE_SIZE + int(TILE_SIZE / 2.0),
+					floori(float(p.y) / TILE_SIZE) * TILE_SIZE + int(TILE_SIZE / 2.0))
 
 
 func _carve_l_path(from: Vector2i, to: Vector2i) -> void:
@@ -389,7 +389,7 @@ func _carve_l_path(from: Vector2i, to: Vector2i) -> void:
 func _carve_straight(from: Vector2i, to: Vector2i) -> Array[Vector2i]:
 	if from == to:
 		return []
-	var half: int = corridor_width / 2
+	var half: int = int(corridor_width / 2.0)
 	var dx: int = signi(to.x - from.x)
 	var dy: int = signi(to.y - from.y)
 	var perp := Vector2i(0, 1) if dx != 0 else Vector2i(1, 0)

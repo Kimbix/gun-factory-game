@@ -60,7 +60,7 @@ func get_building_ports(v: Vector2i) -> Array[Port]:
 func get_building_rotation(v: Vector2i) -> FactoryBuilding.Rotation:
 	if _buildings.has(v) and _buildings[v] != null:
 		return _buildings[v].rotation
-	return 0
+	return FactoryBuilding.Rotation.NORMAL
 
 
 func get_building_texture(v: Vector2i) -> Texture2D:
@@ -83,9 +83,8 @@ func place_building(
 		print("Position for building must be valid")
 		return
 
-	var building := FactoryBuilding.new(self, what, where)
+	var building := FactoryBuilding.new(self, what, where, _rotation)
 	_buildings[where] = building
-	building.rotation = _rotation
 
 
 func place_item(what: FactoryItemInfo, where: Vector2) -> void:

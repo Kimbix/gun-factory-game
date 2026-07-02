@@ -39,13 +39,17 @@ var ports: Array[Port]
 var _info: GridComponentInfo
 
 
-func _init(_grid: PlayerGrid, info: GridComponentInfo, _position: Vector2i) -> void:
+func _init(
+		_grid: PlayerGrid,
+		info: GridComponentInfo,
+		_position: Vector2i,
+		_rotation: FactoryBuilding.Rotation,
+) -> void:
+	_info = info
 	position = _position
 	grid = _grid
 	rect = Rect2(_position, info.dimensions)
-	_info = info
-	for i: Port in _info.ports:
-		ports.append(i.duplicate())
+	rotation = _rotation
 
 	if _info.behaviour != null:
 		behaviour = _info.behaviour.new()

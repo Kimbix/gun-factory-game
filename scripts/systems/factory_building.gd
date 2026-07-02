@@ -35,7 +35,7 @@ var behaviour: FactoryComponent
 var texture: Texture2D:
 	get():
 		return _info.texture
-var ports: Array[Port]
+var ports: Array[Port] = []
 var _info: GridComponentInfo
 
 

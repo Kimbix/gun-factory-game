@@ -1,6 +1,7 @@
 class_name PlayerGrid
 extends Node
 
+@warning_ignore("unused_signal")
 signal output_item(item: FactoryItem)
 
 const GRID_TEXTURE_SIZE := 16
@@ -10,6 +11,13 @@ const GRID_TEXTURE_SIZE := 16
 var _floor: Dictionary[Vector2i, Texture2D] = { }
 var _items: Array[FactoryItem] = []
 var _buildings: Dictionary[Vector2i, FactoryBuilding] = { }
+
+
+func set_building_rotation(v: Vector2i, rotation: FactoryBuilding.Rotation) -> void:
+	if not has_building(v):
+		return
+	var b := get_building(v)
+	b.rotation = rotation
 
 
 func destroy_item(what: FactoryItem) -> void:
@@ -30,7 +38,9 @@ func get_item_position(id: int) -> Vector2:
 
 
 func get_floor_texture(v: Vector2i) -> Texture2D:
-	return _floor[v]
+	if _floor.has(v):
+		return _floor[v]
+	return null
 
 
 func has_building(v: Vector2i) -> bool:
@@ -47,13 +57,23 @@ func get_building_ports(v: Vector2i) -> Array[Port]:
 	return _buildings[v].ports
 
 
+func get_building_rotation(v: Vector2i) -> int:
+	if _buildings.has(v) and _buildings[v] != null:
+		return _buildings[v].rotation
+	return 0
+
+
 func get_building_texture(v: Vector2i) -> Texture2D:
 	if _buildings.has(v) and _buildings[v] != null:
 		return _buildings[v].texture
 	return null
 
 
-func place_building(what: GridComponentInfo, where: Vector2i) -> void:
+func place_building(
+		what: GridComponentInfo,
+		where: Vector2i,
+		_rotation: FactoryBuilding.Rotation = FactoryBuilding.Rotation.NORMAL,
+) -> void:
 	if what == null:
 		print("GridComponentInfo cannot be null")
 		return
@@ -65,6 +85,7 @@ func place_building(what: GridComponentInfo, where: Vector2i) -> void:
 
 	var building := FactoryBuilding.new(self, what, where)
 	_buildings[where] = building
+	building.rotation = _rotation
 
 
 func place_item(what: FactoryItemInfo, where: Vector2) -> void:
@@ -119,43 +140,3 @@ func _clear_grid() -> void:
 			continue
 		_buildings[i] = null
 	_buildings.clear()
-
-
-class FactoryBuilding:
-	var _info: GridComponentInfo
-	var position: Vector2i
-	var behaviour: FactoryComponent
-	var texture: Texture2D:
-		get():
-			return _info.texture
-	var ports: Array[Port]:
-		get():
-			return _info.ports # TODO: Do rotation
-
-
-	func tick() -> void:
-		if behaviour == null:
-			return
-		behaviour.tick()
-
-
-	func receive_item(item: FactoryItem) -> void:
-		if behaviour == null:
-			return
-		behaviour.receive_item(item)
-
-
-	func set_var(n: StringName, v: Variant) -> void:
-		if behaviour == null:
-			return
-		behaviour.set_var(n, v)
-
-
-	func _init(_grid: PlayerGrid, info: GridComponentInfo, _position: Vector2i) -> void:
-		self.position = _position
-		_info = info
-		if _info.behaviour != null:
-			behaviour = _info.behaviour.new()
-			behaviour.grid = _grid
-			behaviour.position = _position
-			behaviour.rect = Rect2(_position, Vector2.ONE)

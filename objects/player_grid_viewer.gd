@@ -16,7 +16,22 @@ func _draw() -> void:
 		var to_draw: Texture2D = grid.get_building_texture(v)
 		if to_draw == null:
 			continue
-		draw_texture(to_draw, v * PlayerGrid.GRID_TEXTURE_SIZE)
+		var rot := grid.get_building_rotation(v)
+		if rot != 0:
+			var center := Vector2(v * PlayerGrid.GRID_TEXTURE_SIZE) + Vector2.ONE * (PlayerGrid.GRID_TEXTURE_SIZE / 2.0)
+			var radians := 0.0
+			match rot:
+				1: # CLOCKWISE
+					radians = PI / 2.0
+				2: # COUNTERCLOCKWISE
+					radians = -PI / 2.0
+				3: # FLIPPED
+					radians = PI
+			draw_set_transform(center, radians, Vector2.ONE)
+			draw_texture(to_draw, -Vector2.ONE * (PlayerGrid.GRID_TEXTURE_SIZE / 2.0))
+			draw_set_transform(Vector2.ZERO, 0.0, Vector2.ONE)
+		else:
+			draw_texture(to_draw, v * PlayerGrid.GRID_TEXTURE_SIZE)
 
 	for i: int in grid.get_item_count():
 		var texture := grid.get_item_texture(i)

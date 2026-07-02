@@ -2,9 +2,19 @@
 class_name FactoryComponent
 extends RefCounted
 
-var grid: PlayerGrid
-var position: Vector2i
-var rect: Rect2
+var building: FactoryBuilding
+var rotation: FactoryBuilding.Rotation:
+	get():
+		return building.rotation
+var grid: PlayerGrid:
+	get():
+		return building.grid
+var position: Vector2i:
+	get():
+		return building.position
+var rect: Rect2:
+	get():
+		return building.rect
 
 
 func tick() -> void:

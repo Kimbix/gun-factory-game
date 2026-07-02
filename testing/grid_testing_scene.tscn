@@ -6,7 +6,6 @@
 [node name="GridTestingScene" type="Node2D" unique_id=978679656]
 scale = Vector2(5, 5)
 script = ExtResource("1_38roy")
-ticks_per_second = 32000
 
 [node name="PlayerGridViewer" parent="." unique_id=1170141869 instance=ExtResource("1_bgcc2")]
 view_ports = true

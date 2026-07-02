@@ -1,9 +1,5 @@
 extends Node2D
 
-@export var ticks_per_second: int = 20
-
-var _tick_timer: float = 0.0
-
 @onready var grid_viewer: PlayerGridViewer = $PlayerGridViewer
 @onready var player_grid: PlayerGrid = $PlayerGridViewer/PlayerGrid
 
@@ -15,24 +11,28 @@ func _ready() -> void:
 	const BULLET_CASING_INFO := preload("uid://c4wf626ege7cx")
 
 	player_grid.initialize_empty()
-	player_grid.place_building(GENERATOR_INFO, Vector2i(0, 4))
-	player_grid.place_building(RECEIVER_INFO, Vector2i(9, 4))
-	player_grid.set_building_var("generating", BULLET_CASING_INFO, Vector2i(0, 4))
-	for i: int in range(1, 9):
-		player_grid.place_building(CONVEYOR_INFO, Vector2i(i, 4))
+
+	player_grid.place_building(GENERATOR_INFO, Vector2i(0, 0), FactoryBuilding.Rotation.NORMAL)
+	player_grid.place_building(CONVEYOR_INFO, Vector2i(1, 0), FactoryBuilding.Rotation.NORMAL)
+	player_grid.place_building(RECEIVER_INFO, Vector2i(2, 0), FactoryBuilding.Rotation.NORMAL)
+	player_grid.set_building_var("generating", BULLET_CASING_INFO, Vector2i(0, 0))
+
+	player_grid.place_building(GENERATOR_INFO, Vector2i(2, 1), FactoryBuilding.Rotation.FLIPPED)
+	player_grid.place_building(CONVEYOR_INFO, Vector2i(1, 1), FactoryBuilding.Rotation.FLIPPED)
+	player_grid.place_building(RECEIVER_INFO, Vector2i(0, 1), FactoryBuilding.Rotation.FLIPPED)
+	player_grid.set_building_var("generating", BULLET_CASING_INFO, Vector2i(2, 1))
+
+	player_grid.place_building(GENERATOR_INFO, Vector2i(3, 0), FactoryBuilding.Rotation.CLOCKWISE)
+	player_grid.place_building(CONVEYOR_INFO, Vector2i(3, 1), FactoryBuilding.Rotation.CLOCKWISE)
+	player_grid.place_building(RECEIVER_INFO, Vector2i(3, 2), FactoryBuilding.Rotation.CLOCKWISE)
+	player_grid.set_building_var("generating", BULLET_CASING_INFO, Vector2i(3, 0))
+
+	player_grid.place_building(GENERATOR_INFO, Vector2i(4, 2), FactoryBuilding.Rotation.COUNTERCLOCKWISE)
+	player_grid.place_building(CONVEYOR_INFO, Vector2i(4, 1), FactoryBuilding.Rotation.COUNTERCLOCKWISE)
+	player_grid.place_building(RECEIVER_INFO, Vector2i(4, 0), FactoryBuilding.Rotation.COUNTERCLOCKWISE)
+	player_grid.set_building_var("generating", BULLET_CASING_INFO, Vector2i(4, 2))
 
 	player_grid.output_item.connect(_on_output_item)
-
-
-func _process(delta: float) -> void:
-	if ticks_per_second <= 0:
-		return
-	_tick_timer += delta
-	var interval := 1.0 / ticks_per_second
-	while _tick_timer >= interval:
-		_tick_timer -= interval
-		player_grid.tick()
-	grid_viewer.queue_redraw()
 
 
 func _input(event: InputEvent) -> void:

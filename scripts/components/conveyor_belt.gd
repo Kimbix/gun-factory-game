@@ -7,19 +7,19 @@ const MOVE_DIRECTION: Dictionary[FactoryBuilding.Rotation, Vector2] = {
 	FactoryBuilding.Rotation.COUNTERCLOCKWISE: Vector2.UP,
 	FactoryBuilding.Rotation.FLIPPED: Vector2.LEFT,
 }
-const CHECK_METHOD: Dictionary[FactoryBuilding.Rotation, StringName] = {
-	FactoryBuilding.Rotation.NORMAL: &"_normal_rotation_check",
-	FactoryBuilding.Rotation.CLOCKWISE: &"_clockwise_rotation_check",
-	FactoryBuilding.Rotation.COUNTERCLOCKWISE: &"_counterclockwise_rotation_check",
-	FactoryBuilding.Rotation.FLIPPED: &"_flipped_rotation_check",
-}
 
+var check_method: Dictionary[FactoryBuilding.Rotation, StringName] = {
+	FactoryBuilding.Rotation.NORMAL: _normal_rotation_check.get_method(),
+	FactoryBuilding.Rotation.CLOCKWISE: _clockwise_rotation_check.get_method(),
+	FactoryBuilding.Rotation.COUNTERCLOCKWISE: _counterclockwise_rotation_check.get_method(),
+	FactoryBuilding.Rotation.FLIPPED: _flipped_rotation_check.get_method(),
+}
 var items: Array[FactoryItem] = []
 
 
 func tick() -> void:
 	var dir := MOVE_DIRECTION[rotation]
-	var check := CHECK_METHOD[rotation]
+	var check := check_method[rotation]
 	for i: FactoryItem in items.duplicate():
 		var new_rect := i.rect
 		new_rect.position += dir * .05

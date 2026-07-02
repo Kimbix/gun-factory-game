@@ -57,7 +57,7 @@ func get_building_ports(v: Vector2i) -> Array[Port]:
 	return _buildings[v].ports
 
 
-func get_building_rotation(v: Vector2i) -> int:
+func get_building_rotation(v: Vector2i) -> FactoryBuilding.Rotation:
 	if _buildings.has(v) and _buildings[v] != null:
 		return _buildings[v].rotation
 	return 0

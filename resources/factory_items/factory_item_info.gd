@@ -6,4 +6,6 @@ extends Resource
 
 var grid_size: Vector2:
 	get():
+		if texture == null:
+			return Vector2.ZERO
 		return texture.get_size() / PlayerGrid.GRID_TEXTURE_SIZE

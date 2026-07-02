@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="GridComponentInfo" format=3 uid="uid://d1wu3w33a0ds1"]
+
+[ext_resource type="Script" uid="uid://d2vlvlecmb3ax" path="res://scripts/components/item_generator.gd" id="1_6vowf"]
+[ext_resource type="Script" uid="uid://cxdyvqaslkwas" path="res://scripts/systems/port.gd" id="2_ov3e4"]
+[ext_resource type="Script" uid="uid://da4yb3omv2567" path="res://resources/grid_components/grid_component_info.gd" id="3_yil13"]
+[ext_resource type="Texture2D" uid="uid://c32abh8epl7ve" path="res://assets/factory_components/spr_generator.png" id="4_6vowf"]
+
+[sub_resource type="Resource" id="Resource_38roy"]
+script = ExtResource("2_ov3e4")
+facing = Vector2i(1, 0)
+mode = 1
+metadata/_custom_type_script = "uid://cxdyvqaslkwas"
+
+[resource]
+script = ExtResource("3_yil13")
+name = &"item_generator"
+texture = ExtResource("4_6vowf")
+dimensions = Vector2i(1, 1)
+behaviour = ExtResource("1_6vowf")
+ports = Array[ExtResource("2_ov3e4")]([SubResource("Resource_38roy")])
+metadata/_custom_type_script = "uid://da4yb3omv2567"

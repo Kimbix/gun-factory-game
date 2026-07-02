@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://dhkulhdjf0gsf"]
+
+[ext_resource type="Script" uid="uid://bp1uw1141go1" path="res://testing/grid_testing_scene.gd" id="1_38roy"]
+[ext_resource type="PackedScene" uid="uid://dq2aqdo8qs8ft" path="res://objects/player_grid_viewer.tscn" id="1_bgcc2"]
+
+[node name="GridTestingScene" type="Node2D" unique_id=978679656]
+scale = Vector2(5, 5)
+script = ExtResource("1_38roy")
+ticks_per_second = 32000
+
+[node name="PlayerGridViewer" parent="." unique_id=1170141869 instance=ExtResource("1_bgcc2")]
+view_ports = true

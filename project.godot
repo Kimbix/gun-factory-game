@@ -13,3 +13,20 @@ config_version=5
 config/name="Gun Factory Game"
 config/features=PackedStringArray("4.7", "Forward Plus")
 config/icon="res://icon.svg"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/GDQuest_GDScript_formatter/plugin.cfg", "res://addons/script-ide/plugin.cfg")
+
+[file_customization]
+
+folder_colors={
+"res://addons/": "gray",
+"res://assets/": "red",
+"res://resources/": "green",
+"res://scripts/": "blue"
+}
+
+[rendering]
+
+textures/canvas_textures/default_texture_filter=0

@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://dq2aqdo8qs8ft"]
+
+[ext_resource type="Script" uid="uid://cj3e1bi5aowx2" path="res://objects/player_grid_viewer.gd" id="1_g38f3"]
+[ext_resource type="Script" uid="uid://cxl6cqkp8irqk" path="res://scripts/systems/player_grid.gd" id="2_uooec"]
+
+[node name="PlayerGridViewer" type="Node2D" unique_id=2050687440 node_paths=PackedStringArray("grid")]
+script = ExtResource("1_g38f3")
+grid = NodePath("PlayerGrid")
+metadata/_custom_type_script = "uid://cj3e1bi5aowx2"
+
+[node name="PlayerGrid" type="Node" parent="." unique_id=1936675931]
+script = ExtResource("2_uooec")
+metadata/_custom_type_script = "uid://cxl6cqkp8irqk"

@@ -1,0 +1,60 @@
+@abstract
+class_name FactoryComponent
+extends RefCounted
+
+var grid: PlayerGrid
+var position: Vector2i
+var rect: Rect2
+
+
+func tick() -> void:
+	pass
+
+
+func set_var(n: StringName, v: Variant) -> void:
+	set(n, v)
+
+
+func receive_item(_item: FactoryItem) -> void:
+	pass
+
+
+func _get_available_out_port() -> Port:
+	var my_ports := grid.get_building_ports(position).filter(Port.output_mode_filter)
+	if my_ports.size() == 0:
+		return null
+	return my_ports.front()
+
+
+func _notify(what: String, args: Array) -> void:
+	var to_call: Array = [what]
+	to_call.append_array(args)
+	grid.emit_signal.callv(to_call)
+
+
+func _can_output() -> bool:
+	var my_ports := grid.get_building_ports(position).filter(Port.output_mode_filter)
+	if my_ports.size() == 0:
+		return false
+
+	for p: Port in my_ports:
+		# Get the position of the block that contains the port
+		var give_block_position := position + p.position
+		# Check the position we're looking at for ports
+		var receive_block_position := give_block_position + p.facing
+
+		if grid.get_building(receive_block_position) == null:
+			return true # We can place the item on the floor
+
+		var their_ports := (grid.get_building_ports(receive_block_position)
+				.filter(Port.input_mode_filter))
+		for other_p: Port in their_ports:
+			# Get the block this port receives from by summing the position of
+			# the port within the building + the direction it's facing
+			var receive_from := receive_block_position + other_p.position + other_p.facing
+			# If they match, the port can output
+			if give_block_position == receive_from:
+				# TODO: Each building has it's own way of determining
+				# if they can receive an item other than having ports
+				return true
+	return false

@@ -1,0 +1,35 @@
+[gd_resource type="Resource" script_class="GridComponentInfo" format=3 uid="uid://djspgv1yqiaky"]
+
+[ext_resource type="Script" uid="uid://cgeo8bkln2ba0" path="res://scripts/components/item_receiver.gd" id="1_cbgds"]
+[ext_resource type="Script" uid="uid://cxdyvqaslkwas" path="res://scripts/systems/port.gd" id="2_nedx0"]
+[ext_resource type="Script" uid="uid://da4yb3omv2567" path="res://resources/grid_components/grid_component_info.gd" id="3_pfbim"]
+[ext_resource type="Texture2D" uid="uid://1epvup5675yh" path="res://assets/factory_components/spr_receiver.png" id="4_cbgds"]
+
+[sub_resource type="Resource" id="Resource_38roy"]
+script = ExtResource("2_nedx0")
+facing = Vector2i(1, 0)
+metadata/_custom_type_script = "uid://cxdyvqaslkwas"
+
+[sub_resource type="Resource" id="Resource_bg5r3"]
+script = ExtResource("2_nedx0")
+facing = Vector2i(-1, 0)
+metadata/_custom_type_script = "uid://cxdyvqaslkwas"
+
+[sub_resource type="Resource" id="Resource_hwi32"]
+script = ExtResource("2_nedx0")
+facing = Vector2i(0, 1)
+metadata/_custom_type_script = "uid://cxdyvqaslkwas"
+
+[sub_resource type="Resource" id="Resource_cyv5i"]
+script = ExtResource("2_nedx0")
+facing = Vector2i(0, -1)
+metadata/_custom_type_script = "uid://cxdyvqaslkwas"
+
+[resource]
+script = ExtResource("3_pfbim")
+name = &"item_receiver"
+texture = ExtResource("4_cbgds")
+dimensions = Vector2i(1, 1)
+behaviour = ExtResource("1_cbgds")
+ports = Array[ExtResource("2_nedx0")]([SubResource("Resource_38roy"), SubResource("Resource_bg5r3"), SubResource("Resource_hwi32"), SubResource("Resource_cyv5i")])
+metadata/_custom_type_script = "uid://da4yb3omv2567"

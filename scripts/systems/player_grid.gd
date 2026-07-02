@@ -1,0 +1,161 @@
+class_name PlayerGrid
+extends Node
+
+signal output_item(item: FactoryItem)
+
+const GRID_TEXTURE_SIZE := 16
+
+@export var dimensions: Vector2i = Vector2i(10, 10)
+
+var _floor: Dictionary[Vector2i, Texture2D] = { }
+var _items: Array[FactoryItem] = []
+var _buildings: Dictionary[Vector2i, FactoryBuilding] = { }
+
+
+func destroy_item(what: FactoryItem) -> void:
+	if _items.has(what):
+		_items.erase(what)
+
+
+func get_item_count() -> int:
+	return _items.size()
+
+
+func get_item_texture(id: int) -> Texture2D:
+	return _items[id].texture
+
+
+func get_item_position(id: int) -> Vector2:
+	return _items[id].position
+
+
+func get_floor_texture(v: Vector2i) -> Texture2D:
+	return _floor[v]
+
+
+func has_building(v: Vector2i) -> bool:
+	return _buildings.has(v) and _buildings[v] != null
+
+
+func get_building(v: Vector2i) -> FactoryBuilding:
+	return _buildings[v] if _buildings.has(v) else null
+
+
+func get_building_ports(v: Vector2i) -> Array[Port]:
+	if not _buildings.has(v):
+		return []
+	return _buildings[v].ports
+
+
+func get_building_texture(v: Vector2i) -> Texture2D:
+	if _buildings.has(v) and _buildings[v] != null:
+		return _buildings[v].texture
+	return null
+
+
+func place_building(what: GridComponentInfo, where: Vector2i) -> void:
+	if what == null:
+		print("GridComponentInfo cannot be null")
+		return
+
+	# NOTE: This check will probably have to be more thorough when NxM buildings are in play
+	if where.x < 0 or where.x >= dimensions.x or where.y < 0 or where.y >= dimensions.y:
+		print("Position for building must be valid")
+		return
+
+	var building := FactoryBuilding.new(self, what, where)
+	_buildings[where] = building
+
+
+func place_item(what: FactoryItemInfo, where: Vector2) -> void:
+	if what == null:
+		print("GridComponentInfo cannot be null")
+		return
+
+	# NOTE: This check will probably have to be more thorough when NxM buildings are in play
+	if where.x < 0 or where.x >= dimensions.x or where.y < 0 or where.y >= dimensions.y:
+		print("Position for building must be valid")
+		return
+
+	var building_to_check := where.floor()
+	var building := get_building(building_to_check)
+
+	var item := FactoryItem.new(what, where)
+	_items.append(item)
+	if building != null:
+		building.receive_item(item)
+
+
+func initialize_empty() -> void:
+	_clear_grid()
+
+	for v: Vector2i in VectorTools.vector2i_range(dimensions):
+		_floor[v] = preload("uid://bcxv8tx5ovn5l")
+
+
+func tick() -> void:
+	for v: Vector2i in _buildings.keys():
+		var building := _buildings[v]
+		building.tick()
+
+
+func set_building_var(n: StringName, v: Variant, p: Vector2i) -> void:
+	if not _buildings.has(p):
+		return
+	_buildings[p].set_var(n, v)
+
+
+func _clear_grid() -> void:
+	for i: Vector2i in _floor.keys():
+		var obj: Texture2D = _floor[i]
+		if obj == null:
+			continue
+		_floor[i] = null
+	_floor.clear()
+
+	for i: Vector2i in _buildings.keys():
+		var obj: FactoryBuilding = _buildings[i]
+		if obj == null:
+			continue
+		_buildings[i] = null
+	_buildings.clear()
+
+
+class FactoryBuilding:
+	var _info: GridComponentInfo
+	var position: Vector2i
+	var behaviour: FactoryComponent
+	var texture: Texture2D:
+		get():
+			return _info.texture
+	var ports: Array[Port]:
+		get():
+			return _info.ports # TODO: Do rotation
+
+
+	func tick() -> void:
+		if behaviour == null:
+			return
+		behaviour.tick()
+
+
+	func receive_item(item: FactoryItem) -> void:
+		if behaviour == null:
+			return
+		behaviour.receive_item(item)
+
+
+	func set_var(n: StringName, v: Variant) -> void:
+		if behaviour == null:
+			return
+		behaviour.set_var(n, v)
+
+
+	func _init(_grid: PlayerGrid, info: GridComponentInfo, _position: Vector2i) -> void:
+		self.position = _position
+		_info = info
+		if _info.behaviour != null:
+			behaviour = _info.behaviour.new()
+			behaviour.grid = _grid
+			behaviour.position = _position
+			behaviour.rect = Rect2(_position, Vector2.ONE)

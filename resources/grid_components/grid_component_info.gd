@@ -1,0 +1,8 @@
+class_name GridComponentInfo
+extends Resource
+
+@export var name: StringName = &""
+@export var texture: Texture2D = null
+@export var dimensions: Vector2i = Vector2i.ZERO
+@export var behaviour: Script = null
+@export var ports: Array[Port] = []

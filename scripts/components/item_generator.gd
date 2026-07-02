@@ -7,7 +7,7 @@ var generating: FactoryItemInfo:
 		_precompute_offsets()
 		_cooldown = 0
 var _cooldown: int = 0
-var _offsets: Dictionary = { }
+var _offsets: Dictionary[FactoryBuilding.Rotation, Vector2] = { }
 
 
 func tick() -> void:

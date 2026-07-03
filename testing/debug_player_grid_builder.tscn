@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://c42oxf66vw7sk" path="res://testing/debug_player_grid_builder.gd" id="1_xnnkg"]
 [ext_resource type="Resource" uid="uid://cxaf6asblr1t7" path="res://resources/grid_components/conveyor_belt.tres" id="2_rq0mw"]
-[ext_resource type="Resource" uid="uid://dr6nl610t14jj" path="res://resources/item_catalogue/debug_building_catalogue.tres" id="3_7eqaa"]
+[ext_resource type="Resource" uid="uid://dr6nl610t14jj" path="res://resources/building_catalogue/debug_building_catalogue.tres" id="3_7eqaa"]
 
 [node name="DebugPlayerGridBuilder" type="Control" unique_id=649837091]
 layout_mode = 3

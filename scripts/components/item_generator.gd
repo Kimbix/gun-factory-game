@@ -1,6 +1,8 @@
 class_name ItemGenerator
 extends FactoryComponent
 
+const INTERFACE := preload("uid://c8wqyeagxk100")
+
 var generating: FactoryItemInfo:
 	set(v):
 		generating = v
@@ -13,7 +15,6 @@ var _offsets: Dictionary[FactoryBuilding.Rotation, Vector2] = { }
 func tick() -> void:
 	if generating == null:
 		return
-
 	if _cooldown > 0:
 		_cooldown -= 1
 		return
@@ -27,10 +28,26 @@ func tick() -> void:
 	_cooldown = 40
 
 
+func open_interface() -> void:
+	var interface: GeneratorInterface = INTERFACE.instantiate()
+	InterfaceCanvasLayer.add_child(interface)
+	interface.item_pressed.connect(_on_item_pressed)
+
+
+func _on_item_pressed(item: FactoryItemInfo) -> void:
+	generating = item
+
+
 func _precompute_offsets() -> void:
 	if generating == null:
 		return
-	_offsets[FactoryBuilding.Rotation.NORMAL] = Vector2.DOWN * .5 + Vector2.UP * generating.grid_size.y * .5
-	_offsets[FactoryBuilding.Rotation.CLOCKWISE] = Vector2.RIGHT * .5 + Vector2.LEFT * generating.grid_size.x * .5
-	_offsets[FactoryBuilding.Rotation.COUNTERCLOCKWISE] = Vector2.DOWN + Vector2.UP * generating.grid_size.y + Vector2.RIGHT * .5 + Vector2.LEFT * generating.grid_size.x * .5
-	_offsets[FactoryBuilding.Rotation.FLIPPED] = Vector2.RIGHT + Vector2.LEFT * generating.grid_size.x + Vector2.DOWN * .5 + Vector2.UP * generating.grid_size.y * .5
+	_offsets[FactoryBuilding.Rotation.NORMAL] = (
+			Vector2.DOWN * .5 + Vector2.UP * generating.grid_size.y * .5)
+	_offsets[FactoryBuilding.Rotation.CLOCKWISE] = (
+			Vector2.RIGHT * .5 + Vector2.LEFT * generating.grid_size.x * .5)
+	_offsets[FactoryBuilding.Rotation.COUNTERCLOCKWISE] = (
+			Vector2.DOWN + Vector2.UP * generating.grid_size.y +
+			Vector2.RIGHT * .5 + Vector2.LEFT * generating.grid_size.x * .5)
+	_offsets[FactoryBuilding.Rotation.FLIPPED] = (
+			Vector2.RIGHT + Vector2.LEFT * generating.grid_size.x +
+			Vector2.DOWN * .5 + Vector2.UP * generating.grid_size.y * .5)

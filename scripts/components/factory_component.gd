@@ -29,6 +29,10 @@ func receive_item(_item: FactoryItem) -> void:
 	pass
 
 
+func open_interface() -> void:
+	pass
+
+
 func _get_available_out_port() -> Port:
 	var my_ports := grid.get_building_ports(position).filter(Port.output_mode_filter)
 	if my_ports.size() == 0:

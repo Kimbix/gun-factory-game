@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://cq5f74b5ddssl"]
+
+[ext_resource type="Script" uid="uid://5ch604n3lk0d" path="res://interfaces/item_button.gd" id="1_5l86c"]
+
+[node name="ItemButton" type="Button" unique_id=242071875]
+custom_minimum_size = Vector2(32, 32)
+anchors_preset = -1
+anchor_left = 0.4861111
+anchor_top = 0.47530866
+anchor_right = 0.5138889
+anchor_bottom = 0.52469134
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("1_5l86c")
+metadata/_custom_type_script = "uid://5ch604n3lk0d"
+metadata/_edit_use_anchors_ = true
+
+[node name="ItemImage" type="TextureRect" parent="." unique_id=261202828]
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2

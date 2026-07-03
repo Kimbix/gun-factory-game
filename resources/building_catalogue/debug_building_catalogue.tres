@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://da4yb3omv2567" path="res://resources/grid_components/grid_component_info.gd" id="1_3g68y"]
 [ext_resource type="Resource" uid="uid://cxaf6asblr1t7" path="res://resources/grid_components/conveyor_belt.tres" id="2_312wq"]
-[ext_resource type="Script" uid="uid://bj46e0a68npcj" path="res://resources/item_catalogue/building_catalogue.gd" id="2_bss7p"]
+[ext_resource type="Script" uid="uid://bj46e0a68npcj" path="res://resources/building_catalogue/building_catalogue.gd" id="2_bss7p"]
 [ext_resource type="Resource" uid="uid://djspgv1yqiaky" path="res://resources/grid_components/item_receiver.tres" id="3_kxio0"]
 [ext_resource type="Resource" uid="uid://d1wu3w33a0ds1" path="res://resources/grid_components/item_generator.tres" id="4_nkpgx"]
 

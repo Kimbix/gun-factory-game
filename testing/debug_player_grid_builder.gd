@@ -34,9 +34,13 @@ func _process(_delta: float) -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if not (event is InputEventMouseButton and event.pressed):
 		return
+	if viewer == null or viewer.grid == null:
+		return
 
 	match event.button_index:
 		MOUSE_BUTTON_RIGHT:
+			if not viewer.grid.has_building(hovered_cell):
+				return
 			viewer.grid.destroy_building(hovered_cell)
 			viewer.queue_redraw()
 		MOUSE_BUTTON_WHEEL_UP, MOUSE_BUTTON_WHEEL_DOWN:
@@ -45,10 +49,11 @@ func _unhandled_input(event: InputEvent) -> void:
 			queue_redraw()
 		MOUSE_BUTTON_LEFT:
 			var component_info := building_catalogue.buildings[_selected_building_index]
-			if component_info == null or viewer == null or viewer.grid == null:
+			if component_info == null or viewer.grid.has_building(hovered_cell):
 				return
 			viewer.grid.place_building(component_info, hovered_cell, pending_rotation)
 			viewer.queue_redraw()
+			accept_event()
 
 
 func _unhandled_key_input(event: InputEvent) -> void:

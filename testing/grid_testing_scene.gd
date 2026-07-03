@@ -2,7 +2,7 @@ extends Node2D
 
 @onready var grid_viewer: PlayerGridViewer = $PlayerGridViewer
 @onready var player_grid: PlayerGrid = $PlayerGridViewer/PlayerGrid
-@onready var debug_builder: DebugPlayerGridBuilder = $CanvasLayer/DebugPlayerGridBuilder
+@onready var debug_builder: DebugPlayerGridBuilder = $DebugLayer/DebugPlayerGridBuilder
 
 
 func _ready() -> void:

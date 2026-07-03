@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://bp1uw1141go1" path="res://testing/grid_testing_scene.gd" id="1_38roy"]
 [ext_resource type="PackedScene" uid="uid://dq2aqdo8qs8ft" path="res://objects/player_grid_viewer.tscn" id="1_bgcc2"]
 [ext_resource type="Script" uid="uid://c42oxf66vw7sk" path="res://testing/debug_player_grid_builder.gd" id="2_k33vg"]
-[ext_resource type="Resource" uid="uid://dr6nl610t14jj" path="res://resources/item_catalogue/debug_building_catalogue.tres" id="5_ecpxj"]
+[ext_resource type="Resource" uid="uid://dr6nl610t14jj" path="res://resources/building_catalogue/debug_building_catalogue.tres" id="5_ecpxj"]
 
 [node name="GridTestingScene" type="Node2D" unique_id=978679656]
 script = ExtResource("1_38roy")
@@ -12,9 +12,9 @@ script = ExtResource("1_38roy")
 scale = Vector2(5, 5)
 view_ports = true
 
-[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1704631010]
+[node name="DebugLayer" type="CanvasLayer" parent="." unique_id=1704631010]
 
-[node name="DebugPlayerGridBuilder" type="Control" parent="CanvasLayer" unique_id=649837091 node_paths=PackedStringArray("viewer")]
+[node name="DebugPlayerGridBuilder" type="Control" parent="DebugLayer" unique_id=649837091 node_paths=PackedStringArray("viewer")]
 layout_mode = 3
 anchors_preset = 11
 anchor_left = 1.0
@@ -27,7 +27,7 @@ viewer = NodePath("../../PlayerGridViewer")
 building_catalogue = ExtResource("5_ecpxj")
 metadata/_custom_type_script = "uid://c42oxf66vw7sk"
 
-[node name="BuildingsList" type="GridContainer" parent="CanvasLayer/DebugPlayerGridBuilder" unique_id=892556118]
+[node name="BuildingsList" type="GridContainer" parent="DebugLayer/DebugPlayerGridBuilder" unique_id=892556118]
 layout_mode = 1
 anchors_preset = 11
 anchor_left = 1.0

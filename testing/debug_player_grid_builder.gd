@@ -40,7 +40,7 @@ func _unhandled_input(event: InputEvent) -> void:
 			viewer.grid.destroy_building(hovered_cell)
 			viewer.queue_redraw()
 		MOUSE_BUTTON_WHEEL_UP, MOUSE_BUTTON_WHEEL_DOWN:
-			var dir := 1 if event.button_index == MOUSE_BUTTON_WHEEL_UP else -1
+			var dir := 1 if event.button_index == MOUSE_BUTTON_WHEEL_DOWN else -1
 			pending_rotation = (pending_rotation + dir + 4) % 4
 			queue_redraw()
 		MOUSE_BUTTON_LEFT:

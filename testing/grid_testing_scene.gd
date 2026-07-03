@@ -2,6 +2,7 @@ extends Node2D
 
 @onready var grid_viewer: PlayerGridViewer = $PlayerGridViewer
 @onready var player_grid: PlayerGrid = $PlayerGridViewer/PlayerGrid
+@onready var debug_builder: DebugPlayerGridBuilder = $CanvasLayer/DebugPlayerGridBuilder
 
 
 func _ready() -> void:
@@ -17,6 +18,9 @@ func _input(event: InputEvent) -> void:
 		KEY_F1:
 			player_grid.tick()
 			grid_viewer.queue_redraw()
+		KEY_F2:
+			debug_builder.visible = not debug_builder.visible
+			debug_builder.process_mode = PROCESS_MODE_INHERIT if debug_builder.visible else PROCESS_MODE_DISABLED
 
 
 func _on_output_item(item: FactoryItem) -> void:

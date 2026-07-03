@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://73xpeh8gi2ro"]
+
+[ext_resource type="Script" uid="uid://c42oxf66vw7sk" path="res://testing/debug_player_grid_builder.gd" id="1_xnnkg"]
+[ext_resource type="Resource" uid="uid://cxaf6asblr1t7" path="res://resources/grid_components/conveyor_belt.tres" id="2_rq0mw"]
+[ext_resource type="Resource" uid="uid://dr6nl610t14jj" path="res://resources/item_catalogue/debug_building_catalogue.tres" id="3_7eqaa"]
+
+[node name="DebugPlayerGridBuilder" type="Control" unique_id=649837091]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_xnnkg")
+component_info = ExtResource("2_rq0mw")
+building_catalogue = ExtResource("3_7eqaa")
+metadata/_custom_type_script = "uid://c42oxf66vw7sk"
+metadata/_edit_use_anchors_ = true
+
+[node name="BuildingsList" type="GridContainer" parent="." unique_id=892556118]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 0
+grow_vertical = 2
+columns = 3

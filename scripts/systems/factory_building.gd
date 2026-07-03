@@ -56,6 +56,10 @@ func _init(
 		behaviour.building = self
 
 
+func _to_string() -> String:
+	return "<FactoryBuilding %s>" % [_info.name]
+
+
 func tick() -> void:
 	if behaviour == null:
 		return

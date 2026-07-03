@@ -10,7 +10,7 @@ var texture: Texture2D:
 		return _info.texture
 var name: String:
 	get():
-		return _info.resource_name
+		return _info.name
 var _info: FactoryItemInfo
 
 

@@ -26,5 +26,7 @@ func _unhandled_input(event: InputEvent) -> void:
 	match event.button_index:
 		MOUSE_BUTTON_LEFT:
 			var b := viewer.grid.get_building(hovered_cell)
+			if b == null:
+				return
 			b.behaviour.open_interface()
 			viewer.queue_redraw()

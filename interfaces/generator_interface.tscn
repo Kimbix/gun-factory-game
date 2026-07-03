@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://c8wqyeagxk100"]
 
 [ext_resource type="Script" uid="uid://kdipf8fij2im" path="res://interfaces/generator_interface.gd" id="1_255gi"]
+[ext_resource type="PackedScene" uid="uid://cq5f74b5ddssl" path="res://interfaces/item_button.tscn" id="2_ra787"]
 
 [node name="GeneratorInterface" type="PanelContainer" unique_id=916866348]
 custom_minimum_size = Vector2(256, 128)
@@ -23,3 +24,7 @@ layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 0
 text = "X"
+
+[node name="ItemButton" parent="." unique_id=242071875 instance=ExtResource("2_ra787")]
+layout_mode = 2
+size_flags_horizontal = 8

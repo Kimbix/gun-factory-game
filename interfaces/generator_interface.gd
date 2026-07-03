@@ -8,6 +8,7 @@ const ITEM_BUTTON := preload("uid://cq5f74b5ddssl")
 
 @onready var grid_container: GridContainer = $GridContainer
 @onready var close_button: Button = $CloseButton
+@onready var current_output: ItemButton = $ItemButton
 
 
 func _ready() -> void:
@@ -17,6 +18,10 @@ func _ready() -> void:
 		instance.item = item
 		instance.item_pressed.connect(_on_item_pressed)
 	close_button.pressed.connect(queue_free)
+
+
+func change_output(item: FactoryItemInfo) -> void:
+	current_output.item = item
 
 
 func _on_item_pressed(item: FactoryItemInfo) -> void:

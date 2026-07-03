@@ -8,7 +8,9 @@ var item: FactoryItemInfo:
 		return item
 	set(v):
 		item = v
-		texture_rect.texture = item.texture
+		if item != null:
+			texture_rect.texture = item.texture
+			tooltip_text = item.name
 var texture:
 	get():
 		return texture_rect.texture

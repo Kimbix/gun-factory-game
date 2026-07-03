@@ -2,10 +2,10 @@ class_name FactoryBuilding
 extends RefCounted
 
 enum Rotation {
-	NORMAL,
-	CLOCKWISE,
-	COUNTERCLOCKWISE,
-	FLIPPED,
+	NORMAL = 0,
+	CLOCKWISE = 1,
+	FLIPPED = 2,
+	COUNTERCLOCKWISE = 3,
 }
 
 var grid: PlayerGrid
@@ -37,6 +37,13 @@ var texture: Texture2D:
 		return _info.texture
 var ports: Array[Port] = []
 var _info: GridComponentInfo
+
+
+static func rotate(
+		r: FactoryBuilding.Rotation,
+		clockwise: bool = true,
+) -> FactoryBuilding.Rotation:
+	return ((r + (1 if clockwise else 3)) % 4) as FactoryBuilding.Rotation
 
 
 func _init(

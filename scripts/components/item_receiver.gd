@@ -1,7 +1,6 @@
 class_name ItemReceiver
 extends FactoryComponent
 
-
 func tick() -> void:
 	pass
 

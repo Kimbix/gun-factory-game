@@ -13,6 +13,20 @@ var _items: Array[FactoryItem] = []
 var _buildings: Dictionary[Vector2i, FactoryBuilding] = { }
 
 
+func destroy_building(v: Vector2i) -> void:
+	if not has_building(v):
+		return
+
+	print("Erasing building at %s" % v)
+	_buildings.erase(v)
+
+
+func rotate_building(v: Vector2i, clockwise: bool = true) -> void:
+	var r := get_building_rotation(v)
+	r = FactoryBuilding.rotate(r, clockwise)
+	set_building_rotation(v, r)
+
+
 func set_building_rotation(v: Vector2i, rotation: FactoryBuilding.Rotation) -> void:
 	if not has_building(v):
 		return

@@ -17,3 +17,7 @@ var _info: FactoryItemInfo
 func _init(info: FactoryItemInfo, _position: Vector2) -> void:
 	self.position = _position
 	_info = info
+
+
+func get_info() -> FactoryItemInfo:
+	return _info

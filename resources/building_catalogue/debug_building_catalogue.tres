@@ -8,8 +8,9 @@
 [ext_resource type="Resource" uid="uid://b41gow6t4rmgw" path="res://resources/grid_components/item_receiver.tres" id="5_1u43t"]
 [ext_resource type="Resource" uid="uid://dow1nfk5h5vv" path="res://resources/grid_components/furnace.tres" id="6_2wq31"]
 [ext_resource type="Resource" uid="uid://bfbl3v4bs23as" path="res://resources/grid_components/metal_processor.tres" id="7_3wq31"]
+[ext_resource type="Resource" path="res://resources/grid_components/ammo_assembler.tres" id="8_4wq31"]
 
 [resource]
 script = ExtResource("2_bss7p")
-buildings = Array[ExtResource("1_3g68y")]([ExtResource("4_nkpgx"), ExtResource("3_kxio0"), ExtResource("2_312wq"), ExtResource("5_1u43t"), ExtResource("6_2wq31"), ExtResource("7_3wq31")])
+buildings = Array[ExtResource("1_3g68y")]([ExtResource("4_nkpgx"), ExtResource("3_kxio0"), ExtResource("2_312wq"), ExtResource("5_1u43t"), ExtResource("6_2wq31"), ExtResource("7_3wq31"), ExtResource("8_4wq31")])
 metadata/_custom_type_script = "uid://bj46e0a68npcj"

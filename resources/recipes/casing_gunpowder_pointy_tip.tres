@@ -1,0 +1,33 @@
+[gd_resource type="Resource" script_class="ItemRecipe" format=3]
+
+[ext_resource type="Texture2D" uid="uid://xp8d6rtgs61m" path="res://assets/factory_items/spr_rifleRounds.png" id="1_h93nf"]
+[ext_resource type="Script" uid="uid://d3f4ru8ryeu14" path="res://resources/recipes/recipe_ingredient.gd" id="1_keo7j"]
+[ext_resource type="Script" uid="uid://0p8ni7rbeu6p" path="res://resources/recipes/item_recipe.gd" id="1_xj2cp"]
+[ext_resource type="Resource" uid="uid://c4wf626ege7cx" path="res://resources/factory_items/bullet_casing.tres" id="2_sh3nw"]
+[ext_resource type="Resource" uid="uid://cpg7snevhbi06" path="res://resources/factory_items/gunpowder.tres" id="3_wx4tf"]
+[ext_resource type="Resource" path="res://resources/factory_items/pointy_lead_tip.tres" id="4_tpsek"]
+[ext_resource type="Resource" path="res://resources/factory_items/rifle_round.tres" id="5_ib3ef"]
+[ext_resource type="Resource" uid="uid://delxbnrvtqsr4" path="res://resources/grid_components/ammo_assembler.tres" id="6_qqhnt"]
+
+[sub_resource type="Resource" id="Resource_tnams"]
+script = ExtResource("1_keo7j")
+item = ExtResource("2_sh3nw")
+
+[sub_resource type="Resource" id="Resource_vkdxb"]
+script = ExtResource("1_keo7j")
+item = ExtResource("3_wx4tf")
+
+[sub_resource type="Resource" id="Resource_ehrhx"]
+script = ExtResource("1_keo7j")
+item = ExtResource("4_tpsek")
+
+[sub_resource type="Resource" id="Resource_oj4et"]
+script = ExtResource("1_keo7j")
+item = ExtResource("5_ib3ef")
+
+[resource]
+script = ExtResource("1_xj2cp")
+icon = ExtResource("1_h93nf")
+inputs = Array[ExtResource("1_keo7j")]([SubResource("Resource_tnams"), SubResource("Resource_vkdxb"), SubResource("Resource_ehrhx")])
+outputs = Array[ExtResource("1_keo7j")]([SubResource("Resource_oj4et")])
+machine = ExtResource("6_qqhnt")

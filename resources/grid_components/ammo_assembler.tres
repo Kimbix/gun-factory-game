@@ -1,0 +1,31 @@
+[gd_resource type="Resource" script_class="GridComponentInfo" format=3 uid="uid://delxbnrvtqsr4"]
+
+[ext_resource type="Script" uid="uid://cg2hm7sla5yw" path="res://scripts/components/ammo_assembler.gd" id="1_hsiot"]
+[ext_resource type="Script" uid="uid://cxdyvqaslkwas" path="res://scripts/systems/port.gd" id="2_qa7on"]
+[ext_resource type="Script" uid="uid://da4yb3omv2567" path="res://resources/grid_components/grid_component_info.gd" id="3_4ov8w"]
+[ext_resource type="Texture2D" uid="uid://57bd0imx6n1h" path="res://assets/factory_components/spr_ammoAssembler.png" id="4_qa7on"]
+
+[sub_resource type="Resource" id="Resource_yqg4a"]
+script = ExtResource("2_qa7on")
+facing = Vector2i(0, 1)
+
+[sub_resource type="Resource" id="Resource_qg4ay"]
+script = ExtResource("2_qa7on")
+facing = Vector2i(0, -1)
+
+[sub_resource type="Resource" id="Resource_r4ayg"]
+script = ExtResource("2_qa7on")
+facing = Vector2i(-1, 0)
+
+[sub_resource type="Resource" id="Resource_s4ayg"]
+script = ExtResource("2_qa7on")
+facing = Vector2i(1, 0)
+mode = 1
+
+[resource]
+script = ExtResource("3_4ov8w")
+name = &"ammo_assembler"
+texture = ExtResource("4_qa7on")
+dimensions = Vector2i(1, 1)
+behaviour = ExtResource("1_hsiot")
+ports = Array[ExtResource("2_qa7on")]([SubResource("Resource_yqg4a"), SubResource("Resource_qg4ay"), SubResource("Resource_r4ayg"), SubResource("Resource_s4ayg")])

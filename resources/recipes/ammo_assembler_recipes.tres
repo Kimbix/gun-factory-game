@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="RecipeCatalogue" format=3]
+
+[ext_resource type="Script" uid="uid://0p8ni7rbeu6p" path="res://resources/recipes/item_recipe.gd" id="1_9se6p"]
+[ext_resource type="Script" uid="uid://buxsgr4u71mah" path="res://resources/recipes/recipe_catalogue.gd" id="2_btccb"]
+[ext_resource type="Resource" path="res://resources/recipes/casing_gunpowder_pellets.tres" id="2_utyma"]
+[ext_resource type="Resource" path="res://resources/recipes/casing_gunpowder_pointy_tip.tres" id="3_utyma"]
+[ext_resource type="Resource" path="res://resources/recipes/casing_gunpowder_rounded_tip.tres" id="4_utyma"]
+
+[resource]
+script = ExtResource("2_btccb")
+recipes = Array[ExtResource("1_9se6p")]([ExtResource("2_utyma"), ExtResource("3_utyma"), ExtResource("4_utyma")])

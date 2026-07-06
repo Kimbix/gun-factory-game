@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://cgrsaa7x25x2o"]
+
+[ext_resource type="Script" path="res://interfaces/ammo_assembler_interface.gd" id="1_xee5u"]
+
+[node name="AmmoAssemblerInterface" type="PanelContainer"]
+custom_minimum_size = Vector2(240, 120)
+anchors_preset = -1
+anchor_left = 0.39583334
+anchor_top = 0.4074074
+anchor_right = 0.6041667
+anchor_bottom = 0.5925926
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_xee5u")
+metadata/_edit_use_anchors_ = true
+
+[node name="PickableRecipes" type="GridContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 0
+columns = 3
+
+[node name="SelectedRecipe" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+mouse_filter = 2
+
+[node name="CloseButton" type="Button" parent="."]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+text = "X"

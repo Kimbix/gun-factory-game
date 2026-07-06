@@ -9,9 +9,6 @@ var _cooldown: int = 0
 
 
 func tick() -> void:
-	if lead_count == 0:
-		_cooldown = 0
-
 	if _cooldown > 0:
 		_cooldown -= 1
 		if _cooldown == 0:

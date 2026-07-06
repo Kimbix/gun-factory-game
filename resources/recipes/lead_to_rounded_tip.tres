@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="ItemRecipe" format=3 uid="uid://vlx400moqi4b"]
+
+[ext_resource type="Texture2D" uid="uid://b2iyu45v5f738" path="res://assets/factory_items/spr_roundedLeadTip.png" id="1_a0c26"]
+[ext_resource type="Script" uid="uid://d3f4ru8ryeu14" path="res://resources/recipes/recipe_ingredient.gd" id="1_keo7j"]
+[ext_resource type="Script" uid="uid://0p8ni7rbeu6p" path="res://resources/recipes/item_recipe.gd" id="1_wli0s"]
+[ext_resource type="Resource" uid="uid://c0nkegvlqof7" path="res://resources/factory_items/lead_plate.tres" id="2_xycuk"]
+[ext_resource type="Resource" uid="uid://bfbl3v4bs23as" path="res://resources/grid_components/metal_processor.tres" id="3_ichsm"]
+[ext_resource type="Resource" path="res://resources/factory_items/rounded_lead_tip.tres" id="4_et85g"]
+
+[sub_resource type="Resource" id="Resource_drpog"]
+script = ExtResource("1_keo7j")
+item = ExtResource("2_xycuk")
+
+[sub_resource type="Resource" id="Resource_mmgc4"]
+script = ExtResource("1_keo7j")
+item = ExtResource("4_et85g")
+
+[resource]
+script = ExtResource("1_wli0s")
+icon = ExtResource("1_a0c26")
+inputs = Array[ExtResource("1_keo7j")]([SubResource("Resource_drpog")])
+outputs = Array[ExtResource("1_keo7j")]([SubResource("Resource_mmgc4")])
+machine = ExtResource("3_ichsm")

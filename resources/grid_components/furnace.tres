@@ -1,0 +1,37 @@
+[gd_resource type="Resource" script_class="GridComponentInfo" format=3 uid="uid://dow1nfk5h5vv"]
+
+[ext_resource type="Script" uid="uid://b0vl3ix6s43nx" path="res://scripts/components/furnace.gd" id="1_dl2pg"]
+[ext_resource type="Script" uid="uid://cxdyvqaslkwas" path="res://scripts/systems/port.gd" id="2_qa7on"]
+[ext_resource type="Script" uid="uid://da4yb3omv2567" path="res://resources/grid_components/grid_component_info.gd" id="3_4ov8w"]
+[ext_resource type="Texture2D" uid="uid://c7vrijdudkahf" path="res://assets/factory_components/spr_furnace.png" id="4_qa7on"]
+
+[sub_resource type="Resource" id="Resource_yqg4a"]
+script = ExtResource("2_qa7on")
+facing = Vector2i(0, 1)
+metadata/_custom_type_script = "uid://cxdyvqaslkwas"
+
+[sub_resource type="Resource" id="Resource_qg4ay"]
+script = ExtResource("2_qa7on")
+facing = Vector2i(0, -1)
+metadata/_custom_type_script = "uid://cxdyvqaslkwas"
+
+[sub_resource type="Resource" id="Resource_4ayqg"]
+script = ExtResource("2_qa7on")
+facing = Vector2i(1, 0)
+mode = 1
+metadata/_custom_type_script = "uid://cxdyvqaslkwas"
+
+[sub_resource type="Resource" id="Resource_mxpwy"]
+script = ExtResource("2_qa7on")
+facing = Vector2i(-1, 0)
+mode = 1
+metadata/_custom_type_script = "uid://cxdyvqaslkwas"
+
+[resource]
+script = ExtResource("3_4ov8w")
+name = &"furnace"
+texture = ExtResource("4_qa7on")
+dimensions = Vector2i(1, 1)
+behaviour = ExtResource("1_dl2pg")
+ports = Array[ExtResource("2_qa7on")]([SubResource("Resource_yqg4a"), SubResource("Resource_qg4ay"), SubResource("Resource_4ayqg"), SubResource("Resource_mxpwy")])
+metadata/_custom_type_script = "uid://da4yb3omv2567"

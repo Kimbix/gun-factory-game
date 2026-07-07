@@ -13,6 +13,10 @@ func _init(limit: int) -> void:
 	slot_limit = limit
 
 
+func get_accepted_types() -> Array[FactoryItemInfo]:
+	return _accepted_types.keys() as Array[FactoryItemInfo]
+
+
 func set_accept_filter(allowed: Array[FactoryItemInfo]) -> void:
 	_accepted_types.clear()
 	for info in allowed:

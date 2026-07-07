@@ -38,6 +38,13 @@ func open_interface() -> void:
 	interface.change_output(generating)
 
 
+func get_vars() -> Dictionary:
+	return {
+		&"generating": generating,
+		&"_cooldown": _cooldown,
+	}
+
+
 func _precompute_offsets() -> void:
 	if generating == null:
 		return

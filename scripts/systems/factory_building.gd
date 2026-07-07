@@ -79,6 +79,14 @@ func receive_item(item: FactoryItem) -> void:
 	behaviour.receive_item(item)
 
 
+func get_info() -> GridComponentInfo:
+	return _info
+
+
+func get_vars() -> Dictionary:
+	return behaviour.get_vars() if behaviour else {}
+
+
 func set_var(n: StringName, v: Variant) -> void:
 	if behaviour == null:
 		return

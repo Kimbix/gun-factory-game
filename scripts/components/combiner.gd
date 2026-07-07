@@ -31,6 +31,15 @@ func tick() -> void:
 		_cooldown = 60
 
 
+func get_vars() -> Dictionary:
+	return {
+		&"gunpowder_count": gunpowder_count,
+		&"shells_count": shells_count,
+		&"_cooldown": _cooldown,
+		&"_pending": _pending,
+	}
+
+
 func receive_item(item: FactoryItem) -> void:
 	if item.name == &"bullet_casing":
 		shells_count += 1

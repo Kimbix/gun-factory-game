@@ -31,6 +31,13 @@ func _do_output() -> void:
 	grid.place_item(OUTPUT_ITEM, where_to)
 
 
+func get_vars() -> Dictionary:
+	return {
+		&"lead_count": lead_count,
+		&"_cooldown": _cooldown,
+	}
+
+
 func receive_item(item: FactoryItem) -> void:
 	if item.name == &"raw_lead":
 		lead_count += 1

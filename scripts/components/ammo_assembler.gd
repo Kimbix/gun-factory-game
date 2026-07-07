@@ -57,6 +57,49 @@ func tick() -> void:
 		grid.place_item(output.item, where)
 
 
+func get_vars() -> Dictionary:
+	var slots_data: Array[Dictionary] = []
+	for idx in inventory.slots:
+		var slot := inventory.slots[idx]
+		slots_data.append(
+			{
+				"index": idx,
+				"info": slot.item_info,
+				"count": slot.count,
+			},
+		)
+	return {
+		&"recipe": recipe,
+		&"_inventory_slots": slots_data,
+		&"_inventory_accepted": inventory.get_accepted_types(),
+		&"_craft_progress": _craft_progress,
+	}
+
+
+func set_var(n: StringName, v: Variant) -> void:
+	match n:
+		&"recipe":
+			recipe = v
+			if v != null:
+				var allowed: Array[FactoryItemInfo] = []
+				for ingredient in v.inputs:
+					allowed.append(ingredient.item)
+				inventory.set_accept_filter(allowed)
+		&"_inventory_slots":
+			inventory.slots.clear()
+			for entry: Dictionary in v:
+				var slot := BlockInventory.InventorySlot.new(entry.info as FactoryItemInfo)
+				slot.count = entry.count as int
+				inventory.slots[entry.index as int] = slot
+		&"_inventory_accepted":
+			var allowed: Array[FactoryItemInfo] = []
+			for item: Variant in v:
+				allowed.append(item as FactoryItemInfo)
+			inventory.set_accept_filter(allowed)
+		_:
+			super.set_var(n, v)
+
+
 func receive_item(item: FactoryItem) -> void:
 	inventory.add(item)
 	grid.destroy_item(item)

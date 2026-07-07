@@ -139,6 +139,38 @@ func set_building_var(n: StringName, v: Variant, p: Vector2i) -> void:
 	_buildings[p].set_var(n, v)
 
 
+func to_data() -> PlayerGridData:
+	var data := PlayerGridData.new()
+	data.dimensions = dimensions
+	data.floor_textures = _floor.duplicate(true)
+
+	for v: Vector2i in _buildings.keys():
+		var b := _buildings[v]
+		var entry := BuildingEntry.new()
+		entry.position = v
+		entry.rotation = b.rotation
+		entry.info = b.get_info()
+		entry.variables = b.get_vars()
+		data.buildings.append(entry)
+
+	return data
+
+
+func from_data(data: PlayerGridData) -> void:
+	_clear_grid()
+	_items.clear()
+	dimensions = data.dimensions
+	_floor.clear()
+	for k: Variant in data.floor_textures:
+		_floor[k as Vector2i] = data.floor_textures[k] as Texture2D
+
+	for entry: BuildingEntry in data.buildings:
+		var rotation := entry.rotation as FactoryBuilding.Rotation
+		place_building(entry.info, entry.position, rotation)
+		for n: StringName in entry.variables:
+			set_building_var(n, entry.variables[n], entry.position)
+
+
 func _clear_grid() -> void:
 	for i: Vector2i in _floor.keys():
 		var obj: Texture2D = _floor[i]

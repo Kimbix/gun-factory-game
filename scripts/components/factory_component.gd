@@ -25,6 +25,10 @@ func set_var(n: StringName, v: Variant) -> void:
 	set(n, v)
 
 
+func get_vars() -> Dictionary:
+	return {}
+
+
 func receive_item(_item: FactoryItem) -> void:
 	pass
 

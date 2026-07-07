@@ -35,6 +35,14 @@ func tick() -> void:
 		_cooldown = CRAFT_TIME
 
 
+func get_vars() -> Dictionary:
+	return {
+		&"recipe": recipe,
+		&"lead_plates": lead_plates,
+		&"_cooldown": _cooldown,
+	}
+
+
 func receive_item(item: FactoryItem) -> void:
 	if item.name == &"lead_plate":
 		lead_plates += 1

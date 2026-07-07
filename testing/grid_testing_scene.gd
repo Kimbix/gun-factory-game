@@ -1,5 +1,7 @@
 extends Node2D
 
+const SAVE_PATH := "user://grid_save.tres"
+
 @onready var grid_viewer: PlayerGridViewer = $PlayerGridViewer
 @onready var player_grid: PlayerGrid = $PlayerGridViewer/PlayerGrid
 @onready var debug_builder: DebugPlayerGridBuilder = $DebugLayer/DebugPlayerGridBuilder
@@ -21,6 +23,24 @@ func _input(event: InputEvent) -> void:
 		KEY_F2:
 			debug_builder.visible = not debug_builder.visible
 			debug_builder.process_mode = PROCESS_MODE_INHERIT if debug_builder.visible else PROCESS_MODE_DISABLED
+		KEY_F3:
+			var data := player_grid.to_data()
+			var err := ResourceSaver.save(data, SAVE_PATH)
+			if err == OK:
+				print("Grid saved to %s" % SAVE_PATH)
+			else:
+				print("Failed to save grid: %d" % err)
+		KEY_F4:
+			if not ResourceLoader.exists(SAVE_PATH):
+				print("No save file found at %s" % SAVE_PATH)
+				return
+			var data := ResourceLoader.load(SAVE_PATH) as PlayerGridData
+			if data == null:
+				print("Failed to load save file")
+				return
+			player_grid.from_data(data)
+			grid_viewer.queue_redraw()
+			print("Grid loaded from %s" % SAVE_PATH)
 
 
 func _on_output_item(item: FactoryItem) -> void:

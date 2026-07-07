@@ -1,0 +1,35 @@
+[gd_scene format=3 uid="uid://0xiqunpp8bx8"]
+
+[ext_resource type="Script" uid="uid://18d2wy6wwdlu" path="res://interfaces/recipe_picker_interface.gd" id="1_5jkj8"]
+
+[node name="RecipePicker" type="PanelContainer" unique_id=358233224 node_paths=PackedStringArray("close_button", "recipe_grid")]
+custom_minimum_size = Vector2(384, 256)
+anchors_preset = -1
+anchor_left = 0.33333334
+anchor_top = 0.30246913
+anchor_right = 0.6666667
+anchor_bottom = 0.69753087
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_5jkj8")
+close_button = NodePath("MarginContainer/Close")
+recipe_grid = NodePath("MarginContainer/RecipeGrid")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=2068560443]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="Close" type="Button" parent="MarginContainer" unique_id=1444202499]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+text = "X"
+
+[node name="RecipeGrid" type="GridContainer" parent="MarginContainer" unique_id=101474768]
+layout_mode = 2
+size_flags_horizontal = 0
+columns = 6

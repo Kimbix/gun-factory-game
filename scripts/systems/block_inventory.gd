@@ -37,6 +37,13 @@ func can_accept(item: FactoryItem) -> bool:
 	return false
 
 
+func has_all(requirements: Array[RecipeIngredient]) -> bool:
+	for ingredient in requirements:
+		if not has(ingredient.item, ingredient.amount):
+			return false
+	return true
+
+
 func has(info: FactoryItemInfo, amount: int = 1) -> bool:
 	var total := 0
 	for i in slot_limit:

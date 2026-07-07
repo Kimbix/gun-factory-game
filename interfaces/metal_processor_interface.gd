@@ -1,34 +1,73 @@
 class_name MetalProcessorInterface
 extends PanelContainer
 
-signal recipe_selected(r: ItemRecipe)
+const ITEM_BUTTON := preload("uid://cq5f74b5ddssl")
+const RECIPE_PICKER := preload("uid://0xiqunpp8bx8")
 
-@onready var recipes: RecipeCatalogue = load("res://resources/recipes/metal_processor_recipes.tres")
-@onready var selected_recipe_icon: TextureRect = $SelectedRecipe
-@onready var pickable_recipes: GridContainer = $PickableRecipes
-@onready var close_button: Button = $CloseButton
+@export var close_button: Button
+@export var selected_recipe: Button
+@export var items_in_inventory: HBoxContainer
+@export var completion_label: Label
+
+var recipes: RecipeCatalogue
+var metal_processor: MetalProcessor:
+	get():
+		return metal_processor
+	set(v):
+		metal_processor = v
+		generate_ui()
+var _picker: RecipePickerInterface
 
 
 func _ready() -> void:
-	close_button.pressed.connect(self.queue_free)
-	for r: ItemRecipe in recipes.recipes:
-		var button := Button.new()
-		var text := TextureRect.new()
-		text.texture = r.icon
-		text.set_anchors_preset(Control.PRESET_FULL_RECT)
-		text.mouse_filter = Control.MOUSE_FILTER_IGNORE
-		button.custom_minimum_size = Vector2.ONE * 32
-		button.tooltip_text = r.display_name
-		button.add_child(text)
-		button.pressed.connect(_selected_recipe.bind(r))
-		pickable_recipes.add_child(button)
+	close_button.pressed.connect(_on_close)
+	selected_recipe.pressed.connect(_on_selected_recipe)
 
 
-func change_recipe(r: ItemRecipe) -> void:
-	if r != null:
-		selected_recipe_icon.texture = r.icon
+func generate_ui() -> void:
+	for child in items_in_inventory.get_children():
+		child.queue_free()
+
+	if metal_processor == null or metal_processor.recipe == null:
+		selected_recipe.text = "?"
+		selected_recipe.icon = null
+		selected_recipe.expand_icon = true
+		var label := Label.new()
+		label.text = "No Recipe Selected"
+		items_in_inventory.add_child(label)
+		return
+
+	selected_recipe.text = ""
+	selected_recipe.icon = metal_processor.recipe.icon
+	selected_recipe.expand_icon = true
+	selected_recipe.icon_alignment = HORIZONTAL_ALIGNMENT_CENTER
+
+	for ingredient in metal_processor.recipe.inputs:
+		var button: ItemButton = ITEM_BUTTON.instantiate()
+		button.item = ingredient.item
+		items_in_inventory.add_child(button)
 
 
-func _selected_recipe(r: ItemRecipe) -> void:
-	print(r)
-	recipe_selected.emit(r)
+func update_completion(value: float) -> void:
+	if value < 0:
+		completion_label.text = "---"
+	else:
+		completion_label.text = "%d%%" % value
+
+
+func _on_close() -> void:
+	InterfaceCanvasLayer.close_window(self)
+
+
+func _on_selected_recipe() -> void:
+	_picker = RECIPE_PICKER.instantiate()
+	_picker.recipes = recipes
+	_picker.recipe_selected.connect(_on_recipe_selected_from_picker)
+	InterfaceCanvasLayer.open_window_from(_picker, self)
+
+
+func _on_recipe_selected_from_picker(r: ItemRecipe) -> void:
+	metal_processor.set_recipe(r)
+	generate_ui()
+	InterfaceCanvasLayer.close_window(_picker)
+	_picker = null

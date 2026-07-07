@@ -5,7 +5,7 @@
 [ext_resource type="Script" uid="uid://0p8ni7rbeu6p" path="res://resources/recipes/item_recipe.gd" id="1_wli0s"]
 [ext_resource type="Resource" uid="uid://c0nkegvlqof7" path="res://resources/factory_items/lead_plate.tres" id="2_xycuk"]
 [ext_resource type="Resource" uid="uid://bfbl3v4bs23as" path="res://resources/grid_components/metal_processor.tres" id="3_ichsm"]
-[ext_resource type="Resource" path="res://resources/factory_items/rounded_lead_tip.tres" id="4_et85g"]
+[ext_resource type="Resource" uid="uid://bexcwplnas18e" path="res://resources/factory_items/rounded_lead_tip.tres" id="4_et85g"]
 
 [sub_resource type="Resource" id="Resource_drpog"]
 script = ExtResource("1_keo7j")
@@ -17,8 +17,8 @@ item = ExtResource("4_et85g")
 
 [resource]
 script = ExtResource("1_wli0s")
-icon = ExtResource("1_a0c26")
 display_name = "Rounded Tip"
+icon = ExtResource("1_a0c26")
 inputs = Array[ExtResource("1_keo7j")]([SubResource("Resource_drpog")])
 outputs = Array[ExtResource("1_keo7j")]([SubResource("Resource_mmgc4")])
 machine = ExtResource("3_ichsm")

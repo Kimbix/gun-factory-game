@@ -35,11 +35,11 @@ func tick() -> void:
 		return
 
 	if not _can_output():
-		_notify_progress(_craft_progress * 100 / 40)
+		_notify_progress(int(_craft_progress * 100.0 / 40.0))
 		return
 
 	_craft_progress += 1
-	_notify_progress(_craft_progress * 100 / 40)
+	_notify_progress(int(_craft_progress * 100.0 / 40.0))
 	if _craft_progress < 40:
 		return
 

@@ -1,0 +1,75 @@
+[gd_scene format=3 uid="uid://d0g7gg1hq86cc"]
+
+[ext_resource type="Script" uid="uid://dkg78jmucqof2" path="res://interfaces/save_grid_interface.gd" id="1_20kvg"]
+
+[node name="SaveGridInterface" type="PanelContainer" unique_id=375436290]
+custom_minimum_size = Vector2(420, 300)
+anchors_preset = -1
+anchor_left = 0.25
+anchor_top = 0.25
+anchor_right = 0.75
+anchor_bottom = 0.75
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_20kvg")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1790956970]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=943652112]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="MarginContainer/VBoxContainer" unique_id=1637381970]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Save Grid"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=759259623]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Preview" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=1907952045]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Controls" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=871987727]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="FileNameLabel" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/Controls" unique_id=975770746]
+layout_mode = 2
+text = "File Name"
+
+[node name="FileNameInput" type="LineEdit" parent="MarginContainer/VBoxContainer/HBoxContainer/Controls" unique_id=1172308501]
+unique_name_in_owner = true
+layout_mode = 2
+placeholder_text = "my_save"
+
+[node name="ErrorLabel" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/Controls" unique_id=545347092]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+
+[node name="Spacer" type="Control" parent="MarginContainer/VBoxContainer/HBoxContainer/Controls" unique_id=1107366797]
+layout_mode = 2
+size_flags_vertical = 8
+
+[node name="Buttons" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/Controls" unique_id=1030895620]
+layout_mode = 2
+size_flags_horizontal = 4
+alignment = 2
+
+[node name="CancelButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer/Controls/Buttons" unique_id=801416385]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Cancel"
+
+[node name="SaveButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer/Controls/Buttons" unique_id=729219477]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Save"

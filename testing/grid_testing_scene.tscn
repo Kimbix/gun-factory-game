@@ -4,6 +4,8 @@
 [ext_resource type="PackedScene" uid="uid://dq2aqdo8qs8ft" path="res://objects/player_grid_viewer.tscn" id="1_bgcc2"]
 [ext_resource type="Script" uid="uid://c42oxf66vw7sk" path="res://testing/debug_player_grid_builder.gd" id="2_k33vg"]
 [ext_resource type="Resource" uid="uid://dr6nl610t14jj" path="res://resources/building_catalogue/debug_building_catalogue.tres" id="5_ecpxj"]
+[ext_resource type="Texture2D" uid="uid://d0mnduudv6lhr" path="res://assets/interface/spr_saveGrid.png" id="5_fp60s"]
+[ext_resource type="Texture2D" uid="uid://b6r3u4g8eud6j" path="res://assets/interface/spr_loadGrid.png" id="6_5wuod"]
 
 [node name="GridTestingScene" type="Node2D" unique_id=978679656]
 script = ExtResource("1_38roy")
@@ -35,9 +37,22 @@ offset_left = -254.0
 grow_horizontal = 0
 metadata/_edit_use_anchors_ = true
 
-[node name="Instructions" type="Label" parent="DebugLayer/DebugPlayerGridBuilder/VBoxContainer" unique_id=345783397]
+[node name="HBoxContainer" type="HBoxContainer" parent="DebugLayer/DebugPlayerGridBuilder/VBoxContainer" unique_id=1744198410]
 layout_mode = 2
-text = "F1: Tick | F2: Toggle Debug Menu | F3: Save | F4: Load"
+size_flags_horizontal = 8
+size_flags_vertical = 0
+
+[node name="Instructions" type="Label" parent="DebugLayer/DebugPlayerGridBuilder/VBoxContainer/HBoxContainer" unique_id=345783397]
+layout_mode = 2
+text = "F1: Tick | F2: Toggle"
+
+[node name="SaveGrid" type="Button" parent="DebugLayer/DebugPlayerGridBuilder/VBoxContainer/HBoxContainer" unique_id=1277380525]
+layout_mode = 2
+icon = ExtResource("5_fp60s")
+
+[node name="LoadGrid" type="Button" parent="DebugLayer/DebugPlayerGridBuilder/VBoxContainer/HBoxContainer" unique_id=1884308457]
+layout_mode = 2
+icon = ExtResource("6_5wuod")
 
 [node name="BuildingsList" type="GridContainer" parent="DebugLayer/DebugPlayerGridBuilder/VBoxContainer" unique_id=892556118]
 layout_mode = 2

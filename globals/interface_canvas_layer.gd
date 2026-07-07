@@ -20,6 +20,10 @@ func open_window_from(window: Control, parent: Control) -> void:
 	open_window(window)
 
 
+func is_interface_open() -> bool:
+	return not opened_windows.is_empty()
+
+
 func close_window(window: Control) -> void:
 	var parent: Control = _window_parent.get(window)
 	if parent != null:

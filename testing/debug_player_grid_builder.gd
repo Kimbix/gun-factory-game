@@ -34,6 +34,8 @@ func _process(_delta: float) -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if not (event is InputEventMouseButton and event.pressed):
 		return
+	if InterfaceCanvasLayer.is_interface_open():
+		return
 	if viewer == null or viewer.grid == null:
 		return
 
@@ -59,6 +61,8 @@ func _unhandled_input(event: InputEvent) -> void:
 func _unhandled_key_input(event: InputEvent) -> void:
 	if event is not InputEventKey or not event.is_pressed():
 		return
+	if InterfaceCanvasLayer.is_interface_open():
+		return
 	if viewer == null or viewer.grid == null:
 		return
 	if not viewer.grid.has_building(hovered_cell):
@@ -72,6 +76,8 @@ func _unhandled_key_input(event: InputEvent) -> void:
 
 func _draw() -> void:
 	if viewer == null or viewer.grid == null:
+		return
+	if InterfaceCanvasLayer.is_interface_open():
 		return
 	var to_draw := building_catalogue.get_texture(_selected_building_index)
 	if to_draw == null:

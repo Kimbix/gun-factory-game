@@ -100,12 +100,25 @@ func _draw() -> void:
 func _initialize_catalogue_viewer() -> void:
 	for b_id: int in range(building_catalogue.buildings.size()):
 		var building := building_catalogue.buildings[b_id]
+		var container := VBoxContainer.new()
+		container.alignment = BoxContainer.ALIGNMENT_CENTER
+
 		var text := TextureButton.new()
 		text.texture_normal = building.texture
-		text.custom_minimum_size = Vector2.ONE * 64
+		text.custom_minimum_size = Vector2.ONE * 128
+		text.stretch_mode = TextureButton.STRETCH_KEEP_ASPECT_CENTERED
 		text.button_down.connect(
 			func() -> void:
 				_selected_building_index = b_id
 				queue_redraw()
 		)
-		grid.add_child(text)
+		container.add_child(text)
+
+		var label := Label.new()
+		label.text = building.display_name if not building.display_name.is_empty() else building.name
+		label.custom_minimum_size = Vector2(128, 0)
+		label.autowrap_mode = TextServer.AUTOWRAP_WORD
+		label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		container.add_child(label)
+
+		grid.add_child(container)

@@ -26,6 +26,7 @@ mode = 1
 [resource]
 script = ExtResource("3_4ov8w")
 name = &"metal_processor"
+display_name = "Lead Processor"
 texture = ExtResource("4_qa7on")
 dimensions = Vector2i(1, 1)
 behaviour = ExtResource("1_hsiot")

@@ -28,6 +28,7 @@ metadata/_custom_type_script = "uid://cxdyvqaslkwas"
 [resource]
 script = ExtResource("3_4ov8w")
 name = &"item_receiver"
+display_name = "Factory Output"
 texture = ExtResource("4_0qo24")
 dimensions = Vector2i(1, 1)
 behaviour = ExtResource("1_hsiot")

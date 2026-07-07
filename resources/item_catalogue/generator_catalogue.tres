@@ -5,8 +5,16 @@
 [ext_resource type="Resource" uid="uid://c4wf626ege7cx" path="res://resources/factory_items/bullet_casing.tres" id="2_sd46n"]
 [ext_resource type="Resource" uid="uid://cpg7snevhbi06" path="res://resources/factory_items/gunpowder.tres" id="3_sd46n"]
 [ext_resource type="Resource" uid="uid://b4hj3tlqd3od" path="res://resources/factory_items/raw_lead.tres" id="4_d46n"]
+[ext_resource type="Resource" path="res://resources/factory_items/rounded_lead_pellets.tres" id="5_381sm"]
+[ext_resource type="Resource" uid="uid://c0nkegvlqof7" path="res://resources/factory_items/lead_plate.tres" id="6_jbqac"]
+[ext_resource type="Resource" uid="uid://c22n2v8wi7hp5" path="res://resources/factory_items/pointy_lead_tip.tres" id="7_jbqac"]
+[ext_resource type="Resource" uid="uid://bexcwplnas18e" path="res://resources/factory_items/rounded_lead_tip.tres" id="8_jbqac"]
+[ext_resource type="Resource" uid="uid://cxut2uukg2odn" path="res://resources/factory_items/loaded_bullet.tres" id="9_jbqac"]
+[ext_resource type="Resource" uid="uid://ch1p8rsf7lx2x" path="res://resources/factory_items/rifle_round.tres" id="10_jbqac"]
+[ext_resource type="Resource" uid="uid://b0o6kjka3f1is" path="res://resources/factory_items/shotgun_bullet.tres" id="11_jbqac"]
+[ext_resource type="Resource" uid="uid://dnlk33wh1plgp" path="res://resources/factory_items/rounded_lead_round.tres" id="12_jbqac"]
 
 [resource]
 script = ExtResource("2_7mr05")
-items = Array[ExtResource("1_iqqdv")]([ExtResource("2_sd46n"), ExtResource("3_sd46n"), ExtResource("4_d46n")])
+items = Array[ExtResource("1_iqqdv")]([ExtResource("2_sd46n"), ExtResource("3_sd46n"), ExtResource("4_d46n"), ExtResource("5_381sm"), ExtResource("6_jbqac"), ExtResource("7_jbqac"), ExtResource("8_jbqac"), ExtResource("9_jbqac"), ExtResource("10_jbqac"), ExtResource("11_jbqac"), ExtResource("12_jbqac")])
 metadata/_custom_type_script = "uid://tgtb7oldk48a"

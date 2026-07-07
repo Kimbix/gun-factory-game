@@ -10,3 +10,6 @@ version.txt
 
 # Local secrets (Discord webhook, etc.)
 .discord_webhook
+
+# Personal agent instructions
+AGENTS.md

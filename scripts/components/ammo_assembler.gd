@@ -3,7 +3,7 @@ extends FactoryComponent
 
 const INTERFACE := preload("res://interfaces/ammo_assembler_interface.tscn")
 
-var RECIPES := load("res://resources/recipes/ammo_assembler_recipes.tres")
+var recipes := load("res://resources/recipes/ammo_assembler_recipes.tres")
 var inventory := BlockInventory.new(3)
 var recipe: ItemRecipe
 var _craft_progress: int = 0
@@ -57,11 +57,6 @@ func tick() -> void:
 		grid.place_item(output.item, where)
 
 
-func _notify_progress(value: int) -> void:
-	if _interface != null:
-		_interface.update_completion(value)
-
-
 func receive_item(item: FactoryItem) -> void:
 	inventory.add(item)
 	grid.destroy_item(item)
@@ -70,11 +65,16 @@ func receive_item(item: FactoryItem) -> void:
 func open_interface() -> void:
 	var interface: AmmoAssemblerInterface = INTERFACE.instantiate()
 	interface.ammo_assembler = self
-	interface.recipes = RECIPES
+	interface.recipes = recipes
 	_interface = interface
 	interface.tree_exited.connect(_on_interface_closed)
 	_notify_progress(-1)
 	InterfaceCanvasLayer.open_window(interface)
+
+
+func _notify_progress(value: int) -> void:
+	if _interface != null:
+		_interface.update_completion(value)
 
 
 func _on_interface_closed() -> void:

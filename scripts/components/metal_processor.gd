@@ -4,7 +4,7 @@ extends FactoryComponent
 const CRAFT_TIME := 60
 const INTERFACE := preload("uid://61ydd0a8m0ke")
 
-var RECIPES = load("res://resources/recipes/metal_processor_recipes.tres")
+var recipes = load("res://resources/recipes/metal_processor_recipes.tres")
 var recipe: ItemRecipe
 var lead_plates: int = 0
 var _cooldown: int = 0
@@ -44,7 +44,7 @@ func receive_item(item: FactoryItem) -> void:
 func open_interface() -> void:
 	var interface: MetalProcessorInterface = INTERFACE.instantiate()
 	interface.metal_processor = self
-	interface.recipes = RECIPES
+	interface.recipes = recipes
 	_interface = interface
 	interface.tree_exited.connect(_on_interface_closed)
 	_notify_progress(-1)

@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="FactoryItemInfo" format=3]
+[gd_resource type="Resource" script_class="FactoryItemInfo" format=3 uid="uid://ch1p8rsf7lx2x"]
 
 [ext_resource type="Script" uid="uid://b3ij0uga7row5" path="res://resources/factory_items/factory_item_info.gd" id="1_lwxet"]
 [ext_resource type="Texture2D" uid="uid://xp8d6rtgs61m" path="res://assets/factory_items/spr_rifleRounds.png" id="2_et85g"]
@@ -6,4 +6,5 @@
 [resource]
 script = ExtResource("1_lwxet")
 name = &"rifle_round"
+display_name = "Rifle Rounds"
 texture = ExtResource("2_et85g")

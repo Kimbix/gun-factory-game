@@ -6,4 +6,5 @@
 [resource]
 script = ExtResource("1_lwxet")
 name = &"rounded_lead_pellets"
+display_name = "Lead Pellets"
 texture = ExtResource("2_et85g")

@@ -28,6 +28,7 @@ item = ExtResource("5_ib3ef")
 [resource]
 script = ExtResource("1_xj2cp")
 icon = ExtResource("1_h93nf")
+display_name = "Loaded Bullet"
 inputs = Array[ExtResource("1_keo7j")]([SubResource("Resource_tnams"), SubResource("Resource_vkdxb"), SubResource("Resource_ehrhx")])
 outputs = Array[ExtResource("1_keo7j")]([SubResource("Resource_oj4et")])
 machine = ExtResource("6_qqhnt")

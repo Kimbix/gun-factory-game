@@ -6,5 +6,6 @@
 [resource]
 script = ExtResource("1_dfljx")
 name = &"gunpowder"
+display_name = "Gunpowder"
 texture = ExtResource("2_dfljx")
 metadata/_custom_type_script = "uid://b3ij0uga7row5"

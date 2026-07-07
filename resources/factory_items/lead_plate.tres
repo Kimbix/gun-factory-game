@@ -6,5 +6,6 @@
 [resource]
 script = ExtResource("1_lwxet")
 name = &"lead_plate"
+display_name = "Lead Plate"
 texture = ExtResource("2_et85g")
 metadata/_custom_type_script = "uid://b3ij0uga7row5"

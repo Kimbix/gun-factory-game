@@ -16,7 +16,9 @@ func _ready() -> void:
 		var text := TextureRect.new()
 		text.texture = r.icon
 		text.set_anchors_preset(Control.PRESET_FULL_RECT)
+		text.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		button.custom_minimum_size = Vector2.ONE * 32
+		button.tooltip_text = r.display_name
 		button.add_child(text)
 		button.pressed.connect(_selected_recipe.bind(r))
 		pickable_recipes.add_child(button)

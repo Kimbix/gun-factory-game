@@ -6,5 +6,6 @@
 [resource]
 script = ExtResource("1_ymh7j")
 name = &"loaded_bullet"
+display_name = "Loaded Bullet"
 texture = ExtResource("2_ymh7j")
 metadata/_custom_type_script = "uid://b3ij0uga7row5"

@@ -28,9 +28,9 @@ metadata/_custom_type_script = "uid://cxdyvqaslkwas"
 [resource]
 script = ExtResource("3_4ov8w")
 name = &"item_receiver"
-display_name = "Factory Output"
 texture = ExtResource("4_0qo24")
 dimensions = Vector2i(1, 1)
 behaviour = ExtResource("1_hsiot")
+color = Color(0.8980392, 0.3137255, 0.3137255, 1)
 ports = Array[ExtResource("2_qa7on")]([SubResource("Resource_38roy"), SubResource("Resource_bg5r3"), SubResource("Resource_hwi32"), SubResource("Resource_cyv5i")])
 metadata/_custom_type_script = "uid://da4yb3omv2567"

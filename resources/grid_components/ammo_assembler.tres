@@ -25,9 +25,9 @@ mode = 1
 [resource]
 script = ExtResource("3_4ov8w")
 name = &"ammo_assembler"
-display_name = "Ammunition Assembler"
 texture = ExtResource("4_qa7on")
 dimensions = Vector2i(1, 1)
 behaviour = ExtResource("1_hsiot")
+color = Color(0.34901962, 0.3372549, 0.32156864, 1)
 ports = Array[ExtResource("2_qa7on")]([SubResource("Resource_yqg4a"), SubResource("Resource_qg4ay"), SubResource("Resource_r4ayg"), SubResource("Resource_s4ayg")])
 metadata/_custom_type_script = "uid://da4yb3omv2567"

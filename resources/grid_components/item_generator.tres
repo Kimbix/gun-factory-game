@@ -14,9 +14,9 @@ metadata/_custom_type_script = "uid://cxdyvqaslkwas"
 [resource]
 script = ExtResource("3_yil13")
 name = &"item_generator"
-display_name = "Item Producer"
 texture = ExtResource("4_6vowf")
 dimensions = Vector2i(1, 1)
 behaviour = ExtResource("1_6vowf")
+color = Color(0.6, 0.8980392, 0.3137255, 1)
 ports = Array[ExtResource("2_ov3e4")]([SubResource("Resource_38roy")])
 metadata/_custom_type_script = "uid://da4yb3omv2567"

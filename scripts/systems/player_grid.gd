@@ -153,6 +153,8 @@ func to_data() -> PlayerGridData:
 		entry.variables = b.get_vars()
 		data.buildings.append(entry)
 
+	data.preview = _generate_preview()
+
 	return data
 
 
@@ -169,6 +171,18 @@ func from_data(data: PlayerGridData) -> void:
 		place_building(entry.info, entry.position, rotation)
 		for n: StringName in entry.variables:
 			set_building_var(n, entry.variables[n], entry.position)
+
+
+func _generate_preview() -> Image:
+	var img := Image.create(dimensions.x, dimensions.y, false, Image.FORMAT_RGB8)
+	for x in dimensions.x:
+		for y in dimensions.y:
+			var v := Vector2i(x, y)
+			if has_building(v):
+				img.set_pixel(x, y, get_building(v).get_info().color)
+			else:
+				img.set_pixel(x, y, Color.BLACK)
+	return img
 
 
 func _clear_grid() -> void:

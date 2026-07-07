@@ -1,0 +1,49 @@
+[gd_scene format=3 uid="uid://bpjbhpqjtay0c"]
+
+[ext_resource type="Script" uid="uid://cfmm8bqdd7ppy" path="res://interfaces/load_grid_interface.gd" id="1_7bndk"]
+
+[node name="LoadGridInterface" type="PanelContainer" unique_id=1494883158]
+custom_minimum_size = Vector2(360, 400)
+anchors_preset = -1
+anchor_left = 0.25
+anchor_top = 0.25
+anchor_right = 0.75
+anchor_bottom = 0.75
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_7bndk")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=2111098433]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=1718730598]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="MarginContainer/VBoxContainer" unique_id=1316602234]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Load Grid"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/VBoxContainer" unique_id=589044586]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ItemList" type="VBoxContainer" parent="MarginContainer/VBoxContainer/ScrollContainer" unique_id=32194150]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+
+[node name="Buttons" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=1672534969]
+layout_mode = 2
+size_flags_horizontal = 4
+alignment = 2
+
+[node name="CancelButton" type="Button" parent="MarginContainer/VBoxContainer/Buttons" unique_id=2125932924]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Cancel"

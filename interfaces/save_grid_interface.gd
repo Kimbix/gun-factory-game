@@ -31,7 +31,7 @@ func _generate_preview() -> void:
 	)
 
 
-func _on_save() -> void:
+func _on_save(_submitted_text: String = "") -> void:
 	var save_as: String = %FileNameInput.text.strip_edges()
 	if save_as.is_empty():
 		%ErrorLabel.text = "Name cannot be empty"

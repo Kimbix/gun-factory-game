@@ -2,17 +2,20 @@ extends Node2D
 
 const SAVE_PATH := "user://grid_save.tres"
 const SAVE_GRID_INTERFACE := preload("res://interfaces/save_grid_interface.tscn")
+const LOAD_GRID_INTERFACE := preload("res://interfaces/load_grid_interface.tscn")
 
 @onready var grid_viewer: PlayerGridViewer = $PlayerGridViewer
 @onready var player_grid: PlayerGrid = $PlayerGridViewer/PlayerGrid
 @onready var debug_builder: DebugPlayerGridBuilder = $DebugLayer/DebugPlayerGridBuilder
 @onready var save_grid_button: Button = $DebugLayer/DebugPlayerGridBuilder/VBoxContainer/HBoxContainer/SaveGrid
+@onready var load_grid_button: Button = $DebugLayer/DebugPlayerGridBuilder/VBoxContainer/HBoxContainer/LoadGrid
 
 
 func _ready() -> void:
 	player_grid.initialize_empty()
 	player_grid.output_item.connect(_on_output_item)
 	save_grid_button.pressed.connect(_on_save_grid_pressed)
+	load_grid_button.pressed.connect(_on_load_grid_pressed)
 
 
 func _input(event: InputEvent) -> void:
@@ -49,6 +52,13 @@ func _input(event: InputEvent) -> void:
 func _on_save_grid_pressed() -> void:
 	var interface: SaveGridInterface = SAVE_GRID_INTERFACE.instantiate()
 	interface.player_grid = player_grid
+	InterfaceCanvasLayer.open_window(interface)
+
+
+func _on_load_grid_pressed() -> void:
+	var interface: LoadGridInterface = LOAD_GRID_INTERFACE.instantiate()
+	interface.player_grid = player_grid
+	interface.grid_loaded.connect(grid_viewer.queue_redraw)
 	InterfaceCanvasLayer.open_window(interface)
 
 

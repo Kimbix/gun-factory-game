@@ -162,7 +162,6 @@ func from_data(data: PlayerGridData) -> void:
 	_clear_grid()
 	_items.clear()
 	dimensions = data.dimensions
-	_floor.clear()
 	for k: Variant in data.floor_textures:
 		_floor[k as Vector2i] = data.floor_textures[k] as Texture2D
 

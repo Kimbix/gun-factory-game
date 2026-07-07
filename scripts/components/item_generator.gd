@@ -39,6 +39,9 @@ func open_interface() -> void:
 
 
 func get_vars() -> Dictionary:
+	# NOTE: generating must come before _cooldown here.
+	# The generating setter resets _cooldown to 0, so _cooldown
+	# must be restored after generating to preserve the saved value.
 	return {
 		&"generating": generating,
 		&"_cooldown": _cooldown,

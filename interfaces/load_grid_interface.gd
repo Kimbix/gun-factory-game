@@ -10,6 +10,8 @@ var player_grid: PlayerGrid
 
 func _ready() -> void:
 	%CancelButton.pressed.connect(_on_cancel)
+	if player_grid == null:
+		return
 	_populate_list()
 
 
@@ -62,6 +64,8 @@ func _add_grid_entry(list: VBoxContainer, path: String, display_name: String) ->
 
 
 func _on_grid_selected(path: String) -> void:
+	if player_grid == null:
+		return
 	var data := ResourceLoader.load(path) as PlayerGridData
 	if data == null:
 		return

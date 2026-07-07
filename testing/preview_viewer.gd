@@ -21,11 +21,6 @@ func _load_preview() -> void:
 		return
 
 	var img := Image.create(data.dimensions.x, data.dimensions.y, false, Image.FORMAT_RGB8)
-	for x in data.dimensions.x:
-		for y in data.dimensions.y:
-			var v := Vector2i(x, y)
-			img.set_pixel(x, y, Color.BLACK)
-
 	for entry: BuildingEntry in data.buildings:
 		img.set_pixel(entry.position.x, entry.position.y, entry.info.color)
 

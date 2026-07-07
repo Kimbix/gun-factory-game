@@ -80,11 +80,6 @@ func set_var(n: StringName, v: Variant) -> void:
 	match n:
 		&"recipe":
 			recipe = v
-			if v != null:
-				var allowed: Array[FactoryItemInfo] = []
-				for ingredient in v.inputs:
-					allowed.append(ingredient.item)
-				inventory.set_accept_filter(allowed)
 		&"_inventory_slots":
 			inventory.slots.clear()
 			for entry: Dictionary in v:

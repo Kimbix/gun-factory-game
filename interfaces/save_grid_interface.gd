@@ -14,6 +14,8 @@ func _ready() -> void:
 	%SaveButton.pressed.connect(_on_save)
 	%CancelButton.pressed.connect(_on_cancel)
 
+	if player_grid == null:
+		return
 	_data = player_grid.to_data()
 	_generate_preview()
 

@@ -6,7 +6,7 @@ const MAX_STACK_SIZE := 9999
 var slots: Dictionary[int, InventorySlot]
 var slot_limit: int
 
-var _accepted_types: Dictionary  # Dictionary[FactoryItemInfo, bool] — used as a set
+var _accepted_types: Dictionary # Dictionary[FactoryItemInfo, bool] — used as a set
 
 
 func _init(limit: int) -> void:
@@ -84,6 +84,7 @@ func remove(info: FactoryItemInfo, amount: int = 1) -> int:
 class InventorySlot:
 	var item_info: FactoryItemInfo
 	var count: int
+
 
 	func _init(info: FactoryItemInfo) -> void:
 		item_info = info

@@ -17,7 +17,7 @@ var pending_rotation: int = FactoryBuilding.Rotation.NORMAL
 var _selected_building_index: int = 0
 var _last_hovered: Vector2i = Vector2i(-1, -1)
 
-@onready var grid := $BuildingsList
+@onready var grid := $VBoxContainer/BuildingsList
 
 
 func _ready() -> void:
@@ -115,7 +115,9 @@ func _initialize_catalogue_viewer() -> void:
 		container.add_child(text)
 
 		var label := Label.new()
-		label.text = building.display_name if not building.display_name.is_empty() else building.name
+		label.text = (building.display_name
+				if not building.display_name.is_empty()
+				else building.name)
 		label.custom_minimum_size = Vector2(128, 0)
 		label.autowrap_mode = TextServer.AUTOWRAP_WORD
 		label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER

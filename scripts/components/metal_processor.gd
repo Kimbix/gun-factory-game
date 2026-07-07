@@ -22,7 +22,7 @@ func tick() -> void:
 
 	if _cooldown > 0:
 		_cooldown -= 1
-		_notify_progress((CRAFT_TIME - _cooldown) * 100 / CRAFT_TIME)
+		_notify_progress(int((CRAFT_TIME - _cooldown) * 100.0 / CRAFT_TIME))
 		if _cooldown == 0:
 			if _can_output():
 				_do_output()

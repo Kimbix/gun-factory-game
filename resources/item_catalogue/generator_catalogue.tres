@@ -5,8 +5,9 @@
 [ext_resource type="Resource" uid="uid://c4wf626ege7cx" path="res://resources/factory_items/bullet_casing.tres" id="2_sd46n"]
 [ext_resource type="Resource" uid="uid://cpg7snevhbi06" path="res://resources/factory_items/gunpowder.tres" id="3_sd46n"]
 [ext_resource type="Resource" uid="uid://b4hj3tlqd3od" path="res://resources/factory_items/raw_lead.tres" id="4_d46n"]
+[ext_resource type="Resource" path="res://resources/factory_items/rounded_lead_pellets.tres" id="5_381sm"]
 
 [resource]
 script = ExtResource("2_7mr05")
-items = Array[ExtResource("1_iqqdv")]([ExtResource("2_sd46n"), ExtResource("3_sd46n"), ExtResource("4_d46n")])
+items = Array[ExtResource("1_iqqdv")]([ExtResource("2_sd46n"), ExtResource("3_sd46n"), ExtResource("4_d46n"), ExtResource("5_381sm")])
 metadata/_custom_type_script = "uid://tgtb7oldk48a"

@@ -30,3 +30,4 @@ texture = ExtResource("4_qa7on")
 dimensions = Vector2i(1, 1)
 behaviour = ExtResource("1_hsiot")
 ports = Array[ExtResource("2_qa7on")]([SubResource("Resource_yqg4a"), SubResource("Resource_qg4ay"), SubResource("Resource_r4ayg"), SubResource("Resource_s4ayg")])
+metadata/_custom_type_script = "uid://da4yb3omv2567"

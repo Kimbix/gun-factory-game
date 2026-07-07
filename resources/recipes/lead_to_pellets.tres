@@ -17,8 +17,8 @@ item = ExtResource("4_et85g")
 
 [resource]
 script = ExtResource("1_wli0s")
-icon = ExtResource("1_a0c26")
 display_name = "Lead Pellets"
+icon = ExtResource("1_a0c26")
 inputs = Array[ExtResource("1_keo7j")]([SubResource("Resource_drpog")])
 outputs = Array[ExtResource("1_keo7j")]([SubResource("Resource_mmgc4")])
 machine = ExtResource("3_ichsm")

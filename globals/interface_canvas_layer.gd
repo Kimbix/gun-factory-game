@@ -5,6 +5,7 @@ var focused_window: Control
 var unfocusable_windows: Array[Control] = []
 
 var _window_parent: Dictionary
+var _source_to_window: Dictionary = {}
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -13,17 +14,27 @@ func _unhandled_input(event: InputEvent) -> void:
 		get_viewport().set_input_as_handled()
 
 
-func open_window(window: Control) -> void:
+func open_window(window: Control, source: Object = null) -> bool:
+	if source != null:
+		var existing := _source_to_window.get(source) as Control
+		if is_instance_valid(existing):
+			focused_window = existing
+			return false
+		_source_to_window[source] = window
+
 	add_child(window)
 	opened_windows.append(window)
 	focused_window = window
+	return true
 
 
 func open_window_from(window: Control, parent: Control) -> void:
 	_window_parent[window] = parent
 	parent.hide()
 	opened_windows.erase(parent)
-	open_window(window)
+	add_child(window)
+	opened_windows.append(window)
+	focused_window = window
 
 
 func is_interface_open() -> bool:
@@ -31,6 +42,14 @@ func is_interface_open() -> bool:
 
 
 func close_window(window: Control) -> void:
+	var source_to_remove: Object = null
+	for s in _source_to_window:
+		if _source_to_window[s] == window:
+			source_to_remove = s
+			break
+	if source_to_remove != null:
+		_source_to_window.erase(source_to_remove)
+
 	var parent: Control = _window_parent.get(window)
 	if parent != null:
 		_window_parent.erase(window)

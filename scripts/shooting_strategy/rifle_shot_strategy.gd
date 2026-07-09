@@ -12,7 +12,7 @@ const SPEED := 600.0
 func execute(shooter: Node2D, target: Node2D, _item: FactoryItem) -> void:
 	var spread_rad := deg_to_rad(SPREAD_DEG)
 
-	for _i in BURST_COUNT:
+	for i in BURST_COUNT:
 		if not is_instance_valid(target):
 			target = shooter.find_target()
 			if target == null:

@@ -5,6 +5,7 @@ extends Node
 @export var enemy_waves: EnemyWaves
 @export var enemy_cap := 50
 @export_category("Spawn Specifications")
+@export var spawn_interval := 10.0
 @export var spawn_per_wave_percent := .05
 @export var spawn_distance_min := 500.0
 @export var spawn_distance_max := 750.0
@@ -24,7 +25,7 @@ func _ready() -> void:
 
 	var timer := Timer.new()
 	timer.timeout.connect(_spawn_enemies)
-	timer.wait_time = 60.0 * spawn_per_wave_percent
+	timer.wait_time = spawn_interval
 	timer.autostart = true
 	add_child(timer)
 

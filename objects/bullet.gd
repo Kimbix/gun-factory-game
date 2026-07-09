@@ -1,9 +1,9 @@
 class_name Bullet
 extends Area2D
 
-const SPEED := 400.0
 const LIFETIME := 3.0
 
+var speed := 400.0
 var direction: Vector2
 var damage := 5
 var _lifetime := 0.0
@@ -15,7 +15,7 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
-	position += direction * SPEED * delta
+	position += direction * speed * delta
 	_lifetime += delta
 	if _lifetime >= LIFETIME:
 		queue_free()

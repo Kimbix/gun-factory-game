@@ -5,7 +5,7 @@ signal recipe_selected(r: ItemRecipe)
 
 @export var close_button: Button
 @export var recipe_grid: GridContainer
-@export var recipes: RecipeCatalogue
+@export var recipes: BaseRecipeCatalogue
 
 
 func _ready() -> void:

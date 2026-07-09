@@ -3,7 +3,6 @@ extends CharacterBody2D
 
 const SPEED := 200.0
 const GRID_VIEW_SCALE := 1.5
-const BULLET := preload("res://objects/bullet.tscn")
 
 static var _actions_ready := false
 
@@ -71,14 +70,13 @@ func _setup_minimap() -> void:
 	viewer.scale = Vector2(GRID_VIEW_SCALE, GRID_VIEW_SCALE)
 
 
-func _shoot(_item: FactoryItem = null) -> void:
+func _shoot(item: FactoryItem = null) -> void:
+	if item == null or item.shooting_strategy == null:
+		return
 	var target := _find_nearest_enemy()
 	if target == null:
 		return
-	var bullet: Bullet = BULLET.instantiate()
-	bullet.direction = (target.global_position - global_position).normalized()
-	bullet.global_position = global_position
-	get_parent().add_child(bullet)
+	item.shooting_strategy.execute(self, target, item)
 
 
 func _find_nearest_enemy() -> Node2D:

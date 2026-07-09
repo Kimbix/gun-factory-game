@@ -9,7 +9,7 @@ const RECIPE_PICKER := preload("uid://0xiqunpp8bx8")
 @export var items_in_inventory: HBoxContainer
 @export var completion_label: Label
 
-var recipes: RecipeCatalogue
+var recipes: BaseRecipeCatalogue
 var ammo_assembler: AmmoAssembler:
 	get():
 		return ammo_assembler

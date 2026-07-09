@@ -26,7 +26,7 @@ func set_var(n: StringName, v: Variant) -> void:
 
 
 func get_vars() -> Dictionary:
-	return {}
+	return { }
 
 
 func can_accept(_item: FactoryItem) -> bool:
@@ -37,16 +37,16 @@ func receive_item(_item: FactoryItem) -> void:
 	pass
 
 
+func open_interface() -> void:
+	pass
+
+
 func _can_output_to(item: FactoryItemInfo, port: Port, at_position: Vector2 = Vector2.INF) -> bool:
-	var where := at_position if at_position != Vector2.INF else building.position + port.position + port.facing
+	var where: Vector2 = at_position if at_position != Vector2.INF else building.position + port.position + port.facing
 	var target := grid.get_building(where.floor())
 	if target == null:
 		return true
 	return target.behaviour.can_accept(FactoryItem.new(item, where))
-
-
-func open_interface() -> void:
-	pass
 
 
 func _get_available_out_port() -> Port:

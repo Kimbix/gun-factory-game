@@ -1,7 +1,7 @@
 class_name ConveyorBelt
 extends FactoryComponent
 
-const ITEM_SPEED := 0.1
+const ITEM_SPEED := 0.05
 
 var items: Array[FactoryItem] = []
 

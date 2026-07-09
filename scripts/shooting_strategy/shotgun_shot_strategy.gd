@@ -14,7 +14,7 @@ func execute(shooter: Node2D, target: Node2D, _item: FactoryItem) -> void:
 	for _i in PELLET_COUNT:
 		var angle_offset := randf_range(-spread_rad * 0.5, spread_rad * 0.5)
 		var dir := base_dir.rotated(angle_offset)
-		var speed := 400.0 * randf_range(0.75, 1.25)
+		var speed := 800.0 * randf_range(0.75, 1.25)
 
 		var bullet := BULLET.instantiate()
 		bullet.direction = dir

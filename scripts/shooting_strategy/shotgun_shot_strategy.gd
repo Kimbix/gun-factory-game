@@ -8,6 +8,9 @@ const DAMAGE := 5
 
 
 func execute(shooter: Node2D, target: Node2D, _item: FactoryItem) -> void:
+	if not is_instance_valid(target):
+		return
+
 	var base_dir := (target.global_position - shooter.global_position).normalized()
 	var spread_rad := deg_to_rad(SPREAD_DEG)
 

@@ -1,6 +1,7 @@
 extends CharacterBody2D
 
 const SPEED := 200.0
+const GRID_VIEW_SCALE := 1.5
 
 @export var starting_grid_data: PlayerGridData
 
@@ -19,11 +20,30 @@ func _ready() -> void:
 		_player_grid.from_data(starting_grid_data)
 	else:
 		_player_grid.initialize_empty()
+	_player_grid.output_item.connect(_shoot)
+
+	var tick_timer := Timer.new()
+	tick_timer.timeout.connect(_player_grid.tick)
+	tick_timer.wait_time = 0.05
+	add_child(tick_timer)
+	tick_timer.start()
+
+	_setup_minimap()
 
 
-func _unhandled_input(event: InputEvent) -> void:
-	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
-		_shoot()
+func _setup_minimap() -> void:
+	var layer := CanvasLayer.new()
+	add_child(layer)
+
+	var viewer := PlayerGridViewer.new()
+	viewer.grid = _player_grid
+	layer.add_child(viewer)
+
+	var grid_w := _player_grid.dimensions.x * PlayerGrid.GRID_TEXTURE_SIZE
+	viewer.position = Vector2(get_viewport().get_visible_rect().size.x - grid_w * GRID_VIEW_SCALE - 10, 10)
+	viewer.scale = Vector2(GRID_VIEW_SCALE, GRID_VIEW_SCALE)
+
+
 
 
 func _physics_process(_delta: float) -> void:
@@ -32,8 +52,11 @@ func _physics_process(_delta: float) -> void:
 	move_and_slide()
 
 
-func _shoot() -> void:
-	var bullet := Bullet.new()
+const BULLET := preload("res://objects/bullet.tscn")
+
+
+func _shoot(_item: FactoryItem = null) -> void:
+	var bullet: Bullet = BULLET.instantiate()
 	bullet.direction = (get_global_mouse_position() - global_position).normalized()
 	bullet.global_position = global_position
 	get_parent().add_child(bullet)

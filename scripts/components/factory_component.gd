@@ -45,7 +45,7 @@ func _can_output_to(item: FactoryItemInfo, port: Port, at_position: Vector2 = Ve
 	var where: Vector2 = at_position if at_position != Vector2.INF else Vector2(building.position + port.position + port.facing)
 	var target := grid.get_building(where.floor())
 	if target == null:
-		return true
+		return false
 	return target.behaviour.can_accept(FactoryItem.new(item, where))
 
 
@@ -74,7 +74,7 @@ func _can_output() -> bool:
 		var receive_block_position := give_block_position + p.facing
 
 		if grid.get_building(receive_block_position) == null:
-			return true # We can place the item on the floor
+			continue
 
 		var their_ports := (grid.get_building_ports(receive_block_position)
 				.filter(Port.input_mode_filter))

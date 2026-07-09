@@ -1,7 +1,7 @@
 class_name MetalProcessor
 extends FactoryComponent
 
-const CRAFT_TIME := 60
+const CRAFT_TIME := 20
 const INTERFACE := preload("uid://61ydd0a8m0ke")
 
 var recipes = load("res://resources/recipes/metal_processor_recipes.tres")

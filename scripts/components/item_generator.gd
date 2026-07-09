@@ -1,6 +1,7 @@
 class_name ItemGenerator
 extends FactoryComponent
 
+const COOLDOWN := 20
 const INTERFACE := preload("uid://c8wqyeagxk100")
 
 var generating: FactoryItemInfo:
@@ -27,7 +28,7 @@ func tick() -> void:
 	if not _can_output_to(generating, output_port, where_to):
 		return
 	grid.place_item(generating, where_to)
-	_cooldown = 40
+	_cooldown = COOLDOWN
 
 
 func open_interface() -> void:

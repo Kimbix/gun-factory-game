@@ -1,6 +1,7 @@
 class_name Combiner
 extends FactoryComponent
 
+const COOLDOWN := 20
 const ITEM_OUTPUT := preload("uid://cxut2uukg2odn")
 
 var gunpowder_count: int = 0
@@ -30,7 +31,7 @@ func tick() -> void:
 	if gunpowder_count >= 1 and shells_count >= 1:
 		gunpowder_count -= 1
 		shells_count -= 1
-		_cooldown = 60
+		_cooldown = COOLDOWN
 
 
 func get_vars() -> Dictionary:

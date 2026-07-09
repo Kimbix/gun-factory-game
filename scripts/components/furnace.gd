@@ -1,7 +1,7 @@
 class_name Furnace
 extends FactoryComponent
 
-const CRAFT_TIME := 60
+const CRAFT_TIME := 20
 const OUTPUT_ITEM := preload("uid://c0nkegvlqof7")
 
 var lead_count: int = 0

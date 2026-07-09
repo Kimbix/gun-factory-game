@@ -9,4 +9,4 @@ func get_first() -> EnemyWave:
 
 
 func get_wave(i: int) -> EnemyWave:
-	return waves[i] if waves.size() > 0 else null
+	return waves[i] if i < waves.size() else null

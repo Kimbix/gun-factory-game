@@ -12,7 +12,8 @@ func tick() -> void:
 	if _cooldown > 0:
 		_cooldown -= 1
 		if _cooldown == 0:
-			if _can_output():
+			var port := _get_available_out_port()
+			if port != null and _can_output() and _can_output_to(OUTPUT_ITEM, port):
 				_do_output()
 			else:
 				_cooldown = 1
@@ -26,8 +27,6 @@ func tick() -> void:
 func _do_output() -> void:
 	var p := _get_available_out_port()
 	if p == null:
-		return
-	if not _can_output_to(OUTPUT_ITEM, p):
 		return
 	var where_to: Vector2 = position + p.position + p.facing
 	grid.place_item(OUTPUT_ITEM, where_to)

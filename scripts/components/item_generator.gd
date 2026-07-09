@@ -25,6 +25,7 @@ func tick() -> void:
 		return
 	if not _can_output_to(generating, output_port):
 		return
+
 	var where_to: Vector2 = position + output_port.position + output_port.facing
 	grid.place_item(generating, where_to + _offsets[rotation])
 	_cooldown = 40

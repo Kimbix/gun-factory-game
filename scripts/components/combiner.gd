@@ -13,14 +13,16 @@ func tick() -> void:
 	if _cooldown > 0:
 		_cooldown -= 1
 		if _cooldown == 0:
-			if _can_output():
+			var port := _get_available_out_port()
+			if port != null and _can_output() and _can_output_to(ITEM_OUTPUT, port):
 				_do_output()
 			else:
 				_pending += 1
 		return
 
 	if _pending > 0:
-		if _can_output():
+		var port := _get_available_out_port()
+		if port != null and _can_output() and _can_output_to(ITEM_OUTPUT, port):
 			_pending -= 1
 			_do_output()
 		return
@@ -52,8 +54,6 @@ func receive_item(item: FactoryItem) -> void:
 func _do_output() -> void:
 	var p := _get_available_out_port()
 	if p == null:
-		return
-	if not _can_output_to(ITEM_OUTPUT, p):
 		return
 	var where_to: Vector2 = position + p.position + p.facing
 	grid.place_item(ITEM_OUTPUT, where_to)

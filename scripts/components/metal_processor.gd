@@ -24,7 +24,8 @@ func tick() -> void:
 		_cooldown -= 1
 		_notify_progress(int((CRAFT_TIME - _cooldown) * 100.0 / CRAFT_TIME))
 		if _cooldown == 0:
-			if _can_output():
+			var port := _get_available_out_port()
+			if port != null and _can_output() and _can_output_to(recipe.outputs[0].item, port):
 				_do_output()
 			else:
 				_cooldown = 1
@@ -67,8 +68,6 @@ func _notify_progress(value: int) -> void:
 func _do_output() -> void:
 	var p := _get_available_out_port()
 	if p == null:
-		return
-	if not _can_output_to(recipe.outputs[0].item, p):
 		return
 	var where_to: Vector2 = position + p.position + p.facing
 	grid.place_item(recipe.outputs[0].item, where_to)

@@ -7,6 +7,12 @@ var unfocusable_windows: Array[Control] = []
 var _window_parent: Dictionary
 
 
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed("ui_cancel") and focused_window != null:
+		close_window(focused_window)
+		get_viewport().set_input_as_handled()
+
+
 func open_window(window: Control) -> void:
 	add_child(window)
 	opened_windows.append(window)

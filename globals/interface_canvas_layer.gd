@@ -14,6 +14,11 @@ func _unhandled_input(event: InputEvent) -> void:
 		get_viewport().set_input_as_handled()
 
 
+func _on_window_gui_input(event: InputEvent, window: Control) -> void:
+	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+		focused_window = window
+
+
 func open_window(window: Control, source: Object = null) -> bool:
 	if source != null:
 		var existing := _source_to_window.get(source) as Control
@@ -25,6 +30,7 @@ func open_window(window: Control, source: Object = null) -> bool:
 	add_child(window)
 	opened_windows.append(window)
 	focused_window = window
+	window.gui_input.connect(_on_window_gui_input.bind(window))
 	return true
 
 
@@ -35,6 +41,7 @@ func open_window_from(window: Control, parent: Control) -> void:
 	add_child(window)
 	opened_windows.append(window)
 	focused_window = window
+	window.gui_input.connect(_on_window_gui_input.bind(window))
 
 
 func is_interface_open() -> bool:

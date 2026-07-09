@@ -5,7 +5,7 @@ var focused_window: Control
 var unfocusable_windows: Array[Control] = []
 
 var _window_parent: Dictionary
-var _source_to_window: Dictionary = {}
+var _source_to_window: Dictionary = { }
 
 
 func _unhandled_input(event: InputEvent) -> void:

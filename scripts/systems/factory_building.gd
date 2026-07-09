@@ -84,7 +84,7 @@ func get_info() -> GridComponentInfo:
 
 
 func get_vars() -> Dictionary:
-	return behaviour.get_vars() if behaviour else {}
+	return behaviour.get_vars() if behaviour else { }
 
 
 func set_var(n: StringName, v: Variant) -> void:

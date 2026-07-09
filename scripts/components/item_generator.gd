@@ -32,7 +32,7 @@ func tick() -> void:
 
 func open_interface() -> void:
 	var interface: GeneratorInterface = INTERFACE.instantiate()
-	InterfaceCanvasLayer.add_child(interface)
+	InterfaceCanvasLayer.open_window(interface)
 	var _on_item_pressed: Callable = func(item: FactoryItemInfo) -> void:
 		generating = item
 		interface.change_output(generating)

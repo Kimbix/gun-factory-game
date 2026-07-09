@@ -2,7 +2,6 @@ class_name ConveyorBelt
 extends FactoryComponent
 
 const ITEM_SPEED := 0.05
-const CENTER_SPEED := ITEM_SPEED
 
 var items: Array[FactoryItem] = []
 
@@ -16,19 +15,26 @@ func tick() -> void:
 			cur.position = _step_toward_center(cur)
 			continue
 
-		if _will_exit(cur):
-			var p := _get_available_out_port()
-			if p == null:
-				continue
-			var build := grid.get_building(position + p.position + p.facing)
-			if build != null and _can_output():
+		var next_pos := cur.position + _move_dir() * ITEM_SPEED
+
+		if _would_collide(next_pos, ahead):
+			continue
+
+		if _dist_to_exit(cur) < cur.rect.size.x:
+			var build := _next_building()
+			if build != null and build.behaviour is ConveyorBelt:
+				var other := build.behaviour as ConveyorBelt
+				if other._blocks_item_at(next_pos, rotation):
+					continue
+
+		if _will_exit(next_pos, cur):
+			var build := _next_building()
+			if build != null:
 				items.remove_at(i)
 				build.receive_item(cur)
-		else:
-			var next_pos := cur.position + _move_dir() * ITEM_SPEED
-			if _would_collide(next_pos, ahead):
-				continue
-			cur.position = next_pos
+			continue
+
+		cur.position = next_pos
 
 
 func receive_item(item: FactoryItem) -> void:
@@ -37,6 +43,21 @@ func receive_item(item: FactoryItem) -> void:
 		func(a: FactoryItem, b: FactoryItem) -> bool:
 			return _progress(a) < _progress(b)
 	)
+
+
+func _blocks_item_at(at_pos: Vector2, from_rotation: FactoryBuilding.Rotation) -> bool:
+	var rel := (from_rotation - rotation + 4) % 4
+	if rel == 0:
+		if items.is_empty():
+			return false
+		return _calc_gap(at_pos, items[-1]) < items[-1].rect.size.x
+	elif rel == 1 or rel == 3:
+		for existing: FactoryItem in items:
+			if _calc_gap(at_pos, existing) < existing.rect.size.x:
+				return true
+		return false
+	else:
+		return true
 
 
 func _is_centered(cur: FactoryItem) -> bool:
@@ -54,17 +75,38 @@ func _step_toward_center(cur: FactoryItem) -> Vector2:
 		FactoryBuilding.Rotation.NORMAL, FactoryBuilding.Rotation.FLIPPED:
 			var center_y := rect.position.y + rect.size.y * 0.5 - cur.rect.size.y * 0.5
 			var diff := center_y - cur.position.y
-			if abs(diff) <= CENTER_SPEED:
+			if abs(diff) <= ITEM_SPEED:
 				return Vector2(cur.position.x, center_y)
-			return Vector2(cur.position.x, cur.position.y + sign(diff) * CENTER_SPEED)
+			return Vector2(cur.position.x, cur.position.y + sign(diff) * ITEM_SPEED)
 		FactoryBuilding.Rotation.CLOCKWISE, FactoryBuilding.Rotation.COUNTERCLOCKWISE:
 			var center_x := rect.position.x + rect.size.x * 0.5 - cur.rect.size.x * 0.5
 			var diff := center_x - cur.position.x
-			if abs(diff) <= CENTER_SPEED:
+			if abs(diff) <= ITEM_SPEED:
 				return Vector2(center_x, cur.position.y)
-			return Vector2(cur.position.x + sign(diff) * CENTER_SPEED, cur.position.y)
+			return Vector2(cur.position.x + sign(diff) * ITEM_SPEED, cur.position.y)
 		_:
 			return cur.position
+
+
+func _dist_to_exit(cur: FactoryItem) -> float:
+	match rotation:
+		FactoryBuilding.Rotation.NORMAL:
+			return rect.position.x + rect.size.x - (cur.position.x + cur.rect.size.x)
+		FactoryBuilding.Rotation.FLIPPED:
+			return cur.position.x - rect.position.x
+		FactoryBuilding.Rotation.CLOCKWISE:
+			return rect.position.y + rect.size.y - (cur.position.y + cur.rect.size.y)
+		FactoryBuilding.Rotation.COUNTERCLOCKWISE:
+			return cur.position.y - rect.position.y
+		_:
+			return 0.0
+
+
+func _next_building() -> FactoryBuilding:
+	var p := _get_available_out_port()
+	if p == null:
+		return null
+	return grid.get_building(position + p.position + p.facing)
 
 
 func _move_dir() -> Vector2:
@@ -95,16 +137,17 @@ func _progress(item: FactoryItem) -> float:
 			return item.position.x
 
 
-func _will_exit(cur: FactoryItem) -> bool:
+func _will_exit(next_pos: Vector2, cur: FactoryItem) -> bool:
+	var center := next_pos + cur.rect.size * 0.5
 	match rotation:
 		FactoryBuilding.Rotation.NORMAL:
-			return cur.position.x + cur.rect.size.x * 0.5 >= rect.position.x + rect.size.x
+			return center.x >= rect.position.x + rect.size.x
 		FactoryBuilding.Rotation.FLIPPED:
-			return cur.position.x + cur.rect.size.x * 0.5 <= rect.position.x
+			return center.x <= rect.position.x
 		FactoryBuilding.Rotation.CLOCKWISE:
-			return cur.position.y + cur.rect.size.y * 0.5 >= rect.position.y + rect.size.y
+			return center.y >= rect.position.y + rect.size.y
 		FactoryBuilding.Rotation.COUNTERCLOCKWISE:
-			return cur.position.y + cur.rect.size.y * 0.5 <= rect.position.y
+			return center.y <= rect.position.y
 		_:
 			return false
 

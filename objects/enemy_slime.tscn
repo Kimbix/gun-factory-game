@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://c3krnxqtp0xbk"]
+
+[ext_resource type="Texture2D" uid="uid://ceym0vtm257nj" path="res://assets/world_entities/spr_enemySlime.png" id="1_t7xr3"]
+[ext_resource type="Script" uid="uid://dtbuseh8mw7c1" path="res://objects/enemy_slime.gd" id="2_qu3vo"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vuntw"]
+size = Vector2(8, 4)
+
+[node name="EnemySlime" type="CharacterBody2D" unique_id=589975782]
+script = ExtResource("2_qu3vo")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=954768743]
+texture = ExtResource("1_t7xr3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=284001717]
+shape = SubResource("RectangleShape2D_vuntw")

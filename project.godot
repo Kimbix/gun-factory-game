@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Gun Factory Game"
-run/main_scene="uid://dhkulhdjf0gsf"
+run/main_scene="uid://mv44gab30mb0"
 config/features=PackedStringArray("4.7", "Forward Plus")
 config/icon="res://icon.svg"
 

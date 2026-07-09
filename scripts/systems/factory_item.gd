@@ -11,6 +11,7 @@ var texture: Texture2D:
 var name: String:
 	get():
 		return _info.name
+var shooting_strategy: ShootingStrategy
 var _info: FactoryItemInfo
 
 

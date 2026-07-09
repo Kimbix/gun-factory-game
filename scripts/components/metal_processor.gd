@@ -68,6 +68,8 @@ func _do_output() -> void:
 	var p := _get_available_out_port()
 	if p == null:
 		return
+	if not _can_output_to(recipe.outputs[0].item, p):
+		return
 	var where_to: Vector2 = position + p.position + p.facing
 	grid.place_item(recipe.outputs[0].item, where_to)
 

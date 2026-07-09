@@ -22,10 +22,8 @@ func tick() -> void:
 
 		if _dist_to_exit(cur) < cur.rect.size.x:
 			var build := _next_building()
-			if build != null and build.behaviour is ConveyorBelt:
-				var other := build.behaviour as ConveyorBelt
-				if other._blocks_item_at(next_pos, rotation):
-					continue
+			if build != null and not build.behaviour.can_accept(cur):
+				continue
 
 		if _will_exit(next_pos, cur):
 			var build := _next_building()
@@ -37,27 +35,19 @@ func tick() -> void:
 		cur.position = next_pos
 
 
+func can_accept(item: FactoryItem) -> bool:
+	for existing: FactoryItem in items:
+		if _calc_gap(item.position, existing) < item.rect.size.x:
+			return false
+	return true
+
+
 func receive_item(item: FactoryItem) -> void:
 	items.append(item)
 	items.sort_custom(
 		func(a: FactoryItem, b: FactoryItem) -> bool:
 			return _progress(a) < _progress(b)
 	)
-
-
-func _blocks_item_at(at_pos: Vector2, from_rotation: FactoryBuilding.Rotation) -> bool:
-	var rel := (from_rotation - rotation + 4) % 4
-	if rel == 0:
-		if items.is_empty():
-			return false
-		return _calc_gap(at_pos, items[0]) < items[0].rect.size.x
-	elif rel == 1 or rel == 3:
-		for existing: FactoryItem in items:
-			if _calc_gap(at_pos, existing) < existing.rect.size.x:
-				return true
-		return false
-	else:
-		return true
 
 
 func _is_centered(cur: FactoryItem) -> bool:

@@ -27,6 +27,8 @@ func _do_output() -> void:
 	var p := _get_available_out_port()
 	if p == null:
 		return
+	if not _can_output_to(OUTPUT_ITEM, p):
+		return
 	var where_to: Vector2 = position + p.position + p.facing
 	grid.place_item(OUTPUT_ITEM, where_to)
 

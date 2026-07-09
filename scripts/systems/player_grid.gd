@@ -115,6 +115,8 @@ func place_item(what: FactoryItemInfo, where: Vector2) -> void:
 	var building := get_building(building_to_check)
 
 	var item := FactoryItem.new(what, where)
+	if building != null and not building.behaviour.can_accept(item):
+		return
 	_items.append(item)
 	if building != null:
 		building.receive_item(item)

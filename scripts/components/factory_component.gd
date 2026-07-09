@@ -29,8 +29,20 @@ func get_vars() -> Dictionary:
 	return {}
 
 
+func can_accept(_item: FactoryItem) -> bool:
+	return true
+
+
 func receive_item(_item: FactoryItem) -> void:
 	pass
+
+
+func _can_output_to(item: FactoryItemInfo, port: Port) -> bool:
+	var where: Vector2 = building.position + port.position + port.facing
+	var target := grid.get_building(where.floor())
+	if target == null:
+		return true
+	return target.behaviour.can_accept(FactoryItem.new(item, where))
 
 
 func open_interface() -> void:

@@ -53,6 +53,8 @@ func tick() -> void:
 		return
 
 	for output in recipe.outputs:
+		if not _can_output_to(output.item, output_port):
+			continue
 		var where := position + output_port.position + output_port.facing
 		grid.place_item(output.item, where)
 

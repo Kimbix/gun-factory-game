@@ -1,7 +1,7 @@
-[gd_resource type="Resource" script_class="RecipeCatalogue" format=3 uid="uid://doehfu33ikgrr"]
+[gd_resource type="Resource" script_class="AmmoAssemblerRecipeCatalogue" format=3 uid="uid://doehfu33ikgrr"]
 
-[ext_resource type="Script" uid="uid://0p8ni7rbeu6p" path="res://resources/recipes/item_recipe.gd" id="1_9se6p"]
-[ext_resource type="Script" uid="uid://buxsgr4u71mah" path="res://resources/recipes/recipe_catalogue.gd" id="2_btccb"]
+[ext_resource type="Script" uid="uid://kexpq7onpvuy" path="res://resources/recipes/ammo_recipe.gd" id="1_9se6p"]
+[ext_resource type="Script" uid="uid://dkpbd08kk7emn" path="res://resources/recipes/ammo_assembler_recipe_catalogue.gd" id="2_btccb"]
 [ext_resource type="Resource" uid="uid://buxq4518ft2jm" path="res://resources/recipes/casing_gunpowder_pellets.tres" id="2_utyma"]
 [ext_resource type="Resource" uid="uid://cqks1oi0y6vx7" path="res://resources/recipes/casing_gunpowder_pointy_tip.tres" id="3_utyma"]
 [ext_resource type="Resource" uid="uid://qovh4etc7h1q" path="res://resources/recipes/casing_gunpowder_rounded_tip.tres" id="4_utyma"]

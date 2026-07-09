@@ -58,6 +58,9 @@ func tick() -> void:
 		var where := position + output_port.position + output_port.facing
 		grid.place_item(output.item, where)
 
+	if recipe is AmmoRecipe:
+		print("strategy: ", (recipe as AmmoRecipe).strategy)
+
 
 func get_vars() -> Dictionary:
 	var slots_data: Array[Dictionary] = []

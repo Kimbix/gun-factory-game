@@ -1,13 +1,14 @@
-[gd_resource type="Resource" script_class="ItemRecipe" format=3 uid="uid://cqks1oi0y6vx7"]
+[gd_resource type="Resource" script_class="AmmoRecipe" format=3 uid="uid://cqks1oi0y6vx7"]
 
 [ext_resource type="Texture2D" uid="uid://xp8d6rtgs61m" path="res://assets/factory_items/spr_rifleRounds.png" id="1_h93nf"]
 [ext_resource type="Script" uid="uid://d3f4ru8ryeu14" path="res://resources/recipes/recipe_ingredient.gd" id="1_keo7j"]
-[ext_resource type="Script" uid="uid://0p8ni7rbeu6p" path="res://resources/recipes/item_recipe.gd" id="1_xj2cp"]
+[ext_resource type="Script" uid="uid://kexpq7onpvuy" path="res://resources/recipes/ammo_recipe.gd" id="1_xj2cp"]
 [ext_resource type="Resource" uid="uid://c4wf626ege7cx" path="res://resources/factory_items/bullet_casing.tres" id="2_sh3nw"]
 [ext_resource type="Resource" uid="uid://cpg7snevhbi06" path="res://resources/factory_items/gunpowder.tres" id="3_wx4tf"]
 [ext_resource type="Resource" uid="uid://c22n2v8wi7hp5" path="res://resources/factory_items/pointy_lead_tip.tres" id="4_tpsek"]
 [ext_resource type="Resource" uid="uid://ch1p8rsf7lx2x" path="res://resources/factory_items/rifle_round.tres" id="5_ib3ef"]
 [ext_resource type="Resource" uid="uid://delxbnrvtqsr4" path="res://resources/grid_components/ammo_assembler.tres" id="6_qqhnt"]
+[ext_resource type="Script" uid="uid://cnurwixqc6xie" path="res://scripts/shooting_strategy/rifle_shot_strategy.gd" id="9_ndi54"]
 
 [sub_resource type="Resource" id="Resource_tnams"]
 script = ExtResource("1_keo7j")
@@ -27,6 +28,7 @@ item = ExtResource("5_ib3ef")
 
 [resource]
 script = ExtResource("1_xj2cp")
+strategy = ExtResource("9_ndi54")
 display_name = "Rifle Round"
 icon = ExtResource("1_h93nf")
 inputs = Array[ExtResource("1_keo7j")]([SubResource("Resource_tnams"), SubResource("Resource_vkdxb"), SubResource("Resource_ehrhx")])

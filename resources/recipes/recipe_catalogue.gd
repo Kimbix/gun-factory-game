@@ -1,4 +1,4 @@
 class_name RecipeCatalogue
-extends Resource
+extends BaseRecipeCatalogue
 
 @export var recipes: Array[ItemRecipe]

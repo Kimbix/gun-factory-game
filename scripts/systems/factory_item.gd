@@ -4,7 +4,7 @@ extends RefCounted
 var position: Vector2
 var rect: Rect2:
 	get():
-		return Rect2(position, texture.get_size() / PlayerGrid.GRID_TEXTURE_SIZE)
+		return Rect2(position, _info.grid_size)
 var texture: Texture2D:
 	get():
 		return _info.texture

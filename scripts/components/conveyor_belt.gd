@@ -1,57 +1,129 @@
 class_name ConveyorBelt
 extends FactoryComponent
 
-const MOVE_DIRECTION: Dictionary[FactoryBuilding.Rotation, Vector2] = {
-	FactoryBuilding.Rotation.NORMAL: Vector2.RIGHT,
-	FactoryBuilding.Rotation.CLOCKWISE: Vector2.DOWN,
-	FactoryBuilding.Rotation.COUNTERCLOCKWISE: Vector2.UP,
-	FactoryBuilding.Rotation.FLIPPED: Vector2.LEFT,
-}
+const ITEM_SPEED := 0.05
+const CENTER_SPEED := ITEM_SPEED
 
-var check_method: Dictionary[FactoryBuilding.Rotation, StringName] = {
-	FactoryBuilding.Rotation.NORMAL: _normal_rotation_check.get_method(),
-	FactoryBuilding.Rotation.CLOCKWISE: _clockwise_rotation_check.get_method(),
-	FactoryBuilding.Rotation.COUNTERCLOCKWISE: _counterclockwise_rotation_check.get_method(),
-	FactoryBuilding.Rotation.FLIPPED: _flipped_rotation_check.get_method(),
-}
 var items: Array[FactoryItem] = []
 
 
 func tick() -> void:
-	var dir := MOVE_DIRECTION[rotation]
-	var check := check_method[rotation]
-	for i: FactoryItem in items.duplicate():
-		var new_rect := i.rect
-		new_rect.position += dir * .05
+	for i: int in range(items.size() - 1, -1, -1):
+		var cur := items[i]
+		var ahead := items[i + 1] if i + 1 < items.size() else null
 
-		if call(check, new_rect):
-			i.position += dir * .05
+		if not _is_centered(cur):
+			cur.position = _step_toward_center(cur)
 			continue
 
-		var p := _get_available_out_port()
-		if p == null:
-			continue
-		var build := grid.get_building(position + p.position + p.facing)
-		if build != null and _can_output():
-			items.erase(i)
-			build.receive_item(i)
+		if _will_exit(cur):
+			var p := _get_available_out_port()
+			if p == null:
+				continue
+			var build := grid.get_building(position + p.position + p.facing)
+			if build != null and _can_output():
+				items.remove_at(i)
+				build.receive_item(cur)
+		else:
+			var next_pos := cur.position + _move_dir() * ITEM_SPEED
+			if _would_collide(next_pos, ahead):
+				continue
+			cur.position = next_pos
 
 
 func receive_item(item: FactoryItem) -> void:
 	items.append(item)
+	items.sort_custom(
+		func(a: FactoryItem, b: FactoryItem) -> bool:
+			return _progress(a) < _progress(b)
+	)
 
 
-func _normal_rotation_check(r: Rect2) -> bool:
-	return r.position.x + r.size.x * .5 < rect.position.x + rect.size.x
+func _is_centered(cur: FactoryItem) -> bool:
+	match rotation:
+		FactoryBuilding.Rotation.NORMAL, FactoryBuilding.Rotation.FLIPPED:
+			return abs(cur.position.y + cur.rect.size.y * 0.5 - rect.position.y - rect.size.y * 0.5) < 0.005
+		FactoryBuilding.Rotation.CLOCKWISE, FactoryBuilding.Rotation.COUNTERCLOCKWISE:
+			return abs(cur.position.x + cur.rect.size.x * 0.5 - rect.position.x - rect.size.x * 0.5) < 0.005
+		_:
+			return true
 
 
-func _clockwise_rotation_check(r: Rect2) -> bool:
-	return r.position.y + r.size.y * .5 < rect.position.y + rect.size.y
+func _step_toward_center(cur: FactoryItem) -> Vector2:
+	match rotation:
+		FactoryBuilding.Rotation.NORMAL, FactoryBuilding.Rotation.FLIPPED:
+			var center_y := rect.position.y + rect.size.y * 0.5 - cur.rect.size.y * 0.5
+			var diff := center_y - cur.position.y
+			if abs(diff) <= CENTER_SPEED:
+				return Vector2(cur.position.x, center_y)
+			return Vector2(cur.position.x, cur.position.y + sign(diff) * CENTER_SPEED)
+		FactoryBuilding.Rotation.CLOCKWISE, FactoryBuilding.Rotation.COUNTERCLOCKWISE:
+			var center_x := rect.position.x + rect.size.x * 0.5 - cur.rect.size.x * 0.5
+			var diff := center_x - cur.position.x
+			if abs(diff) <= CENTER_SPEED:
+				return Vector2(center_x, cur.position.y)
+			return Vector2(cur.position.x + sign(diff) * CENTER_SPEED, cur.position.y)
+		_:
+			return cur.position
 
 
-func _counterclockwise_rotation_check(r: Rect2) -> bool:
-	return r.position.y + r.size.y * .5 > rect.position.y
+func _move_dir() -> Vector2:
+	match rotation:
+		FactoryBuilding.Rotation.NORMAL:
+			return Vector2.RIGHT
+		FactoryBuilding.Rotation.CLOCKWISE:
+			return Vector2.DOWN
+		FactoryBuilding.Rotation.COUNTERCLOCKWISE:
+			return Vector2.UP
+		FactoryBuilding.Rotation.FLIPPED:
+			return Vector2.LEFT
+		_:
+			return Vector2.RIGHT
 
 
-func _flipped_rotation_check(r: Rect2) -> bool:
-	return r.position.x + r.size.x * .5 > rect.position.x
+func _progress(item: FactoryItem) -> float:
+	match rotation:
+		FactoryBuilding.Rotation.NORMAL:
+			return item.position.x
+		FactoryBuilding.Rotation.FLIPPED:
+			return -item.position.x
+		FactoryBuilding.Rotation.CLOCKWISE:
+			return item.position.y
+		FactoryBuilding.Rotation.COUNTERCLOCKWISE:
+			return -item.position.y
+		_:
+			return item.position.x
+
+
+func _will_exit(cur: FactoryItem) -> bool:
+	match rotation:
+		FactoryBuilding.Rotation.NORMAL:
+			return cur.position.x + cur.rect.size.x * 0.5 >= rect.position.x + rect.size.x
+		FactoryBuilding.Rotation.FLIPPED:
+			return cur.position.x + cur.rect.size.x * 0.5 <= rect.position.x
+		FactoryBuilding.Rotation.CLOCKWISE:
+			return cur.position.y + cur.rect.size.y * 0.5 >= rect.position.y + rect.size.y
+		FactoryBuilding.Rotation.COUNTERCLOCKWISE:
+			return cur.position.y + cur.rect.size.y * 0.5 <= rect.position.y
+		_:
+			return false
+
+
+func _would_collide(next_pos: Vector2, ahead: FactoryItem) -> bool:
+	if ahead == null:
+		return false
+	return _calc_gap(next_pos, ahead) < ahead.rect.size.x
+
+
+func _calc_gap(next_pos: Vector2, ahead: FactoryItem) -> float:
+	match rotation:
+		FactoryBuilding.Rotation.NORMAL:
+			return ahead.position.x - next_pos.x
+		FactoryBuilding.Rotation.FLIPPED:
+			return next_pos.x - ahead.position.x
+		FactoryBuilding.Rotation.CLOCKWISE:
+			return ahead.position.y - next_pos.y
+		FactoryBuilding.Rotation.COUNTERCLOCKWISE:
+			return next_pos.y - ahead.position.y
+		_:
+			return ahead.position.x - next_pos.x

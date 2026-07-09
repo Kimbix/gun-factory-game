@@ -56,10 +56,12 @@ func tick() -> void:
 		if not _can_output_to(output.item, output_port):
 			continue
 		var where := position + output_port.position + output_port.facing
-		grid.place_item(output.item, where)
-
-	if recipe is AmmoRecipe:
-		print("strategy: ", (recipe as AmmoRecipe).strategy)
+		var item := FactoryItem.new(output.item, where)
+		if recipe is AmmoRecipe:
+			var ammo_recipe := recipe as AmmoRecipe
+			if ammo_recipe.strategy != null:
+				item.shooting_strategy = ammo_recipe.strategy.new()
+		grid.place_item(item)
 
 
 func get_vars() -> Dictionary:

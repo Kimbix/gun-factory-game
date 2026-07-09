@@ -76,7 +76,7 @@ func _notify_progress(value: int) -> void:
 
 func _do_output(port: Port) -> void:
 	var where_to: Vector2 = position + port.position + port.facing
-	grid.place_item(recipe.outputs[0].item, where_to)
+	grid.place_item(FactoryItem.new(recipe.outputs[0].item, where_to))
 
 
 func _on_interface_closed() -> void:

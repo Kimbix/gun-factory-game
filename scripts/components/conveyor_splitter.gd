@@ -48,5 +48,5 @@ func tick() -> void:
 	if not _can_output_to(info, port, where_to):
 		return
 
-	grid.place_item(_items.pop_front(), where_to)
+	grid.place_item(FactoryItem.new(_items.pop_front(), where_to))
 	_cooldown = COOLDOWN

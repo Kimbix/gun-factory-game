@@ -101,20 +101,19 @@ func place_building(
 	_buildings[where] = building
 
 
-func place_item(what: FactoryItemInfo, where: Vector2) -> void:
-	if what == null:
-		print("GridComponentInfo cannot be null")
+func place_item(item: FactoryItem) -> void:
+	if item == null:
+		print("Item cannot be null")
 		return
 
-	# NOTE: This check will probably have to be more thorough when NxM buildings are in play
-	if where.x < 0 or where.x >= dimensions.x or where.y < 0 or where.y >= dimensions.y:
-		print("Position for building must be valid")
+	var pos := item.position
+	if pos.x < 0 or pos.x >= dimensions.x or pos.y < 0 or pos.y >= dimensions.y:
+		print("Position for item must be valid")
 		return
 
-	var building_to_check := where.floor()
+	var building_to_check := pos.floor()
 	var building := get_building(building_to_check)
 
-	var item := FactoryItem.new(what, where)
 	if building != null and not building.behaviour.can_accept(item):
 		return
 	_items.append(item)

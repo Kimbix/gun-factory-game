@@ -57,4 +57,4 @@ func _do_output() -> void:
 	if p == null:
 		return
 	var where_to: Vector2 = position + p.position + p.facing
-	grid.place_item(ITEM_OUTPUT, where_to)
+	grid.place_item(FactoryItem.new(ITEM_OUTPUT, where_to))

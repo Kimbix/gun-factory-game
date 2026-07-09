@@ -67,5 +67,5 @@ func close_window(window: Control) -> void:
 	opened_windows.erase(window)
 	unfocusable_windows.erase(window)
 	if focused_window == window:
-		focused_window = null
+		focused_window = opened_windows.back() if not opened_windows.is_empty() else null
 	window.queue_free()

@@ -10,6 +10,7 @@ var _lifetime := 0.0
 
 
 func _ready() -> void:
+	rotation = direction.angle()
 	body_entered.connect(_on_body_entered)
 
 

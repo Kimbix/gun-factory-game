@@ -48,7 +48,7 @@ func _spawn_enemies() -> void:
 
 	var missing: int = enemy_cap - enemies.size()
 	var to_spawn := ceili(missing * spawn_per_wave_percent)
-	for _i in to_spawn:
+	for i: Variant in to_spawn:
 		if enemies.size() >= enemy_cap:
 			return
 

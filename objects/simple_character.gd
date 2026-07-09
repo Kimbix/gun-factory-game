@@ -72,7 +72,24 @@ func _setup_minimap() -> void:
 
 
 func _shoot(_item: FactoryItem = null) -> void:
+	var target := _find_nearest_enemy()
+	if target == null:
+		return
 	var bullet: Bullet = BULLET.instantiate()
-	bullet.direction = (get_global_mouse_position() - global_position).normalized()
+	bullet.direction = (target.global_position - global_position).normalized()
 	bullet.global_position = global_position
 	get_parent().add_child(bullet)
+
+
+func _find_nearest_enemy() -> Node2D:
+	var nearest: Node2D = null
+	var nearest_dist := INF
+	for node: Node in get_tree().get_nodes_in_group("enemy"):
+		var enemy := node as Node2D
+		if not is_instance_valid(enemy):
+			continue
+		var dist := global_position.distance_squared_to(enemy.global_position)
+		if dist < nearest_dist:
+			nearest_dist = dist
+			nearest = enemy
+	return nearest

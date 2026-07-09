@@ -8,6 +8,7 @@ static var _actions_ready := false
 
 @export var starting_grid_data: PlayerGridData
 
+var current_target: Node2D
 var _player_grid: PlayerGrid
 
 
@@ -73,13 +74,13 @@ func _setup_minimap() -> void:
 func _shoot(item: FactoryItem = null) -> void:
 	if item == null or item.shooting_strategy == null:
 		return
-	var target := _find_nearest_enemy()
-	if target == null:
+	current_target = find_target()
+	if current_target == null:
 		return
-	item.shooting_strategy.execute(self, target, item)
+	item.shooting_strategy.execute(self, current_target, item)
 
 
-func _find_nearest_enemy() -> Node2D:
+func find_target() -> Node2D:
 	var nearest: Node2D = null
 	var nearest_dist := INF
 	for node: Node in get_tree().get_nodes_in_group("enemy"):

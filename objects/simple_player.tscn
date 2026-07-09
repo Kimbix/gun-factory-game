@@ -17,3 +17,6 @@ texture = ExtResource("3_8nbjm")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1225916189]
 position = Vector2(1.5, -0.5)
 shape = SubResource("RectangleShape2D_r3t7o")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1089392001]
+zoom = Vector2(2, 2)

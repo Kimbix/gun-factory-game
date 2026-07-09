@@ -7,8 +7,8 @@ extends Node
 @export_category("Spawn Specifications")
 @export var spawn_interval := 10.0
 @export var spawn_per_wave_percent := .05
-@export var spawn_distance_min := 500.0
-@export var spawn_distance_max := 750.0
+@export var spawn_distance_min := 250.0
+@export var spawn_distance_max := 400.0
 
 var elapsed_time: float
 var enemies: Array[BaseEnemy] = []
@@ -28,6 +28,7 @@ func _ready() -> void:
 	timer.wait_time = spawn_interval
 	timer.autostart = true
 	add_child(timer)
+	_spawn_enemies()
 
 
 func _process(delta: float) -> void:

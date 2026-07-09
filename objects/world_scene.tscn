@@ -2,12 +2,21 @@
 
 [ext_resource type="PackedScene" uid="uid://c0f7aja78bay4" path="res://objects/simple_player.tscn" id="1_t7wo2"]
 [ext_resource type="Resource" uid="uid://ciyco2se0tapx" path="res://resources/enemy_waves/testing_waves.tres" id="3_vuntw"]
+[ext_resource type="Texture2D" uid="uid://cfi1wpkmoebie" path="res://assets/world/spr_madForestBackground.png" id="4_6mirt"]
 [ext_resource type="Script" uid="uid://dqwaa3ln6a25" path="res://objects/game_director.gd" id="4_2780i"]
 
 [sub_resource type="Environment" id="Environment_t7wo2"]
 
 [node name="WorldScene" type="WorldEnvironment" unique_id=568582084]
 environment = SubResource("Environment_t7wo2")
+
+[node name="Parallax2D" type="Parallax2D" parent="." unique_id=1626368049]
+repeat_size = Vector2(1024, 1024)
+repeat_times = 32
+
+[node name="Sprite2D" type="Sprite2D" parent="Parallax2D" unique_id=1240994281]
+scale = Vector2(2, 2)
+texture = ExtResource("4_6mirt")
 
 [node name="GameDirector" type="Node" parent="." unique_id=652692234]
 script = ExtResource("4_2780i")

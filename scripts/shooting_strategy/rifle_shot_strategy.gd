@@ -6,7 +6,7 @@ const BURST_COUNT := 3
 const DAMAGE := 10
 const SPREAD_DEG := 5.0
 const DELAY := 0.1
-const SPEED := 1200.0
+const SPEED := 600.0
 
 
 func execute(shooter: Node2D, target: Node2D, _item: FactoryItem) -> void:

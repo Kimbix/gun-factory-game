@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://c0f7aja78bay4"]
 
 [ext_resource type="Script" uid="uid://blaeku3hh6pnr" path="res://objects/simple_character.gd" id="1_yj3so"]
-[ext_resource type="Resource" path="res://resources/player_grid_data/shotgun_testing.tres" id="2_hycru"]
+[ext_resource type="Resource" path="res://resources/player_grid_data/shotgun_rifle_test.tres" id="2_hycru"]
 [ext_resource type="Texture2D" uid="uid://c78eu1huc66n7" path="res://assets/world_entities/spr_playerCharacter.png" id="3_8nbjm"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_r3t7o"]

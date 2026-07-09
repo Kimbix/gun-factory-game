@@ -50,7 +50,7 @@ func _blocks_item_at(at_pos: Vector2, from_rotation: FactoryBuilding.Rotation) -
 	if rel == 0:
 		if items.is_empty():
 			return false
-		return _calc_gap(at_pos, items[-1]) < items[-1].rect.size.x
+		return _calc_gap(at_pos, items[0]) < items[0].rect.size.x
 	elif rel == 1 or rel == 3:
 		for existing: FactoryItem in items:
 			if _calc_gap(at_pos, existing) < existing.rect.size.x:

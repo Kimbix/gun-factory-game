@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="EnemyWaves" format=3 uid="uid://ciyco2se0tapx"]
+
+[ext_resource type="Script" uid="uid://dio5qgikhe7p1" path="res://resources/enemy_waves/enemy_waves.gd" id="1_q4fjt"]
+[ext_resource type="Script" uid="uid://ctf6nntqd8vvt" path="res://resources/enemy_waves/enemy_wave.gd" id="2_fhf8w"]
+[ext_resource type="Script" uid="uid://bsafh2yqkks57" path="res://resources/enemy_waves/enemy_info.gd" id="3_fhf8w"]
+[ext_resource type="PackedScene" uid="uid://c3krnxqtp0xbk" path="res://objects/enemy_slime.tscn" id="4_6e1dk"]
+
+[sub_resource type="Resource" id="Resource_fhf8w"]
+script = ExtResource("3_fhf8w")
+scene = ExtResource("4_6e1dk")
+metadata/_custom_type_script = "uid://bsafh2yqkks57"
+
+[sub_resource type="Resource" id="Resource_8rb1r"]
+script = ExtResource("2_fhf8w")
+end_time_minutes = 1.0
+enemies = Array[ExtResource("3_fhf8w")]([SubResource("Resource_fhf8w")])
+metadata/_custom_type_script = "uid://ctf6nntqd8vvt"
+
+[resource]
+script = ExtResource("1_q4fjt")
+waves = Array[ExtResource("2_fhf8w")]([SubResource("Resource_8rb1r")])
+metadata/_custom_type_script = "uid://dio5qgikhe7p1"

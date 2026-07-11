@@ -1,0 +1,9 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://objects/game_supervisor.gd" id="1_7xq2v"]
+[ext_resource type="PackedScene" uid="uid://mv44gab30mb0" path="res://objects/gameplay_scene.tscn" id="2_gm3q9"]
+
+[node name="GameSupervisor" type="Node"]
+script = ExtResource("1_7xq2v")
+
+[node name="GameplayScene" parent="." instance=ExtResource("2_gm3q9")]

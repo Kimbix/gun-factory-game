@@ -15,16 +15,9 @@ var enemies: Array[BaseEnemy] = []
 var active_wave: EnemyWave
 var wave_index: int
 var _player_instance: Node2D
-var _paused: bool = false
 
 
 func _ready() -> void:
-	if not InputMap.has_action("pause"):
-		var event := InputEventKey.new()
-		event.keycode = KEY_ESCAPE
-		InputMap.add_action("pause")
-		InputMap.action_add_event("pause", event)
-
 	_spawn_player()
 	elapsed_time = 0.0
 	wave_index = 0
@@ -76,13 +69,3 @@ func _spawn_enemies() -> void:
 
 func _on_enemy_killed(which: BaseEnemy) -> void:
 	enemies.erase(which)
-
-
-func _unhandled_input(event: InputEvent) -> void:
-	if event.is_action_pressed("pause"):
-		toggle_pause()
-
-
-func toggle_pause() -> void:
-	_paused = not _paused
-	get_tree().paused = _paused

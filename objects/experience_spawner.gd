@@ -4,6 +4,7 @@ extends Node2D
 static var crystals: Dictionary[int, PackedScene] = {
 	1: preload("res://objects/experience_crystal.tscn"),
 }
+
 @export var base_xp: int = 5
 @export_range(0.0, 1.0) var variance: float = 0.2
 @export var spawn_radius: float = 16.0
@@ -19,7 +20,12 @@ func spawn() -> void:
 
 	var amount := roundi(base_xp * randf_range(1.0 - variance, 1.0 + variance))
 	amount = maxi(amount, 0)
+	var origin := parent.global_position
 
+	call_deferred("_do_spawn_deferred", amount, origin)
+
+
+func _do_spawn_deferred(amount: int, origin: Vector2) -> void:
 	var values := crystals.keys()
 	values.sort()
 	values.reverse()
@@ -28,7 +34,7 @@ func spawn() -> void:
 		var scene: PackedScene = crystals[value]
 		if scene == null:
 			continue
-		var count: int = amount / value
+		var count := int(float(amount) / float(value))
 		amount -= count * value
 
 		for i: int in count:
@@ -37,5 +43,5 @@ func spawn() -> void:
 				continue
 			crystal.xp_value = value
 			var offset := Vector2.RIGHT.rotated(randf() * TAU) * randf() * spawn_radius
-			crystal.global_position = parent.global_position + offset
+			crystal.global_position = origin + offset
 			get_tree().current_scene.add_child(crystal)

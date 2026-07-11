@@ -7,6 +7,9 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_r3t7o"]
 size = Vector2(13, 31)
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_clctn"]
+radius = 80.0
+
 [node name="CharacterBody2D" type="CharacterBody2D" unique_id=800432502]
 script = ExtResource("1_yj3so")
 starting_grid_data = ExtResource("2_hycru")
@@ -20,3 +23,8 @@ shape = SubResource("RectangleShape2D_r3t7o")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1089392001]
 zoom = Vector2(2, 2)
+
+[node name="CollectionArea" type="Area2D" parent="." unique_id=1259597154]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollectionArea" unique_id=1942872774]
+shape = SubResource("CircleShape2D_clctn")

@@ -10,6 +10,7 @@ static var _actions_ready := false
 
 var current_target: Node2D
 var _player_grid: PlayerGrid
+var experience: int = 0
 
 
 static func _setup_input_actions() -> void:
@@ -50,6 +51,20 @@ func _ready() -> void:
 	tick_timer.start()
 
 	_setup_minimap()
+
+	$CollectionArea.area_entered.connect(_on_collection_area_entered)
+
+
+func _on_collection_area_entered(area: Area2D) -> void:
+	var crystal := area as ExperienceCrystal
+	if crystal == null:
+		return
+	crystal.collected.connect(_on_crystal_collected.bind(crystal))
+	crystal.start_follow(self)
+
+
+func _on_crystal_collected(crystal: ExperienceCrystal) -> void:
+	experience += crystal.xp_value
 
 
 func _physics_process(_delta: float) -> void:

@@ -3,6 +3,8 @@ extends BaseEnemy
 
 const SPEED := 60.0
 
+signal on_death
+
 var health := 30
 
 
@@ -18,4 +20,5 @@ func _physics_process(_delta: float) -> void:
 func take_damage(amount: int) -> void:
 	health -= amount
 	if health <= 0:
+		on_death.emit()
 		queue_free()

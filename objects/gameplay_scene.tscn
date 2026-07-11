@@ -7,14 +7,14 @@
 
 [sub_resource type="Environment" id="Environment_t7wo2"]
 
-[node name="WorldScene" type="WorldEnvironment" unique_id=568582084]
+[node name="GameplayScene" type="WorldEnvironment" unique_id=568582084]
 environment = SubResource("Environment_t7wo2")
 
-[node name="Parallax2D" type="Parallax2D" parent="." unique_id=1626368049]
+[node name="Background" type="Parallax2D" parent="." unique_id=1626368049]
 repeat_size = Vector2(1024, 1024)
 repeat_times = 32
 
-[node name="Sprite2D" type="Sprite2D" parent="Parallax2D" unique_id=1240994281]
+[node name="BackgroundSprite" type="Sprite2D" parent="Background" unique_id=1240994281]
 scale = Vector2(2, 2)
 texture = ExtResource("4_6mirt")
 
@@ -22,3 +22,5 @@ texture = ExtResource("4_6mirt")
 script = ExtResource("4_2780i")
 player_character_scene = ExtResource("1_t7wo2")
 enemy_waves = ExtResource("3_vuntw")
+spawn_interval = 1.0
+spawn_per_wave_percent = 0.1

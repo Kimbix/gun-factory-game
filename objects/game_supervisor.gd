@@ -4,6 +4,7 @@ extends Node
 var _building: bool = false
 var _paused: bool = false
 var _emergent_ui: EmergentUI
+var _active_player: SimpleCharacter
 
 
 func _ready() -> void:
@@ -21,6 +22,7 @@ func _ready() -> void:
 		InputMap.action_add_event("factory_building", event)
 
 	call_deferred("_connect_level_system")
+	_active_player = %GameplayScene.player_instance
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -48,7 +50,7 @@ func pause_gameworld() -> void:
 
 
 func _connect_level_system() -> void:
-	var player := get_tree().get_first_node_in_group("player") as SimpleCharacter
+	var player := _active_player
 	if player == null:
 		return
 	player.level_system.leveled_up.connect(_on_leveled_up)

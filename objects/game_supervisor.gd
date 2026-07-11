@@ -2,9 +2,11 @@ class_name GameSupervisor
 extends Node
 
 var _paused: bool = false
+var _emergent_ui: EmergentUI
 
 
 func _ready() -> void:
+	_emergent_ui = $EmergentUI as EmergentUI
 	if not InputMap.has_action("pause"):
 		var event := InputEventKey.new()
 		event.keycode = KEY_ESCAPE
@@ -32,17 +34,15 @@ func _connect_level_system() -> void:
 	if player == null:
 		return
 	player.level_system.leveled_up.connect(_on_leveled_up)
-	var ui := $EmergentUI as EmergentUI
-	if ui != null:
-		ui.resume_requested.connect(_on_resume_requested)
+	if _emergent_ui != null:
+		_emergent_ui.resume_requested.connect(_on_resume_requested)
 
 
 func _on_leveled_up(_new_level: int) -> void:
 	_paused = true
 	%GameplayScene.process_mode = PROCESS_MODE_DISABLED
-	var ui := $EmergentUI as EmergentUI
-	if ui != null:
-		ui.show_level_up()
+	if _emergent_ui != null:
+		_emergent_ui.show_level_up()
 
 
 func _on_resume_requested() -> void:

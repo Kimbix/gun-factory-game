@@ -1,0 +1,43 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://objects/stats_debug_ui.gd" id="1_f3v2h"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vuntw"]
+bg_color = Color(0, 0, 0, 0.7)
+content_margin_left = 8
+content_margin_top = 8
+content_margin_right = 8
+content_margin_bottom = 8
+
+[node name="StatsDebugUI" type="VBoxContainer"]
+anchors_preset = 0
+offset_left = 8.0
+offset_top = 8.0
+mouse_filter = 1
+visible = false
+script = ExtResource("1_f3v2h")
+theme_override_styles/panel = SubResource("StyleBoxFlat_vuntw")
+
+[node name="Level" type="Label" parent="."]
+text = "Level: 1"
+
+[node name="XP" type="Label" parent="."]
+text = "XP: 0 / 5"
+
+[node name="Health" type="Label" parent="."]
+text = "Health: 100.0"
+
+[node name="MaxHealth" type="Label" parent="."]
+text = "Max Health: 100.0"
+
+[node name="MoveSpeed" type="Label" parent="."]
+text = "Move Speed: 200.0"
+
+[node name="TickSpeed" type="Label" parent="."]
+text = "Tick Speed: 0.0500"
+
+[node name="HealthRegen" type="Label" parent="."]
+text = "Health Regen: 0.0/s"
+
+[node name="PickupRange" type="Label" parent="."]
+text = "Pickup Range: 80.0"

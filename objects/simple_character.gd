@@ -110,16 +110,16 @@ func _on_building_removed(building: FactoryBuilding) -> void:
 
 
 func _sync_stats() -> void:
-	var tick_spd := player_stats.stats[&"tick_speed"].value
+	var tick_spd: float = player_stats.stats[&"tick_speed"].value
 	_tick_timer.wait_time = maxf(tick_spd, 0.01)
 
 	$CollectionArea/CollisionShape2D.shape.radius = player_stats.stats[&"pickup_range"].value
 
-	var max_hp := player_stats.stats[&"max_health"].value
+	var max_hp: float = player_stats.stats[&"max_health"].value
 	if health > max_hp:
 		health = max_hp
 
-	var regen := player_stats.stats[&"health_regen"].value
+	var regen: float = player_stats.stats[&"health_regen"].value
 	if regen > 0:
 		_regen_timer.wait_time = 1.0
 		_regen_timer.start()
@@ -128,8 +128,8 @@ func _sync_stats() -> void:
 
 
 func _apply_regen() -> void:
-	var max_hp := player_stats.stats[&"max_health"].value
-	var regen := player_stats.stats[&"health_regen"].value
+	var max_hp: float = player_stats.stats[&"max_health"].value
+	var regen: float = player_stats.stats[&"health_regen"].value
 	if regen <= 0:
 		return
 	health = minf(health + regen, max_hp)

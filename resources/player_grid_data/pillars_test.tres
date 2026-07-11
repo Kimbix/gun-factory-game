@@ -1,30 +1,30 @@
-[gd_resource type="Resource" script_class="PlayerGridData" format=4]
+[gd_resource type="Resource" script_class="PlayerGridData" format=4 uid="uid://cogm6818mvats"]
 
-[ext_resource type="Script" path="res://resources/player_grid_data/building_entry.gd" id="1_vm03k"]
-[ext_resource type="Resource" path="res://resources/grid_components/item_generator.tres" id="2_35m0k"]
-[ext_resource type="Resource" path="res://resources/factory_items/raw_lead.tres" id="3_ddjvf"]
-[ext_resource type="Resource" path="res://resources/grid_components/furnace.tres" id="4_3n2k3"]
-[ext_resource type="Resource" path="res://resources/grid_components/metal_processor.tres" id="5_1fqxc"]
-[ext_resource type="Resource" path="res://resources/recipes/lead_to_pellets.tres" id="6_t7fx1"]
-[ext_resource type="Resource" path="res://resources/grid_components/ammo_assembler.tres" id="7_o8wdx"]
-[ext_resource type="Resource" path="res://resources/recipes/casing_gunpowder_pellets.tres" id="8_wb6us"]
-[ext_resource type="Resource" path="res://resources/factory_items/gunpowder.tres" id="9_5d7le"]
-[ext_resource type="Resource" path="res://resources/factory_items/bullet_casing.tres" id="10_4hfq7"]
+[ext_resource type="Script" uid="uid://codwir1q0qp6b" path="res://resources/player_grid_data/building_entry.gd" id="1_vm03k"]
+[ext_resource type="Resource" uid="uid://d1wu3w33a0ds1" path="res://resources/grid_components/item_generator.tres" id="2_35m0k"]
+[ext_resource type="Resource" uid="uid://b4hj3tlqd3od" path="res://resources/factory_items/raw_lead.tres" id="3_ddjvf"]
+[ext_resource type="Resource" uid="uid://dow1nfk5h5vv" path="res://resources/grid_components/furnace.tres" id="4_3n2k3"]
+[ext_resource type="Resource" uid="uid://bfbl3v4bs23as" path="res://resources/grid_components/metal_processor.tres" id="5_1fqxc"]
+[ext_resource type="Resource" uid="uid://dyowbethxl8q1" path="res://resources/recipes/lead_to_pellets.tres" id="6_t7fx1"]
+[ext_resource type="Resource" uid="uid://delxbnrvtqsr4" path="res://resources/grid_components/ammo_assembler.tres" id="7_o8wdx"]
+[ext_resource type="Resource" uid="uid://buxq4518ft2jm" path="res://resources/recipes/casing_gunpowder_pellets.tres" id="8_wb6us"]
+[ext_resource type="Resource" uid="uid://cpg7snevhbi06" path="res://resources/factory_items/gunpowder.tres" id="9_5d7le"]
+[ext_resource type="Resource" uid="uid://c4wf626ege7cx" path="res://resources/factory_items/bullet_casing.tres" id="10_4hfq7"]
 [ext_resource type="Resource" path="res://resources/factory_items/rounded_lead_pellets.tres" id="11_00s3x"]
-[ext_resource type="Resource" path="res://resources/grid_components/item_receiver.tres" id="12_30uue"]
-[ext_resource type="Resource" path="res://resources/recipes/casing_gunpowder_pointy_tip.tres" id="13_kxg2p"]
-[ext_resource type="Resource" path="res://resources/factory_items/pointy_lead_tip.tres" id="14_6wx8w"]
-[ext_resource type="Resource" path="res://resources/recipes/lead_to_tip.tres" id="15_hjchf"]
-[ext_resource type="Resource" path="res://resources/recipes/lead_to_rounded_tip.tres" id="16_o7g70"]
-[ext_resource type="Resource" path="res://resources/recipes/casing_gunpowder_rounded_tip.tres" id="17_yaye5"]
-[ext_resource type="Resource" path="res://resources/factory_items/rounded_lead_tip.tres" id="18_j2sx1"]
-[ext_resource type="Resource" path="res://resources/grid_components/max_health_pillar.tres" id="19_bvu0b"]
-[ext_resource type="Resource" path="res://resources/grid_components/move_speed_pillar.tres" id="20_xl406"]
-[ext_resource type="Resource" path="res://resources/grid_components/tick_speed_pillar.tres" id="21_srans"]
-[ext_resource type="Resource" path="res://resources/grid_components/pickup_range_pillar.tres" id="22_drp5k"]
-[ext_resource type="Resource" path="res://resources/grid_components/health_regen_pillar.tres" id="23_cl8j4"]
-[ext_resource type="Texture2D" path="res://assets/factory_components/spr_emptyCell.png" id="24_jahqj"]
-[ext_resource type="Script" path="res://resources/player_grid_data/player_grid_data.gd" id="25_asjlo"]
+[ext_resource type="Resource" uid="uid://b41gow6t4rmgw" path="res://resources/grid_components/item_receiver.tres" id="12_30uue"]
+[ext_resource type="Resource" uid="uid://cqks1oi0y6vx7" path="res://resources/recipes/casing_gunpowder_pointy_tip.tres" id="13_kxg2p"]
+[ext_resource type="Resource" uid="uid://c22n2v8wi7hp5" path="res://resources/factory_items/pointy_lead_tip.tres" id="14_6wx8w"]
+[ext_resource type="Resource" uid="uid://i1ur6tqp6wwc" path="res://resources/recipes/lead_to_tip.tres" id="15_hjchf"]
+[ext_resource type="Resource" uid="uid://vlx400moqi4b" path="res://resources/recipes/lead_to_rounded_tip.tres" id="16_o7g70"]
+[ext_resource type="Resource" uid="uid://qovh4etc7h1q" path="res://resources/recipes/casing_gunpowder_rounded_tip.tres" id="17_yaye5"]
+[ext_resource type="Resource" uid="uid://bexcwplnas18e" path="res://resources/factory_items/rounded_lead_tip.tres" id="18_j2sx1"]
+[ext_resource type="Resource" uid="uid://bcal2r5lkeamc" path="res://resources/grid_components/max_health_pillar.tres" id="19_bvu0b"]
+[ext_resource type="Resource" uid="uid://bqpqfr2jxp4t3" path="res://resources/grid_components/move_speed_pillar.tres" id="20_xl406"]
+[ext_resource type="Resource" uid="uid://s86vmfpi3w15" path="res://resources/grid_components/tick_speed_pillar.tres" id="21_srans"]
+[ext_resource type="Resource" uid="uid://5h2vu81iay55" path="res://resources/grid_components/pickup_range_pillar.tres" id="22_drp5k"]
+[ext_resource type="Resource" uid="uid://du6m2qkdv14nq" path="res://resources/grid_components/health_regen_pillar.tres" id="23_cl8j4"]
+[ext_resource type="Texture2D" uid="uid://bcxv8tx5ovn5l" path="res://assets/factory_components/spr_emptyCell.png" id="24_jahqj"]
+[ext_resource type="Script" uid="uid://bprmcqf7sa0y8" path="res://resources/player_grid_data/player_grid_data.gd" id="25_asjlo"]
 
 [sub_resource type="Resource" id="Resource_wsidq"]
 script = ExtResource("1_vm03k")
@@ -330,7 +330,7 @@ data = {
 [resource]
 script = ExtResource("25_asjlo")
 dimensions = Vector2i(10, 10)
-floor_textures = Dictionary[Vector2i, Texture2D]({
+floor_textures = {
 Vector2i(0, 0): ExtResource("24_jahqj"),
 Vector2i(0, 1): ExtResource("24_jahqj"),
 Vector2i(0, 2): ExtResource("24_jahqj"),
@@ -431,6 +431,6 @@ Vector2i(9, 6): ExtResource("24_jahqj"),
 Vector2i(9, 7): ExtResource("24_jahqj"),
 Vector2i(9, 8): ExtResource("24_jahqj"),
 Vector2i(9, 9): ExtResource("24_jahqj")
-})
+}
 buildings = Array[ExtResource("1_vm03k")]([SubResource("Resource_wsidq"), SubResource("Resource_sfjhk"), SubResource("Resource_mpayp"), SubResource("Resource_pe0qb"), SubResource("Resource_i30bt"), SubResource("Resource_ri7mi"), SubResource("Resource_l3nw8"), SubResource("Resource_gtbgg"), SubResource("Resource_4o50c"), SubResource("Resource_0b015"), SubResource("Resource_nyrns"), SubResource("Resource_pjcg5"), SubResource("Resource_078al"), SubResource("Resource_cjnja"), SubResource("Resource_aom55"), SubResource("Resource_vayrt"), SubResource("Resource_w7bei"), SubResource("Resource_hr8r1"), SubResource("Resource_kiuyk"), SubResource("Resource_sxnot"), SubResource("Resource_egawh"), SubResource("Resource_l1aji"), SubResource("Resource_ygt1k"), SubResource("Resource_ofva3"), SubResource("Resource_21ycs"), SubResource("Resource_7jsxj"), SubResource("Resource_qn8yn"), SubResource("Resource_ykaj4"), SubResource("Resource_0ln4h"), SubResource("Resource_lae8a"), SubResource("Resource_2qnhv")])
 preview = SubResource("Image_tts7u")

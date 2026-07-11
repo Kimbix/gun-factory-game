@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="GridComponentInfo" format=3]
+[gd_resource type="Resource" script_class="GridComponentInfo" format=3 uid="uid://bqpqfr2jxp4t3"]
 
 [ext_resource type="Script" uid="uid://da4yb3omv2567" path="res://resources/grid_components/grid_component_info.gd" id="1_fv3h2"]
-[ext_resource type="Script" path="res://scripts/components/stat_pillar.gd" id="2_c87k1"]
+[ext_resource type="Script" uid="uid://cxdyvqaslkwas" path="res://scripts/systems/port.gd" id="2_4x8nr"]
+[ext_resource type="Script" uid="uid://857ipmnllr5o" path="res://scripts/components/stat_pillar.gd" id="2_c87k1"]
 [ext_resource type="Texture2D" uid="uid://cquewg7ywqoti" path="res://assets/factory_components/spr_moveSpeedPillar.png" id="3_d2g1h"]
 
 [resource]
@@ -11,6 +12,6 @@ display_name = &"Move Speed Pillar"
 texture = ExtResource("3_d2g1h")
 dimensions = Vector2i(1, 1)
 behaviour = ExtResource("2_c87k1")
-color = Color(0.2, 0.6, 0.9, 1.0)
+color = Color(0.2, 0.6, 0.9, 1)
 stat_name = &"move_speed"
 boost_value = 40.0

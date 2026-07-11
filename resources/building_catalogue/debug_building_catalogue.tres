@@ -10,11 +10,11 @@
 [ext_resource type="Resource" uid="uid://bfbl3v4bs23as" path="res://resources/grid_components/metal_processor.tres" id="7_3wq31"]
 [ext_resource type="Resource" uid="uid://delxbnrvtqsr4" path="res://resources/grid_components/ammo_assembler.tres" id="8_4wq31"]
 [ext_resource type="Resource" uid="uid://dsn4h7kwi2ca2" path="res://resources/grid_components/conveyor_splitter.tres" id="9_5wq31"]
-[ext_resource type="Resource" path="res://resources/grid_components/max_health_pillar.tres" id="10_abc"]
-[ext_resource type="Resource" path="res://resources/grid_components/move_speed_pillar.tres" id="11_def"]
-[ext_resource type="Resource" path="res://resources/grid_components/tick_speed_pillar.tres" id="12_ghi"]
-[ext_resource type="Resource" path="res://resources/grid_components/health_regen_pillar.tres" id="13_jkl"]
-[ext_resource type="Resource" path="res://resources/grid_components/pickup_range_pillar.tres" id="14_mno"]
+[ext_resource type="Resource" uid="uid://bcal2r5lkeamc" path="res://resources/grid_components/max_health_pillar.tres" id="10_abc"]
+[ext_resource type="Resource" uid="uid://bqpqfr2jxp4t3" path="res://resources/grid_components/move_speed_pillar.tres" id="11_def"]
+[ext_resource type="Resource" uid="uid://s86vmfpi3w15" path="res://resources/grid_components/tick_speed_pillar.tres" id="12_ghi"]
+[ext_resource type="Resource" uid="uid://du6m2qkdv14nq" path="res://resources/grid_components/health_regen_pillar.tres" id="13_jkl"]
+[ext_resource type="Resource" uid="uid://5h2vu81iay55" path="res://resources/grid_components/pickup_range_pillar.tres" id="14_mno"]
 
 [resource]
 script = ExtResource("2_bss7p")

@@ -11,6 +11,6 @@ script = ExtResource("1_7xq2v")
 [node name="GameplayScene" parent="." unique_id=367612 instance=ExtResource("2_gm3q9")]
 unique_name_in_owner = true
 
-[node name="EmergentUI" parent="." instance=ExtResource("5_pqrs")]
+[node name="EmergentUI" parent="." unique_id=217905485 instance=ExtResource("5_pqrs")]
 
 [node name="DebugUI" parent="." unique_id=1655867431 instance=ExtResource("4_abc")]

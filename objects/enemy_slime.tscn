@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" path="res://objects/experience_spawner.tscn" id="3_g5he2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vuntw"]
-size = Vector2(8, 4)
+size = Vector2(18, 10)
 
 [node name="EnemySlime" type="CharacterBody2D" unique_id=589975782]
 script = ExtResource("2_qu3vo")
@@ -16,7 +16,7 @@ texture = ExtResource("1_t7xr3")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=284001717]
 shape = SubResource("RectangleShape2D_vuntw")
 
-[node name="ExperienceSpawner" parent="." instance=ExtResource("3_g5he2")]
+[node name="ExperienceSpawner" parent="." unique_id=1642692828 instance=ExtResource("3_g5he2")]
 base_xp = 3
 variance = 0.3
 

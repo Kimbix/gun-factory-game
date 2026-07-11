@@ -32,13 +32,13 @@ func _connect_level_system() -> void:
 	if player == null:
 		return
 	player.level_system.leveled_up.connect(_on_leveled_up)
-	%LevelUpNotification.resume_requested.connect(_on_resume_requested)
+	$EmergentUI/LevelUpNotification.resume_requested.connect(_on_resume_requested)
 
 
 func _on_leveled_up(_new_level: int) -> void:
 	_paused = true
 	%GameplayScene.process_mode = PROCESS_MODE_DISABLED
-	%LevelUpNotification.show()
+	$EmergentUI/LevelUpNotification.show()
 
 
 func _on_resume_requested() -> void:

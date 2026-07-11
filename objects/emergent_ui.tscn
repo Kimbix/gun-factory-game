@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://dgxpr0t4v73lm"]
+
+[ext_resource type="PackedScene" uid="uid://chiougv7mhwbp" path="res://objects/level_up_notification.tscn" id="1_sbv5o"]
+
+[node name="EmergentUI" type="CanvasLayer"]
+
+[node name="LevelUpNotification" parent="." instance=ExtResource("1_sbv5o")]
+unique_name_in_owner = true

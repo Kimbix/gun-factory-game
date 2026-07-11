@@ -1,5 +1,5 @@
 class_name GameDirector
-extends Node
+extends WorldEnvironment
 
 @export var player_character_scene: PackedScene
 @export var enemy_waves: EnemyWaves
@@ -14,7 +14,7 @@ var elapsed_time: float
 var enemies: Array[BaseEnemy] = []
 var active_wave: EnemyWave
 var wave_index: int
-var _player_instance: Node2D
+var player_instance: SimpleCharacter
 
 
 func _ready() -> void:
@@ -39,9 +39,9 @@ func _process(delta: float) -> void:
 
 
 func _spawn_player(spawn_pos: Vector2 = Vector2.ZERO) -> void:
-	_player_instance = player_character_scene.instantiate()
-	_player_instance.position = spawn_pos
-	add_child(_player_instance)
+	player_instance = player_character_scene.instantiate()
+	player_instance.position = spawn_pos
+	add_child(player_instance)
 
 
 func _spawn_enemies() -> void:
@@ -56,9 +56,9 @@ func _spawn_enemies() -> void:
 
 		var info: EnemyInfo = active_wave.enemies.pick_random()
 		var instance: BaseEnemy = info.scene.instantiate()
-		instance.player = _player_instance
+		instance.player = player_instance
 		instance.position = (
-				_player_instance.position
+				player_instance.position
 				+ ((Vector2.RIGHT * randf_range(spawn_distance_min, spawn_distance_max))
 						.rotated(randf() * TAU))
 		)

@@ -6,8 +6,9 @@ signal item_pressed(item: FactoryItemInfo)
 const ITEM_CATALOGUE := preload("uid://me3tk3q2kkm5")
 const ITEM_BUTTON := preload("uid://cq5f74b5ddssl")
 
-@onready var grid_container: GridContainer = $GridContainer
 @export var close_button: Button
+
+@onready var grid_container: GridContainer = $GridContainer
 @onready var current_output: ItemButton = $ItemButton
 
 

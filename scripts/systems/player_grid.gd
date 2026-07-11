@@ -6,8 +6,6 @@ signal output_item(item: FactoryItem)
 signal building_placed(building: FactoryBuilding)
 signal building_removed(building: FactoryBuilding)
 
-const GRID_TEXTURE_SIZE := 16
-
 @export var dimensions: Vector2i = Vector2i(10, 10)
 
 var _floor: Dictionary[Vector2i, Texture2D] = { }

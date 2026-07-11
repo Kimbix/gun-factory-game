@@ -5,4 +5,4 @@ extends Resource
 @export var display_name: StringName = &""
 @export var texture: Texture2D
 
-var grid_size: Vector2 = Vector2.ONE * 8 / PlayerGrid.GRID_TEXTURE_SIZE
+var grid_size: Vector2 = Vector2.ONE * 8 / PlayerGridViewer.GRID_TEXTURE_SIZE

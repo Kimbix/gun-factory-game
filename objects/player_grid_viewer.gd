@@ -1,6 +1,8 @@
 class_name PlayerGridViewer
 extends Node2D
 
+const GRID_TEXTURE_SIZE := 16.0
+
 @export var grid: PlayerGrid = null
 @export var view_ports: bool
 
@@ -10,7 +12,7 @@ func _draw() -> void:
 		return
 
 	for v: Vector2i in VectorTools.vector2i_range(grid.dimensions):
-		draw_texture(grid.get_floor_texture(v), v * PlayerGrid.GRID_TEXTURE_SIZE)
+		draw_texture(grid.get_floor_texture(v), v * GRID_TEXTURE_SIZE)
 
 	for v: Vector2i in VectorTools.vector2i_range(grid.dimensions):
 		var to_draw: Texture2D = grid.get_building_texture(v)
@@ -18,7 +20,7 @@ func _draw() -> void:
 			continue
 		var rot := grid.get_building_rotation(v)
 		if rot != 0:
-			var center := Vector2(v * PlayerGrid.GRID_TEXTURE_SIZE) + Vector2.ONE * (PlayerGrid.GRID_TEXTURE_SIZE / 2.0)
+			var center := Vector2(v * PlayerGridViewer.GRID_TEXTURE_SIZE) + Vector2.ONE * (PlayerGridViewer.GRID_TEXTURE_SIZE / 2.0)
 			var radians := 0.0
 			match rot:
 				FactoryBuilding.Rotation.CLOCKWISE:
@@ -28,18 +30,34 @@ func _draw() -> void:
 				FactoryBuilding.Rotation.FLIPPED:
 					radians = PI
 			draw_set_transform(center, radians, Vector2.ONE)
-			draw_texture(to_draw, -Vector2.ONE * (PlayerGrid.GRID_TEXTURE_SIZE / 2.0))
+			draw_texture(to_draw, -Vector2.ONE * (PlayerGridViewer.GRID_TEXTURE_SIZE / 2.0))
 			draw_set_transform(Vector2.ZERO, 0.0, Vector2.ONE)
 		else:
-			draw_texture(to_draw, v * PlayerGrid.GRID_TEXTURE_SIZE)
+			draw_texture(to_draw, v * PlayerGridViewer.GRID_TEXTURE_SIZE)
 
 	for i: int in grid.get_item_count():
 		var texture := grid.get_item_texture(i)
-		var pos := grid.get_item_position(i) * PlayerGrid.GRID_TEXTURE_SIZE
+		var pos := grid.get_item_position(i) * PlayerGridViewer.GRID_TEXTURE_SIZE
 		draw_texture(texture, pos)
 
 	if view_ports:
 		_draw_ports()
+
+
+func get_width() -> float:
+	return grid.dimensions.x * GRID_TEXTURE_SIZE * self.scale.x
+
+
+func get_height() -> float:
+	return grid.dimensions.y * GRID_TEXTURE_SIZE * self.scale.y
+
+
+## Function used to set the size of the viewer, regardless of the grid dimensions
+func set_final_size(size: Vector2) -> void:
+	var curr_size := grid.dimensions * GRID_TEXTURE_SIZE * self.scale
+	var new_scale := size / curr_size
+	self.scale *= new_scale
+	print(new_scale)
 
 
 func _draw_ports() -> void:
@@ -51,9 +69,9 @@ func _draw_ports() -> void:
 		if ports.size() == 0:
 			continue
 
-		var half_block := PlayerGrid.GRID_TEXTURE_SIZE / 2.0
+		var half_block := PlayerGridViewer.GRID_TEXTURE_SIZE / 2.0
 		var offset := Vector2.ONE * half_block
-		var cell_center: Vector2 = Vector2(v * PlayerGrid.GRID_TEXTURE_SIZE) + offset
+		var cell_center: Vector2 = Vector2(v * PlayerGridViewer.GRID_TEXTURE_SIZE) + offset
 		for p: Port in ports:
 			var is_out := p.mode == Port.PortMode.OUT
 			var draw_pos := cell_center + p.facing * half_block

@@ -15,9 +15,11 @@ run/main_scene="res://objects/game_supervisor.tscn"
 config/features=PackedStringArray("4.7", "Forward Plus")
 config/icon="res://icon.svg"
 
-[autoload]
+[display]
 
-InterfaceCanvasLayer="*uid://u5nlq61scp6q"
+window/size/viewport_width=1280
+window/size/viewport_height=720
+window/stretch/mode="viewport"
 
 [editor_plugins]
 

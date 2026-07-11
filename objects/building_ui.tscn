@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://bg1u2yvhxn1tl"]
+
+[ext_resource type="Script" uid="uid://bjxs4kbxxrhi4" path="res://objects/building_ui.gd" id="1_nb3kx"]
+[ext_resource type="PackedScene" uid="uid://dq2aqdo8qs8ft" path="res://objects/player_grid_viewer.tscn" id="2_n327g"]
+
+[node name="BuildingUI" type="CanvasLayer" unique_id=2125740331]
+script = ExtResource("1_nb3kx")
+
+[node name="PlayerGridViewer" parent="." unique_id=2050687440 instance=ExtResource("2_n327g")]
+unique_name_in_owner = true

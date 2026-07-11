@@ -3,7 +3,6 @@ extends CanvasLayer
 var opened_windows: Array[Control] = []
 var focused_window: Control
 var unfocusable_windows: Array[Control] = []
-
 var _window_parent: Dictionary
 var _source_to_window: Dictionary = { }
 
@@ -12,11 +11,6 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_cancel") and focused_window != null:
 		close_window(focused_window)
 		get_viewport().set_input_as_handled()
-
-
-func _on_window_gui_input(event: InputEvent, window: Control) -> void:
-	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
-		focused_window = window
 
 
 func open_window(window: Control, source: Object = null) -> bool:
@@ -69,3 +63,8 @@ func close_window(window: Control) -> void:
 	if focused_window == window:
 		focused_window = opened_windows.back() if not opened_windows.is_empty() else null
 	window.queue_free()
+
+
+func _on_window_gui_input(event: InputEvent, window: Control) -> void:
+	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+		focused_window = window

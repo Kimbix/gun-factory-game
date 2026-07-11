@@ -12,7 +12,7 @@ var hovered_cell: Vector2i:
 		var screen_mouse := viewer.get_global_mouse_position()
 		var canvas_mouse := get_canvas_transform().affine_inverse() * screen_mouse
 		var local_mouse := viewer.to_local(canvas_mouse)
-		return Vector2i(local_mouse / PlayerGrid.GRID_TEXTURE_SIZE)
+		return Vector2i(local_mouse / PlayerGridViewer.GRID_TEXTURE_SIZE)
 var pending_rotation: int = FactoryBuilding.Rotation.NORMAL
 var _selected_building_index: int = 0
 var _last_hovered: Vector2i = Vector2i(-1, -1)
@@ -34,8 +34,7 @@ func _process(_delta: float) -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if not (event is InputEventMouseButton and event.pressed):
 		return
-	if InterfaceCanvasLayer.is_interface_open():
-		return
+
 	if viewer == null or viewer.grid == null:
 		return
 
@@ -61,8 +60,8 @@ func _unhandled_input(event: InputEvent) -> void:
 func _unhandled_key_input(event: InputEvent) -> void:
 	if event is not InputEventKey or not event.is_pressed():
 		return
-	if InterfaceCanvasLayer.is_interface_open():
-		return
+	#if InterfaceCanvasLayer.is_interface_open(): # TODO: My god fix this
+	#return
 	if viewer == null or viewer.grid == null:
 		return
 	if not viewer.grid.has_building(hovered_cell):
@@ -77,13 +76,13 @@ func _unhandled_key_input(event: InputEvent) -> void:
 func _draw() -> void:
 	if viewer == null or viewer.grid == null:
 		return
-	if InterfaceCanvasLayer.is_interface_open():
-		return
+	#if InterfaceCanvasLayer.is_interface_open(): # TODO: I've made a mistake
+	#return
 	var to_draw := building_catalogue.get_texture(_selected_building_index)
 	if to_draw == null:
 		return
 
-	var cell_origin := Vector2(hovered_cell) * PlayerGrid.GRID_TEXTURE_SIZE
+	var cell_origin := Vector2(hovered_cell) * PlayerGridViewer.GRID_TEXTURE_SIZE
 	var cell_canvas := viewer.to_global(cell_origin)
 	var cell_screen := get_canvas_transform() * cell_canvas
 	var local_pos := cell_screen - global_position

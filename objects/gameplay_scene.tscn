@@ -1,14 +1,18 @@
 [gd_scene format=3 uid="uid://mv44gab30mb0"]
 
-[ext_resource type="PackedScene" uid="uid://c0f7aja78bay4" path="res://objects/simple_player.tscn" id="1_t7wo2"]
-[ext_resource type="Resource" uid="uid://ciyco2se0tapx" path="res://resources/enemy_waves/testing_waves.tres" id="3_vuntw"]
+[ext_resource type="Script" uid="uid://dqwaa3ln6a25" path="res://objects/game_director.gd" id="1_tshmu"]
+[ext_resource type="PackedScene" uid="uid://c0f7aja78bay4" path="res://objects/simple_player.tscn" id="2_rcs5u"]
+[ext_resource type="Resource" uid="uid://ciyco2se0tapx" path="res://resources/enemy_waves/testing_waves.tres" id="3_w28c3"]
 [ext_resource type="Texture2D" uid="uid://cfi1wpkmoebie" path="res://assets/world/spr_madForestBackground.png" id="4_6mirt"]
-[ext_resource type="Script" uid="uid://dqwaa3ln6a25" path="res://objects/game_director.gd" id="4_2780i"]
 
 [sub_resource type="Environment" id="Environment_t7wo2"]
 
-[node name="GameplayScene" type="WorldEnvironment" unique_id=568582084]
+[node name="GameplayScene" type="WorldEnvironment" unique_id=280338972]
 environment = SubResource("Environment_t7wo2")
+script = ExtResource("1_tshmu")
+player_character_scene = ExtResource("2_rcs5u")
+enemy_waves = ExtResource("3_w28c3")
+metadata/_custom_type_script = "uid://dqwaa3ln6a25"
 
 [node name="Background" type="Parallax2D" parent="." unique_id=1626368049]
 repeat_size = Vector2(1024, 1024)
@@ -17,10 +21,3 @@ repeat_times = 32
 [node name="BackgroundSprite" type="Sprite2D" parent="Background" unique_id=1240994281]
 scale = Vector2(2, 2)
 texture = ExtResource("4_6mirt")
-
-[node name="GameDirector" type="Node" parent="." unique_id=652692234]
-script = ExtResource("4_2780i")
-player_character_scene = ExtResource("1_t7wo2")
-enemy_waves = ExtResource("3_vuntw")
-spawn_interval = 1.0
-spawn_per_wave_percent = 0.1

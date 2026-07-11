@@ -14,12 +14,14 @@ var hovered_cell: Vector2i:
 		var screen_mouse := viewer.get_global_mouse_position()
 		var canvas_mouse := get_canvas_transform().affine_inverse() * screen_mouse
 		var local_mouse := viewer.to_local(canvas_mouse)
-		return Vector2i(local_mouse / PlayerGrid.GRID_TEXTURE_SIZE)
+		return Vector2i(local_mouse / PlayerGridViewer.GRID_TEXTURE_SIZE)
 
 @onready var viewer: PlayerGridViewer = get_parent()
 
 
 func _unhandled_input(event: InputEvent) -> void:
+	if viewer.grid == null:
+		return
 	if not (event is InputEventMouseButton and event.pressed):
 		return
 

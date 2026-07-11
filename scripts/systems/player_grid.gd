@@ -3,6 +3,8 @@ extends Node
 
 @warning_ignore("unused_signal")
 signal output_item(item: FactoryItem)
+signal building_placed(building: FactoryBuilding)
+signal building_removed(building: FactoryBuilding)
 
 const GRID_TEXTURE_SIZE := 16
 
@@ -17,6 +19,8 @@ func destroy_building(v: Vector2i) -> void:
 	if not has_building(v):
 		return
 
+	var building := _buildings[v]
+	building_removed.emit(building)
 	print("Erasing building at %s" % v)
 	_buildings.erase(v)
 
@@ -99,6 +103,7 @@ func place_building(
 
 	var building := FactoryBuilding.new(self, what, where, _rotation)
 	_buildings[where] = building
+	building_placed.emit(building)
 
 
 func place_item(item: FactoryItem) -> void:

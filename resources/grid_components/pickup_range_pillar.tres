@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="GridComponentInfo" format=3]
+
+[ext_resource type="Script" uid="uid://da4yb3omv2567" path="res://resources/grid_components/grid_component_info.gd" id="1_fv3h2"]
+[ext_resource type="Script" path="res://scripts/components/stat_pillar.gd" id="2_c87k1"]
+[ext_resource type="Texture2D" uid="uid://jv2bdvvjet3q" path="res://assets/factory_components/spr_pickupRangePillar.png" id="3_d2g1h"]
+
+[resource]
+script = ExtResource("1_fv3h2")
+name = &"pickup_range_pillar"
+display_name = &"Pickup Range Pillar"
+texture = ExtResource("3_d2g1h")
+dimensions = Vector2i(1, 1)
+behaviour = ExtResource("2_c87k1")
+color = Color(0.8, 0.4, 0.9, 1.0)
+stat_name = &"pickup_range"
+boost_value = 40.0

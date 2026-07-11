@@ -1,7 +1,6 @@
 class_name SimpleCharacter
 extends CharacterBody2D
 
-const SPEED := 200.0
 const GRID_VIEW_SCALE := 1.5
 
 static var _actions_ready := false
@@ -11,6 +10,10 @@ static var _actions_ready := false
 var current_target: Node2D
 var _player_grid: PlayerGrid
 var level_system: LevelSystem
+var player_stats: PlayerStats
+var health: float
+var _tick_timer: Timer
+var _regen_timer: Timer
 
 
 static func _setup_input_actions() -> void:
@@ -40,21 +43,34 @@ func _ready() -> void:
 	level_system = LevelSystem.new()
 	add_child(level_system)
 	level_system.leveled_up.connect(_on_level_up)
+
+	player_stats = PlayerStats.new(PlayerStatsData.new())
+	health = player_stats.stats[&"max_health"].value
+
 	add_to_group("player")
 	_player_grid = PlayerGrid.new()
+	_player_grid.output_item.connect(_shoot)
+	_player_grid.building_placed.connect(_on_building_placed)
+	_player_grid.building_removed.connect(_on_building_removed)
 	if starting_grid_data != null:
 		_player_grid.from_data(starting_grid_data)
 	else:
 		_player_grid.initialize_empty()
-	_player_grid.output_item.connect(_shoot)
 
-	var tick_timer := Timer.new()
-	tick_timer.timeout.connect(_player_grid.tick)
-	tick_timer.wait_time = 0.05
-	add_child(tick_timer)
-	tick_timer.start()
+	_tick_timer = Timer.new()
+	_tick_timer.timeout.connect(_player_grid.tick)
+	_tick_timer.wait_time = player_stats.stats[&"tick_speed"].value
+	add_child(_tick_timer)
+	_tick_timer.start()
+
+	_regen_timer = Timer.new()
+	_regen_timer.timeout.connect(_apply_regen)
+	_regen_timer.wait_time = 1.0
+	add_child(_regen_timer)
+	_regen_timer.start()
 
 	_setup_minimap()
+	_sync_stats()
 
 	$CollectionArea.area_entered.connect(_on_collection_area_entered)
 
@@ -75,9 +91,53 @@ func _on_level_up(new_level: int) -> void:
 	print("Level ", new_level, "!")
 
 
+func _on_building_placed(building: FactoryBuilding) -> void:
+	var info := building.get_info()
+	if info.stat_name == &"":
+		return
+	var sid := StringName("pillar_%d_%d" % [building.position.x, building.position.y])
+	player_stats.apply_modifier(sid, info.stat_name, info.boost_value)
+	_sync_stats()
+
+
+func _on_building_removed(building: FactoryBuilding) -> void:
+	var info := building.get_info()
+	if info.stat_name == &"":
+		return
+	var sid := StringName("pillar_%d_%d" % [building.position.x, building.position.y])
+	player_stats.remove_modifier(sid, info.stat_name)
+	_sync_stats()
+
+
+func _sync_stats() -> void:
+	var tick_spd := player_stats.stats[&"tick_speed"].value
+	_tick_timer.wait_time = maxf(tick_spd, 0.01)
+
+	$CollectionArea/CollisionShape2D.shape.radius = player_stats.stats[&"pickup_range"].value
+
+	var max_hp := player_stats.stats[&"max_health"].value
+	if health > max_hp:
+		health = max_hp
+
+	var regen := player_stats.stats[&"health_regen"].value
+	if regen > 0:
+		_regen_timer.wait_time = 1.0
+		_regen_timer.start()
+	else:
+		_regen_timer.stop()
+
+
+func _apply_regen() -> void:
+	var max_hp := player_stats.stats[&"max_health"].value
+	var regen := player_stats.stats[&"health_regen"].value
+	if regen <= 0:
+		return
+	health = minf(health + regen, max_hp)
+
+
 func _physics_process(_delta: float) -> void:
 	var direction := Input.get_vector("move_left", "move_right", "move_up", "move_down")
-	velocity = direction * SPEED
+	velocity = direction * player_stats.stats[&"move_speed"].value
 	move_and_slide()
 
 

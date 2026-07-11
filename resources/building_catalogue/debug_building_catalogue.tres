@@ -10,8 +10,13 @@
 [ext_resource type="Resource" uid="uid://bfbl3v4bs23as" path="res://resources/grid_components/metal_processor.tres" id="7_3wq31"]
 [ext_resource type="Resource" uid="uid://delxbnrvtqsr4" path="res://resources/grid_components/ammo_assembler.tres" id="8_4wq31"]
 [ext_resource type="Resource" uid="uid://dsn4h7kwi2ca2" path="res://resources/grid_components/conveyor_splitter.tres" id="9_5wq31"]
+[ext_resource type="Resource" path="res://resources/grid_components/max_health_pillar.tres" id="10_abc"]
+[ext_resource type="Resource" path="res://resources/grid_components/move_speed_pillar.tres" id="11_def"]
+[ext_resource type="Resource" path="res://resources/grid_components/tick_speed_pillar.tres" id="12_ghi"]
+[ext_resource type="Resource" path="res://resources/grid_components/health_regen_pillar.tres" id="13_jkl"]
+[ext_resource type="Resource" path="res://resources/grid_components/pickup_range_pillar.tres" id="14_mno"]
 
 [resource]
 script = ExtResource("2_bss7p")
-buildings = Array[ExtResource("1_3g68y")]([ExtResource("4_nkpgx"), ExtResource("3_kxio0"), ExtResource("2_312wq"), ExtResource("5_1u43t"), ExtResource("9_5wq31"), ExtResource("6_2wq31"), ExtResource("7_3wq31"), ExtResource("8_4wq31")])
+buildings = Array[ExtResource("1_3g68y")]([ExtResource("4_nkpgx"), ExtResource("3_kxio0"), ExtResource("2_312wq"), ExtResource("5_1u43t"), ExtResource("9_5wq31"), ExtResource("6_2wq31"), ExtResource("7_3wq31"), ExtResource("8_4wq31"), ExtResource("10_abc"), ExtResource("11_def"), ExtResource("12_ghi"), ExtResource("13_jkl"), ExtResource("14_mno")])
 metadata/_custom_type_script = "uid://bj46e0a68npcj"

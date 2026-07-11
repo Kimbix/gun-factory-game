@@ -10,7 +10,7 @@ static var _actions_ready := false
 
 var current_target: Node2D
 var _player_grid: PlayerGrid
-var experience: int = 0
+var level_system: LevelSystem
 
 
 static func _setup_input_actions() -> void:
@@ -37,6 +37,9 @@ func _ready() -> void:
 		_setup_input_actions()
 		_actions_ready = true
 
+	level_system = LevelSystem.new()
+	add_child(level_system)
+	level_system.leveled_up.connect(_on_level_up)
 	_player_grid = PlayerGrid.new()
 	if starting_grid_data != null:
 		_player_grid.from_data(starting_grid_data)
@@ -64,7 +67,11 @@ func _on_collection_area_entered(area: Area2D) -> void:
 
 
 func _on_crystal_collected(crystal: ExperienceCrystal) -> void:
-	experience += crystal.xp_value
+	level_system.add_xp(crystal.xp_value)
+
+
+func _on_level_up(new_level: int) -> void:
+	print("Level ", new_level, "!")
 
 
 func _physics_process(_delta: float) -> void:

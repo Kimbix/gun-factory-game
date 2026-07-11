@@ -9,6 +9,7 @@ static var _actions_ready := false
 
 var current_target: Node2D
 var _player_grid: PlayerGrid
+var building_inventory: PlayerBuildingInventory
 var level_system: LevelSystem
 var player_stats: PlayerStats
 var health: float
@@ -40,6 +41,7 @@ func _ready() -> void:
 		_setup_input_actions()
 		_actions_ready = true
 
+	building_inventory = PlayerBuildingInventory.new()
 	level_system = LevelSystem.new()
 	add_child(level_system)
 	level_system.leveled_up.connect(_on_level_up)
@@ -73,7 +75,7 @@ func _ready() -> void:
 	_regen_timer.start()
 
 	_setup_minimap()
-	_sync_stats()
+	sync_stats()
 
 	$CollectionArea.area_entered.connect(_on_collection_area_entered)
 
@@ -100,7 +102,7 @@ func _on_building_placed(building: FactoryBuilding) -> void:
 		return
 	var sid := StringName("pillar_%d_%d" % [building.position.x, building.position.y])
 	player_stats.apply_modifier(sid, info.stat_name, info.boost_value)
-	_sync_stats()
+	sync_stats()
 
 
 func _on_building_removed(building: FactoryBuilding) -> void:
@@ -109,10 +111,10 @@ func _on_building_removed(building: FactoryBuilding) -> void:
 		return
 	var sid := StringName("pillar_%d_%d" % [building.position.x, building.position.y])
 	player_stats.remove_modifier(sid, info.stat_name)
-	_sync_stats()
+	sync_stats()
 
 
-func _sync_stats() -> void:
+func sync_stats() -> void:
 	var tick_spd: float = player_stats.stats[&"tick_speed"].value
 	_tick_timer.wait_time = maxf(tick_spd, 0.01)
 

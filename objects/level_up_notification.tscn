@@ -2,9 +2,6 @@
 
 [ext_resource type="Script" uid="uid://cicxfqxykrj4t" path="res://objects/level_up_notification.gd" id="1_6y5mk"]
 
-[sub_resource type="Theme" id="Theme_u87wq"]
-default_font_size = 32
-
 [node name="LevelUpNotification" type="CenterContainer" unique_id=961079872]
 visible = false
 anchors_preset = 15
@@ -13,7 +10,51 @@ anchor_bottom = 1.0
 mouse_filter = 2
 script = ExtResource("1_6y5mk")
 
-[node name="Button" type="Button" parent="." unique_id=351334062]
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=532756252]
 layout_mode = 2
-theme = SubResource("Theme_u87wq")
-text = "I leveled up!"
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Title" type="Label" parent="VBoxContainer" unique_id=578369796]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Level Up!
+Choose a Reward:"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Options" type="HBoxContainer" parent="VBoxContainer" unique_id=1023600692]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+alignment = 1
+
+[node name="Option1" type="Button" parent="VBoxContainer/Options" unique_id=1368671467]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(128, 160)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 20
+icon_alignment = 1
+vertical_icon_alignment = 0
+
+[node name="Option2" type="Button" parent="VBoxContainer/Options" unique_id=172829807]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(128, 160)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 20
+icon_alignment = 1
+vertical_icon_alignment = 0
+
+[node name="Option3" type="Button" parent="VBoxContainer/Options" unique_id=1638545451]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(128, 160)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 20
+icon_alignment = 1
+vertical_icon_alignment = 0

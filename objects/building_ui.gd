@@ -1,5 +1,5 @@
 class_name BuildingUI
-extends CanvasLayer
+extends BaseInterface
 
 
 func open_factory_interface(grid: PlayerGrid) -> void:

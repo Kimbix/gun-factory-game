@@ -1,15 +1,15 @@
 class_name EmergentUI
-extends CanvasLayer
+extends BaseInterface
 
 signal resume_requested
 
 
-func show_level_up() -> void:
-	%LevelUpNotification.show_options()
-
-
 func _ready() -> void:
 	%LevelUpNotification.reward_chosen.connect(_on_reward_chosen)
+
+
+func show_level_up() -> void:
+	%LevelUpNotification.show_options()
 
 
 func _on_reward_chosen(info: GridComponentInfo) -> void:

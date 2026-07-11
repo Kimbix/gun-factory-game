@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://deboc28j42ccn" path="res://objects/game_supervisor.gd" id="1_7xq2v"]
 [ext_resource type="PackedScene" uid="uid://mv44gab30mb0" path="res://objects/gameplay_scene.tscn" id="2_gm3q9"]
+[ext_resource type="Script" uid="uid://cuqxkadkndm0f" path="res://scripts/systems/interface_supervisor.gd" id="3_r0dkg"]
 [ext_resource type="PackedScene" uid="uid://c3c05svxbk3ou" path="res://objects/debug_ui.tscn" id="4_abc"]
 [ext_resource type="PackedScene" uid="uid://u5nlq61scp6q" path="res://interfaces/interface_canvas_layer.tscn" id="4_bncg7"]
 [ext_resource type="PackedScene" uid="uid://dgxpr0t4v73lm" path="res://objects/emergent_ui.tscn" id="5_pqrs"]
@@ -13,14 +14,17 @@ script = ExtResource("1_7xq2v")
 [node name="GameplayScene" parent="." unique_id=367612 instance=ExtResource("2_gm3q9")]
 unique_name_in_owner = true
 
-[node name="BuildingUI" parent="." unique_id=367613 instance=ExtResource("6_jroq")]
+[node name="InterfaceSupervisor" type="Node" parent="." unique_id=503560897]
+script = ExtResource("3_r0dkg")
+
+[node name="BuildingUI" parent="InterfaceSupervisor" unique_id=367613 instance=ExtResource("6_jroq")]
 unique_name_in_owner = true
 
-[node name="FactoryBuildingUI" parent="." unique_id=1321081738 instance=ExtResource("4_bncg7")]
+[node name="FactoryBuildingUI" parent="InterfaceSupervisor" unique_id=1321081738 instance=ExtResource("4_bncg7")]
 unique_name_in_owner = true
 
-[node name="EmergentUI" parent="." unique_id=217905485 instance=ExtResource("5_pqrs")]
+[node name="EmergentUI" parent="InterfaceSupervisor" unique_id=217905485 instance=ExtResource("5_pqrs")]
 unique_name_in_owner = true
 
-[node name="DebugUI" parent="." unique_id=1655867431 instance=ExtResource("4_abc")]
+[node name="DebugUI" parent="InterfaceSupervisor" unique_id=1655867431 instance=ExtResource("4_abc")]
 unique_name_in_owner = true

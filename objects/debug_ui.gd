@@ -1,12 +1,8 @@
 class_name DebugUI
-extends CanvasLayer
-
-func _unhandled_input(event: InputEvent) -> void:
-	if event is InputEventKey and event.keycode == KEY_F3 and event.pressed and not event.echo:
-		_toggle_stats_debug()
+extends BaseInterface
 
 
-func _toggle_stats_debug() -> void:
+func toggle_stats_debug() -> void:
 	var ui := $StatsDebugUI
 	if ui == null:
 		return

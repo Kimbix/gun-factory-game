@@ -5,10 +5,17 @@ var _building: bool = false
 var _paused: bool = false
 var _emergent_ui: EmergentUI
 var _active_player: SimpleCharacter
+var _interface_supervisor: InterfaceSupervisor
 
 
 func _ready() -> void:
-	_emergent_ui = $EmergentUI as EmergentUI
+	_active_player = %GameplayScene.player_instance
+	call_deferred("_connect_level_system")
+
+	_interface_supervisor = $InterfaceSupervisor
+	_interface_supervisor.player = _active_player
+
+	_emergent_ui = %EmergentUI as EmergentUI
 	if not InputMap.has_action("pause"):
 		var event := InputEventKey.new()
 		event.keycode = KEY_P
@@ -20,9 +27,6 @@ func _ready() -> void:
 		event.keycode = KEY_F
 		InputMap.add_action("factory_building")
 		InputMap.action_add_event("factory_building", event)
-
-	call_deferred("_connect_level_system")
-	_active_player = %GameplayScene.player_instance
 
 
 func _unhandled_input(event: InputEvent) -> void:

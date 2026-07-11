@@ -1,4 +1,4 @@
-extends CanvasLayer
+extends BaseInterface
 
 var opened_windows: Array[Control] = []
 var focused_window: Control

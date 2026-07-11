@@ -48,25 +48,28 @@ func _ready() -> void:
 	health = player_stats.stats[&"max_health"].value
 
 	add_to_group("player")
+
 	_player_grid = PlayerGrid.new()
 	_player_grid.output_item.connect(_shoot)
 	_player_grid.building_placed.connect(_on_building_placed)
 	_player_grid.building_removed.connect(_on_building_removed)
-	if starting_grid_data != null:
-		_player_grid.from_data(starting_grid_data)
-	else:
-		_player_grid.initialize_empty()
 
 	_tick_timer = Timer.new()
 	_tick_timer.timeout.connect(_player_grid.tick)
 	_tick_timer.wait_time = player_stats.stats[&"tick_speed"].value
 	add_child(_tick_timer)
-	_tick_timer.start()
 
 	_regen_timer = Timer.new()
 	_regen_timer.timeout.connect(_apply_regen)
 	_regen_timer.wait_time = 1.0
 	add_child(_regen_timer)
+
+	if starting_grid_data != null:
+		_player_grid.from_data(starting_grid_data)
+	else:
+		_player_grid.initialize_empty()
+
+	_tick_timer.start()
 	_regen_timer.start()
 
 	_setup_minimap()

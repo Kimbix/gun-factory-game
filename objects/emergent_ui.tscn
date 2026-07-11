@@ -1,8 +1,10 @@
 [gd_scene format=3 uid="uid://dgxpr0t4v73lm"]
 
-[ext_resource type="PackedScene" uid="uid://chiougv7mhwbp" path="res://objects/level_up_notification.tscn" id="1_sbv5o"]
+[ext_resource type="Script" uid="uid://bv6gyh0k7utnw" path="res://objects/emergent_ui.gd" id="1_colon3"]
+[ext_resource type="PackedScene" uid="uid://chiougv7mhwbp" path="res://objects/level_up_notification.tscn" id="2_n1x2b"]
 
 [node name="EmergentUI" type="CanvasLayer"]
+script = ExtResource("1_colon3")
 
-[node name="LevelUpNotification" parent="." instance=ExtResource("1_sbv5o")]
+[node name="LevelUpNotification" parent="." instance=ExtResource("2_n1x2b")]
 unique_name_in_owner = true

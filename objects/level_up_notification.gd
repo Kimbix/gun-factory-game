@@ -14,6 +14,17 @@ const ALL_PILLARS: Array[GridComponentInfo] = [
 var _options: Array[GridComponentInfo] = []
 
 
+func _ready() -> void:
+	reward_chosen.connect(
+		func(info: GridComponentInfo) -> void:
+			var player := GameSupervisor.instance.get_player()
+			player.building_inventory.add(info)
+			GameSupervisor.instance.unpause_gameplay()
+	)
+
+	show_options()
+
+
 func show_options() -> void:
 	var pool: Array[GridComponentInfo] = ALL_PILLARS.duplicate()
 	pool.shuffle()

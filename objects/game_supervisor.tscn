@@ -11,9 +11,6 @@
 [node name="GameSupervisor" type="Node" unique_id=1285082505]
 script = ExtResource("1_7xq2v")
 
-[node name="GameplayScene" parent="." unique_id=367612 instance=ExtResource("2_gm3q9")]
-unique_name_in_owner = true
-
 [node name="InterfaceSupervisor" type="Node" parent="." unique_id=503560897]
 script = ExtResource("3_r0dkg")
 
@@ -27,4 +24,7 @@ unique_name_in_owner = true
 unique_name_in_owner = true
 
 [node name="DebugUI" parent="InterfaceSupervisor" unique_id=1655867431 instance=ExtResource("4_abc")]
+unique_name_in_owner = true
+
+[node name="GameplayScene" parent="." unique_id=367612 instance=ExtResource("2_gm3q9")]
 unique_name_in_owner = true

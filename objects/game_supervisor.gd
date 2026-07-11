@@ -1,21 +1,21 @@
 class_name GameSupervisor
 extends Node
 
+static var instance: GameSupervisor
+
 var _building: bool = false
 var _paused: bool = false
-var _emergent_ui: EmergentUI
 var _active_player: SimpleCharacter
 var _interface_supervisor: InterfaceSupervisor
 
 
 func _ready() -> void:
+	instance = self
 	_active_player = %GameplayScene.player_instance
-	call_deferred("_connect_level_system")
 
 	_interface_supervisor = $InterfaceSupervisor
-	_interface_supervisor.player = _active_player
+	_interface_supervisor.pause_gameplay.connect(pause_gameplay)
 
-	_emergent_ui = %EmergentUI as EmergentUI
 	if not InputMap.has_action("pause"):
 		var event := InputEventKey.new()
 		event.keycode = KEY_P
@@ -31,10 +31,14 @@ func _ready() -> void:
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("factory_building"):
-		pause_gameworld()
+		toggle_pause_gameplay()
 		bring_building_interface()
 	if event.is_action_pressed("pause"):
-		pause_gameworld()
+		toggle_pause_gameplay()
+
+
+func get_player() -> SimpleCharacter:
+	return _active_player
 
 
 func bring_building_interface() -> void:
@@ -45,7 +49,7 @@ func bring_building_interface() -> void:
 		%BuildingUI.close_factory_interface()
 
 
-func pause_gameworld() -> void:
+func toggle_pause_gameplay() -> void:
 	_paused = not _paused
 	if _paused:
 		%GameplayScene.process_mode = PROCESS_MODE_DISABLED
@@ -53,20 +57,16 @@ func pause_gameworld() -> void:
 		%GameplayScene.process_mode = PROCESS_MODE_INHERIT
 
 
-func _connect_level_system() -> void:
-	var player := _active_player
-	if player == null:
+func unpause_gameplay() -> void:
+	if not _paused:
 		return
-	player.level_system.leveled_up.connect(_on_leveled_up)
-	if _emergent_ui != null:
-		_emergent_ui.resume_requested.connect(_on_resume_requested)
+	toggle_pause_gameplay()
 
 
-func _on_leveled_up(_new_level: int) -> void:
-	_paused = true
-	%GameplayScene.process_mode = PROCESS_MODE_DISABLED
-	if _emergent_ui != null:
-		_emergent_ui.show_level_up()
+func pause_gameplay() -> void:
+	if _paused:
+		return
+	toggle_pause_gameplay()
 
 
 func _on_resume_requested() -> void:

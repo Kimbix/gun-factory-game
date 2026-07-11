@@ -76,6 +76,8 @@ func _ready() -> void:
 
 	$CollectionArea.area_entered.connect(_on_collection_area_entered)
 
+	level_system.leveled_up.connect(InterfaceSupervisor.instance.on_leveled_up)
+
 
 func _physics_process(_delta: float) -> void:
 	var direction := Input.get_vector("move_left", "move_right", "move_up", "move_down")

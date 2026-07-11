@@ -1,6 +1,8 @@
 class_name InterfaceSupervisor
 extends Node
 
+signal pause_gameplay
+
 enum InterfaceType {
 	BUILDING,
 	FACTORY_BUILDING,
@@ -11,10 +13,10 @@ enum InterfaceType {
 static var instance: InterfaceSupervisor
 
 var interfaces: Dictionary[InterfaceType, BaseInterface]
-var player: SimpleCharacter
 
 
 func _ready() -> void:
+	instance = self
 	interfaces = { }
 	for n: Node in get_children():
 		if n is not BaseInterface:
@@ -36,5 +38,18 @@ func _unhandled_input(event: InputEvent) -> void:
 		(interfaces[InterfaceType.DEBUG] as DebugUI).toggle_stats_debug()
 
 
-func open_interface(layer: InterfaceType, window: Control, source: Object = null) -> void:
-	pass
+func open_interface(
+		layer: InterfaceType,
+		window_scene_uid: StringName,
+		_source: Object = null,
+) -> void:
+	var open_in := interfaces[layer]
+	var window_scene: PackedScene = load(window_scene_uid)
+	var window_instance := window_scene.instantiate()
+	open_in.add_child(window_instance)
+
+
+func on_leveled_up(_new_level: int) -> void:
+	pause_gameplay.emit()
+	const LEVEL_UP_UID := &"uid://chiougv7mhwbp"
+	open_interface(InterfaceType.EMERGENT, LEVEL_UP_UID, null)

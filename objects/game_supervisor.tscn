@@ -1,9 +1,16 @@
-[gd_scene format=3]
+[gd_scene format=3 uid="uid://d2iffoyfe2cd2"]
 
-[ext_resource type="Script" path="res://objects/game_supervisor.gd" id="1_7xq2v"]
+[ext_resource type="Script" uid="uid://deboc28j42ccn" path="res://objects/game_supervisor.gd" id="1_7xq2v"]
 [ext_resource type="PackedScene" uid="uid://mv44gab30mb0" path="res://objects/gameplay_scene.tscn" id="2_gm3q9"]
+[ext_resource type="PackedScene" uid="uid://chiougv7mhwbp" path="res://objects/level_up_notification.tscn" id="3_5n2q1"]
 
-[node name="GameSupervisor" type="Node"]
+[node name="GameSupervisor" type="Node" unique_id=1285082505]
 script = ExtResource("1_7xq2v")
 
-[node name="GameplayScene" parent="." instance=ExtResource("2_gm3q9")]
+[node name="GameplayScene" parent="." unique_id=367612 instance=ExtResource("2_gm3q9")]
+unique_name_in_owner = true
+
+[node name="EmergentUI" type="CanvasLayer" parent="." unique_id=1261477792]
+
+[node name="LevelUpNotification" parent="EmergentUI" unique_id=2108860140 instance=ExtResource("3_5n2q1")]
+unique_name_in_owner = true

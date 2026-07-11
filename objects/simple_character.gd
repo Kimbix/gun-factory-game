@@ -40,6 +40,7 @@ func _ready() -> void:
 	level_system = LevelSystem.new()
 	add_child(level_system)
 	level_system.leveled_up.connect(_on_level_up)
+	add_to_group("player")
 	_player_grid = PlayerGrid.new()
 	if starting_grid_data != null:
 		_player_grid.from_data(starting_grid_data)

@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://chiougv7mhwbp"]
+
+[ext_resource type="Script" uid="uid://cicxfqxykrj4t" path="res://objects/level_up_notification.gd" id="1_6y5mk"]
+
+[sub_resource type="Theme" id="Theme_u87wq"]
+default_font_size = 32
+
+[node name="LevelUpNotification" type="CenterContainer" unique_id=961079872]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+script = ExtResource("1_6y5mk")
+
+[node name="Button" type="Button" parent="." unique_id=351334062]
+layout_mode = 2
+theme = SubResource("Theme_u87wq")
+text = "I leveled up!"

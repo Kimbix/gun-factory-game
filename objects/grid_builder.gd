@@ -44,7 +44,9 @@ func _unhandled_input(event: InputEvent) -> void:
 			_try_place()
 			get_viewport().set_input_as_handled()
 		MOUSE_BUTTON_RIGHT:
-			_on_right_click()
+			if selected_info == null:
+				return
+			deselect()
 			get_viewport().set_input_as_handled()
 		MOUSE_BUTTON_WHEEL_UP, MOUSE_BUTTON_WHEEL_DOWN:
 			if selected_info == null:
@@ -137,15 +139,3 @@ func _try_place() -> void:
 	var ui := get_parent().get_parent() as BuildingUI
 	if ui != null:
 		ui.refresh_building_list()
-
-
-func _on_right_click() -> void:
-	var cell := hovered_cell
-	if viewer.grid.dimensions.x <= cell.x or viewer.grid.dimensions.y <= cell.y \
-			or cell.x < 0 or cell.y < 0:
-		return
-	if viewer.grid.has_building(cell):
-		viewer.grid.destroy_building(cell)
-		viewer.queue_redraw()
-	elif selected_info != null:
-		deselect()

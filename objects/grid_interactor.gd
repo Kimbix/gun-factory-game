@@ -35,6 +35,18 @@ func _unhandled_input(event: InputEvent) -> void:
 				return
 			b.behaviour.open_interface()
 			viewer.queue_redraw()
+		MOUSE_BUTTON_RIGHT:
+			if builder != null and builder.selected_info != null:
+				return
+			if not viewer.grid.has_building(hovered_cell):
+				return
+			var info := viewer.grid.get_building(hovered_cell).get_info()
+			viewer.grid.destroy_building(hovered_cell)
+			GameSupervisor.instance.get_player().building_inventory.add(info)
+			var ui := viewer.get_parent() as BuildingUI
+			if ui != null:
+				ui.refresh_building_list()
+			viewer.queue_redraw()
 
 
 func _find_builder() -> GridBuilder:

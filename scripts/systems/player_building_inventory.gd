@@ -3,32 +3,63 @@ extends RefCounted
 
 signal changed
 
-var _buildings: Array[GridComponentInfo] = []
+var _stacks: Array[BuildingStack] = []
 
 
-func add(info: GridComponentInfo) -> void:
-	_buildings.append(info)
+func add(info: GridComponentInfo, amount: int = 1) -> void:
+	for stack in _stacks:
+		if stack.info == info:
+			stack.count += amount
+			changed.emit()
+			return
+	var stack := BuildingStack.new()
+	stack.info = info
+	stack.count = amount
+	_stacks.append(stack)
 	changed.emit()
 
 
-func remove_at(index: int) -> GridComponentInfo:
-	var info := _buildings[index]
-	_buildings.remove_at(index)
-	changed.emit()
-	return info
+func remove(info: GridComponentInfo, amount: int = 1) -> bool:
+	for i in _stacks.size():
+		if _stacks[i].info == info:
+			_stacks[i].count -= amount
+			if _stacks[i].count <= 0:
+				_stacks.remove_at(i)
+			changed.emit()
+			return true
+	return false
 
 
-func get_at(index: int) -> GridComponentInfo:
-	return _buildings[index]
+func get_count(info: GridComponentInfo) -> int:
+	for stack in _stacks:
+		if stack.info == info:
+			return stack.count
+	return 0
 
 
-func get_all() -> Array[GridComponentInfo]:
-	return _buildings.duplicate()
+func has(info: GridComponentInfo, amount: int = 1) -> bool:
+	return get_count(info) >= amount
+
+
+func get_stacks() -> Array[BuildingStack]:
+	return _stacks.duplicate()
 
 
 func size() -> int:
-	return _buildings.size()
+	return _stacks.size()
+
+
+func total_count() -> int:
+	var total := 0
+	for stack in _stacks:
+		total += stack.count
+	return total
 
 
 func is_empty() -> bool:
-	return _buildings.is_empty()
+	return _stacks.is_empty()
+
+
+class BuildingStack:
+	var info: GridComponentInfo
+	var count: int

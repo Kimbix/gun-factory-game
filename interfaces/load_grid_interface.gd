@@ -1,5 +1,5 @@
 class_name LoadGridInterface
-extends PanelContainer
+extends InterfaceWindow
 
 signal grid_loaded
 
@@ -71,8 +71,14 @@ func _on_grid_selected(path: String) -> void:
 		return
 	player_grid.from_data(data)
 	grid_loaded.emit()
-	InterfaceSupervisor.instance.close_window(InterfaceSupervisor.InterfaceType.FACTORY_BUILDING, self)
+	InterfaceSupervisor.instance.close_interface(
+		InterfaceSupervisor.InterfaceType.FACTORY_BUILDING,
+		self,
+	)
 
 
 func _on_cancel() -> void:
-	InterfaceSupervisor.instance.close_window(InterfaceSupervisor.InterfaceType.FACTORY_BUILDING, self)
+	InterfaceSupervisor.instance.close_interface(
+		InterfaceSupervisor.InterfaceType.FACTORY_BUILDING,
+		self,
+	)

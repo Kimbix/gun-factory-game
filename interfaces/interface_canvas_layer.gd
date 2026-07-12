@@ -2,9 +2,6 @@ extends BaseInterface
 
 var opened_windows: Array[Control] = []
 var focused_window: Control
-var unfocusable_windows: Array[Control] = []
-var _window_parent: Dictionary
-var _source_to_window: Dictionary = { }
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -34,23 +31,7 @@ func is_interface_open() -> bool:
 
 
 func close_window(window: InterfaceWindow) -> void:
-	var source_to_remove: Object = null
-	for s in _source_to_window:
-		if _source_to_window[s] == window:
-			source_to_remove = s
-			break
-	if source_to_remove != null:
-		_source_to_window.erase(source_to_remove)
-
-	var parent: Control = _window_parent.get(window)
-	if parent != null:
-		_window_parent.erase(window)
-		parent.show()
-		opened_windows.append(parent)
-		focused_window = parent
-
 	opened_windows.erase(window)
-	unfocusable_windows.erase(window)
 	if focused_window == window:
 		focused_window = opened_windows.back() if not opened_windows.is_empty() else null
 

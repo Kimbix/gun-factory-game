@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cfmm8bqdd7ppy" path="res://interfaces/load_grid_interface.gd" id="1_7bndk"]
 
-[node name="LoadGridInterface" type="PanelContainer" unique_id=1494883158]
+[node name="LoadGridInterface" type="InterfaceWindow" unique_id=1494883158]
 custom_minimum_size = Vector2(360, 400)
 anchors_preset = -1
 anchor_left = 0.25

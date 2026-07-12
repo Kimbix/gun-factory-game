@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dkg78jmucqof2" path="res://interfaces/save_grid_interface.gd" id="1_20kvg"]
 
-[node name="SaveGridInterface" type="PanelContainer" unique_id=375436290]
+[node name="SaveGridInterface" type="InterfaceWindow" unique_id=375436290]
 custom_minimum_size = Vector2(420, 300)
 anchors_preset = -1
 anchor_left = 0.25

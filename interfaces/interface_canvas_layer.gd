@@ -13,11 +13,8 @@ func _unhandled_input(event: InputEvent) -> void:
 		get_viewport().set_input_as_handled()
 
 
-func open_window_from(window: Control, parent: Control) -> void:
-	_window_parent[window] = parent
-	parent.hide()
-	opened_windows.erase(parent)
-	add_child(window)
+func open_window(window: InterfaceWindow, window_parent: InterfaceWindow = null) -> void:
+	super.open_window(window, window_parent)
 	opened_windows.append(window)
 	focused_window = window
 	window.gui_input.connect(_on_window_gui_input.bind(window))
@@ -27,7 +24,7 @@ func is_interface_open() -> bool:
 	return not opened_windows.is_empty()
 
 
-func close_window(window: Control) -> void:
+func close_window(window: InterfaceWindow) -> void:
 	var source_to_remove: Object = null
 	for s in _source_to_window:
 		if _source_to_window[s] == window:
@@ -47,7 +44,8 @@ func close_window(window: Control) -> void:
 	unfocusable_windows.erase(window)
 	if focused_window == window:
 		focused_window = opened_windows.back() if not opened_windows.is_empty() else null
-	window.queue_free()
+
+	super.close_window(window)
 
 
 func _on_window_gui_input(event: InputEvent, window: Control) -> void:

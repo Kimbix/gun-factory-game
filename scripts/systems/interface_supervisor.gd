@@ -39,10 +39,10 @@ func _unhandled_input(event: InputEvent) -> void:
 func open_interface(
 		layer: InterfaceType,
 		window: InterfaceWindow,
-		_window_parent: InterfaceWindow = null,
+		window_parent: InterfaceWindow = null,
 ) -> void:
 	var open_in := interfaces[layer]
-	open_in.open_window(window)
+	open_in.open_window(window, window_parent)
 
 
 func close_interface(

@@ -70,6 +70,11 @@ func _populate_building_list() -> void:
 	building_panel.show()
 
 
+func refresh_building_list() -> void:
+	_clear_building_list()
+	_populate_building_list()
+
+
 func _clear_building_list() -> void:
 	for child in building_list.get_children():
 		child.queue_free()

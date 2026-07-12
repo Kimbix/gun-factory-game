@@ -131,6 +131,13 @@ func _try_place() -> void:
 	viewer.grid.place_building(selected_info, cell, pending_rotation)
 	viewer.queue_redraw()
 
+	if not player.building_inventory.has(selected_info):
+		deselect()
+
+	var ui := get_parent().get_parent() as BuildingUI
+	if ui != null:
+		ui.refresh_building_list()
+
 
 func _on_right_click() -> void:
 	var cell := hovered_cell

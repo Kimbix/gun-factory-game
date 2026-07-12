@@ -9,7 +9,7 @@ signal recipe_selected(r: ItemRecipe)
 
 
 func _ready() -> void:
-	close_button.pressed.connect(_on_close)
+	close_button.pressed.connect(close_self)
 
 	for r: ItemRecipe in recipes.recipes:
 		var button := Button.new()
@@ -22,10 +22,6 @@ func _ready() -> void:
 		button.add_child(texture)
 		button.pressed.connect(_on_recipe_pressed.bind(r))
 		recipe_grid.add_child(button)
-
-
-func _on_close() -> void:
-	InterfaceSupervisor.instance.close_window(InterfaceSupervisor.InterfaceType.FACTORY_BUILDING, self)
 
 
 func _on_recipe_pressed(r: ItemRecipe) -> void:

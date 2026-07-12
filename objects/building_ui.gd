@@ -4,12 +4,15 @@ extends BaseInterface
 var _building := false
 
 @onready var player_grid_viewer := $PlayerGridViewer
+@onready var building_panel := $BuildingInventoryPanel
+@onready var building_list := %BuildingList
 
 
 func open_building_interface() -> void:
 	if _building:
 		return
 	open_factory_interface()
+	_populate_building_list()
 	_building = true
 
 
@@ -17,6 +20,7 @@ func close_building_interface() -> void:
 	if not _building:
 		return
 	close_factory_interface()
+	_clear_building_list()
 	_building = false
 
 
@@ -39,3 +43,21 @@ func open_factory_interface() -> void:
 func close_factory_interface() -> void:
 	player_grid_viewer.grid = null
 	player_grid_viewer.queue_redraw()
+
+
+func _populate_building_list() -> void:
+	var player := GameSupervisor.instance.get_player()
+	for stack in player.building_inventory.get_stacks():
+		var btn := Button.new()
+		btn.icon = stack.info.texture
+		btn.expand_icon = true
+		btn.custom_minimum_size = Vector2(64, 64)
+		btn.size_flags_horizontal = 0
+		building_list.add_child(btn)
+	building_panel.show()
+
+
+func _clear_building_list() -> void:
+	for child in building_list.get_children():
+		child.queue_free()
+	building_panel.hide()

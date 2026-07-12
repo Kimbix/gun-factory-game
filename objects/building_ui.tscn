@@ -3,8 +3,48 @@
 [ext_resource type="Script" uid="uid://bjxs4kbxxrhi4" path="res://objects/building_ui.gd" id="1_nb3kx"]
 [ext_resource type="PackedScene" uid="uid://dq2aqdo8qs8ft" path="res://objects/player_grid_viewer.tscn" id="2_n327g"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_building_panel"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+bg_color = Color(0, 0, 0, 0.7)
+
 [node name="BuildingUI" type="CanvasLayer" unique_id=491694709]
 script = ExtResource("1_nb3kx")
 metadata/_custom_type_script = "uid://bjxs4kbxxrhi4"
 
 [node name="PlayerGridViewer" parent="." unique_id=2050687440 instance=ExtResource("2_n327g")]
+
+[node name="BuildingInventoryPanel" type="PanelContainer" parent="." unique_id=1648296818]
+visible = false
+anchors_preset = -1
+anchor_left = 0.85
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_building_panel")
+
+[node name="MarginContainer" type="MarginContainer" parent="BuildingInventoryPanel" unique_id=939179983]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="BuildingInventoryPanel/MarginContainer" unique_id=800509909]
+layout_mode = 2
+
+[node name="Header" type="Label" parent="BuildingInventoryPanel/MarginContainer/VBoxContainer" unique_id=1971155247]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "Buildings"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="BuildingInventoryPanel/MarginContainer/VBoxContainer" unique_id=578672680]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="BuildingList" type="VBoxContainer" parent="BuildingInventoryPanel/MarginContainer/VBoxContainer/ScrollContainer" unique_id=91407264]
+unique_name_in_owner = true
+layout_mode = 2

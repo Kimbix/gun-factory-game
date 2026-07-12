@@ -1,8 +1,6 @@
 class_name InterfaceSupervisor
 extends Node
 
-signal pause_gameplay
-
 enum InterfaceType {
 	BUILDING,
 	FACTORY_BUILDING,
@@ -40,16 +38,27 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func open_interface(
 		layer: InterfaceType,
-		window_scene_uid: StringName,
-		_source: Object = null,
+		window: InterfaceWindow,
+		_window_parent: InterfaceWindow = null,
 ) -> void:
 	var open_in := interfaces[layer]
-	var window_scene: PackedScene = load(window_scene_uid)
-	var window_instance := window_scene.instantiate()
-	open_in.add_child(window_instance)
+	open_in.open_window(window)
+
+
+func close_interface(
+		layer: InterfaceType,
+		window: InterfaceWindow,
+) -> void:
+	var close_in := interfaces[layer]
+	close_in.close_window(window)
 
 
 func on_leveled_up(_new_level: int) -> void:
-	pause_gameplay.emit()
-	const LEVEL_UP_UID := &"uid://chiougv7mhwbp"
-	open_interface(InterfaceType.EMERGENT, LEVEL_UP_UID, null)
+	GameSupervisor.instance.pause_gameplay()
+	var level_up_window := preload("uid://chiougv7mhwbp").instantiate()
+	open_interface(InterfaceType.EMERGENT, level_up_window, null)
+
+
+func toggle_building_interface() -> void:
+	GameSupervisor.instance.pause_gameplay()
+	interfaces[InterfaceType.BUILDING].toggle_building_interface()

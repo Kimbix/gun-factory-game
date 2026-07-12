@@ -15,16 +15,12 @@ script = ExtResource("1_7xq2v")
 script = ExtResource("3_r0dkg")
 
 [node name="BuildingUI" parent="InterfaceSupervisor" unique_id=367613 instance=ExtResource("6_jroq")]
-unique_name_in_owner = true
 
 [node name="FactoryBuildingUI" parent="InterfaceSupervisor" unique_id=1321081738 instance=ExtResource("4_bncg7")]
-unique_name_in_owner = true
 
 [node name="EmergentUI" parent="InterfaceSupervisor" unique_id=217905485 instance=ExtResource("5_pqrs")]
-unique_name_in_owner = true
 
 [node name="DebugUI" parent="InterfaceSupervisor" unique_id=1655867431 instance=ExtResource("4_abc")]
-unique_name_in_owner = true
 
 [node name="GameplayScene" parent="." unique_id=367612 instance=ExtResource("2_gm3q9")]
 unique_name_in_owner = true

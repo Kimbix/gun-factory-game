@@ -1,5 +1,5 @@
 class_name LevelUpNotification
-extends CenterContainer
+extends InterfaceWindow
 
 signal reward_chosen(info: GridComponentInfo)
 
@@ -53,4 +53,4 @@ func _disconnect_buttons() -> void:
 
 func _on_option_pressed(index: int) -> void:
 	reward_chosen.emit(_options[index])
-	hide()
+	close_self()

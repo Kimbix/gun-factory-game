@@ -1,5 +1,5 @@
 class_name RecipePickerInterface
-extends PanelContainer
+extends InterfaceWindow
 
 signal recipe_selected(r: ItemRecipe)
 
@@ -25,7 +25,7 @@ func _ready() -> void:
 
 
 func _on_close() -> void:
-	InterfaceCanvasLayer.close_window(self)
+	InterfaceSupervisor.instance.close_window(InterfaceSupervisor.InterfaceType.FACTORY_BUILDING, self)
 
 
 func _on_recipe_pressed(r: ItemRecipe) -> void:

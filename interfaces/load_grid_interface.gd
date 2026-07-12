@@ -71,8 +71,8 @@ func _on_grid_selected(path: String) -> void:
 		return
 	player_grid.from_data(data)
 	grid_loaded.emit()
-	InterfaceCanvasLayer.close_window(self)
+	InterfaceSupervisor.instance.close_window(InterfaceSupervisor.InterfaceType.FACTORY_BUILDING, self)
 
 
 func _on_cancel() -> void:
-	InterfaceCanvasLayer.close_window(self)
+	InterfaceSupervisor.instance.close_window(InterfaceSupervisor.InterfaceType.FACTORY_BUILDING, self)

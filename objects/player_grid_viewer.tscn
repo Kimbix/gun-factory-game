@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://cj3e1bi5aowx2" path="res://objects/player_grid_viewer.gd" id="1_g38f3"]
 [ext_resource type="Script" uid="uid://dfpr1wc4mukir" path="res://objects/grid_interactor.gd" id="3_e3i1j"]
 
-[node name="PlayerGridViewer" type="Node2D" unique_id=2050687440]
+[node name="PlayerGridViewer" type="Node2D" unique_id=1863324682]
 script = ExtResource("1_g38f3")
 metadata/_custom_type_script = "uid://cj3e1bi5aowx2"
 

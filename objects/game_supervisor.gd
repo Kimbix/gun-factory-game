@@ -3,7 +3,6 @@ extends Node
 
 static var instance: GameSupervisor
 
-var _building: bool = false
 var _paused: bool = false
 var _active_player: SimpleCharacter
 var _interface_supervisor: InterfaceSupervisor
@@ -12,9 +11,7 @@ var _interface_supervisor: InterfaceSupervisor
 func _ready() -> void:
 	instance = self
 	_active_player = %GameplayScene.player_instance
-
 	_interface_supervisor = $InterfaceSupervisor
-	_interface_supervisor.pause_gameplay.connect(pause_gameplay)
 
 	if not InputMap.has_action("pause"):
 		var event := InputEventKey.new()
@@ -31,22 +28,13 @@ func _ready() -> void:
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("factory_building"):
-		toggle_pause_gameplay()
-		bring_building_interface()
+		_interface_supervisor.toggle_building_interface()
 	if event.is_action_pressed("pause"):
 		toggle_pause_gameplay()
 
 
 func get_player() -> SimpleCharacter:
 	return _active_player
-
-
-func bring_building_interface() -> void:
-	_building = not _building
-	if _building:
-		%BuildingUI.open_factory_interface(%GameplayScene.player_instance.player_grid)
-	else:
-		%BuildingUI.close_factory_interface()
 
 
 func toggle_pause_gameplay() -> void:

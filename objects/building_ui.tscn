@@ -8,4 +8,3 @@ script = ExtResource("1_nb3kx")
 metadata/_custom_type_script = "uid://bjxs4kbxxrhi4"
 
 [node name="PlayerGridViewer" parent="." unique_id=2050687440 instance=ExtResource("2_n327g")]
-unique_name_in_owner = true

@@ -13,21 +13,6 @@ func _unhandled_input(event: InputEvent) -> void:
 		get_viewport().set_input_as_handled()
 
 
-func open_window(window: Control, source: Object = null) -> bool:
-	if source != null:
-		var existing := _source_to_window.get(source) as Control
-		if is_instance_valid(existing):
-			focused_window = existing
-			return false
-		_source_to_window[source] = window
-
-	add_child(window)
-	opened_windows.append(window)
-	focused_window = window
-	window.gui_input.connect(_on_window_gui_input.bind(window))
-	return true
-
-
 func open_window_from(window: Control, parent: Control) -> void:
 	_window_parent[window] = parent
 	parent.hide()

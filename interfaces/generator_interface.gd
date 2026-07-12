@@ -1,5 +1,5 @@
 class_name GeneratorInterface
-extends PanelContainer
+extends InterfaceWindow
 
 signal item_pressed(item: FactoryItemInfo)
 
@@ -18,15 +18,11 @@ func _ready() -> void:
 		self.grid_container.add_child(instance)
 		instance.item = item
 		instance.item_pressed.connect(_on_item_pressed)
-	close_button.pressed.connect(_on_close)
+	close_button.pressed.connect(close_self)
 
 
 func change_output(item: FactoryItemInfo) -> void:
 	current_output.item = item
-
-
-func _on_close() -> void:
-	InterfaceCanvasLayer.close_window(self)
 
 
 func _on_item_pressed(item: FactoryItemInfo) -> void:

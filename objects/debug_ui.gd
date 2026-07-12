@@ -1,7 +1,6 @@
 class_name DebugUI
 extends BaseInterface
 
-
 func toggle_stats_debug() -> void:
 	var ui := $StatsDebugUI
 	if ui == null:

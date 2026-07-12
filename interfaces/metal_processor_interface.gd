@@ -1,5 +1,5 @@
 class_name MetalProcessorInterface
-extends PanelContainer
+extends InterfaceWindow
 
 const ITEM_BUTTON := preload("uid://cq5f74b5ddssl")
 const RECIPE_PICKER := preload("uid://0xiqunpp8bx8")
@@ -20,7 +20,7 @@ var _picker: RecipePickerInterface
 
 
 func _ready() -> void:
-	close_button.pressed.connect(_on_close)
+	close_button.pressed.connect(close_self)
 	selected_recipe.pressed.connect(_on_selected_recipe)
 
 
@@ -55,19 +55,15 @@ func update_completion(value: float) -> void:
 		completion_label.text = "%d%%" % value
 
 
-func _on_close() -> void:
-	InterfaceCanvasLayer.close_window(self)
-
-
 func _on_selected_recipe() -> void:
 	_picker = RECIPE_PICKER.instantiate()
 	_picker.recipes = recipes
 	_picker.recipe_selected.connect(_on_recipe_selected_from_picker)
-	InterfaceCanvasLayer.open_window_from(_picker, self)
+	InterfaceSupervisor.instance.open_interface(InterfaceSupervisor.InterfaceType.FACTORY_BUILDING, _picker, self)
 
 
 func _on_recipe_selected_from_picker(r: ItemRecipe) -> void:
 	metal_processor.set_recipe(r)
 	generate_ui()
-	InterfaceCanvasLayer.close_window(_picker)
+	_picker.close_self()
 	_picker = null

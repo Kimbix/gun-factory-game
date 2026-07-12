@@ -66,7 +66,7 @@ func open_interface() -> void:
 	_interface = interface
 	interface.tree_exited.connect(_on_interface_closed)
 	_notify_progress(-1)
-	InterfaceCanvasLayer.open_window(interface, self)
+	InterfaceSupervisor.instance.open_interface(InterfaceSupervisor.InterfaceType.FACTORY_BUILDING, interface)
 
 
 func _notify_progress(value: int) -> void:

@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cj3e1bi5aowx2" path="res://objects/player_grid_viewer.gd" id="1_g38f3"]
 [ext_resource type="Script" uid="uid://dfpr1wc4mukir" path="res://objects/grid_interactor.gd" id="3_e3i1j"]
+[ext_resource type="Script" uid="uid://peco78lj3njl" path="res://objects/grid_builder.gd" id="4_ohem"]
 
 [node name="PlayerGridViewer" type="Node2D" unique_id=1863324682]
 script = ExtResource("1_g38f3")
@@ -10,3 +11,6 @@ metadata/_custom_type_script = "uid://cj3e1bi5aowx2"
 [node name="GridInteractor" type="Node2D" parent="." unique_id=1071824604]
 script = ExtResource("3_e3i1j")
 metadata/_custom_type_script = "uid://dfpr1wc4mukir"
+
+[node name="GridBuilder" type="Node2D" parent="." unique_id=733741403]
+script = ExtResource("4_ohem")

@@ -19,6 +19,9 @@ func open_building_interface() -> void:
 func close_building_interface() -> void:
 	if not _building:
 		return
+	var builder := player_grid_viewer.get_node("GridBuilder") as GridBuilder
+	if builder != null:
+		builder.deselect()
 	close_factory_interface()
 	_clear_building_list()
 	_building = false
@@ -47,12 +50,22 @@ func close_factory_interface() -> void:
 
 func _populate_building_list() -> void:
 	var player := GameSupervisor.instance.get_player()
+	var builder := player_grid_viewer.get_node("GridBuilder") as GridBuilder
 	for stack in player.building_inventory.get_stacks():
 		var btn := Button.new()
 		btn.icon = stack.info.texture
 		btn.expand_icon = true
 		btn.custom_minimum_size = Vector2(64, 64)
 		btn.size_flags_horizontal = 0
+		btn.pressed.connect(
+			func() -> void:
+				if builder == null:
+					return
+				if builder.selected_info == stack.info:
+					builder.deselect()
+				else:
+					builder.select(stack.info)
+		)
 		building_list.add_child(btn)
 	building_panel.show()
 

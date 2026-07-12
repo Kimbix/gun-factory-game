@@ -1,21 +1,27 @@
 class_name BuildingUI
 extends BaseInterface
 
-const PLAYER_GRID_VIEWER := preload("uid://dq2aqdo8qs8ft")
-
 var _building := false
 
 @onready var player_grid_viewer := $PlayerGridViewer
 
 
-func toggle_building_interface() -> void:
+func open_building_interface() -> void:
 	if _building:
-		close_factory_interface()
-		GameSupervisor.instance.unpause_gameplay()
-	else:
-		open_factory_interface()
-		GameSupervisor.instance.pause_gameplay()
-	_building = not _building
+		return
+	open_factory_interface()
+	_building = true
+
+
+func close_building_interface() -> void:
+	if not _building:
+		return
+	close_factory_interface()
+	_building = false
+
+
+func is_building_interface_open() -> bool:
+	return _building
 
 
 func open_factory_interface() -> void:

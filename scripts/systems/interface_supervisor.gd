@@ -59,6 +59,13 @@ func on_leveled_up(_new_level: int) -> void:
 	open_interface(InterfaceType.EMERGENT, level_up_window, null)
 
 
-func toggle_building_interface() -> void:
-	GameSupervisor.instance.pause_gameplay()
-	interfaces[InterfaceType.BUILDING].toggle_building_interface()
+func open_building_interface() -> void:
+	(interfaces[InterfaceType.BUILDING] as BuildingUI).open_building_interface()
+
+
+func close_building_interface() -> void:
+	(interfaces[InterfaceType.BUILDING] as BuildingUI).close_building_interface()
+
+
+func is_building_interface_open() -> bool:
+	return (interfaces[InterfaceType.BUILDING] as BuildingUI).is_building_interface_open()

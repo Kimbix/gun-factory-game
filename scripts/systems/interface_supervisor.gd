@@ -40,9 +40,9 @@ func open_interface(
 		layer: InterfaceType,
 		window: InterfaceWindow,
 		window_parent: InterfaceWindow = null,
-) -> void:
+) -> bool:
 	var open_in := interfaces[layer]
-	open_in.open_window(window, window_parent)
+	return open_in.open_window(window, window_parent)
 
 
 func close_interface(

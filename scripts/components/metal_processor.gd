@@ -63,10 +63,15 @@ func open_interface() -> void:
 	var interface: MetalProcessorInterface = INTERFACE.instantiate()
 	interface.metal_processor = self
 	interface.recipes = recipes
+	interface.source = self
+	if not InterfaceSupervisor.instance.open_interface(
+		InterfaceSupervisor.InterfaceType.FACTORY_BUILDING,
+		interface,
+	):
+		return
 	_interface = interface
 	interface.tree_exited.connect(_on_interface_closed)
 	_notify_progress(-1)
-	InterfaceSupervisor.instance.open_interface(InterfaceSupervisor.InterfaceType.FACTORY_BUILDING, interface)
 
 
 func _notify_progress(value: int) -> void:

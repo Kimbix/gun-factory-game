@@ -13,11 +13,20 @@ func _unhandled_input(event: InputEvent) -> void:
 		get_viewport().set_input_as_handled()
 
 
-func open_window(window: InterfaceWindow, window_parent: InterfaceWindow = null) -> void:
-	super.open_window(window, window_parent)
+func open_window(window: InterfaceWindow, window_parent: InterfaceWindow = null) -> bool:
+	if not super.open_window(window, window_parent):
+		return false
 	opened_windows.append(window)
 	focused_window = window
 	window.gui_input.connect(_on_window_gui_input.bind(window))
+	return true
+
+
+func _focus_window(window: InterfaceWindow) -> void:
+	super._focus_window(window)
+	opened_windows.erase(window)
+	opened_windows.append(window)
+	focused_window = window
 
 
 func is_interface_open() -> bool:

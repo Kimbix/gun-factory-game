@@ -6,7 +6,14 @@ var focused: InterfaceWindow
 var _hidden_parents: Dictionary[InterfaceWindow, InterfaceWindow]
 
 
-func open_window(window: InterfaceWindow, window_parent: InterfaceWindow = null) -> void:
+func open_window(window: InterfaceWindow, window_parent: InterfaceWindow = null) -> bool:
+	if window.source != null:
+		for existing: InterfaceWindow in windows:
+			if existing.source == window.source:
+				_focus_window(existing)
+				window.queue_free()
+				return false
+
 	self.add_child(window)
 	windows.append(window)
 	focused = window
@@ -15,6 +22,15 @@ func open_window(window: InterfaceWindow, window_parent: InterfaceWindow = null)
 	if window_parent != null:
 		_hidden_parents[window] = window_parent
 		window_parent.hide()
+	return true
+
+
+func _focus_window(window: InterfaceWindow) -> void:
+	window.show()
+	move_child(window, get_child_count() - 1)
+	windows.erase(window)
+	windows.append(window)
+	focused = window
 
 
 func close_window(window: InterfaceWindow) -> void:

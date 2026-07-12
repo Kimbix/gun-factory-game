@@ -33,10 +33,12 @@ func tick() -> void:
 
 func open_interface() -> void:
 	var interface: GeneratorInterface = INTERFACE.instantiate()
-	InterfaceSupervisor.instance.open_interface(
+	interface.source = self
+	if not InterfaceSupervisor.instance.open_interface(
 		InterfaceSupervisor.InterfaceType.FACTORY_BUILDING,
 		interface,
-	)
+	):
+		return
 	var _on_item_pressed: Callable = func(item: FactoryItemInfo) -> void:
 		generating = item
 		interface.change_output(generating)

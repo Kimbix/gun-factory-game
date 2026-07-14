@@ -1,7 +1,6 @@
 class_name ShotgunShotStrategy
 extends ShootingStrategy
 
-const BULLET := preload("res://objects/bullet.tscn")
 const PELLET_COUNT := 9
 const SPREAD_DEG := 45.0
 const DAMAGE := 5
@@ -19,9 +18,4 @@ func execute(shooter: Node2D, target: Node2D, _item: FactoryItem) -> void:
 		var dir := base_dir.rotated(angle_offset)
 		var speed := 600.0 * randf_range(0.75, 1.25)
 
-		var bullet := BULLET.instantiate()
-		bullet.direction = dir
-		bullet.global_position = shooter.global_position
-		bullet.speed = speed
-		bullet.damage = DAMAGE
-		shooter.get_parent().add_child(bullet)
+		spawn_bullet(shooter, dir, speed, DAMAGE)

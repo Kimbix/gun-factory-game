@@ -1,7 +1,6 @@
 class_name SpreadShotStrategy
 extends ShootingStrategy
 
-const BULLET := preload("res://objects/bullet.tscn")
 const BULLET_COUNT := 15
 const DAMAGE := 3
 const SPREAD_DEG := 60.0
@@ -22,11 +21,6 @@ func execute(shooter: Node2D, target: Node2D, _item: FactoryItem) -> void:
 		var dir := base_dir.rotated(angle_offset)
 		var speed := 600.0 * randf_range(0.95, 1.05)
 
-		var bullet := BULLET.instantiate()
-		bullet.direction = dir
-		bullet.global_position = shooter.global_position
-		bullet.speed = speed
-		bullet.damage = DAMAGE
-		shooter.get_parent().add_child(bullet)
+		spawn_bullet(shooter, dir, speed, DAMAGE)
 
 		await shooter.get_tree().create_timer(DELAY).timeout

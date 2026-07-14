@@ -1,19 +1,19 @@
-[gd_resource type="Resource" script_class="PlayerGridData" format=4]
+[gd_resource type="Resource" script_class="PlayerGridData" format=4 uid="uid://b44j3dntkvbwx"]
 
-[ext_resource type="Script" path="res://resources/player_grid_data/building_entry.gd" id="1_7fn13"]
-[ext_resource type="Resource" path="res://resources/grid_components/item_generator.tres" id="2_ynd2e"]
-[ext_resource type="Resource" path="res://resources/factory_items/raw_lead.tres" id="3_dee45"]
-[ext_resource type="Resource" path="res://resources/grid_components/furnace.tres" id="4_uj54d"]
-[ext_resource type="Resource" path="res://resources/grid_components/metal_processor.tres" id="5_3r0vj"]
-[ext_resource type="Resource" path="res://resources/recipes/lead_to_pellets.tres" id="6_00fms"]
-[ext_resource type="Resource" path="res://resources/grid_components/ammo_assembler.tres" id="7_w1exi"]
-[ext_resource type="Resource" path="res://resources/recipes/casing_gunpowder_pellets.tres" id="8_vyt17"]
-[ext_resource type="Resource" path="res://resources/factory_items/gunpowder.tres" id="9_fyui3"]
-[ext_resource type="Resource" path="res://resources/factory_items/bullet_casing.tres" id="10_kijrd"]
+[ext_resource type="Script" uid="uid://codwir1q0qp6b" path="res://resources/player_grid_data/building_entry.gd" id="1_7fn13"]
+[ext_resource type="Resource" uid="uid://d1wu3w33a0ds1" path="res://resources/grid_components/item_generator.tres" id="2_ynd2e"]
+[ext_resource type="Resource" uid="uid://b4hj3tlqd3od" path="res://resources/factory_items/raw_lead.tres" id="3_dee45"]
+[ext_resource type="Resource" uid="uid://dow1nfk5h5vv" path="res://resources/grid_components/furnace.tres" id="4_uj54d"]
+[ext_resource type="Resource" uid="uid://bfbl3v4bs23as" path="res://resources/grid_components/metal_processor.tres" id="5_3r0vj"]
+[ext_resource type="Resource" uid="uid://dyowbethxl8q1" path="res://resources/recipes/lead_to_pellets.tres" id="6_00fms"]
+[ext_resource type="Resource" uid="uid://delxbnrvtqsr4" path="res://resources/grid_components/ammo_assembler.tres" id="7_w1exi"]
+[ext_resource type="Resource" uid="uid://buxq4518ft2jm" path="res://resources/recipes/casing_gunpowder_pellets.tres" id="8_vyt17"]
+[ext_resource type="Resource" uid="uid://cpg7snevhbi06" path="res://resources/factory_items/gunpowder.tres" id="9_fyui3"]
+[ext_resource type="Resource" uid="uid://c4wf626ege7cx" path="res://resources/factory_items/bullet_casing.tres" id="10_kijrd"]
 [ext_resource type="Resource" path="res://resources/factory_items/rounded_lead_pellets.tres" id="11_vfhc0"]
-[ext_resource type="Resource" path="res://resources/grid_components/item_receiver.tres" id="12_w2ltj"]
-[ext_resource type="Texture2D" path="res://assets/factory_components/spr_emptyCell.png" id="13_4qlin"]
-[ext_resource type="Script" path="res://resources/player_grid_data/player_grid_data.gd" id="14_8t7gc"]
+[ext_resource type="Resource" uid="uid://b41gow6t4rmgw" path="res://resources/grid_components/item_receiver.tres" id="12_w2ltj"]
+[ext_resource type="Texture2D" uid="uid://bcxv8tx5ovn5l" path="res://assets/factory_components/spr_emptyCell.png" id="13_4qlin"]
+[ext_resource type="Script" uid="uid://bprmcqf7sa0y8" path="res://resources/player_grid_data/player_grid_data.gd" id="14_8t7gc"]
 
 [sub_resource type="Resource" id="Resource_rpqjc"]
 script = ExtResource("1_7fn13")
@@ -108,7 +108,7 @@ data = {
 [resource]
 script = ExtResource("14_8t7gc")
 dimensions = Vector2i(10, 10)
-floor_textures = Dictionary[Vector2i, Texture2D]({
+floor_textures = {
 Vector2i(0, 0): ExtResource("13_4qlin"),
 Vector2i(0, 1): ExtResource("13_4qlin"),
 Vector2i(0, 2): ExtResource("13_4qlin"),
@@ -209,6 +209,6 @@ Vector2i(9, 6): ExtResource("13_4qlin"),
 Vector2i(9, 7): ExtResource("13_4qlin"),
 Vector2i(9, 8): ExtResource("13_4qlin"),
 Vector2i(9, 9): ExtResource("13_4qlin")
-})
+}
 buildings = Array[ExtResource("1_7fn13")]([SubResource("Resource_rpqjc"), SubResource("Resource_j5x1f"), SubResource("Resource_elqud"), SubResource("Resource_nfhh7"), SubResource("Resource_ec3r3"), SubResource("Resource_02l38"), SubResource("Resource_jnnh1")])
 preview = SubResource("Image_giesj")

@@ -4,6 +4,12 @@
 [ext_resource type="Script" uid="uid://cxdyvqaslkwas" path="res://scripts/systems/port.gd" id="2_4x8nr"]
 [ext_resource type="Script" uid="uid://857ipmnllr5o" path="res://scripts/components/stat_pillar.gd" id="2_c87k1"]
 [ext_resource type="Texture2D" uid="uid://cquewg7ywqoti" path="res://assets/factory_components/spr_moveSpeedPillar.png" id="3_d2g1h"]
+[ext_resource type="Script" uid="uid://gjwx0diquk71" path="res://resources/grid_components/pillar_config.gd" id="4_pcfg"]
+
+[sub_resource type="Resource" id="Resource_pcfg"]
+script = ExtResource("4_pcfg")
+stat_name = &"move_speed"
+boost_value = 40.0
 
 [resource]
 script = ExtResource("1_fv3h2")
@@ -13,5 +19,4 @@ texture = ExtResource("3_d2g1h")
 dimensions = Vector2i(1, 1)
 behaviour = ExtResource("2_c87k1")
 color = Color(0.2, 0.6, 0.9, 1)
-stat_name = &"move_speed"
-boost_value = 40.0
+config = SubResource("Resource_pcfg")

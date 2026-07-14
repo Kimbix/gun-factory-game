@@ -135,20 +135,20 @@ func _on_level_up(new_level: int) -> void:
 
 
 func _on_building_placed(building: FactoryBuilding) -> void:
-	var info := building.get_info()
-	if info.stat_name == &"":
+	var cfg := building.get_info().config
+	if cfg == null or cfg.get("stat_name") == null:
 		return
 	var sid := StringName("pillar_%d_%d" % [building.position.x, building.position.y])
-	player_stats.apply_modifier(sid, info.stat_name, info.boost_value)
+	player_stats.apply_modifier(sid, cfg.get("stat_name"), cfg.get("boost_value"))
 	sync_stats()
 
 
 func _on_building_removed(building: FactoryBuilding) -> void:
-	var info := building.get_info()
-	if info.stat_name == &"":
+	var cfg := building.get_info().config
+	if cfg == null or cfg.get("stat_name") == null:
 		return
 	var sid := StringName("pillar_%d_%d" % [building.position.x, building.position.y])
-	player_stats.remove_modifier(sid, info.stat_name)
+	player_stats.remove_modifier(sid, cfg.get("stat_name"))
 	sync_stats()
 
 

@@ -42,8 +42,11 @@ func _configure_buttons() -> void:
 	for i in 3:
 		var info := _options[i]
 		var button := buttons[i]
+		var boost_text := ""
+		if info.config != null and info.config.get("boost_value") != null:
+			boost_text = str(info.config.get("boost_value"))
 		button.icon = info.texture
-		button.text = "%s\n(%s)" % [info.display_name, info.boost_value]
+		button.text = "%s\n(%s)" % [info.display_name, boost_text]
 		button.pressed.connect(_on_option_pressed.bind(i))
 
 

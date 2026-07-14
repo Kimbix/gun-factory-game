@@ -8,6 +8,4 @@ extends Resource
 @export var behaviour: Script = null
 @export var color: Color = Color.WHITE
 @export var ports: Array[Port] = []
-@export var stat_name: StringName = &""
-@export var boost_value: float = 0.0
 @export var config: Resource

@@ -2,7 +2,6 @@ class_name Combiner
 extends FactoryComponent
 
 const COOLDOWN := 20
-const ITEM_OUTPUT := preload("uid://cxut2uukg2odn")
 
 var gunpowder_count: int = 0
 var shells_count: int = 0
@@ -11,11 +10,12 @@ var _pending: int = 0
 
 
 func tick() -> void:
+	var output := (building.get_info().config as MachineConfig).output_item
 	if _cooldown > 0:
 		_cooldown -= 1
 		if _cooldown == 0:
 			var port := _get_available_out_port()
-			if port != null and _can_output() and _can_output_to(ITEM_OUTPUT, port):
+			if port != null and _can_output() and _can_output_to(output, port):
 				_do_output()
 			else:
 				_pending += 1
@@ -23,7 +23,7 @@ func tick() -> void:
 
 	if _pending > 0:
 		var port := _get_available_out_port()
-		if port != null and _can_output() and _can_output_to(ITEM_OUTPUT, port):
+		if port != null and _can_output() and _can_output_to(output, port):
 			_pending -= 1
 			_do_output()
 		return
@@ -56,5 +56,6 @@ func _do_output() -> void:
 	var p := _get_available_out_port()
 	if p == null:
 		return
+	var output := (building.get_info().config as MachineConfig).output_item
 	var where_to: Vector2 = position + p.position + p.facing
-	grid.place_item(FactoryItem.new(ITEM_OUTPUT, where_to))
+	grid.place_item(FactoryItem.new(output, where_to))

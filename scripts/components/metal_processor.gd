@@ -2,9 +2,7 @@ class_name MetalProcessor
 extends FactoryComponent
 
 const CRAFT_TIME := 20
-const INTERFACE := preload("uid://61ydd0a8m0ke")
 
-var recipes := load("uid://b3ctfw2jd14ta")
 var recipe: ItemRecipe
 var lead_plates: int = 0
 var _cooldown: int = 0
@@ -68,9 +66,10 @@ func set_var(n: StringName, v: Variant) -> void:
 
 
 func open_interface(interface_supervisor: InterfaceSupervisor) -> void:
-	var interface: MetalProcessorInterface = INTERFACE.instantiate()
+	var cfg := building.get_info().config as MachineConfig
+	var interface: MetalProcessorInterface = cfg.interface_scene.instantiate()
 	interface.metal_processor = self
-	interface.recipes = recipes
+	interface.recipes = cfg.recipe_catalogue
 	interface.source = self
 	interface.interface_supervisor = interface_supervisor
 	if not interface_supervisor.open_interface(

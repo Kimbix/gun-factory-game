@@ -1,9 +1,6 @@
 class_name AmmoAssembler
 extends FactoryComponent
 
-const INTERFACE := preload("uid://cgrsaa7x25x2o")
-
-var recipes := load("uid://doehfu33ikgrr")
 var inventory := BlockInventory.new(3)
 var recipe: ItemRecipe
 var _craft_progress: int = 0
@@ -108,9 +105,10 @@ func receive_item(item: FactoryItem) -> void:
 
 
 func open_interface(interface_supervisor: InterfaceSupervisor) -> void:
-	var interface: AmmoAssemblerInterface = INTERFACE.instantiate()
+	var cfg := building.get_info().config as MachineConfig
+	var interface: AmmoAssemblerInterface = cfg.interface_scene.instantiate()
 	interface.ammo_assembler = self
-	interface.recipes = recipes
+	interface.recipes = cfg.recipe_catalogue
 	interface.source = self
 	interface.interface_supervisor = interface_supervisor
 	if not interface_supervisor.open_interface(

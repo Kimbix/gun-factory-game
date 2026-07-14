@@ -2,7 +2,6 @@ class_name ItemGenerator
 extends FactoryComponent
 
 const COOLDOWN := 20
-const INTERFACE := preload("uid://c8wqyeagxk100")
 
 var generating: FactoryItemInfo:
 	set(v):
@@ -35,7 +34,8 @@ func tick() -> void:
 
 
 func open_interface(interface_supervisor: InterfaceSupervisor) -> void:
-	var interface: GeneratorInterface = INTERFACE.instantiate()
+	var cfg := building.get_info().config as MachineConfig
+	var interface: GeneratorInterface = cfg.interface_scene.instantiate()
 	interface.source = self
 	if not interface_supervisor.open_interface(
 		InterfaceSupervisor.InterfaceType.FACTORY_BUILDING,

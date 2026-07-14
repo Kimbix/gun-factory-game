@@ -4,6 +4,14 @@
 [ext_resource type="Script" uid="uid://cxdyvqaslkwas" path="res://scripts/systems/port.gd" id="2_qa7on"]
 [ext_resource type="Script" uid="uid://da4yb3omv2567" path="res://resources/grid_components/grid_component_info.gd" id="3_4ov8w"]
 [ext_resource type="Texture2D" uid="uid://dp3r1chajoa7v" path="res://assets/factory_components/spr_metalProcessor.png" id="4_qa7on"]
+[ext_resource type="PackedScene" uid="uid://61ydd0a8m0ke" path="res://interfaces/metal_processor_interface.tscn" id="5_qw7e"]
+[ext_resource type="Resource" uid="uid://b3ctfw2jd14ta" path="res://resources/recipes/metal_processor_recipes.tres" id="6_ty8r"]
+[ext_resource type="Script" path="res://resources/grid_components/machine_config.gd" id="7_mcfg"]
+
+[sub_resource type="Resource" id="Resource_mcfg"]
+script = ExtResource("7_mcfg")
+interface_scene = ExtResource("5_qw7e")
+recipe_catalogue = ExtResource("6_ty8r")
 
 [sub_resource type="Resource" id="Resource_yqg4a"]
 script = ExtResource("2_qa7on")
@@ -31,4 +39,5 @@ dimensions = Vector2i(1, 1)
 behaviour = ExtResource("1_hsiot")
 color = Color(0.4, 0.22352941, 0.19215687, 1)
 ports = Array[ExtResource("2_qa7on")]([SubResource("Resource_yqg4a"), SubResource("Resource_qg4ay"), SubResource("Resource_r4ayg"), SubResource("Resource_s4ayg")])
+config = SubResource("Resource_mcfg")
 metadata/_custom_type_script = "uid://da4yb3omv2567"

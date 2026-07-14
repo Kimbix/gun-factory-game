@@ -4,6 +4,12 @@
 [ext_resource type="Script" uid="uid://cxdyvqaslkwas" path="res://scripts/systems/port.gd" id="2_ov3e4"]
 [ext_resource type="Script" uid="uid://da4yb3omv2567" path="res://resources/grid_components/grid_component_info.gd" id="3_yil13"]
 [ext_resource type="Texture2D" uid="uid://c32abh8epl7ve" path="res://assets/factory_components/spr_generator.png" id="4_6vowf"]
+[ext_resource type="PackedScene" uid="uid://c8wqyeagxk100" path="res://interfaces/generator_interface.tscn" id="5_qw7e"]
+[ext_resource type="Script" path="res://resources/grid_components/machine_config.gd" id="6_mcfg"]
+
+[sub_resource type="Resource" id="Resource_mcfg"]
+script = ExtResource("6_mcfg")
+interface_scene = ExtResource("5_qw7e")
 
 [sub_resource type="Resource" id="Resource_38roy"]
 script = ExtResource("2_ov3e4")
@@ -19,4 +25,5 @@ dimensions = Vector2i(1, 1)
 behaviour = ExtResource("1_6vowf")
 color = Color(0.6, 0.8980392, 0.3137255, 1)
 ports = Array[ExtResource("2_ov3e4")]([SubResource("Resource_38roy")])
+config = SubResource("Resource_mcfg")
 metadata/_custom_type_script = "uid://da4yb3omv2567"

@@ -10,3 +10,4 @@ extends Resource
 @export var ports: Array[Port] = []
 @export var stat_name: StringName = &""
 @export var boost_value: float = 0.0
+@export var config: Resource

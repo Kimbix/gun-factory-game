@@ -7,7 +7,6 @@ var recipes := load("res://resources/recipes/ammo_assembler_recipes.tres")
 var inventory := BlockInventory.new(3)
 var recipe: ItemRecipe
 var _craft_progress: int = 0
-var _interface: AmmoAssemblerInterface
 
 
 func set_recipe(r: ItemRecipe) -> void:
@@ -127,15 +126,6 @@ func open_interface() -> void:
 		interface,
 	):
 		return
-	_interface = interface
+	_progress_interface = interface
 	interface.tree_exited.connect(_on_interface_closed)
 	_notify_progress(-1)
-
-
-func _notify_progress(value: int) -> void:
-	if _interface != null:
-		_interface.update_completion(value)
-
-
-func _on_interface_closed() -> void:
-	_interface = null

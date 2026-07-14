@@ -9,7 +9,6 @@ var recipe: ItemRecipe
 var lead_plates: int = 0
 var _cooldown: int = 0
 var _next_out_port: int = 0
-var _interface: MetalProcessorInterface
 
 
 func set_recipe(r: ItemRecipe) -> void:
@@ -78,7 +77,7 @@ func open_interface() -> void:
 		interface,
 	):
 		return
-	_interface = interface
+	_progress_interface = interface
 	interface.tree_exited.connect(_on_interface_closed)
 	_notify_progress(-1)
 
@@ -92,15 +91,6 @@ func _update_overlay_strategy() -> void:
 	overlay_strategy = s
 
 
-func _notify_progress(value: int) -> void:
-	if _interface != null:
-		_interface.update_completion(value)
-
-
 func _do_output(port: Port) -> void:
 	var where_to: Vector2 = position + port.position + port.facing
 	grid.place_item(FactoryItem.new(recipe.outputs[0].item, where_to))
-
-
-func _on_interface_closed() -> void:
-	_interface = null

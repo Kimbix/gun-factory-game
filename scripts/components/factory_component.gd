@@ -51,6 +51,18 @@ func open_interface() -> void:
 	pass
 
 
+var _progress_interface: RecipeMachineInterface
+
+
+func _notify_progress(value: int) -> void:
+	if _progress_interface != null:
+		_progress_interface.update_completion(value)
+
+
+func _on_interface_closed() -> void:
+	_progress_interface = null
+
+
 func _can_output_to(item: FactoryItemInfo, port: Port, at_position: Vector2 = Vector2.INF) -> bool:
 	var where: Vector2 = (
 			at_position

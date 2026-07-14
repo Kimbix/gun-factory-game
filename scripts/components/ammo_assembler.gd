@@ -1,9 +1,9 @@
 class_name AmmoAssembler
 extends FactoryComponent
 
-const INTERFACE := preload("res://interfaces/ammo_assembler_interface.tscn")
+const INTERFACE := preload("uid://cgrsaa7x25x2o")
 
-var recipes := load("res://resources/recipes/ammo_assembler_recipes.tres")
+var recipes := load("uid://doehfu33ikgrr")
 var inventory := BlockInventory.new(3)
 var recipe: ItemRecipe
 var _craft_progress: int = 0
@@ -107,15 +107,6 @@ func receive_item(item: FactoryItem) -> void:
 	grid.destroy_item(item)
 
 
-func _update_overlay_strategy() -> void:
-	if recipe == null or recipe.outputs.is_empty():
-		overlay_strategy = null
-		return
-	var s := ItemOverlayStrategy.new()
-	s.item_info = recipe.outputs[0].item
-	overlay_strategy = s
-
-
 func open_interface() -> void:
 	var interface: AmmoAssemblerInterface = INTERFACE.instantiate()
 	interface.ammo_assembler = self
@@ -129,3 +120,12 @@ func open_interface() -> void:
 	_progress_interface = interface
 	interface.tree_exited.connect(_on_interface_closed)
 	_notify_progress(-1)
+
+
+func _update_overlay_strategy() -> void:
+	if recipe == null or recipe.outputs.is_empty():
+		overlay_strategy = null
+		return
+	var s := ItemOverlayStrategy.new()
+	s.item_info = recipe.outputs[0].item
+	overlay_strategy = s

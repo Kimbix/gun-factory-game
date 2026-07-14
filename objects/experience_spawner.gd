@@ -2,7 +2,7 @@ class_name ExperienceSpawner
 extends Node2D
 
 static var crystals: Dictionary[int, PackedScene] = {
-	1: preload("res://objects/experience_crystal.tscn"),
+	1: preload("uid://r5gdpvcp6gx3"),
 }
 
 @export var base_xp: int = 5

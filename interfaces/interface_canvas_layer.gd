@@ -1,3 +1,4 @@
+class_name InterfaceCanvasLayer
 extends BaseInterface
 
 var opened_windows: Array[Control] = []

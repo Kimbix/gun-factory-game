@@ -31,7 +31,6 @@ folder_colors={
 "res://addons/": "gray",
 "res://assets/": "red",
 "res://docs/": "gray",
-"res://globals/": "orange",
 "res://interfaces/": "green",
 "res://objects/": "teal",
 "res://resources/": "purple",

@@ -1,7 +1,7 @@
 class_name ItemOverlayStrategy
 extends OverlayStrategy
 
-const SHADOW := preload("res://assets/effects/spr_shadow.png")
+const SHADOW := preload("uid://bbnhb00552hg2")
 
 var item_info: FactoryItemInfo
 

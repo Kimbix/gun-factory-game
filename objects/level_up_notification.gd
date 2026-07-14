@@ -4,11 +4,11 @@ extends InterfaceWindow
 signal reward_chosen(info: GridComponentInfo)
 
 const ALL_PILLARS: Array[GridComponentInfo] = [
-	preload("res://resources/grid_components/max_health_pillar.tres"),
-	preload("res://resources/grid_components/move_speed_pillar.tres"),
-	preload("res://resources/grid_components/tick_speed_pillar.tres"),
-	preload("res://resources/grid_components/health_regen_pillar.tres"),
-	preload("res://resources/grid_components/pickup_range_pillar.tres"),
+	preload("uid://bcal2r5lkeamc"),
+	preload("uid://bqpqfr2jxp4t3"),
+	preload("uid://s86vmfpi3w15"),
+	preload("uid://du6m2qkdv14nq"),
+	preload("uid://5h2vu81iay55"),
 ]
 
 var _options: Array[GridComponentInfo] = []

@@ -4,7 +4,7 @@ extends FactoryComponent
 const CRAFT_TIME := 20
 const INTERFACE := preload("uid://61ydd0a8m0ke")
 
-var recipes = load("res://resources/recipes/metal_processor_recipes.tres")
+var recipes := load("uid://b3ctfw2jd14ta")
 var recipe: ItemRecipe
 var lead_plates: int = 0
 var _cooldown: int = 0

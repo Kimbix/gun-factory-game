@@ -1,17 +1,17 @@
 extends Node2D
 
 const SAVE_PATH := "user://grid_save.tres"
-const SAVE_GRID_INTERFACE := preload("res://interfaces/save_grid_interface.tscn")
-const LOAD_GRID_INTERFACE := preload("res://interfaces/load_grid_interface.tscn")
+const SAVE_GRID_INTERFACE := preload("uid://d0g7gg1hq86cc")
+const LOAD_GRID_INTERFACE := preload("uid://bpjbhpqjtay0c")
 
 @onready var grid_viewer: PlayerGridViewer = $PlayerGridViewer
 @onready var player_grid: PlayerGrid = $PlayerGridViewer/PlayerGrid
 @onready var debug_builder: DebugPlayerGridBuilder = $DebugLayer/DebugPlayerGridBuilder
 @onready var save_grid_button: Button = (
-	$DebugLayer/DebugPlayerGridBuilder/VBoxContainer/HBoxContainer/SaveGrid
+		$DebugLayer/DebugPlayerGridBuilder/VBoxContainer/HBoxContainer/SaveGrid
 )
 @onready var load_grid_button: Button = (
-	$DebugLayer/DebugPlayerGridBuilder/VBoxContainer/HBoxContainer/LoadGrid
+		$DebugLayer/DebugPlayerGridBuilder/VBoxContainer/HBoxContainer/LoadGrid
 )
 
 
@@ -33,7 +33,7 @@ func _input(event: InputEvent) -> void:
 		KEY_F2:
 			debug_builder.visible = not debug_builder.visible
 			debug_builder.process_mode = (
-				PROCESS_MODE_INHERIT if debug_builder.visible else PROCESS_MODE_DISABLED
+					PROCESS_MODE_INHERIT if debug_builder.visible else PROCESS_MODE_DISABLED
 			)
 		KEY_F3:
 			var data := player_grid.to_data()

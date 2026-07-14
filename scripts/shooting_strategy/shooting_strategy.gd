@@ -1,7 +1,7 @@
 class_name ShootingStrategy
 extends RefCounted
 
-const BULLET := preload("res://objects/bullet.tscn")
+const BULLET := preload("uid://b1u11et5c3n3")
 
 
 static func spawn_bullet(shooter: Node2D, dir: Vector2, speed: float, damage: int) -> Bullet:

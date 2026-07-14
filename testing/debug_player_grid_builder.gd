@@ -9,10 +9,7 @@ const GHOST_MODULATE := Color(1, 1, 1, 0.4)
 
 var hovered_cell: Vector2i:
 	get():
-		var screen_mouse := viewer.get_global_mouse_position()
-		var canvas_mouse := get_canvas_transform().affine_inverse() * screen_mouse
-		var local_mouse := viewer.to_local(canvas_mouse)
-		return Vector2i(local_mouse / PlayerGridViewer.GRID_TEXTURE_SIZE)
+		return viewer.get_hovered_cell()
 var pending_rotation: int = FactoryBuilding.Rotation.NORMAL
 var _selected_building_index: int = 0
 var _last_hovered: Vector2i = Vector2i(-1, -1)

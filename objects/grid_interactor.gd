@@ -11,10 +11,7 @@ enum InteractorState {
 
 var hovered_cell: Vector2i:
 	get():
-		var screen_mouse := viewer.get_global_mouse_position()
-		var canvas_mouse := get_canvas_transform().affine_inverse() * screen_mouse
-		var local_mouse := viewer.to_local(canvas_mouse)
-		return Vector2i(local_mouse / PlayerGridViewer.GRID_TEXTURE_SIZE)
+		return viewer.get_hovered_cell()
 
 @onready var viewer: PlayerGridViewer = get_parent()
 @onready var builder: GridBuilder = _find_builder()

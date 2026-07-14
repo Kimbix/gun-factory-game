@@ -15,6 +15,13 @@ const GRID_TEXTURE_SIZE := 16.0
 @export var overlay_font: Font
 
 
+func get_hovered_cell() -> Vector2i:
+	var screen_mouse := get_global_mouse_position()
+	var canvas_mouse := get_canvas_transform().affine_inverse() * screen_mouse
+	var local_mouse := to_local(canvas_mouse)
+	return Vector2i(local_mouse / GRID_TEXTURE_SIZE)
+
+
 func _on_overlay_changed(_position: Vector2i) -> void:
 	queue_redraw()
 

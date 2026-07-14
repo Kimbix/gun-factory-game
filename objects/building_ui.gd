@@ -66,6 +66,14 @@ func _populate_building_list() -> void:
 				else:
 					builder.select(stack.info)
 		)
+
+		var count_label := Label.new()
+		count_label.text = "x" + str(stack.count)
+		count_label.set_anchors_preset(Control.PRESET_BOTTOM_RIGHT)
+		count_label.set_offset(SIDE_RIGHT, -4)
+		count_label.set_offset(SIDE_BOTTOM, -4)
+		btn.add_child(count_label)
+
 		building_list.add_child(btn)
 	building_panel.show()
 

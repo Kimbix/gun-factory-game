@@ -47,7 +47,11 @@ func open_interface() -> void:
 
 
 func _can_output_to(item: FactoryItemInfo, port: Port, at_position: Vector2 = Vector2.INF) -> bool:
-	var where: Vector2 = at_position if at_position != Vector2.INF else Vector2(building.position + port.position + port.facing)
+	var where: Vector2 = (
+		at_position
+		if at_position != Vector2.INF
+		else Vector2(building.position + port.position + port.facing)
+	)
 	var target := grid.get_building(where.floor())
 	if target == null:
 		return false

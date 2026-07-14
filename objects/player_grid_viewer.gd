@@ -22,7 +22,10 @@ func _draw() -> void:
 			continue
 		var rot := grid.get_building_rotation(v)
 		if rot != 0:
-			var center := Vector2(v * PlayerGridViewer.GRID_TEXTURE_SIZE) + Vector2.ONE * (PlayerGridViewer.GRID_TEXTURE_SIZE / 2.0)
+			var center := (
+			Vector2(v * PlayerGridViewer.GRID_TEXTURE_SIZE)
+			+ Vector2.ONE * (PlayerGridViewer.GRID_TEXTURE_SIZE / 2.0)
+		)
 			var radians := 0.0
 			match rot:
 				FactoryBuilding.Rotation.CLOCKWISE:

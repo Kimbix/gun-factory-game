@@ -7,8 +7,12 @@ const LOAD_GRID_INTERFACE := preload("res://interfaces/load_grid_interface.tscn"
 @onready var grid_viewer: PlayerGridViewer = $PlayerGridViewer
 @onready var player_grid: PlayerGrid = $PlayerGridViewer/PlayerGrid
 @onready var debug_builder: DebugPlayerGridBuilder = $DebugLayer/DebugPlayerGridBuilder
-@onready var save_grid_button: Button = $DebugLayer/DebugPlayerGridBuilder/VBoxContainer/HBoxContainer/SaveGrid
-@onready var load_grid_button: Button = $DebugLayer/DebugPlayerGridBuilder/VBoxContainer/HBoxContainer/LoadGrid
+@onready var save_grid_button: Button = (
+	$DebugLayer/DebugPlayerGridBuilder/VBoxContainer/HBoxContainer/SaveGrid
+)
+@onready var load_grid_button: Button = (
+	$DebugLayer/DebugPlayerGridBuilder/VBoxContainer/HBoxContainer/LoadGrid
+)
 
 
 func _ready() -> void:
@@ -28,7 +32,9 @@ func _input(event: InputEvent) -> void:
 			grid_viewer.queue_redraw()
 		KEY_F2:
 			debug_builder.visible = not debug_builder.visible
-			debug_builder.process_mode = PROCESS_MODE_INHERIT if debug_builder.visible else PROCESS_MODE_DISABLED
+			debug_builder.process_mode = (
+				PROCESS_MODE_INHERIT if debug_builder.visible else PROCESS_MODE_DISABLED
+			)
 		KEY_F3:
 			var data := player_grid.to_data()
 			var err := ResourceSaver.save(data, SAVE_PATH)

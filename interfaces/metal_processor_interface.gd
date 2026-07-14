@@ -59,7 +59,9 @@ func _on_selected_recipe() -> void:
 	_picker = RECIPE_PICKER.instantiate()
 	_picker.recipes = recipes
 	_picker.recipe_selected.connect(_on_recipe_selected_from_picker)
-	InterfaceSupervisor.instance.open_interface(InterfaceSupervisor.InterfaceType.FACTORY_BUILDING, _picker, self)
+	InterfaceSupervisor.instance.open_interface(
+		InterfaceSupervisor.InterfaceType.FACTORY_BUILDING, _picker, self
+	)
 
 
 func _on_recipe_selected_from_picker(r: ItemRecipe) -> void:

@@ -92,7 +92,10 @@ func _draw_overlays() -> void:
 				font = ThemeDB.fallback_font
 			var font_size := layer.get("font_size", 8) as int
 			var text_size := font.get_string_size(text, HORIZONTAL_ALIGNMENT_LEFT, -1, font_size)
-			var text_pos := center - text_size / 2.0
+			var text_pos := Vector2(
+				center.x - text_size.x / 2.0,
+				center.y - text_size.y / 2.0 + font.get_ascent(font_size),
+			)
 			draw_string(font, text_pos, text, HORIZONTAL_ALIGNMENT_LEFT, -1, font_size)
 
 

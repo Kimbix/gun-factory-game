@@ -11,6 +11,8 @@ enum InterfaceType {
 static var instance: InterfaceSupervisor
 
 var interfaces: Dictionary[InterfaceType, BaseInterface]
+var _pending_level_ups: Array[int] = []
+var _level_up_window_open: bool = false
 
 
 func _ready() -> void:
@@ -54,9 +56,27 @@ func close_interface(
 
 
 func on_leveled_up(_new_level: int) -> void:
+	_pending_level_ups.append(_new_level)
+	if not _level_up_window_open:
+		_show_next_level_up()
+
+
+func _show_next_level_up() -> void:
+	if _pending_level_ups.is_empty():
+		_level_up_window_open = false
+		GameSupervisor.instance.unpause_gameplay()
+		return
+
+	_pending_level_ups.pop_front()
+	_level_up_window_open = true
 	GameSupervisor.instance.pause_gameplay()
 	var level_up_window := preload("uid://chiougv7mhwbp").instantiate()
+	level_up_window.tree_exited.connect(_on_level_up_window_closed)
 	open_interface(InterfaceType.EMERGENT, level_up_window, null)
+
+
+func _on_level_up_window_closed() -> void:
+	_show_next_level_up()
 
 
 func open_building_interface() -> void:

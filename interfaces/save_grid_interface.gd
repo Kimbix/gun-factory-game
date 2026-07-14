@@ -53,5 +53,6 @@ func _on_save(_submitted_text: String = "") -> void:
 
 func _on_cancel() -> void:
 	InterfaceSupervisor.instance.close_interface(
-		InterfaceSupervisor.InterfaceType.FACTORY_BUILDING, self,
+		InterfaceSupervisor.InterfaceType.FACTORY_BUILDING,
+		self,
 	)

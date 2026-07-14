@@ -13,6 +13,7 @@ var _interface: AmmoAssemblerInterface
 func set_recipe(r: ItemRecipe) -> void:
 	recipe = r
 	_craft_progress = 0
+	_update_overlay_strategy()
 	if r != null:
 		var allowed: Array[FactoryItemInfo] = []
 		for ingredient in r.inputs:
@@ -86,7 +87,7 @@ func get_vars() -> Dictionary:
 func set_var(n: StringName, v: Variant) -> void:
 	match n:
 		&"recipe":
-			recipe = v
+			set_recipe(v)
 		&"_inventory_slots":
 			inventory.slots.clear()
 			for entry: Dictionary in v:
@@ -105,6 +106,15 @@ func set_var(n: StringName, v: Variant) -> void:
 func receive_item(item: FactoryItem) -> void:
 	inventory.add(item)
 	grid.destroy_item(item)
+
+
+func _update_overlay_strategy() -> void:
+	if recipe == null or recipe.outputs.is_empty():
+		overlay_strategy = null
+		return
+	var s := ItemOverlayStrategy.new()
+	s.item_info = recipe.outputs[0].item
+	overlay_strategy = s
 
 
 func open_interface() -> void:

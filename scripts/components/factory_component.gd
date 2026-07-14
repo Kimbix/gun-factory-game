@@ -3,6 +3,7 @@ class_name FactoryComponent
 extends RefCounted
 
 var building: FactoryBuilding
+var overlay_strategy: OverlayStrategy = null
 var rotation: FactoryBuilding.Rotation:
 	get():
 		return building.rotation

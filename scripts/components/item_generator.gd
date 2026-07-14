@@ -9,6 +9,7 @@ var generating: FactoryItemInfo:
 		generating = v
 		_precompute_offsets()
 		_cooldown = 0
+		_update_overlay_strategy()
 var _cooldown: int = 0
 var _offsets: Dictionary[FactoryBuilding.Rotation, Vector2] = { }
 
@@ -54,6 +55,15 @@ func get_vars() -> Dictionary:
 		&"generating": generating,
 		&"_cooldown": _cooldown,
 	}
+
+
+func _update_overlay_strategy() -> void:
+	if generating == null:
+		overlay_strategy = null
+		return
+	var s := ItemOverlayStrategy.new()
+	s.item_info = generating
+	overlay_strategy = s
 
 
 func _precompute_offsets() -> void:

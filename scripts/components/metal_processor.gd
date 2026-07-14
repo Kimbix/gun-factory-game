@@ -14,6 +14,7 @@ var _interface: MetalProcessorInterface
 
 func set_recipe(r: ItemRecipe) -> void:
 	recipe = r
+	_update_overlay_strategy()
 
 
 func tick() -> void:
@@ -59,6 +60,14 @@ func receive_item(item: FactoryItem) -> void:
 	grid.destroy_item(item)
 
 
+func set_var(n: StringName, v: Variant) -> void:
+	match n:
+		&"recipe":
+			set_recipe(v)
+		_:
+			super.set_var(n, v)
+
+
 func open_interface() -> void:
 	var interface: MetalProcessorInterface = INTERFACE.instantiate()
 	interface.metal_processor = self
@@ -72,6 +81,15 @@ func open_interface() -> void:
 	_interface = interface
 	interface.tree_exited.connect(_on_interface_closed)
 	_notify_progress(-1)
+
+
+func _update_overlay_strategy() -> void:
+	if recipe == null or recipe.outputs.is_empty():
+		overlay_strategy = null
+		return
+	var s := ItemOverlayStrategy.new()
+	s.item_info = recipe.outputs[0].item
+	overlay_strategy = s
 
 
 func _notify_progress(value: int) -> void:

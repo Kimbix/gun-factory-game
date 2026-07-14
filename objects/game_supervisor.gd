@@ -14,6 +14,8 @@ var _state_before_pause: GameState = GameState.GAMEPLAY
 var _active_player: SimpleCharacter
 var _interface_supervisor: InterfaceSupervisor
 
+@onready var _building_ui: BuildingUI = $InterfaceSupervisor/BuildingUI
+
 
 func _ready() -> void:
 	instance = self
@@ -32,6 +34,12 @@ func _ready() -> void:
 		InputMap.add_action("factory_building")
 		InputMap.action_add_event("factory_building", event)
 
+	if not InputMap.has_action("building_overlay"):
+		var event := InputEventKey.new()
+		event.keycode = KEY_ALT
+		InputMap.add_action("building_overlay")
+		InputMap.action_add_event("building_overlay", event)
+
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("factory_building"):
@@ -40,6 +48,11 @@ func _unhandled_input(event: InputEvent) -> void:
 				_set_state(GameState.BUILDING)
 			GameState.BUILDING:
 				_set_state(GameState.GAMEPLAY)
+
+	if event.is_action_pressed("building_overlay") and _state == GameState.BUILDING:
+		var viewer := _building_ui.player_grid_viewer
+		viewer.building_overlay = not viewer.building_overlay
+		viewer.queue_redraw()
 
 	if event.is_action_pressed("pause"):
 		match _state:

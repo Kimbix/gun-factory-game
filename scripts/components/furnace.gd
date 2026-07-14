@@ -8,6 +8,12 @@ var lead_count: int = 0
 var _cooldown: int = 0
 
 
+func _init() -> void:
+	var s := ItemOverlayStrategy.new()
+	s.item_info = OUTPUT_ITEM
+	overlay_strategy = s
+
+
 func tick() -> void:
 	if _cooldown > 0:
 		_cooldown -= 1

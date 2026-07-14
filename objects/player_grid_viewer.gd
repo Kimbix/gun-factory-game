@@ -5,6 +5,7 @@ const GRID_TEXTURE_SIZE := 16.0
 
 @export var grid: PlayerGrid = null
 @export var view_ports: bool
+@export var building_overlay: bool
 
 
 func _draw() -> void:
@@ -43,6 +44,9 @@ func _draw() -> void:
 	if view_ports:
 		_draw_ports()
 
+	if building_overlay:
+		_draw_overlays()
+
 
 func get_width() -> float:
 	return grid.dimensions.x * GRID_TEXTURE_SIZE * self.scale.x
@@ -58,6 +62,27 @@ func set_final_size(size: Vector2) -> void:
 	var new_scale := size / curr_size
 	self.scale *= new_scale
 	print(new_scale)
+
+
+func _draw_overlays() -> void:
+	for v: Vector2i in VectorTools.vector2i_range(grid.dimensions):
+		if not grid.has_building(v):
+			continue
+		var building := grid.get_building(v)
+		if building.position != v:
+			continue
+		var behaviour := building.behaviour
+		if behaviour == null:
+			continue
+		var strategy := behaviour.overlay_strategy as OverlayStrategy
+		if strategy == null:
+			continue
+		var center := Vector2(v * GRID_TEXTURE_SIZE) + Vector2.ONE * (GRID_TEXTURE_SIZE / 2.0)
+		for layer: Dictionary in strategy.get_layers():
+			var tex: Texture2D = layer.get("texture") as Texture2D
+			if tex == null:
+				continue
+			draw_texture(tex, center - tex.get_size() / 2.0)
 
 
 func _draw_ports() -> void:

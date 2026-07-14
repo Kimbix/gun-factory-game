@@ -7,7 +7,6 @@
 [ext_resource type="Resource" uid="uid://cpg7snevhbi06" path="res://resources/factory_items/gunpowder.tres" id="3_wx4tf"]
 [ext_resource type="Resource" uid="uid://bexcwplnas18e" path="res://resources/factory_items/rounded_lead_tip.tres" id="4_tpsek"]
 [ext_resource type="Resource" uid="uid://dnlk33wh1plgp" path="res://resources/factory_items/rounded_lead_round.tres" id="5_ib3ef"]
-[ext_resource type="Resource" uid="uid://delxbnrvtqsr4" path="res://resources/grid_components/ammo_assembler.tres" id="6_qqhnt"]
 [ext_resource type="Script" uid="uid://obd4raikqaub" path="res://scripts/shooting_strategy/spread_shot_strategy.gd" id="9_hert6"]
 
 [sub_resource type="Resource" id="Resource_tnams"]
@@ -33,4 +32,3 @@ display_name = "Loaded Bullet"
 icon = ExtResource("1_h93nf")
 inputs = Array[ExtResource("1_keo7j")]([SubResource("Resource_tnams"), SubResource("Resource_vkdxb"), SubResource("Resource_ehrhx")])
 outputs = Array[ExtResource("1_keo7j")]([SubResource("Resource_oj4et")])
-machine = ExtResource("6_qqhnt")

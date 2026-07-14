@@ -7,7 +7,6 @@
 [ext_resource type="Resource" uid="uid://cpg7snevhbi06" path="res://resources/factory_items/gunpowder.tres" id="3_wx4tf"]
 [ext_resource type="Resource" uid="uid://c22n2v8wi7hp5" path="res://resources/factory_items/pointy_lead_tip.tres" id="4_tpsek"]
 [ext_resource type="Resource" uid="uid://ch1p8rsf7lx2x" path="res://resources/factory_items/rifle_round.tres" id="5_ib3ef"]
-[ext_resource type="Resource" uid="uid://delxbnrvtqsr4" path="res://resources/grid_components/ammo_assembler.tres" id="6_qqhnt"]
 [ext_resource type="Script" uid="uid://cnurwixqc6xie" path="res://scripts/shooting_strategy/rifle_shot_strategy.gd" id="9_ndi54"]
 
 [sub_resource type="Resource" id="Resource_tnams"]
@@ -33,4 +32,3 @@ display_name = "Rifle Round"
 icon = ExtResource("1_h93nf")
 inputs = Array[ExtResource("1_keo7j")]([SubResource("Resource_tnams"), SubResource("Resource_vkdxb"), SubResource("Resource_ehrhx")])
 outputs = Array[ExtResource("1_keo7j")]([SubResource("Resource_oj4et")])
-machine = ExtResource("6_qqhnt")

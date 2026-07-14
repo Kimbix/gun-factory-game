@@ -7,7 +7,6 @@
 [ext_resource type="Resource" uid="uid://cpg7snevhbi06" path="res://resources/factory_items/gunpowder.tres" id="3_wx4tf"]
 [ext_resource type="Resource" path="res://resources/factory_items/rounded_lead_pellets.tres" id="4_tpsek"]
 [ext_resource type="Resource" uid="uid://b0o6kjka3f1is" path="res://resources/factory_items/shotgun_bullet.tres" id="5_ib3ef"]
-[ext_resource type="Resource" uid="uid://delxbnrvtqsr4" path="res://resources/grid_components/ammo_assembler.tres" id="6_qqhnt"]
 [ext_resource type="Script" uid="uid://hgf2kqj2k85l" path="res://scripts/shooting_strategy/shotgun_shot_strategy.gd" id="9_nnc86"]
 
 [sub_resource type="Resource" id="Resource_tnams"]
@@ -33,4 +32,3 @@ display_name = "Shotgun Shell"
 icon = ExtResource("1_h93nf")
 inputs = Array[ExtResource("1_keo7j")]([SubResource("Resource_tnams"), SubResource("Resource_vkdxb"), SubResource("Resource_ehrhx")])
 outputs = Array[ExtResource("1_keo7j")]([SubResource("Resource_oj4et")])
-machine = ExtResource("6_qqhnt")

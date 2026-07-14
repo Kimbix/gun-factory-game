@@ -3,10 +3,20 @@ extends Node2D
 
 const GRID_TEXTURE_SIZE := 16.0
 
-@export var grid: PlayerGrid = null
+@export var grid: PlayerGrid = null:
+	set(v):
+		if grid != null and grid.overlay_changed.is_connected(_on_overlay_changed):
+			grid.overlay_changed.disconnect(_on_overlay_changed)
+		grid = v
+		if grid != null:
+			grid.overlay_changed.connect(_on_overlay_changed)
 @export var view_ports: bool
 @export var building_overlay: bool
 @export var overlay_font: Font
+
+
+func _on_overlay_changed(_position: Vector2i) -> void:
+	queue_redraw()
 
 
 func _draw() -> void:
@@ -23,9 +33,9 @@ func _draw() -> void:
 		var rot := grid.get_building_rotation(v)
 		if rot != 0:
 			var center := (
-			Vector2(v * PlayerGridViewer.GRID_TEXTURE_SIZE)
-			+ Vector2.ONE * (PlayerGridViewer.GRID_TEXTURE_SIZE / 2.0)
-		)
+					Vector2(v * PlayerGridViewer.GRID_TEXTURE_SIZE)
+					+ Vector2.ONE * (PlayerGridViewer.GRID_TEXTURE_SIZE / 2.0)
+			)
 			var radians := 0.0
 			match rot:
 				FactoryBuilding.Rotation.CLOCKWISE:

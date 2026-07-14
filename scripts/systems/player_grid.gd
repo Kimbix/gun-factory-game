@@ -5,6 +5,7 @@ extends Node
 signal output_item(item: FactoryItem)
 signal building_placed(building: FactoryBuilding)
 signal building_removed(building: FactoryBuilding)
+signal overlay_changed(position: Vector2i)
 
 @export var dimensions: Vector2i = Vector2i(10, 10)
 

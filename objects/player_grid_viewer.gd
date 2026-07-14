@@ -6,6 +6,7 @@ const GRID_TEXTURE_SIZE := 16.0
 @export var grid: PlayerGrid = null
 @export var view_ports: bool
 @export var building_overlay: bool
+@export var overlay_font: Font
 
 
 func _draw() -> void:
@@ -80,9 +81,19 @@ func _draw_overlays() -> void:
 		var center := Vector2(v * GRID_TEXTURE_SIZE) + Vector2.ONE * (GRID_TEXTURE_SIZE / 2.0)
 		for layer: Dictionary in strategy.get_layers():
 			var tex: Texture2D = layer.get("texture") as Texture2D
-			if tex == null:
+			if tex != null:
+				draw_texture(tex, center - tex.get_size() / 2.0)
 				continue
-			draw_texture(tex, center - tex.get_size() / 2.0)
+			var text: String = layer.get("text", "")
+			if text.is_empty():
+				continue
+			var font := overlay_font
+			if font == null:
+				font = ThemeDB.fallback_font
+			var font_size := layer.get("font_size", 8) as int
+			var text_size := font.get_string_size(text, HORIZONTAL_ALIGNMENT_LEFT, -1, font_size)
+			var text_pos := center - text_size / 2.0
+			draw_string(font, text_pos, text, HORIZONTAL_ALIGNMENT_LEFT, -1, font_size)
 
 
 func _draw_ports() -> void:

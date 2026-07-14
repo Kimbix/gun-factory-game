@@ -18,6 +18,10 @@ var rect: Rect2:
 		return building.rect
 
 
+func setup() -> void:
+	pass
+
+
 func tick() -> void:
 	pass
 

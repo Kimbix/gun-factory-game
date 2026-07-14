@@ -61,6 +61,7 @@ func _init(
 	if _info.behaviour != null:
 		behaviour = _info.behaviour.new()
 		behaviour.building = self
+		behaviour.setup()
 
 
 func _to_string() -> String:

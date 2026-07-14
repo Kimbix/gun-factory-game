@@ -8,7 +8,7 @@ var lead_count: int = 0
 var _cooldown: int = 0
 
 
-func _init() -> void:
+func setup() -> void:
 	var s := ItemOverlayStrategy.new()
 	s.item_info = OUTPUT_ITEM
 	overlay_strategy = s

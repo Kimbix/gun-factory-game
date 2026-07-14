@@ -67,12 +67,13 @@ func set_var(n: StringName, v: Variant) -> void:
 			super.set_var(n, v)
 
 
-func open_interface() -> void:
+func open_interface(interface_supervisor: InterfaceSupervisor) -> void:
 	var interface: MetalProcessorInterface = INTERFACE.instantiate()
 	interface.metal_processor = self
 	interface.recipes = recipes
 	interface.source = self
-	if not InterfaceSupervisor.instance.open_interface(
+	interface.interface_supervisor = interface_supervisor
+	if not interface_supervisor.open_interface(
 		InterfaceSupervisor.InterfaceType.FACTORY_BUILDING,
 		interface,
 	):

@@ -26,7 +26,7 @@ func tick() -> void:
 	if output_port == null:
 		return
 	var where_to := (
-		Vector2(position + output_port.position + output_port.facing) + _offsets[rotation]
+			Vector2(position + output_port.position + output_port.facing) + _offsets[rotation]
 	)
 	if not _can_output_to(generating, output_port, where_to):
 		return
@@ -34,10 +34,10 @@ func tick() -> void:
 	_cooldown = COOLDOWN
 
 
-func open_interface() -> void:
+func open_interface(interface_supervisor: InterfaceSupervisor) -> void:
 	var interface: GeneratorInterface = INTERFACE.instantiate()
 	interface.source = self
-	if not InterfaceSupervisor.instance.open_interface(
+	if not interface_supervisor.open_interface(
 		InterfaceSupervisor.InterfaceType.FACTORY_BUILDING,
 		interface,
 	):

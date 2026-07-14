@@ -5,6 +5,7 @@ const SAVE_DIR := "user://"
 const PIXEL_SCALE := 32
 
 var player_grid: PlayerGrid
+var interface_supervisor: InterfaceSupervisor
 var _data: PlayerGridData
 
 
@@ -43,16 +44,18 @@ func _on_save(_submitted_text: String = "") -> void:
 	var err := ResourceSaver.save(_data, path)
 	if err == OK:
 		print("Grid saved to %s" % path)
-		InterfaceSupervisor.instance.close_interface(
-			InterfaceSupervisor.InterfaceType.FACTORY_BUILDING,
-			self,
-		)
+		if interface_supervisor != null:
+			interface_supervisor.close_interface(
+				InterfaceSupervisor.InterfaceType.FACTORY_BUILDING,
+				self,
+			)
 	else:
 		%ErrorLabel.text = "Failed to save: %d" % err
 
 
 func _on_cancel() -> void:
-	InterfaceSupervisor.instance.close_interface(
-		InterfaceSupervisor.InterfaceType.FACTORY_BUILDING,
-		self,
-	)
+	if interface_supervisor != null:
+		interface_supervisor.close_interface(
+			InterfaceSupervisor.InterfaceType.FACTORY_BUILDING,
+			self,
+		)

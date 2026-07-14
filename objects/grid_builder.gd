@@ -5,6 +5,9 @@ extends Node2D
 
 const GHOST_MODULATE := Color(1, 1, 1, 0.4)
 
+var building_inventory: PlayerBuildingInventory
+@export var building_ui: BuildingUI
+
 var selected_info: GridComponentInfo:
 	set(v):
 		selected_info = v
@@ -114,18 +117,16 @@ func _try_place() -> void:
 	if viewer.grid.has_building(cell):
 		return
 
-	var player := GameSupervisor.instance.get_player()
-	if not player.building_inventory.has(selected_info):
+	if not building_inventory.has(selected_info):
 		return
-	if not player.building_inventory.remove(selected_info):
+	if not building_inventory.remove(selected_info):
 		return
 
 	viewer.grid.place_building(selected_info, cell, pending_rotation)
 	viewer.queue_redraw()
 
-	if not player.building_inventory.has(selected_info):
+	if not building_inventory.has(selected_info):
 		deselect()
 
-	var ui := get_parent().get_parent() as BuildingUI
-	if ui != null:
-		ui.refresh_building_list()
+	if building_ui != null:
+		building_ui.refresh_building_list()

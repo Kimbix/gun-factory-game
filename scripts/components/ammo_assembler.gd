@@ -107,12 +107,13 @@ func receive_item(item: FactoryItem) -> void:
 	grid.destroy_item(item)
 
 
-func open_interface() -> void:
+func open_interface(interface_supervisor: InterfaceSupervisor) -> void:
 	var interface: AmmoAssemblerInterface = INTERFACE.instantiate()
 	interface.ammo_assembler = self
 	interface.recipes = recipes
 	interface.source = self
-	if not InterfaceSupervisor.instance.open_interface(
+	interface.interface_supervisor = interface_supervisor
+	if not interface_supervisor.open_interface(
 		InterfaceSupervisor.InterfaceType.FACTORY_BUILDING,
 		interface,
 	):

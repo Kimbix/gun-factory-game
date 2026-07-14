@@ -45,6 +45,7 @@ text = "Buildings"
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="BuildingList" type="VBoxContainer" parent="BuildingInventoryPanel/MarginContainer/VBoxContainer/ScrollContainer" unique_id=91407264]
+[node name="BuildingList" type="GridContainer" parent="BuildingInventoryPanel/MarginContainer/VBoxContainer/ScrollContainer" unique_id=1010954885]
 unique_name_in_owner = true
 layout_mode = 2
+columns = 2

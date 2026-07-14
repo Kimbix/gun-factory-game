@@ -6,6 +6,7 @@ signal grid_loaded
 const SAVE_DIR := "user://"
 
 var player_grid: PlayerGrid
+var interface_supervisor: InterfaceSupervisor
 
 
 func _ready() -> void:
@@ -71,14 +72,16 @@ func _on_grid_selected(path: String) -> void:
 		return
 	player_grid.from_data(data)
 	grid_loaded.emit()
-	InterfaceSupervisor.instance.close_interface(
-		InterfaceSupervisor.InterfaceType.FACTORY_BUILDING,
-		self,
-	)
+	if interface_supervisor != null:
+		interface_supervisor.close_interface(
+			InterfaceSupervisor.InterfaceType.FACTORY_BUILDING,
+			self,
+		)
 
 
 func _on_cancel() -> void:
-	InterfaceSupervisor.instance.close_interface(
-		InterfaceSupervisor.InterfaceType.FACTORY_BUILDING,
-		self,
-	)
+	if interface_supervisor != null:
+		interface_supervisor.close_interface(
+			InterfaceSupervisor.InterfaceType.FACTORY_BUILDING,
+			self,
+		)

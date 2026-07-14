@@ -8,6 +8,7 @@ const RECIPE_PICKER := preload("uid://0xiqunpp8bx8")
 @export var selected_recipe: Button
 @export var items_in_inventory: HBoxContainer
 @export var completion_label: Label
+@export var interface_supervisor: InterfaceSupervisor
 
 var recipes: BaseRecipeCatalogue
 var _picker: RecipePickerInterface
@@ -55,7 +56,7 @@ func _on_selected_recipe() -> void:
 	_picker = RECIPE_PICKER.instantiate()
 	_picker.recipes = recipes
 	_picker.recipe_selected.connect(_on_recipe_selected_from_picker)
-	InterfaceSupervisor.instance.open_interface(
+	interface_supervisor.open_interface(
 		InterfaceSupervisor.InterfaceType.FACTORY_BUILDING,
 		_picker,
 		self,

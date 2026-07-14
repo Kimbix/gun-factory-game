@@ -3,6 +3,10 @@ extends BaseInterface
 
 var _building := false
 
+@export var player_grid: PlayerGrid
+@export var grid_builder: GridBuilder
+var building_inventory: PlayerBuildingInventory
+
 @onready var player_grid_viewer := $PlayerGridViewer
 @onready var building_panel := $BuildingInventoryPanel
 @onready var building_list := %BuildingList
@@ -19,9 +23,8 @@ func open_building_interface() -> void:
 func close_building_interface() -> void:
 	if not _building:
 		return
-	var builder := player_grid_viewer.get_node("GridBuilder") as GridBuilder
-	if builder != null:
-		builder.deselect()
+	if grid_builder != null:
+		grid_builder.deselect()
 	close_factory_interface()
 	_clear_building_list()
 	_building = false
@@ -32,8 +35,7 @@ func is_building_interface_open() -> bool:
 
 
 func open_factory_interface() -> void:
-	var grid := GameSupervisor.instance.get_player().player_grid
-	player_grid_viewer.grid = grid
+	player_grid_viewer.grid = player_grid
 	player_grid_viewer.queue_redraw()
 	var view := get_viewport().get_visible_rect().size
 	var new_size := Vector2(min(view.x, view.y), min(view.x, view.y))
@@ -49,9 +51,7 @@ func close_factory_interface() -> void:
 
 
 func _populate_building_list() -> void:
-	var player := GameSupervisor.instance.get_player()
-	var builder := player_grid_viewer.get_node("GridBuilder") as GridBuilder
-	for stack in player.building_inventory.get_stacks():
+	for stack in building_inventory.get_stacks():
 		var btn := Button.new()
 		btn.icon = stack.info.texture
 		btn.expand_icon = true
@@ -59,12 +59,12 @@ func _populate_building_list() -> void:
 		btn.size_flags_horizontal = 0
 		btn.pressed.connect(
 			func() -> void:
-				if builder == null:
+				if grid_builder == null:
 					return
-				if builder.selected_info == stack.info:
-					builder.deselect()
+				if grid_builder.selected_info == stack.info:
+					grid_builder.deselect()
 				else:
-					builder.select(stack.info)
+					grid_builder.select(stack.info)
 		)
 
 		var count_label := Label.new()

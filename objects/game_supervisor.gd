@@ -7,20 +7,40 @@ enum GameState {
 	PAUSED,
 }
 
-static var instance: GameSupervisor
-
 var _state: GameState = GameState.GAMEPLAY
 var _state_before_pause: GameState = GameState.GAMEPLAY
 var _active_player: SimpleCharacter
 var _interface_supervisor: InterfaceSupervisor
 
 @onready var _building_ui: BuildingUI = $InterfaceSupervisor/BuildingUI
+@onready var _grid_builder: GridBuilder = (
+		$InterfaceSupervisor/BuildingUI/PlayerGridViewer/GridBuilder
+)
+@onready var _grid_interactor: GridInteractor = (
+		$InterfaceSupervisor/BuildingUI/PlayerGridViewer/GridInteractor
+)
 
 
 func _ready() -> void:
-	instance = self
 	_active_player = %GameplayScene.player_instance
 	_interface_supervisor = $InterfaceSupervisor
+
+	_building_ui.player_grid = _active_player.player_grid
+	_building_ui.building_inventory = _active_player.building_inventory
+	_building_ui.grid_builder = _grid_builder
+
+	_grid_builder.building_inventory = _active_player.building_inventory
+	_grid_builder.building_ui = _building_ui
+
+	_grid_interactor.building_inventory = _active_player.building_inventory
+	_grid_interactor.builder = _grid_builder
+	_grid_interactor.building_ui = _building_ui
+	_grid_interactor.interface_supervisor = _interface_supervisor
+
+	_interface_supervisor.building_inventory = _active_player.building_inventory
+	_interface_supervisor.on_pause_requested = pause_gameplay
+	_interface_supervisor.on_unpause_requested = unpause_gameplay
+	_active_player.leveled_up.connect(_interface_supervisor.on_leveled_up)
 
 	if not InputMap.has_action("pause"):
 		var event := InputEventKey.new()
@@ -63,6 +83,19 @@ func _unhandled_input(event: InputEvent) -> void:
 				_set_state(_state_before_pause)
 
 
+func get_player() -> SimpleCharacter:
+	return _active_player
+
+
+func pause_gameplay() -> void:
+	%GameplayScene.process_mode = PROCESS_MODE_DISABLED
+
+
+func unpause_gameplay() -> void:
+	if _state == GameState.GAMEPLAY:
+		%GameplayScene.process_mode = PROCESS_MODE_INHERIT
+
+
 func _set_state(new_state: GameState) -> void:
 	if new_state == _state:
 		return
@@ -77,16 +110,3 @@ func _set_state(new_state: GameState) -> void:
 			%GameplayScene.process_mode = PROCESS_MODE_DISABLED
 		GameState.PAUSED:
 			%GameplayScene.process_mode = PROCESS_MODE_DISABLED
-
-
-func get_player() -> SimpleCharacter:
-	return _active_player
-
-
-func pause_gameplay() -> void:
-	%GameplayScene.process_mode = PROCESS_MODE_DISABLED
-
-
-func unpause_gameplay() -> void:
-	if _state == GameState.GAMEPLAY:
-		%GameplayScene.process_mode = PROCESS_MODE_INHERIT

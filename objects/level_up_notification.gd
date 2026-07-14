@@ -11,15 +11,17 @@ const ALL_PILLARS: Array[GridComponentInfo] = [
 	preload("uid://5h2vu81iay55"),
 ]
 
+var building_inventory: PlayerBuildingInventory
+var on_closed: Callable
 var _options: Array[GridComponentInfo] = []
 
 
 func _ready() -> void:
 	reward_chosen.connect(
 		func(info: GridComponentInfo) -> void:
-			var player := GameSupervisor.instance.get_player()
-			player.building_inventory.add(info)
-			GameSupervisor.instance.unpause_gameplay()
+			building_inventory.add(info)
+			if on_closed:
+				on_closed.call()
 	)
 
 	show_options()

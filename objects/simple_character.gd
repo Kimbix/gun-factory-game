@@ -5,6 +5,8 @@ static var _actions_ready := false
 
 @export var starting_grid_data: PlayerGridData
 
+signal leveled_up(level: int)
+
 var current_target: Node2D
 var player_grid: PlayerGrid
 var building_inventory: PlayerBuildingInventory
@@ -76,8 +78,6 @@ func _ready() -> void:
 
 	$CollectionArea.area_entered.connect(_on_collection_area_entered)
 
-	level_system.leveled_up.connect(InterfaceSupervisor.instance.on_leveled_up)
-
 
 func _physics_process(_delta: float) -> void:
 	var direction := Input.get_vector("move_left", "move_right", "move_up", "move_down")
@@ -131,6 +131,7 @@ func _on_crystal_collected(crystal: ExperienceCrystal) -> void:
 
 func _on_level_up(new_level: int) -> void:
 	print("Level ", new_level, "!")
+	leveled_up.emit(new_level)
 
 
 func _on_building_placed(building: FactoryBuilding) -> void:

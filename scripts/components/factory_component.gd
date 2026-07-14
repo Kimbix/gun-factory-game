@@ -47,7 +47,7 @@ func receive_item(_item: FactoryItem) -> void:
 	pass
 
 
-func open_interface() -> void:
+func open_interface(_interface_supervisor: InterfaceSupervisor) -> void:
 	pass
 
 

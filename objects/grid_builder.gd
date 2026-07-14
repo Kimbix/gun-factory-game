@@ -91,14 +91,7 @@ func _draw() -> void:
 	var cell_origin := Vector2(cell) * PlayerGridViewer.GRID_TEXTURE_SIZE
 	var ghost_center := to_draw.get_size() / 2.0
 
-	var radians := 0.0
-	match pending_rotation % 4:
-		FactoryBuilding.Rotation.CLOCKWISE:
-			radians = PI / 2.0
-		FactoryBuilding.Rotation.COUNTERCLOCKWISE:
-			radians = -PI / 2.0
-		FactoryBuilding.Rotation.FLIPPED:
-			radians = PI
+	var radians := FactoryBuilding.rotation_to_radians(pending_rotation)
 
 	draw_set_transform(cell_origin + ghost_center, radians, Vector2.ONE)
 	draw_texture(to_draw, -ghost_center, GHOST_MODULATE)

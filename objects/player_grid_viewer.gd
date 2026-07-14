@@ -43,14 +43,7 @@ func _draw() -> void:
 					Vector2(v * PlayerGridViewer.GRID_TEXTURE_SIZE)
 					+ Vector2.ONE * (PlayerGridViewer.GRID_TEXTURE_SIZE / 2.0)
 			)
-			var radians := 0.0
-			match rot:
-				FactoryBuilding.Rotation.CLOCKWISE:
-					radians = PI / 2.0
-				FactoryBuilding.Rotation.COUNTERCLOCKWISE:
-					radians = -PI / 2.0
-				FactoryBuilding.Rotation.FLIPPED:
-					radians = PI
+			var radians := FactoryBuilding.rotation_to_radians(rot)
 			draw_set_transform(center, radians, Vector2.ONE)
 			draw_texture(to_draw, -Vector2.ONE * (PlayerGridViewer.GRID_TEXTURE_SIZE / 2.0))
 			draw_set_transform(Vector2.ZERO, 0.0, Vector2.ONE)

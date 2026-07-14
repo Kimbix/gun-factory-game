@@ -46,6 +46,18 @@ static func rotate(
 	return ((r + (1 if clockwise else 3)) % 4) as FactoryBuilding.Rotation
 
 
+static func rotation_to_radians(r: Rotation) -> float:
+	match r:
+		Rotation.CLOCKWISE:
+			return PI / 2.0
+		Rotation.COUNTERCLOCKWISE:
+			return -PI / 2.0
+		Rotation.FLIPPED:
+			return PI
+		_:
+			return 0.0
+
+
 func _init(
 		_grid: PlayerGrid,
 		info: GridComponentInfo,

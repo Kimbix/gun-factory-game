@@ -86,14 +86,7 @@ func _draw() -> void:
 	var viewer_sf := viewer.get_global_transform().get_scale()
 	var ghost_center := to_draw.get_size() / 2.0
 	var cell_center := local_pos + ghost_center * viewer_sf
-	var radians := 0.0
-	match pending_rotation % 4:
-		FactoryBuilding.Rotation.CLOCKWISE:
-			radians = PI / 2.0
-		FactoryBuilding.Rotation.COUNTERCLOCKWISE:
-			radians = -PI / 2.0
-		FactoryBuilding.Rotation.FLIPPED:
-			radians = PI
+	var radians := FactoryBuilding.rotation_to_radians(pending_rotation)
 
 	draw_set_transform(cell_center, radians, viewer_sf)
 	draw_texture(to_draw, -ghost_center, GHOST_MODULATE)

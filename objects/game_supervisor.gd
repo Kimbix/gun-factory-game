@@ -4,11 +4,13 @@ extends Node
 enum GameState {
 	GAMEPLAY,
 	BUILDING,
+	LEVEL_UP,
 	PAUSED,
 }
 
 var _state: GameState = GameState.GAMEPLAY
 var _state_before_pause: GameState = GameState.GAMEPLAY
+var _state_before_level_up: GameState = GameState.GAMEPLAY
 var _active_player: SimpleCharacter
 var _interface_supervisor: InterfaceSupervisor
 
@@ -38,8 +40,8 @@ func _ready() -> void:
 	_grid_interactor.interface_supervisor = _interface_supervisor
 
 	_interface_supervisor.building_inventory = _active_player.building_inventory
-	_interface_supervisor.pause_requested.connect(pause_gameplay)
-	_interface_supervisor.unpause_requested.connect(unpause_gameplay)
+	_interface_supervisor.pause_requested.connect(pause_for_level_up)
+	_interface_supervisor.unpause_requested.connect(unpause_from_level_up)
 	_active_player.leveled_up.connect(_interface_supervisor.on_leveled_up)
 
 	if not InputMap.has_action("pause"):
@@ -62,38 +64,46 @@ func _ready() -> void:
 
 
 func _unhandled_input(event: InputEvent) -> void:
-	if event.is_action_pressed("factory_building"):
-		match _state:
-			GameState.GAMEPLAY:
-				_set_state(GameState.BUILDING)
-			GameState.BUILDING:
-				_set_state(GameState.GAMEPLAY)
-
-	if event.is_action_pressed("building_overlay") and _state == GameState.BUILDING:
-		var viewer := _building_ui.player_grid_viewer
-		viewer.building_overlay = not viewer.building_overlay
-		viewer.queue_redraw()
-
 	if event.is_action_pressed("pause"):
+		if _state not in [GameState.GAMEPLAY, GameState.BUILDING, GameState.PAUSED]:
+			return
 		match _state:
 			GameState.GAMEPLAY, GameState.BUILDING:
 				_state_before_pause = _state
 				_set_state(GameState.PAUSED)
 			GameState.PAUSED:
 				_set_state(_state_before_pause)
+		return
+
+	if event.is_action_pressed("factory_building"):
+		if _state not in [GameState.GAMEPLAY, GameState.BUILDING]:
+			return
+		match _state:
+			GameState.GAMEPLAY:
+				_set_state(GameState.BUILDING)
+			GameState.BUILDING:
+				_set_state(GameState.GAMEPLAY)
+		return
+
+	if event.is_action_pressed("building_overlay"):
+		if _state != GameState.BUILDING:
+			return
+		var viewer := _building_ui.player_grid_viewer
+		viewer.building_overlay = not viewer.building_overlay
+		viewer.queue_redraw()
 
 
 func get_player() -> SimpleCharacter:
 	return _active_player
 
 
-func pause_gameplay() -> void:
-	%GameplayScene.process_mode = PROCESS_MODE_DISABLED
+func pause_for_level_up() -> void:
+	_state_before_level_up = _state
+	_set_state(GameState.LEVEL_UP)
 
 
-func unpause_gameplay() -> void:
-	if _state == GameState.GAMEPLAY:
-		%GameplayScene.process_mode = PROCESS_MODE_INHERIT
+func unpause_from_level_up() -> void:
+	_set_state(_state_before_level_up)
 
 
 func _set_state(new_state: GameState) -> void:
@@ -108,5 +118,8 @@ func _set_state(new_state: GameState) -> void:
 		GameState.BUILDING:
 			_interface_supervisor.open_building_interface()
 			%GameplayScene.process_mode = PROCESS_MODE_DISABLED
+		GameState.LEVEL_UP:
+			%GameplayScene.process_mode = PROCESS_MODE_DISABLED
+			_building_ui.process_mode = PROCESS_MODE_DISABLED
 		GameState.PAUSED:
 			%GameplayScene.process_mode = PROCESS_MODE_DISABLED

@@ -16,6 +16,7 @@ var building_inventory: PlayerBuildingInventory
 func open_building_interface() -> void:
 	if _building:
 		return
+	process_mode = PROCESS_MODE_INHERIT
 	open_factory_interface()
 	shop_panel.building_inventory = building_inventory
 	shop_panel.refresh()
@@ -37,6 +38,7 @@ func close_building_interface() -> void:
 	_clear_building_list()
 	shop_panel.hide()
 	_building = false
+	process_mode = PROCESS_MODE_DISABLED
 
 
 func is_building_interface_open() -> bool:

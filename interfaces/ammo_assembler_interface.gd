@@ -3,9 +3,9 @@ extends RecipeMachineInterface
 
 var ammo_assembler: AmmoAssembler:
 	get():
-		return _machine
+		return machine
 	set(v):
-		_machine = v
+		machine = v
 		generate_ui()
 
 

@@ -51,19 +51,15 @@ func receive_item(item: FactoryItem) -> void:
 
 
 func _is_centered(cur: FactoryItem) -> bool:
+	var dist: float
 	match rotation:
 		FactoryBuilding.Rotation.NORMAL, FactoryBuilding.Rotation.FLIPPED:
-			return (
-					abs(cur.position.y + cur.rect.size.y * 0.5 - rect.position.y - rect.size.y * 0.5)
-					< 0.005
-			)
+			dist = abs(cur.position.y + cur.rect.size.y * 0.5 - rect.position.y - rect.size.y * 0.5)
 		FactoryBuilding.Rotation.CLOCKWISE, FactoryBuilding.Rotation.COUNTERCLOCKWISE:
-			return (
-					abs(cur.position.x + cur.rect.size.x * 0.5 - rect.position.x - rect.size.x * 0.5)
-					< 0.005
-			)
+			dist = abs(cur.position.x + cur.rect.size.x * 0.5 - rect.position.x - rect.size.x * 0.5)
 		_:
 			return true
+	return dist < 0.005
 
 
 func _step_toward_center(cur: FactoryItem) -> Vector2:

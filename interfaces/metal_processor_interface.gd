@@ -3,9 +3,9 @@ extends RecipeMachineInterface
 
 var metal_processor: MetalProcessor:
 	get():
-		return _machine
+		return machine
 	set(v):
-		_machine = v
+		machine = v
 		generate_ui()
 
 

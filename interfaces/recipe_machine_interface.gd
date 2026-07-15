@@ -12,7 +12,7 @@ const RECIPE_PICKER := preload("uid://0xiqunpp8bx8")
 
 var recipes: BaseRecipeCatalogue
 var _picker: RecipePickerInterface
-var _machine: Variant
+var machine: Variant
 
 
 func _ready() -> void:

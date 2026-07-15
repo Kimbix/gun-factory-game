@@ -1,10 +1,10 @@
 class_name PlayerGrid
 extends Node
 
-@warning_ignore("unused_signal")
 signal output_item(item: FactoryItem)
 signal building_placed(building: FactoryBuilding)
 signal building_removed(building: FactoryBuilding)
+@warning_ignore("unused_signal")
 signal overlay_changed(position: Vector2i)
 
 @export var dimensions: Vector2i = Vector2i(10, 10)

@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="ShopCatalogue" format=3 uid="uid://dpko52oiv2rwe"]
 
-[ext_resource type="Script" uid="uid://dap88jo5osmsl" path="res://resources/shop/rarity.gd" id="0_rarity"]
+[ext_resource type="Script" uid="uid://c6tswfd57rg3p" path="res://resources/shop/rarity.gd" id="0_rarity"]
 [ext_resource type="Script" uid="uid://bj46e0a68npcj" path="res://resources/building_catalogue/building_catalogue.gd" id="0_building_cat"]
 
 [ext_resource type="Resource" uid="uid://d0puxbrhw5ty7" path="res://resources/shop/rarities/common.tres" id="1_common"]
@@ -18,8 +18,8 @@
 [ext_resource type="Resource" uid="uid://dsn4h7kwi2ca2" path="res://resources/grid_components/conveyor_splitter.tres" id="b8"]
 
 
-[ext_resource type="Script" uid="uid://chk3gq73ygg2d" path="res://resources/shop/shop_item.gd" id="shop_item_script"]
-[ext_resource type="Script" uid="uid://c7wj60qowcrgm" path="res://resources/shop/shop_catalogue.gd" id="shop_cat_script"]
+[ext_resource type="Script" uid="uid://csy8bw6jxylg3" path="res://resources/shop/shop_item.gd" id="shop_item_script"]
+[ext_resource type="Script" uid="uid://dk761p6ithagt" path="res://resources/shop/shop_catalogue.gd" id="shop_cat_script"]
 
 [sub_resource type="Resource" id="si_1"]
 script = ExtResource("shop_item_script")

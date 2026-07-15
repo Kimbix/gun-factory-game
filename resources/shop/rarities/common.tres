@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="Rarity" format=3 uid="uid://d0puxbrhw5ty7"]
+
+[ext_resource type="Script" uid="uid://dap88jo5osmsl" path="res://resources/shop/rarity.gd" id="1_0e7hn"]
+
+[resource]
+script = ExtResource("1_0e7hn")
+name = &"common"
+weight = 50.0
+color = Color(0.8, 0.8, 0.8, 1)

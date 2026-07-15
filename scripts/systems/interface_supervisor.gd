@@ -1,15 +1,15 @@
 class_name InterfaceSupervisor
 extends Node
 
+signal pause_requested
+signal unpause_requested
+
 enum InterfaceType {
 	BUILDING,
 	FACTORY_BUILDING,
 	EMERGENT,
 	DEBUG,
 }
-
-signal pause_requested
-signal unpause_requested
 
 var interfaces: Dictionary[InterfaceType, BaseInterface]
 var building_inventory: PlayerBuildingInventory
@@ -62,6 +62,18 @@ func on_leveled_up(_new_level: int) -> void:
 		_show_next_level_up()
 
 
+func open_building_interface() -> void:
+	(interfaces[InterfaceType.BUILDING] as BuildingUI).open_building_interface()
+
+
+func close_building_interface() -> void:
+	(interfaces[InterfaceType.BUILDING] as BuildingUI).close_building_interface()
+
+
+func is_building_interface_open() -> bool:
+	return (interfaces[InterfaceType.BUILDING] as BuildingUI).is_building_interface_open()
+
+
 func _show_next_level_up() -> void:
 	if _pending_level_ups.is_empty():
 		_level_up_window_open = false
@@ -81,15 +93,3 @@ func _show_next_level_up() -> void:
 
 func _on_level_up_window_closed() -> void:
 	_show_next_level_up()
-
-
-func open_building_interface() -> void:
-	(interfaces[InterfaceType.BUILDING] as BuildingUI).open_building_interface()
-
-
-func close_building_interface() -> void:
-	(interfaces[InterfaceType.BUILDING] as BuildingUI).close_building_interface()
-
-
-func is_building_interface_open() -> bool:
-	return (interfaces[InterfaceType.BUILDING] as BuildingUI).is_building_interface_open()

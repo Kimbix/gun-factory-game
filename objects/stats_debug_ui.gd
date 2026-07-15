@@ -6,6 +6,7 @@ var _elapsed: float
 
 @onready var _level_label := $Level
 @onready var _xp_label := $XP
+@onready var _gold_label := $Gold
 @onready var _health_label := $Health
 @onready var _max_health_label := $MaxHealth
 @onready var _move_speed_label := $MoveSpeed
@@ -30,6 +31,7 @@ func refresh(player: SimpleCharacter) -> void:
 	var stats: PlayerStats = player.player_stats
 	_level_label.text = "Level: %d" % player.level_system.level
 	_xp_label.text = "XP: %d / %d" % [player.level_system.xp, player.level_system.xp_to_next_level]
+	_gold_label.text = "Gold: %d" % player.level_system.gold
 	_health_label.text = "Health: %.1f" % player.health
 	_max_health_label.text = "Max Health: %.1f" % stats.stats[&"max_health"].value
 	_move_speed_label.text = "Move Speed: %.1f" % stats.stats[&"move_speed"].value

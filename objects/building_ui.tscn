@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bjxs4kbxxrhi4" path="res://objects/building_ui.gd" id="1_nb3kx"]
 [ext_resource type="PackedScene" uid="uid://dq2aqdo8qs8ft" path="res://objects/player_grid_viewer.tscn" id="2_n327g"]
+[ext_resource type="PackedScene" uid="uid://b4qlpy0ku3u1a" path="res://objects/shop_panel.tscn" id="3_n327g"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_building_panel"]
 content_margin_left = 8.0
@@ -49,3 +50,5 @@ size_flags_vertical = 3
 unique_name_in_owner = true
 layout_mode = 2
 columns = 2
+
+[node name="ShopPanel" parent="." unique_id=360560319 instance=ExtResource("3_n327g")]

@@ -24,6 +24,9 @@ text = "Level: 1"
 [node name="XP" type="Label" parent="."]
 text = "XP: 0 / 5"
 
+[node name="Gold" type="Label" parent="."]
+text = "Gold: 0"
+
 [node name="Health" type="Label" parent="."]
 text = "Health: 100.0"
 

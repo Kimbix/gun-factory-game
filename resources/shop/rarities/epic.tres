@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="Rarity" format=3 uid="uid://bujvbbh2afy1y"]
+
+[ext_resource type="Script" uid="uid://dap88jo5osmsl" path="res://resources/shop/rarity.gd" id="1_au23r"]
+
+[resource]
+script = ExtResource("1_au23r")
+name = &"epic"
+weight = 5.0
+color = Color(0.8, 0.2, 0.8, 1)

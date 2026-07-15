@@ -10,12 +10,18 @@ var building_inventory: PlayerBuildingInventory
 @onready var player_grid_viewer := $PlayerGridViewer
 @onready var building_panel := $BuildingInventoryPanel
 @onready var building_list := %BuildingList
+@onready var shop_panel := $ShopPanel
 
 
 func open_building_interface() -> void:
 	if _building:
 		return
 	open_factory_interface()
+	shop_panel.building_inventory = building_inventory
+	shop_panel.refresh()
+	shop_panel.show()
+	if not building_inventory.changed.is_connected(refresh_building_list):
+		building_inventory.changed.connect(refresh_building_list)
 	_populate_building_list()
 	_building = true
 
@@ -26,7 +32,10 @@ func close_building_interface() -> void:
 	if grid_builder != null:
 		grid_builder.deselect()
 	close_factory_interface()
+	if building_inventory.changed.is_connected(refresh_building_list):
+		building_inventory.changed.disconnect(refresh_building_list)
 	_clear_building_list()
+	shop_panel.hide()
 	_building = false
 
 

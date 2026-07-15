@@ -102,7 +102,10 @@ func _next_building() -> FactoryBuilding:
 	var p := _get_available_out_port()
 	if p == null:
 		return null
-	return grid.get_building(position + p.position + p.facing)
+	var g := grid
+	if g == null:
+		return null
+	return g.get_building(position + p.position + p.facing)
 
 
 func _move_dir() -> Vector2:

@@ -15,7 +15,10 @@ func can_accept(_item: FactoryItem) -> bool:
 
 func receive_item(item: FactoryItem) -> void:
 	_items.append(item.get_info())
-	grid.destroy_item(item)
+	var g := grid
+	if g == null:
+		return
+	g.destroy_item(item)
 
 
 func tick() -> void:
@@ -26,7 +29,11 @@ func tick() -> void:
 	if _items.is_empty():
 		return
 
-	var ports := grid.get_building_ports(position).filter(Port.output_mode_filter)
+	var g := grid
+	if g == null:
+		return
+
+	var ports := g.get_building_ports(position).filter(Port.output_mode_filter)
 	if ports.is_empty():
 		return
 
@@ -48,5 +55,5 @@ func tick() -> void:
 	if not _can_output_to(info, port, where_to):
 		return
 
-	grid.place_item(FactoryItem.new(_items.pop_front(), where_to))
+	g.place_item(FactoryItem.new(_items.pop_front(), where_to))
 	_cooldown = COOLDOWN

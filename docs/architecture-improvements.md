@@ -11,6 +11,7 @@
 - **P1 — Externalize Hardcoded UIDs** — Added `MachineConfig` and `PillarConfig` resource types. Building `.tres` files now embed config sub-resources with interface scene, recipe catalogue, output item, stat_name, and boost_value. Removed all `preload("uid://...")` / `load("uid://...")` from component scripts.
 - **P3 — Tree-Walking** — Removed `get_parent().get_parent()`, `get_node("name")`, and `_find_builder()` patterns. All cross-references are now `@export var` wired by `GameSupervisor`.
 - **P2 — InterfaceSupervisor Signals** — Replaced `Callable` properties (`on_pause_requested`, `on_unpause_requested`) with native `signal pause_requested` / `signal unpause_requested`. Connected via `connect()` in `GameSupervisor._ready()` instead of bare `Callable` assignment.
+- **P2 — RefCounted Lifecycle Safety** — Added `is_instance_valid` guard to `FactoryComponent.grid` getter, `free_resources()` method on `FactoryBuilding`, and null-guarded all `grid.*` calls in factory component subclasses. `free_resources()` is called from `PlayerGrid.destroy_building()` and `_clear_grid()`. `FactoryComponent` kept as `RefCounted` — `PlayerGrid` owns the lifecycle entirely.
 
 ---
 
@@ -279,6 +280,5 @@ func _on_death() -> void:
 | Phase | Items | Rationale |
 |-------|-------|-----------|
 | **Next** | P2: SimpleCharacter decomposition | Highest impact remaining. Splitting SimpleCharacter needs careful signal wiring. |
-| **Then** | P2: RefCounted lifecycle fix | Important for memory safety. |
 | **Then** | P3: State machine, Interface consolidation | Lower risk, incremental. |
 | **Last** | P4: BaseEnemy, VectorTools | Minor quality-of-life. |

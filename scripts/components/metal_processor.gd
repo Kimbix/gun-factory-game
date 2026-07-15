@@ -23,7 +23,10 @@ func tick() -> void:
 		_cooldown -= 1
 		_notify_progress(int((CRAFT_TIME - _cooldown) * 100.0 / CRAFT_TIME))
 		if _cooldown == 0:
-			var ports := grid.get_building_ports(position).filter(Port.output_mode_filter)
+			var g := grid
+			if g == null:
+				return
+			var ports := g.get_building_ports(position).filter(Port.output_mode_filter)
 			if ports.is_empty():
 				_cooldown = 1
 				return
@@ -54,7 +57,10 @@ func get_vars() -> Dictionary:
 func receive_item(item: FactoryItem) -> void:
 	if item.name == &"lead_plate":
 		lead_plates += 1
-	grid.destroy_item(item)
+	var g := grid
+	if g == null:
+		return
+	g.destroy_item(item)
 
 
 func set_var(n: StringName, v: Variant) -> void:
@@ -92,5 +98,8 @@ func _update_overlay_strategy() -> void:
 
 
 func _do_output(port: Port) -> void:
+	var g := grid
+	if g == null:
+		return
 	var where_to: Vector2 = position + port.position + port.facing
-	grid.place_item(FactoryItem.new(recipe.outputs[0].item, where_to))
+	g.place_item(FactoryItem.new(recipe.outputs[0].item, where_to))

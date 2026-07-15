@@ -49,13 +49,19 @@ func receive_item(item: FactoryItem) -> void:
 	elif item.name == &"gunpowder":
 		gunpowder_count += 1
 	print(shells_count, gunpowder_count)
-	grid.destroy_item(item)
+	var g := grid
+	if g == null:
+		return
+	g.destroy_item(item)
 
 
 func _do_output() -> void:
 	var p := _get_available_out_port()
 	if p == null:
 		return
+	var g := grid
+	if g == null:
+		return
 	var output := (building.get_info().config as MachineConfig).output_item
 	var where_to: Vector2 = position + p.position + p.facing
-	grid.place_item(FactoryItem.new(output, where_to))
+	g.place_item(FactoryItem.new(output, where_to))

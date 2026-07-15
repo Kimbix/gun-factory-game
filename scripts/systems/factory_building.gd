@@ -76,6 +76,13 @@ func _init(
 		behaviour.setup()
 
 
+func free_resources() -> void:
+	if behaviour:
+		behaviour.building = null
+		behaviour = null
+	grid = null
+
+
 func _to_string() -> String:
 	return "<FactoryBuilding %s>" % [_info.name]
 

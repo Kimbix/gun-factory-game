@@ -6,5 +6,8 @@ func tick() -> void:
 
 
 func receive_item(_item: FactoryItem) -> void:
-	grid.destroy_item(_item)
+	var g := grid
+	if g == null:
+		return
+	g.destroy_item(_item)
 	_notify("output_item", [_item])

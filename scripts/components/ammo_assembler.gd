@@ -49,6 +49,10 @@ func tick() -> void:
 	if output_port == null:
 		return
 
+	var g := grid
+	if g == null:
+		return
+
 	for output in recipe.outputs:
 		if not _can_output_to(output.item, output_port):
 			continue
@@ -58,7 +62,7 @@ func tick() -> void:
 			var ammo_recipe := recipe as AmmoRecipe
 			if ammo_recipe.strategy != null:
 				item.shooting_strategy = ammo_recipe.strategy.new()
-		grid.place_item(item)
+		g.place_item(item)
 
 
 func get_vars() -> Dictionary:
@@ -101,7 +105,10 @@ func set_var(n: StringName, v: Variant) -> void:
 
 func receive_item(item: FactoryItem) -> void:
 	inventory.add(item)
-	grid.destroy_item(item)
+	var g := grid
+	if g == null:
+		return
+	g.destroy_item(item)
 
 
 func open_interface(interface_supervisor: InterfaceSupervisor) -> void:

@@ -34,9 +34,12 @@ func _do_output() -> void:
 	var p := _get_available_out_port()
 	if p == null:
 		return
+	var g := grid
+	if g == null:
+		return
 	var output := (building.get_info().config as MachineConfig).output_item
 	var where_to: Vector2 = position + p.position + p.facing
-	grid.place_item(FactoryItem.new(output, where_to))
+	g.place_item(FactoryItem.new(output, where_to))
 
 
 func get_vars() -> Dictionary:
@@ -49,4 +52,7 @@ func get_vars() -> Dictionary:
 func receive_item(item: FactoryItem) -> void:
 	if item.name == &"raw_lead":
 		lead_count += 1
-	grid.destroy_item(item)
+	var g := grid
+	if g == null:
+		return
+	g.destroy_item(item)

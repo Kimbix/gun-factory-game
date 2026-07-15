@@ -29,7 +29,10 @@ func tick() -> void:
 	)
 	if not _can_output_to(generating, output_port, where_to):
 		return
-	grid.place_item(FactoryItem.new(generating, where_to))
+	var g := grid
+	if g == null:
+		return
+	g.place_item(FactoryItem.new(generating, where_to))
 	_cooldown = COOLDOWN
 
 

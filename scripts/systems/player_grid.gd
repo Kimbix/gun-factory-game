@@ -20,6 +20,7 @@ func destroy_building(v: Vector2i) -> void:
 
 	var building := _buildings[v]
 	building_removed.emit(building)
+	building.free_resources()
 	print("Erasing building at %s" % v)
 	_buildings.erase(v)
 
@@ -201,5 +202,6 @@ func _clear_grid() -> void:
 		var obj: FactoryBuilding = _buildings[i]
 		if obj == null:
 			continue
+		obj.free_resources()
 		_buildings[i] = null
 	_buildings.clear()

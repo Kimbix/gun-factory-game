@@ -38,8 +38,8 @@ func _ready() -> void:
 	_grid_interactor.interface_supervisor = _interface_supervisor
 
 	_interface_supervisor.building_inventory = _active_player.building_inventory
-	_interface_supervisor.on_pause_requested = pause_gameplay
-	_interface_supervisor.on_unpause_requested = unpause_gameplay
+	_interface_supervisor.pause_requested.connect(pause_gameplay)
+	_interface_supervisor.unpause_requested.connect(unpause_gameplay)
 	_active_player.leveled_up.connect(_interface_supervisor.on_leveled_up)
 
 	if not InputMap.has_action("pause"):

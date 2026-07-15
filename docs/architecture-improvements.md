@@ -10,6 +10,7 @@
 - **P1 — Dependency Injection** — Removed `GameSupervisor.instance` / `InterfaceSupervisor.instance` singletons. All dependencies wired in `GameSupervisor._ready()` via `@export var` or plain var. Removed `_find_builder()` and other tree-walking.
 - **P1 — Externalize Hardcoded UIDs** — Added `MachineConfig` and `PillarConfig` resource types. Building `.tres` files now embed config sub-resources with interface scene, recipe catalogue, output item, stat_name, and boost_value. Removed all `preload("uid://...")` / `load("uid://...")` from component scripts.
 - **P3 — Tree-Walking** — Removed `get_parent().get_parent()`, `get_node("name")`, and `_find_builder()` patterns. All cross-references are now `@export var` wired by `GameSupervisor`.
+- **P2 — InterfaceSupervisor Signals** — Replaced `Callable` properties (`on_pause_requested`, `on_unpause_requested`) with native `signal pause_requested` / `signal unpause_requested`. Connected via `connect()` in `GameSupervisor._ready()` instead of bare `Callable` assignment.
 
 ---
 
@@ -68,50 +69,27 @@ func heal(amount: int) -> void: ...
 
 ---
 
-## P2: EventBus Autoload
+## (Deferred) EventBus Autoload
 
-### Problem
+### Status
 
-Cross-system communication uses direct singleton access or ad-hoc signal connections. Adding a new listener requires modifying the emitter's code or manually wiring signals.
+Deferred — not needed at current scale.
 
-### Specification
+### Original Problem
 
-Create an autoload `EventBus` with typed signals for all global game events:
+Cross-system communication used `Callable` properties and ad-hoc wiring instead of signals.
 
-```gdscript
-# autoload/event_bus.gd
-extends Node
-class_name EventBus
+### What Was Actually Done
 
-signal player_damaged(amount: int, source: Node)
-signal player_died
-signal player_leveled_up(level: int)
-signal building_placed(building: FactoryBuilding, grid_position: Vector2i)
-signal building_removed(building: FactoryBuilding, grid_position: Vector2i)
-signal item_crafted(item: FactoryItemInfo, count: int)
-signal item_consumed(item: FactoryItemInfo, count: int)
-signal wave_started(wave_number: int)
-signal wave_completed(wave_number: int)
-signal game_state_changed(old_state: int, new_state: int)
-signal shop_rerolled
-```
+The only genuine cross-system awkwardness was in `InterfaceSupervisor`, which used `Callable` properties for pause/unpause. These were replaced with native signals (`pause_requested`, `unpause_requested`), connected via `connect()` in `GameSupervisor._ready()`.
 
-### Usage
+### Why Deferred
 
-```gdscript
-# Emitter
-EventBus.player_damaged.emit(10, attacker)
+After the Dependency Injection refactor, every other cross-reference is already clean `@export var` or direct `signal.connect()` in `_ready()`. Every signal the EventBus would carry has exactly **one listener** today. An EventBus at this scale makes 1:1 communication *less* traceable with zero decoupling benefit.
 
-# Subscriber
-func _ready() -> void:
-    EventBus.player_damaged.connect(_on_player_damaged)
-```
+### Future Criterion
 
-### Migration Steps
-
-1. Create `autoload/event_bus.gd` and register in Project Settings → Autoload.
-2. Replace direct singleton access with `EventBus.signal.emit()` / `.connect()`.
-3. Remove old signal wiring from scene trees where possible.
+Revisit if any signal accumulates **2+ unrelated subscribers** (e.g., `building_placed` needs to update both grid rendering and a quest system). Until then, keep connections local and explicit.
 
 ---
 
@@ -300,7 +278,7 @@ func _on_death() -> void:
 
 | Phase | Items | Rationale |
 |-------|-------|-----------|
-| **Next** | P2: SimpleCharacter decomposition, EventBus | Highest impact remaining. Splitting SimpleCharacter needs careful signal wiring. |
+| **Next** | P2: SimpleCharacter decomposition | Highest impact remaining. Splitting SimpleCharacter needs careful signal wiring. |
 | **Then** | P2: RefCounted lifecycle fix | Important for memory safety. |
 | **Then** | P3: State machine, Interface consolidation | Lower risk, incremental. |
 | **Last** | P4: BaseEnemy, VectorTools | Minor quality-of-life. |

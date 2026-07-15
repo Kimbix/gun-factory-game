@@ -8,9 +8,10 @@ enum InterfaceType {
 	DEBUG,
 }
 
+signal pause_requested
+signal unpause_requested
+
 var interfaces: Dictionary[InterfaceType, BaseInterface]
-var on_pause_requested: Callable
-var on_unpause_requested: Callable
 var building_inventory: PlayerBuildingInventory
 var _pending_level_ups: Array[int] = []
 var _level_up_window_open: bool = false
@@ -64,19 +65,16 @@ func on_leveled_up(_new_level: int) -> void:
 func _show_next_level_up() -> void:
 	if _pending_level_ups.is_empty():
 		_level_up_window_open = false
-		if on_unpause_requested:
-			on_unpause_requested.call()
+		unpause_requested.emit()
 		return
 
 	_pending_level_ups.pop_front()
 	_level_up_window_open = true
-	if on_pause_requested:
-		on_pause_requested.call()
+	pause_requested.emit()
 	var level_up_window := preload("uid://chiougv7mhwbp").instantiate()
 	level_up_window.building_inventory = building_inventory
 	level_up_window.on_closed = func():
-		if on_unpause_requested:
-			on_unpause_requested.call()
+		unpause_requested.emit()
 	level_up_window.tree_exited.connect(_on_level_up_window_closed)
 	open_interface(InterfaceType.EMERGENT, level_up_window, null)
 

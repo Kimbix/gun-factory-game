@@ -3,22 +3,23 @@
 [ext_resource type="Script" uid="uid://dio5qgikhe7p1" path="res://resources/enemy_waves/enemy_waves.gd" id="1_q4fjt"]
 [ext_resource type="Script" uid="uid://ctf6nntqd8vvt" path="res://resources/enemy_waves/enemy_wave.gd" id="2_fhf8w"]
 [ext_resource type="Script" uid="uid://bsafh2yqkks57" path="res://resources/enemy_waves/enemy_info.gd" id="3_fhf8w"]
-[ext_resource type="PackedScene" uid="uid://c3krnxqtp0xbk" path="res://objects/enemy_slime.tscn" id="4_6e1dk"]
-
-[sub_resource type="Resource" id="Resource_fhf8w"]
-script = ExtResource("3_fhf8w")
-scene = ExtResource("4_6e1dk")
-base_xp = 3
-variance = 0.3
-metadata/_custom_type_script = "uid://bsafh2yqkks57"
+[ext_resource type="Resource" uid="uid://cpsm4hp2ib03s" path="res://resources/enemy_waves/enemy_info_slime.tres" id="4_6e1dk"]
+[ext_resource type="Resource" uid="uid://v0tb8nhb3xj2" path="res://resources/enemy_waves/enemy_info_angry_robot.tres" id="5_uuh8f"]
 
 [sub_resource type="Resource" id="Resource_8rb1r"]
 script = ExtResource("2_fhf8w")
 end_time_minutes = 1.0
-enemies = Array[ExtResource("3_fhf8w")]([SubResource("Resource_fhf8w")])
+enemies = Array[ExtResource("3_fhf8w")]([ExtResource("4_6e1dk")])
+metadata/_custom_type_script = "uid://ctf6nntqd8vvt"
+
+[sub_resource type="Resource" id="Resource_r0dkg"]
+script = ExtResource("2_fhf8w")
+start_time_minutes = 1.0
+end_time_minutes = 2.0
+enemies = Array[ExtResource("3_fhf8w")]([ExtResource("5_uuh8f")])
 metadata/_custom_type_script = "uid://ctf6nntqd8vvt"
 
 [resource]
 script = ExtResource("1_q4fjt")
-waves = Array[ExtResource("2_fhf8w")]([SubResource("Resource_8rb1r")])
+waves = Array[ExtResource("2_fhf8w")]([SubResource("Resource_8rb1r"), SubResource("Resource_r0dkg")])
 metadata/_custom_type_script = "uid://dio5qgikhe7p1"

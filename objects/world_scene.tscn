@@ -4,6 +4,7 @@
 [ext_resource type="Resource" uid="uid://ciyco2se0tapx" path="res://resources/enemy_waves/testing_waves.tres" id="3_vuntw"]
 [ext_resource type="Texture2D" uid="uid://cfi1wpkmoebie" path="res://assets/world/spr_madForestBackground.png" id="4_6mirt"]
 [ext_resource type="Script" uid="uid://dqwaa3ln6a25" path="res://objects/game_director.gd" id="4_2780i"]
+[ext_resource type="Resource" path="res://resources/enemy_waves/testing_events.tres" id="5_events"]
 
 [sub_resource type="Environment" id="Environment_t7wo2"]
 
@@ -22,5 +23,6 @@ texture = ExtResource("4_6mirt")
 script = ExtResource("4_2780i")
 player_character_scene = ExtResource("1_t7wo2")
 enemy_waves = ExtResource("3_vuntw")
+enemy_events = ExtResource("5_events")
 spawn_interval = 1.0
 spawn_per_wave_percent = 0.1

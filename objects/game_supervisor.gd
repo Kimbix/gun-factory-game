@@ -20,8 +20,7 @@ var _interface_supervisor: InterfaceSupervisor
 )
 @onready var _grid_interactor: GridInteractor = (
 		$InterfaceSupervisor/BuildingUI/PlayerGridViewer/GridInteractor
-	)
-
+)
 
 
 func _ready() -> void:

@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="EnemyInfo" format=3 uid="uid://v0tb8nhb3xj2"]
+
+[ext_resource type="Script" uid="uid://bsafh2yqkks57" path="res://resources/enemy_waves/enemy_info.gd" id="1_robot"]
+[ext_resource type="PackedScene" uid="uid://y582g1ol3nyv" path="res://objects/enemy_angry_robot.tscn" id="2_robot"]
+
+[resource]
+script = ExtResource("1_robot")
+scene = ExtResource("2_robot")
+base_xp = 1
+metadata/_custom_type_script = "uid://bsafh2yqkks57"

@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://3wkj66p6pcq3"]
+
+[ext_resource type="Script" uid="uid://dtbuseh8mw7c1" path="res://objects/enemy_slime.gd" id="1_nv0d7"]
+[ext_resource type="Texture2D" uid="uid://3q5vaxhvrsau" path="res://assets/world_entities/spr_bossTest.png" id="2_nv0d7"]
+[ext_resource type="PackedScene" path="res://objects/experience_spawner.tscn" id="3_026nx"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o6wg8"]
+size = Vector2(33, 28.000002)
+
+[node name="EnemySlime" type="CharacterBody2D" unique_id=589975782]
+script = ExtResource("1_nv0d7")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=954768743]
+texture = ExtResource("2_nv0d7")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=284001717]
+position = Vector2(-4.7683716e-07, 0.5000005)
+rotation = -1.5707964
+shape = SubResource("RectangleShape2D_o6wg8")
+
+[node name="ExperienceSpawner" parent="." unique_id=1642692828 instance=ExtResource("3_026nx")]
+base_xp = 1
+variance = 0.3
+
+[connection signal="on_death" from="." to="ExperienceSpawner" method="spawn"]

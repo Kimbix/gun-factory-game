@@ -3,6 +3,7 @@ extends WorldEnvironment
 
 @export var player_character_scene: PackedScene
 @export var enemy_waves: EnemyWaves
+@export var enemy_events: EnemyEvents
 @export var enemy_cap := 50
 @export_category("Spawn Specifications")
 @export var spawn_interval := 10.0
@@ -23,6 +24,12 @@ func _ready() -> void:
 	wave_index = 0
 	active_wave = enemy_waves.get_first()
 
+	if enemy_events != null:
+		print("GameDirector: enemy_events found, ", enemy_events.events.size(), " event(s)")
+		enemy_events.setup()
+	else:
+		print("GameDirector: enemy_events is null")
+
 	var timer := Timer.new()
 	timer.timeout.connect(_spawn_enemies)
 	timer.wait_time = spawn_interval
@@ -33,9 +40,17 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	elapsed_time += delta
+
 	if active_wave != null and elapsed_time >= active_wave.end_time_minutes * 60.0:
 		wave_index += 1
 		active_wave = enemy_waves.get_wave(wave_index)
+
+	if enemy_events != null:
+		var event := enemy_events.get_next_unfired(elapsed_time)
+		while event != null:
+			print("GameDirector: event fired at ", elapsed_time, "s")
+			_handle_event(event)
+			event = enemy_events.get_next_unfired(elapsed_time)
 
 
 func _spawn_player(spawn_pos: Vector2 = Vector2.ZERO) -> void:
@@ -77,3 +92,31 @@ func _spawn_enemies() -> void:
 
 func _on_enemy_killed(which: BaseEnemy) -> void:
 	enemies.erase(which)
+
+
+func _handle_event(event: EnemyEvent) -> void:
+	_spawn_boss(event)
+
+
+func _spawn_boss(event: EnemyEvent) -> void:
+	print("GameDirector: spawning boss")
+	for i in event.count:
+		var instance: BaseEnemy = event.enemy_info.scene.instantiate()
+		instance.enemy_type = BaseEnemy.EnemyType.BOSS
+		instance.player = player_instance
+		instance.spawn_distance_min = spawn_distance_min
+		instance.spawn_distance_max = spawn_distance_max
+		instance.position = (
+				player_instance.position
+				+ ((Vector2.RIGHT * randf_range(spawn_distance_min, spawn_distance_max))
+						.rotated(randf() * TAU))
+		)
+
+		var spawner := instance.find_child("ExperienceSpawner") as ExperienceSpawner
+		if spawner != null:
+			spawner.base_xp = event.enemy_info.base_xp
+			spawner.variance = event.enemy_info.variance
+
+		add_child(instance)
+		enemies.append(instance)
+		instance.tree_exited.connect(_on_enemy_killed.bind(instance))

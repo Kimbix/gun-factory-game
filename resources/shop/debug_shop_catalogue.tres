@@ -24,9 +24,9 @@ stock = 5
 [sub_resource type="Resource" id="si_2"]
 script = ExtResource("shop_item_script")
 item = ExtResource("b8")
-base_price = 10
+base_price = 5
 rarity = ExtResource("1_common")
-stock = 5
+stock = 2
 
 [sub_resource type="Resource" id="si_3"]
 script = ExtResource("shop_item_script")

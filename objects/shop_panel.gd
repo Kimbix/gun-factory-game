@@ -28,7 +28,8 @@ func _ready() -> void:
 
 func refresh() -> void:
 	_reroll_count = 0
-	_pick_random_items()
+	if _slots.is_empty():
+		_pick_random_items()
 	_update_ui()
 
 
@@ -108,7 +109,7 @@ func _update_ui() -> void:
 		hbox.add_child(name_label)
 
 		var details := Label.new()
-		details.text = "x%d %dg" % [si.amount_per_purchase, price]
+		details.text = "%dg  (x%d)" % [price, slot.stock]
 		details.add_theme_color_override("font_color", si.rarity.color)
 		details.add_theme_font_size_override("font_size", 11)
 		details.size_flags_horizontal = Control.SIZE_SHRINK_END
@@ -144,7 +145,7 @@ func _on_slot_pressed(slot: Dictionary) -> void:
 	var price: int = _get_item_price(si, 0)
 	if not player.level_system.spend_gold(price):
 		return
-	building_inventory.add(si.item, si.amount_per_purchase)
+	building_inventory.add(si.item, 1)
 	slot.stock -= 1
 	_update_ui()
 

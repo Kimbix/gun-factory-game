@@ -17,7 +17,7 @@ texture = ExtResource("1_t7xr3")
 shape = SubResource("RectangleShape2D_vuntw")
 
 [node name="ExperienceSpawner" parent="." unique_id=1642692828 instance=ExtResource("3_g5he2")]
-base_xp = 3
+base_xp = 1
 variance = 0.3
 
 [connection signal="on_death" from="." to="ExperienceSpawner" method="spawn"]

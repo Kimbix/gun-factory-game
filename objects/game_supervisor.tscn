@@ -24,6 +24,7 @@ script = ExtResource("3_r0dkg")
 
 [node name="GameplayScene" parent="." unique_id=367612 instance=ExtResource("2_gm3q9")]
 unique_name_in_owner = true
-spawn_interval = 1.0
+spawn_interval = 3.0
+spawn_per_wave_percent = 0.025
 spawn_distance_min = 400.0
 spawn_distance_max = 600.0

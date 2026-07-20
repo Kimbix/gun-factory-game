@@ -9,7 +9,7 @@
 [sub_resource type="Resource" id="Resource_pcfg"]
 script = ExtResource("4_pcfg")
 stat_name = &"pickup_range"
-boost_value = 40.0
+boost_value = 5.0
 
 [resource]
 script = ExtResource("1_fv3h2")

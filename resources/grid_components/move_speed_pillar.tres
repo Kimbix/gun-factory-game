@@ -9,7 +9,7 @@
 [sub_resource type="Resource" id="Resource_pcfg"]
 script = ExtResource("4_pcfg")
 stat_name = &"move_speed"
-boost_value = 40.0
+boost_value = 7.5
 
 [resource]
 script = ExtResource("1_fv3h2")

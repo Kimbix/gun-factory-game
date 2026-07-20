@@ -4,8 +4,9 @@
 [ext_resource type="Script" uid="uid://dtbuseh8mw7c1" path="res://objects/enemy_slime.gd" id="2_qu3vo"]
 [ext_resource type="PackedScene" path="res://objects/experience_spawner.tscn" id="3_g5he2"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_vuntw"]
-size = Vector2(18, 10)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_k111l"]
+radius = 4.0
+height = 18.0
 
 [node name="EnemySlime" type="CharacterBody2D" unique_id=589975782]
 script = ExtResource("2_qu3vo")
@@ -14,7 +15,8 @@ script = ExtResource("2_qu3vo")
 texture = ExtResource("1_t7xr3")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=284001717]
-shape = SubResource("RectangleShape2D_vuntw")
+rotation = -1.5707964
+shape = SubResource("CapsuleShape2D_k111l")
 
 [node name="ExperienceSpawner" parent="." unique_id=1642692828 instance=ExtResource("3_g5he2")]
 base_xp = 1

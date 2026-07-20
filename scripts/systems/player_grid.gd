@@ -1,13 +1,14 @@
 class_name PlayerGrid
 extends Node
 
-signal output_item(item: FactoryItem)
+@warning_ignore("unused_signal") signal output_item(item: FactoryItem)
+@warning_ignore("unused_signal") signal overlay_changed(position: Vector2i)
 signal building_placed(building: FactoryBuilding)
 signal building_removed(building: FactoryBuilding)
-@warning_ignore("unused_signal")
-signal overlay_changed(position: Vector2i)
 
 @export var dimensions: Vector2i = Vector2i(10, 10)
+
+const _DEFAULT_FLOOR_TEX: Texture2D = preload("uid://bcxv8tx5ovn5l")
 
 var _floor: Dictionary[Vector2i, Texture2D] = { }
 var _items: Array[FactoryItem] = []
@@ -130,7 +131,7 @@ func initialize_empty() -> void:
 	_clear_grid()
 
 	for v: Vector2i in VectorTools.vector2i_range(dimensions):
-		_floor[v] = preload("uid://bcxv8tx5ovn5l")
+		_floor[v] = _DEFAULT_FLOOR_TEX
 
 
 func tick() -> void:
@@ -170,6 +171,31 @@ func from_data(data: PlayerGridData) -> void:
 	dimensions = data.dimensions
 	for k: Variant in data.floor_textures:
 		_floor[k as Vector2i] = data.floor_textures[k] as Texture2D
+
+	var expected_floor := dimensions.x * dimensions.y
+	if _floor.size() != expected_floor:
+		print("WARNING: floor cnt %d ≠ %dx%d" % [_floor.size(), dimensions.x, dimensions.y])
+		if _floor.size() > expected_floor:
+			var to_remove: Array[Vector2i] = []
+			for v: Vector2i in _floor:
+				if v.x >= dimensions.x or v.y >= dimensions.y:
+					to_remove.append(v)
+			for v: Vector2i in to_remove:
+				_floor.erase(v)
+		else:
+			var default_tex := _DEFAULT_FLOOR_TEX
+			for v: Vector2i in VectorTools.vector2i_range(dimensions):
+				if not _floor.has(v):
+					_floor[v] = default_tex
+
+		# Also clean up buildings that fell out of bounds
+		var buildings_to_remove: Array[Vector2i] = []
+		for v: Vector2i in _buildings:
+			if v.x >= dimensions.x or v.y >= dimensions.y:
+				buildings_to_remove.append(v)
+		for v: Vector2i in buildings_to_remove:
+			_buildings[v].free_resources()
+			_buildings.erase(v)
 
 	for entry: BuildingEntry in data.buildings:
 		var rotation := entry.rotation as FactoryBuilding.Rotation

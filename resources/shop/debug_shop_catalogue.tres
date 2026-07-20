@@ -1,13 +1,8 @@
 [gd_resource type="Resource" script_class="ShopCatalogue" format=3 uid="uid://dpko52oiv2rwe"]
 
-[ext_resource type="Script" uid="uid://c6tswfd57rg3p" path="res://resources/shop/rarity.gd" id="0_rarity"]
-[ext_resource type="Script" uid="uid://bj46e0a68npcj" path="res://resources/building_catalogue/building_catalogue.gd" id="0_building_cat"]
-
 [ext_resource type="Resource" uid="uid://d0puxbrhw5ty7" path="res://resources/shop/rarities/common.tres" id="1_common"]
 [ext_resource type="Resource" uid="uid://dg83go6xt162r" path="res://resources/shop/rarities/uncommon.tres" id="2_uncommon"]
 [ext_resource type="Resource" uid="uid://c0eojr4amwqdb" path="res://resources/shop/rarities/rare.tres" id="3_rare"]
-[ext_resource type="Resource" uid="uid://bujvbbh2afy1y" path="res://resources/shop/rarities/epic.tres" id="4_epic"]
-
 [ext_resource type="Resource" uid="uid://cxaf6asblr1t7" path="res://resources/grid_components/conveyor_belt.tres" id="b1"]
 [ext_resource type="Resource" uid="uid://djspgv1yqiaky" path="res://resources/grid_components/combiner.tres" id="b2"]
 [ext_resource type="Resource" uid="uid://d1wu3w33a0ds1" path="res://resources/grid_components/item_generator.tres" id="b3"]
@@ -16,10 +11,8 @@
 [ext_resource type="Resource" uid="uid://bfbl3v4bs23as" path="res://resources/grid_components/metal_processor.tres" id="b6"]
 [ext_resource type="Resource" uid="uid://delxbnrvtqsr4" path="res://resources/grid_components/ammo_assembler.tres" id="b7"]
 [ext_resource type="Resource" uid="uid://dsn4h7kwi2ca2" path="res://resources/grid_components/conveyor_splitter.tres" id="b8"]
-
-
-[ext_resource type="Script" uid="uid://csy8bw6jxylg3" path="res://resources/shop/shop_item.gd" id="shop_item_script"]
 [ext_resource type="Script" uid="uid://dk761p6ithagt" path="res://resources/shop/shop_catalogue.gd" id="shop_cat_script"]
+[ext_resource type="Script" uid="uid://csy8bw6jxylg3" path="res://resources/shop/shop_item.gd" id="shop_item_script"]
 
 [sub_resource type="Resource" id="si_1"]
 script = ExtResource("shop_item_script")
@@ -42,7 +35,6 @@ script = ExtResource("shop_item_script")
 item = ExtResource("b3")
 base_price = 20
 rarity = ExtResource("2_uncommon")
-amount_per_purchase = 1
 stock = 3
 
 [sub_resource type="Resource" id="si_4"]
@@ -50,7 +42,6 @@ script = ExtResource("shop_item_script")
 item = ExtResource("b4")
 base_price = 20
 rarity = ExtResource("2_uncommon")
-amount_per_purchase = 1
 stock = 3
 
 [sub_resource type="Resource" id="si_5"]
@@ -58,7 +49,6 @@ script = ExtResource("shop_item_script")
 item = ExtResource("b2")
 base_price = 25
 rarity = ExtResource("2_uncommon")
-amount_per_purchase = 1
 stock = 2
 
 [sub_resource type="Resource" id="si_6"]
@@ -66,7 +56,6 @@ script = ExtResource("shop_item_script")
 item = ExtResource("b5")
 base_price = 35
 rarity = ExtResource("3_rare")
-amount_per_purchase = 1
 stock = 2
 
 [sub_resource type="Resource" id="si_7"]
@@ -74,7 +63,6 @@ script = ExtResource("shop_item_script")
 item = ExtResource("b6")
 base_price = 35
 rarity = ExtResource("3_rare")
-amount_per_purchase = 1
 stock = 2
 
 [sub_resource type="Resource" id="si_8"]
@@ -82,7 +70,6 @@ script = ExtResource("shop_item_script")
 item = ExtResource("b7")
 base_price = 40
 rarity = ExtResource("3_rare")
-amount_per_purchase = 1
 stock = 2
 
 [resource]

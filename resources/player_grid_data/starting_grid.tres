@@ -101,7 +101,7 @@ data = {
 
 [resource]
 script = ExtResource("14_1bc4u")
-dimensions = Vector2i(10, 10)
+dimensions = Vector2i(25, 25)
 floor_textures = {
 Vector2i(0, 0): ExtResource("13_sh7ot"),
 Vector2i(0, 1): ExtResource("13_sh7ot"),

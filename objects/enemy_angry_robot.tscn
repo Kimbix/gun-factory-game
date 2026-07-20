@@ -4,22 +4,20 @@
 [ext_resource type="Texture2D" uid="uid://drreyl7qu0c6g" path="res://assets/world_entities/spr_enemyAngryRobot.png" id="1_rwqws"]
 [ext_resource type="PackedScene" path="res://objects/experience_spawner.tscn" id="3_rwqws"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_k111l"]
-size = Vector2(15.999998, 18)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vuntw"]
+size = Vector2(18, 10)
 
-[node name="EnemySlime" type="CharacterBody2D" unique_id=589975782]
+[node name="AngryRobot" type="CharacterBody2D" unique_id=589975782]
 script = ExtResource("1_ffwk4")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=954768743]
 texture = ExtResource("1_rwqws")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=284001717]
-position = Vector2(0, -2.9802322e-08)
-rotation = -1.5707964
-shape = SubResource("RectangleShape2D_k111l")
+shape = SubResource("RectangleShape2D_vuntw")
 
 [node name="ExperienceSpawner" parent="." unique_id=1642692828 instance=ExtResource("3_rwqws")]
-base_xp = 1
+base_xp = 3
 variance = 0.3
 
 [connection signal="on_death" from="." to="ExperienceSpawner" method="spawn"]

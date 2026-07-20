@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://u5nlq61scp6q" path="res://interfaces/interface_canvas_layer.tscn" id="4_bncg7"]
 [ext_resource type="PackedScene" uid="uid://dgxpr0t4v73lm" path="res://objects/emergent_ui.tscn" id="5_pqrs"]
 [ext_resource type="PackedScene" uid="uid://bg1u2yvhxn1tl" path="res://objects/building_ui.tscn" id="6_jroq"]
+[ext_resource type="Resource" uid="uid://depiu46xbt4hi" path="res://resources/enemy_waves/testing_events.tres" id="8_epj5h"]
 
 [node name="GameSupervisor" type="Node" unique_id=1285082505]
 script = ExtResource("1_7xq2v")
@@ -24,7 +25,7 @@ script = ExtResource("3_r0dkg")
 
 [node name="GameplayScene" parent="." unique_id=367612 instance=ExtResource("2_gm3q9")]
 unique_name_in_owner = true
-spawn_interval = 3.0
-spawn_per_wave_percent = 0.025
-spawn_distance_min = 400.0
+enemy_events = ExtResource("8_epj5h")
+spawn_interval = 1.0
+spawn_distance_min = 500.0
 spawn_distance_max = 600.0

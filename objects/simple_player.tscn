@@ -8,7 +8,7 @@
 size = Vector2(13, 31)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_clctn"]
-radius = 80.0
+radius = 20.0
 
 [node name="CharacterBody2D" type="CharacterBody2D" unique_id=800432502]
 script = ExtResource("1_yj3so")

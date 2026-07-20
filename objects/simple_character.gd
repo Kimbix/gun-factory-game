@@ -121,7 +121,8 @@ func _on_collection_area_entered(area: Area2D) -> void:
 	var crystal := area as ExperienceCrystal
 	if crystal == null:
 		return
-	crystal.collected.connect(_on_crystal_collected.bind(crystal))
+	if not crystal.collected.is_connected(_on_crystal_collected):
+		crystal.collected.connect(_on_crystal_collected.bind(crystal), CONNECT_ONE_SHOT)
 	crystal.start_follow(self)
 
 

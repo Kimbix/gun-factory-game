@@ -8,6 +8,12 @@
 [ext_resource type="PackedScene" uid="uid://dgxpr0t4v73lm" path="res://objects/emergent_ui.tscn" id="5_pqrs"]
 [ext_resource type="PackedScene" uid="uid://bg1u2yvhxn1tl" path="res://objects/building_ui.tscn" id="6_jroq"]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_dspwn"]
+radius = 500.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_boss"]
+radius = 1024.0
+
 [node name="GameSupervisor" type="Node" unique_id=1285082505]
 script = ExtResource("1_7xq2v")
 
@@ -22,5 +28,18 @@ script = ExtResource("3_r0dkg")
 
 [node name="DebugUI" parent="InterfaceSupervisor" unique_id=1655867431 instance=ExtResource("4_abc")]
 
+[node name="DespawnProximity" type="Area2D" parent="." unique_id=757290238]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DespawnProximity" unique_id=1608255921]
+shape = SubResource("CircleShape2D_dspwn")
+
+[node name="BossProximity" type="Area2D" parent="." unique_id=1868556450]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BossProximity" unique_id=769400400]
+shape = SubResource("CircleShape2D_boss")
+
 [node name="GameplayScene" parent="." unique_id=367612 instance=ExtResource("2_gm3q9")]
 unique_name_in_owner = true
+spawn_interval = 1.0
+spawn_distance_min = 500.0
+spawn_distance_max = 600.0

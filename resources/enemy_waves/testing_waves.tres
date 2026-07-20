@@ -8,6 +8,8 @@
 [sub_resource type="Resource" id="Resource_fhf8w"]
 script = ExtResource("3_fhf8w")
 scene = ExtResource("4_6e1dk")
+base_xp = 3
+variance = 0.3
 metadata/_custom_type_script = "uid://bsafh2yqkks57"
 
 [sub_resource type="Resource" id="Resource_8rb1r"]

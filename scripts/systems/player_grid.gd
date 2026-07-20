@@ -172,6 +172,30 @@ func from_data(data: PlayerGridData) -> void:
 	for k: Variant in data.floor_textures:
 		_floor[k as Vector2i] = data.floor_textures[k] as Texture2D
 
+	var expected_floor := dimensions.x * dimensions.y
+	if _floor.size() != expected_floor:
+		print("WARNING: floor cnt %d ≠ %dx%d" % [_floor.size(), dimensions.x, dimensions.y])
+		if _floor.size() > expected_floor:
+			var to_remove: Array[Vector2i] = []
+			for v: Vector2i in _floor:
+				if v.x >= dimensions.x or v.y >= dimensions.y:
+					to_remove.append(v)
+			for v: Vector2i in to_remove:
+				_floor.erase(v)
+		else:
+			var default_tex := preload("uid://bcxv8tx5ovn5l")
+			for v: Vector2i in VectorTools.vector2i_range(dimensions):
+				if not _floor.has(v):
+					_floor[v] = default_tex
+
+		var buildings_to_remove: Array[Vector2i] = []
+		for v: Vector2i in _buildings:
+			if v.x >= dimensions.x or v.y >= dimensions.y:
+				buildings_to_remove.append(v)
+		for v: Vector2i in buildings_to_remove:
+			_buildings[v].free_resources()
+			_buildings.erase(v)
+
 	for entry: BuildingEntry in data.buildings:
 		var rotation := entry.rotation as FactoryBuilding.Rotation
 		place_building(entry.info, entry.position, rotation)

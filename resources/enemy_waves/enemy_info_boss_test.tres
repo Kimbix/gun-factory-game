@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="EnemyInfo" format=3]
+[gd_resource type="Resource" script_class="EnemyInfo" format=3 uid="uid://d0i78waueks5g"]
 
 [ext_resource type="Script" uid="uid://bsafh2yqkks57" path="res://resources/enemy_waves/enemy_info.gd" id="1_boss"]
 [ext_resource type="PackedScene" uid="uid://3wkj66p6pcq3" path="res://objects/enemy_bossTest.tscn" id="2_boss"]
@@ -7,5 +7,4 @@
 script = ExtResource("1_boss")
 scene = ExtResource("2_boss")
 base_xp = 20
-variance = 0.2
 metadata/_custom_type_script = "uid://bsafh2yqkks57"

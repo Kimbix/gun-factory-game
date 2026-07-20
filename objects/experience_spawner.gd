@@ -44,4 +44,7 @@ func _do_spawn_deferred(amount: int, origin: Vector2) -> void:
 			crystal.xp_value = value
 			var offset := Vector2.RIGHT.rotated(randf() * TAU) * randf() * spawn_radius
 			crystal.global_position = origin + offset
-			get_tree().current_scene.add_child(crystal)
+			var enemy := get_parent() as BaseEnemy
+			if enemy == null or enemy.game_world == null:
+				continue
+			enemy.game_world.add_child(crystal)

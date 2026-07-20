@@ -57,6 +57,7 @@ func _spawn_enemies() -> void:
 		var info: EnemyInfo = active_wave.enemies.pick_random()
 		var instance: BaseEnemy = info.scene.instantiate()
 		instance.player = player_instance
+		instance.game_world = self
 		instance.position = (
 				player_instance.position
 				+ ((Vector2.RIGHT * randf_range(spawn_distance_min, spawn_distance_max))

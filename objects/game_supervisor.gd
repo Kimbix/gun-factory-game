@@ -21,8 +21,7 @@ var _interface_supervisor: InterfaceSupervisor
 @onready var _grid_interactor: GridInteractor = (
 		$InterfaceSupervisor/BuildingUI/PlayerGridViewer/GridInteractor
 	)
-@onready var _despawn_proximity: Area2D = $DespawnProximity
-@onready var _boss_proximity: Area2D = $BossProximity
+
 
 
 func _ready() -> void:
@@ -45,15 +44,6 @@ func _ready() -> void:
 	_interface_supervisor.pause_requested.connect(pause_for_level_up)
 	_interface_supervisor.unpause_requested.connect(unpause_from_level_up)
 	_active_player.leveled_up.connect(_interface_supervisor.on_leveled_up)
-
-	_despawn_proximity.body_exited.connect(_on_despawn_proximity_exited)
-	_boss_proximity.body_exited.connect(_on_boss_proximity_exited)
-
-	var position_timer := Timer.new()
-	position_timer.timeout.connect(_sync_proximity_positions)
-	position_timer.wait_time = 30.0 / 60.0
-	position_timer.autostart = true
-	add_child(position_timer)
 
 	if not InputMap.has_action("pause"):
 		var event := InputEventKey.new()
@@ -115,35 +105,6 @@ func pause_for_level_up() -> void:
 
 func unpause_from_level_up() -> void:
 	_set_state(_state_before_level_up)
-
-
-func _sync_proximity_positions() -> void:
-	if _active_player == null:
-		return
-
-	var player_pos := _active_player.global_position
-	_despawn_proximity.global_position = player_pos
-	_boss_proximity.global_position = player_pos
-
-
-func _on_despawn_proximity_exited(body: Node2D) -> void:
-	if _state != GameState.GAMEPLAY:
-		return
-	var enemy := body as BaseEnemy
-	if enemy == null or enemy.enemy_type != BaseEnemy.EnemyType.REGULAR:
-		return
-	enemy.queue_free()
-
-
-func _on_boss_proximity_exited(body: Node2D) -> void:
-	if _state != GameState.GAMEPLAY:
-		return
-	var enemy := body as BaseEnemy
-	if enemy == null or enemy.enemy_type != BaseEnemy.EnemyType.BOSS:
-		return
-	var angle := randf() * TAU
-	var radius := randf_range(enemy.spawn_distance_min, enemy.spawn_distance_max)
-	enemy.global_position = _active_player.global_position + Vector2.RIGHT.rotated(angle) * radius
 
 
 func _set_state(new_state: GameState) -> void:

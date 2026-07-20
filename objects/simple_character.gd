@@ -77,6 +77,8 @@ func _ready() -> void:
 	sync_stats()
 
 	$CollectionArea.area_entered.connect(_on_collection_area_entered)
+	$DespawnProximity.body_exited.connect(_on_despawn_proximity_exited)
+	$BossProximity.body_exited.connect(_on_boss_proximity_exited)
 
 
 func _physics_process(_delta: float) -> void:
@@ -127,6 +129,26 @@ func _on_collection_area_entered(area: Area2D) -> void:
 
 func _on_crystal_collected(crystal: ExperienceCrystal) -> void:
 	level_system.add_xp(crystal.xp_value)
+
+
+func _on_despawn_proximity_exited(body: Node2D) -> void:
+	if not is_processing():
+		return
+	var enemy := body as BaseEnemy
+	if enemy == null or enemy.enemy_type != BaseEnemy.EnemyType.REGULAR:
+		return
+	enemy.queue_free()
+
+
+func _on_boss_proximity_exited(body: Node2D) -> void:
+	if not is_processing():
+		return
+	var enemy := body as BaseEnemy
+	if enemy == null or enemy.enemy_type != BaseEnemy.EnemyType.BOSS:
+		return
+	var angle := randf() * TAU
+	var radius := randf_range(enemy.spawn_distance_min, enemy.spawn_distance_max)
+	enemy.global_position = global_position + Vector2.RIGHT.rotated(angle) * radius
 
 
 func _on_level_up(new_level: int) -> void:

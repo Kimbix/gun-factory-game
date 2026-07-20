@@ -1,6 +1,7 @@
 class_name PlayerGrid
 extends Node
 
+@warning_ignore("unused_signal")
 signal output_item(item: FactoryItem)
 signal building_placed(building: FactoryBuilding)
 signal building_removed(building: FactoryBuilding)

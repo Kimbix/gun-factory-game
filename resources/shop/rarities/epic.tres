@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="Rarity" format=3 uid="uid://bujvbbh2afy1y"]
 
-[ext_resource type="Script" uid="uid://dap88jo5osmsl" path="res://resources/shop/rarity.gd" id="1_au23r"]
+[ext_resource type="Script" uid="uid://c6tswfd57rg3p" path="res://resources/shop/rarity.gd" id="1_au23r"]
 
 [resource]
 script = ExtResource("1_au23r")

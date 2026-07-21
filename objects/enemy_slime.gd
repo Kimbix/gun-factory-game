@@ -17,8 +17,14 @@ func _physics_process(_delta: float) -> void:
 	move_and_collide(velocity * _delta)
 
 
+var _dead: bool
+
+
 func take_damage(amount: int) -> void:
+	if _dead:
+		return
 	health -= amount
 	if health <= 0:
+		_dead = true
 		on_death.emit()
 		queue_free()

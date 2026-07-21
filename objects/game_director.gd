@@ -72,18 +72,14 @@ func _spawn_enemies() -> void:
 		var info: EnemyInfo = active_wave.enemies.pick_random()
 		var instance: BaseEnemy = info.scene.instantiate()
 		instance.player = player_instance
-		instance.spawn_distance_min = spawn_distance_min
-		instance.spawn_distance_max = spawn_distance_max
+		instance.game_world = self
 		instance.position = (
 				player_instance.position
 				+ ((Vector2.RIGHT * randf_range(spawn_distance_min, spawn_distance_max))
 						.rotated(randf() * TAU))
 		)
 
-		var spawner := instance.find_child("ExperienceSpawner") as ExperienceSpawner
-		if spawner != null:
-			spawner.base_xp = info.base_xp
-			spawner.variance = info.variance
+		instance.xp_amount = ceili(info.base_xp * randf_range(1.0 - info.variance, 1.0 + info.variance))
 
 		add_child(instance)
 		enemies.append(instance)
@@ -104,18 +100,14 @@ func _spawn_boss(event: EnemyEvent) -> void:
 		var instance: BaseEnemy = event.enemy_info.scene.instantiate()
 		instance.enemy_type = BaseEnemy.EnemyType.BOSS
 		instance.player = player_instance
-		instance.spawn_distance_min = spawn_distance_min
-		instance.spawn_distance_max = spawn_distance_max
+		instance.game_world = self
 		instance.position = (
 				player_instance.position
 				+ ((Vector2.RIGHT * randf_range(spawn_distance_min, spawn_distance_max))
 						.rotated(randf() * TAU))
 		)
 
-		var spawner := instance.find_child("ExperienceSpawner") as ExperienceSpawner
-		if spawner != null:
-			spawner.base_xp = event.enemy_info.base_xp
-			spawner.variance = event.enemy_info.variance
+		instance.xp_amount = ceili(event.enemy_info.base_xp * randf_range(1.0 - event.enemy_info.variance, 1.0 + event.enemy_info.variance))
 
 		add_child(instance)
 		enemies.append(instance)

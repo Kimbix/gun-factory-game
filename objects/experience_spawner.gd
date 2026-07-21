@@ -5,8 +5,6 @@ static var crystals: Dictionary[int, PackedScene] = {
 	1: preload("uid://r5gdpvcp6gx3"),
 }
 
-@export var base_xp: int = 5
-@export_range(0.0, 1.0) var variance: float = 0.2
 @export var spawn_radius: float = 16.0
 
 
@@ -14,13 +12,12 @@ func spawn() -> void:
 	if crystals.is_empty():
 		return
 
-	var parent := get_parent() as Node2D
-	if parent == null:
+	var enemy := get_parent() as BaseEnemy
+	if enemy == null:
 		return
 
-	var amount := roundi(base_xp * randf_range(1.0 - variance, 1.0 + variance))
-	amount = maxi(amount, 0)
-	var origin := parent.global_position
+	var origin := enemy.global_position
+	var amount := maxi(enemy.xp_amount, 0)
 
 	call_deferred("_do_spawn_deferred", amount, origin)
 

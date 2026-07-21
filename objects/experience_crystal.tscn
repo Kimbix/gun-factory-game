@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://r5gdpvcp6gx3"]
 
 [ext_resource type="Texture2D" uid="uid://cytwusawgdqib" path="res://assets/world_entities/spr_experiencePoint.png" id="1_6hf3c"]
-[ext_resource type="Script" path="res://objects/experience_crystal.gd" id="2_357ey"]
+[ext_resource type="Script" uid="uid://e2oiwvpbg3xo" path="res://objects/experience_crystal.gd" id="2_357ey"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_m7k3d"]
 size = Vector2(4, 6)

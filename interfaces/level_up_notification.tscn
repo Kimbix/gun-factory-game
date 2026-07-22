@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://chiougv7mhwbp"]
 
-[ext_resource type="Script" uid="uid://cicxfqxykrj4t" path="res://objects/level_up_notification.gd" id="1_6y5mk"]
+[ext_resource type="Script" uid="uid://cicxfqxykrj4t" path="res://interfaces/level_up_notification.gd" id="1_6y5mk"]
 
 [node name="LevelUpNotification" type="CenterContainer" unique_id=961079872]
 anchors_preset = 15

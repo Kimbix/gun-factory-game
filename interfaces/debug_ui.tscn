@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://c3c05svxbk3ou"]
 
-[ext_resource type="Script" uid="uid://cu8trpn02ps36" path="res://objects/debug_ui.gd" id="1_so3eq"]
-[ext_resource type="PackedScene" path="res://objects/stats_debug_ui.tscn" id="2_ixc4j"]
+[ext_resource type="Script" uid="uid://cu8trpn02ps36" path="res://interfaces/debug_ui.gd" id="1_so3eq"]
+[ext_resource type="PackedScene" path="res://interfaces/stats_debug_ui.tscn" id="2_ixc4j"]
 
 [node name="DebugUI" type="CanvasLayer" unique_id=410590662]
 script = ExtResource("1_so3eq")

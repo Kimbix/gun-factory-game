@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://bg1u2yvhxn1tl"]
 
-[ext_resource type="Script" uid="uid://bjxs4kbxxrhi4" path="res://objects/building_ui.gd" id="1_nb3kx"]
+[ext_resource type="Script" uid="uid://bjxs4kbxxrhi4" path="res://interfaces/building_ui.gd" id="1_nb3kx"]
 [ext_resource type="PackedScene" uid="uid://dq2aqdo8qs8ft" path="res://objects/player_grid_viewer.tscn" id="2_n327g"]
-[ext_resource type="PackedScene" uid="uid://b4qlpy0ku3u1a" path="res://objects/shop_panel.tscn" id="3_n327g"]
+[ext_resource type="PackedScene" uid="uid://b4qlpy0ku3u1a" path="res://interfaces/shop_panel.tscn" id="3_n327g"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_building_panel"]
 content_margin_left = 8.0

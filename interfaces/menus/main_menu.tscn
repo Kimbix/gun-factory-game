@@ -1,0 +1,44 @@
+[gd_scene format=3 uid="uid://c0f8gqiflva8v"]
+
+[ext_resource type="Script" uid="uid://ckg1bst31es1n" path="res://interfaces/menus/main_menu.gd" id="1_ssb6i"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r3t7o"]
+
+[node name="MainMenu" type="CanvasLayer" unique_id=702927181]
+script = ExtResource("1_ssb6i")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1495190541]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.099985994, 0.099985994, 0.099985994, 1)
+
+[node name="Label" type="Label" parent="." unique_id=297620690]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 23.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 128
+text = "Factrie Game!!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PlayButton" type="Button" parent="." unique_id=149283491]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -4.0
+offset_top = -4.0
+offset_right = 4.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_r3t7o")
+text = "This is where you play the videogame"

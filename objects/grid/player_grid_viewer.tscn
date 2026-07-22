@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://dq2aqdo8qs8ft"]
 
-[ext_resource type="Script" uid="uid://cj3e1bi5aowx2" path="res://objects/player_grid_viewer.gd" id="1_g38f3"]
-[ext_resource type="Script" uid="uid://dfpr1wc4mukir" path="res://objects/grid_interactor.gd" id="3_e3i1j"]
-[ext_resource type="Script" uid="uid://peco78lj3njl" path="res://objects/grid_builder.gd" id="4_ohem"]
+[ext_resource type="Script" uid="uid://cj3e1bi5aowx2" path="res://objects/grid/player_grid_viewer.gd" id="1_g38f3"]
+[ext_resource type="Script" uid="uid://dfpr1wc4mukir" path="res://objects/grid/grid_interactor.gd" id="3_e3i1j"]
+[ext_resource type="Script" uid="uid://peco78lj3njl" path="res://objects/grid/grid_builder.gd" id="4_ohem"]
 
 [node name="PlayerGridViewer" type="Node2D" unique_id=1863324682]
 script = ExtResource("1_g38f3")

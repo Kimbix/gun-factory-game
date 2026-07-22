@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://y582g1ol3nyv"]
 
-[ext_resource type="Script" uid="uid://dtbuseh8mw7c1" path="res://objects/enemy_slime.gd" id="1_ffwk4"]
+[ext_resource type="Script" uid="uid://dtbuseh8mw7c1" path="res://objects/enemies/enemy_slime.gd" id="1_ffwk4"]
 [ext_resource type="Texture2D" uid="uid://drreyl7qu0c6g" path="res://assets/world_entities/spr_enemyAngryRobot.png" id="1_rwqws"]
-[ext_resource type="PackedScene" path="res://objects/experience_spawner.tscn" id="3_rwqws"]
+[ext_resource type="PackedScene" path="res://objects/xp/experience_spawner.tscn" id="3_rwqws"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vuntw"]
 size = Vector2(18, 10)

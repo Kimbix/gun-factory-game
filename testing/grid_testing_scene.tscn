@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://dhkulhdjf0gsf"]
 
 [ext_resource type="Script" uid="uid://bp1uw1141go1" path="res://testing/grid_testing_scene.gd" id="1_38roy"]
-[ext_resource type="PackedScene" uid="uid://dq2aqdo8qs8ft" path="res://objects/player_grid_viewer.tscn" id="1_bgcc2"]
+[ext_resource type="PackedScene" uid="uid://dq2aqdo8qs8ft" path="res://objects/grid/player_grid_viewer.tscn" id="1_bgcc2"]
 [ext_resource type="Script" uid="uid://c42oxf66vw7sk" path="res://testing/debug_player_grid_builder.gd" id="2_k33vg"]
 [ext_resource type="Resource" uid="uid://dr6nl610t14jj" path="res://resources/building_catalogue/debug_building_catalogue.tres" id="5_ecpxj"]
 [ext_resource type="Texture2D" uid="uid://d0mnduudv6lhr" path="res://assets/interface/spr_saveGrid.png" id="5_fp60s"]

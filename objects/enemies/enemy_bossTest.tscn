@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://3wkj66p6pcq3"]
 
-[ext_resource type="Script" uid="uid://dtbuseh8mw7c1" path="res://objects/enemy_slime.gd" id="1_nv0d7"]
+[ext_resource type="Script" uid="uid://dtbuseh8mw7c1" path="res://objects/enemies/enemy_slime.gd" id="1_nv0d7"]
 [ext_resource type="Texture2D" uid="uid://3q5vaxhvrsau" path="res://assets/world_entities/spr_bossTest.png" id="2_nv0d7"]
-[ext_resource type="PackedScene" path="res://objects/experience_spawner.tscn" id="3_026nx"]
+[ext_resource type="PackedScene" path="res://objects/xp/experience_spawner.tscn" id="3_026nx"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_o6wg8"]
 size = Vector2(33, 28.000002)

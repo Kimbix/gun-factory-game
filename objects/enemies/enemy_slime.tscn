@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://c3krnxqtp0xbk"]
 
 [ext_resource type="Texture2D" uid="uid://ceym0vtm257nj" path="res://assets/world_entities/spr_enemySlime.png" id="1_t7xr3"]
-[ext_resource type="Script" uid="uid://dtbuseh8mw7c1" path="res://objects/enemy_slime.gd" id="2_qu3vo"]
-[ext_resource type="PackedScene" path="res://objects/experience_spawner.tscn" id="3_g5he2"]
+[ext_resource type="Script" uid="uid://dtbuseh8mw7c1" path="res://objects/enemies/enemy_slime.gd" id="2_qu3vo"]
+[ext_resource type="PackedScene" path="res://objects/xp/experience_spawner.tscn" id="3_g5he2"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_k111l"]
 radius = 5.0

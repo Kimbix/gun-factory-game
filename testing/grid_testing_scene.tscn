@@ -6,6 +6,9 @@
 [ext_resource type="Resource" uid="uid://dr6nl610t14jj" path="res://resources/building_catalogue/debug_building_catalogue.tres" id="5_ecpxj"]
 [ext_resource type="Texture2D" uid="uid://d0mnduudv6lhr" path="res://assets/interface/spr_saveGrid.png" id="5_fp60s"]
 [ext_resource type="Texture2D" uid="uid://b6r3u4g8eud6j" path="res://assets/interface/spr_loadGrid.png" id="6_5wuod"]
+[ext_resource type="Script" uid="uid://cxl6cqkp8irqk" path="res://scripts/systems/player_grid.gd" id="7_d0b6t"]
+[ext_resource type="Script" uid="uid://cuqxkadkndm0f" path="res://scripts/systems/interface_supervisor.gd" id="8_yo2k4"]
+[ext_resource type="PackedScene" uid="uid://u5nlq61scp6q" path="res://interfaces/layers/factory_building_ui.tscn" id="9_r8gd7"]
 
 [node name="GridTestingScene" type="Node2D" unique_id=978679656]
 script = ExtResource("1_38roy")
@@ -13,6 +16,15 @@ script = ExtResource("1_38roy")
 [node name="PlayerGridViewer" parent="." unique_id=1170141869 instance=ExtResource("1_bgcc2")]
 scale = Vector2(5, 5)
 view_ports = true
+
+[node name="PlayerGrid" type="Node" parent="PlayerGridViewer" unique_id=1269156065]
+script = ExtResource("7_d0b6t")
+dimensions = Vector2i(25, 25)
+
+[node name="InterfaceSupervisor" type="Node" parent="." unique_id=1915036764]
+script = ExtResource("8_yo2k4")
+
+[node name="FactoryBuildingUI" parent="InterfaceSupervisor" unique_id=1134053602 instance=ExtResource("9_r8gd7")]
 
 [node name="DebugLayer" type="CanvasLayer" parent="." unique_id=1704631010]
 

@@ -1,11 +1,14 @@
 extends Node2D
 
 const SAVE_PATH := "user://grid_save.tres"
-const SAVE_GRID_INTERFACE := preload("uid://d0g7gg1hq86cc")
-const LOAD_GRID_INTERFACE := preload("uid://bpjbhpqjtay0c")
+
+var building_inventory := PlayerBuildingInventory.new()
 
 @onready var grid_viewer: PlayerGridViewer = $PlayerGridViewer
 @onready var player_grid: PlayerGrid = $PlayerGridViewer/PlayerGrid
+@onready var grid_interactor: GridInteractor = $PlayerGridViewer/GridInteractor
+@onready var grid_builder: GridBuilder = $PlayerGridViewer/GridBuilder
+@onready var interface_supervisor: InterfaceSupervisor = $InterfaceSupervisor
 @onready var debug_builder: DebugPlayerGridBuilder = $DebugLayer/DebugPlayerGridBuilder
 @onready var save_grid_button: Button = (
 		$DebugLayer/DebugPlayerGridBuilder/VBoxContainer/HBoxContainer/SaveGrid
@@ -17,6 +20,10 @@ const LOAD_GRID_INTERFACE := preload("uid://bpjbhpqjtay0c")
 
 func _ready() -> void:
 	player_grid.initialize_empty()
+	grid_viewer.grid = player_grid
+	grid_interactor.interface_supervisor = interface_supervisor
+	grid_interactor.building_inventory = building_inventory
+	grid_builder.building_inventory = building_inventory
 	player_grid.output_item.connect(_on_output_item)
 	save_grid_button.pressed.connect(_on_save_grid_pressed)
 	load_grid_button.pressed.connect(_on_load_grid_pressed)
@@ -56,16 +63,25 @@ func _input(event: InputEvent) -> void:
 
 
 func _on_save_grid_pressed() -> void:
-	var interface: SaveGridInterface = SAVE_GRID_INTERFACE.instantiate()
-	interface.player_grid = player_grid
-	InterfaceCanvasLayer.open_window(interface)
+	var data := player_grid.to_data()
+	var err := ResourceSaver.save(data, SAVE_PATH)
+	if err == OK:
+		print("Grid saved to %s" % SAVE_PATH)
+	else:
+		print("Failed to save grid: %d" % err)
 
 
 func _on_load_grid_pressed() -> void:
-	var interface: LoadGridInterface = LOAD_GRID_INTERFACE.instantiate()
-	interface.player_grid = player_grid
-	interface.grid_loaded.connect(grid_viewer.queue_redraw)
-	InterfaceCanvasLayer.open_window(interface)
+	if not ResourceLoader.exists(SAVE_PATH):
+		print("No save file found at %s" % SAVE_PATH)
+		return
+	var data := ResourceLoader.load(SAVE_PATH) as PlayerGridData
+	if data == null:
+		print("Failed to load save file")
+		return
+	player_grid.from_data(data)
+	grid_viewer.queue_redraw()
+	print("Grid loaded from %s" % SAVE_PATH)
 
 
 func _on_output_item(item: FactoryItem) -> void:

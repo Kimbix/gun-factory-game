@@ -28,9 +28,19 @@ func _generate_preview() -> void:
 
 	var texture := ImageTexture.create_from_image(img)
 	%Preview.texture = texture
+
+	var view := get_viewport().get_visible_rect().size * 0.2
+	var max_side := maxi(_data.dimensions.x, _data.dimensions.y)
+	var pixel_scale := PIXEL_SCALE
+	if max_side > 0:
+		pixel_scale = clampi(
+			floori(minf(view.x / _data.dimensions.x, view.y / _data.dimensions.y)),
+			1,
+			PIXEL_SCALE,
+		)
 	%Preview.custom_minimum_size = Vector2(
-		_data.dimensions.x * PIXEL_SCALE,
-		_data.dimensions.y * PIXEL_SCALE,
+		_data.dimensions.x * pixel_scale,
+		_data.dimensions.y * pixel_scale,
 	)
 
 

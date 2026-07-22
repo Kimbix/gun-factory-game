@@ -1,6 +1,8 @@
 extends Node2D
 
 const SAVE_PATH := "user://grid_save.tres"
+const SAVE_GRID_INTERFACE := preload("uid://d0g7gg1hq86cc")
+const LOAD_GRID_INTERFACE := preload("uid://bpjbhpqjtay0c")
 
 var building_inventory := PlayerBuildingInventory.new()
 
@@ -27,6 +29,14 @@ func _ready() -> void:
 	player_grid.output_item.connect(_on_output_item)
 	save_grid_button.pressed.connect(_on_save_grid_pressed)
 	load_grid_button.pressed.connect(_on_load_grid_pressed)
+	_fit_grid_to_screen()
+
+
+func _fit_grid_to_screen() -> void:
+	var view := get_viewport().get_visible_rect().size
+	var new_size := Vector2(min(view.x, view.y), min(view.x, view.y))
+	grid_viewer.set_final_size(new_size)
+	grid_viewer.position = Vector2.ZERO
 
 
 func _input(event: InputEvent) -> void:
@@ -63,25 +73,24 @@ func _input(event: InputEvent) -> void:
 
 
 func _on_save_grid_pressed() -> void:
-	var data := player_grid.to_data()
-	var err := ResourceSaver.save(data, SAVE_PATH)
-	if err == OK:
-		print("Grid saved to %s" % SAVE_PATH)
-	else:
-		print("Failed to save grid: %d" % err)
+	var interface: SaveGridInterface = SAVE_GRID_INTERFACE.instantiate()
+	interface.player_grid = player_grid
+	interface.interface_supervisor = interface_supervisor
+	interface_supervisor.open_interface(
+		InterfaceSupervisor.InterfaceType.FACTORY_BUILDING,
+		interface,
+	)
 
 
 func _on_load_grid_pressed() -> void:
-	if not ResourceLoader.exists(SAVE_PATH):
-		print("No save file found at %s" % SAVE_PATH)
-		return
-	var data := ResourceLoader.load(SAVE_PATH) as PlayerGridData
-	if data == null:
-		print("Failed to load save file")
-		return
-	player_grid.from_data(data)
-	grid_viewer.queue_redraw()
-	print("Grid loaded from %s" % SAVE_PATH)
+	var interface: LoadGridInterface = LOAD_GRID_INTERFACE.instantiate()
+	interface.player_grid = player_grid
+	interface.interface_supervisor = interface_supervisor
+	interface.grid_loaded.connect(grid_viewer.queue_redraw)
+	interface_supervisor.open_interface(
+		InterfaceSupervisor.InterfaceType.FACTORY_BUILDING,
+		interface,
+	)
 
 
 func _on_output_item(item: FactoryItem) -> void:

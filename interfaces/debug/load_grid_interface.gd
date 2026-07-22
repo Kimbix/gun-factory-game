@@ -11,8 +11,6 @@ var interface_supervisor: InterfaceSupervisor
 
 func _ready() -> void:
 	%CancelButton.pressed.connect(_on_cancel)
-	if player_grid == null:
-		return
 	_populate_list()
 
 
@@ -23,6 +21,7 @@ func _populate_list() -> void:
 
 	var dir := DirAccess.open(SAVE_DIR)
 	if dir == null:
+		breakpoint
 		return
 
 	dir.list_dir_begin()
@@ -30,6 +29,7 @@ func _populate_list() -> void:
 	while not file_name.is_empty():
 		if file_name.ends_with(".tres"):
 			var path := SAVE_DIR.path_join(file_name)
+			print("Loading %s " % path)
 			_add_grid_entry(list, path, file_name.trim_suffix(".tres"))
 		file_name = dir.get_next()
 
@@ -37,12 +37,15 @@ func _populate_list() -> void:
 func _add_grid_entry(list: VBoxContainer, path: String, display_name: String) -> void:
 	var data := ResourceLoader.load(path) as PlayerGridData
 	if data == null:
+		breakpoint
 		return
 
 	var entry := VBoxContainer.new()
+	entry.name = display_name
 	entry.alignment = BoxContainer.ALIGNMENT_CENTER
 
 	var btn := Button.new()
+	btn.name = "%s_btn" % display_name
 	var preview_size := Vector2(data.dimensions.x * 2, data.dimensions.y * 2)
 	btn.custom_minimum_size = Vector2(maxf(preview_size.x, 64), maxf(preview_size.y, 64))
 	btn.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
@@ -57,6 +60,7 @@ func _add_grid_entry(list: VBoxContainer, path: String, display_name: String) ->
 	entry.add_child(btn)
 
 	var label := Label.new()
+	label.name = "%s_lbl" % display_name
 	label.text = display_name
 	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	entry.add_child(label)

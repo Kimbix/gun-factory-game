@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://u5nlq61scp6q"]
+
+[ext_resource type="Script" uid="uid://dtgunitqq77le" path="res://interfaces/layers/factory_building_ui.gd" id="1_5itm0"]
+
+[node name="InterfaceCanvasLayer" type="CanvasLayer" unique_id=1587278053]
+script = ExtResource("1_5itm0")
+metadata/_custom_type_script = "uid://dtgunitqq77le"

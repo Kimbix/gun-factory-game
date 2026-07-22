@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://mv44gab30mb0" path="res://objects/managers/gameplay_scene.tscn" id="2_gm3q9"]
 [ext_resource type="Script" uid="uid://cuqxkadkndm0f" path="res://scripts/systems/interface_supervisor.gd" id="3_r0dkg"]
 [ext_resource type="PackedScene" uid="uid://c3c05svxbk3ou" path="res://interfaces/layers/debug_ui.tscn" id="4_abc"]
-[ext_resource type="PackedScene" uid="uid://u5nlq61scp6q" path="res://interfaces/layers/interface_canvas_layer.tscn" id="4_bncg7"]
+[ext_resource type="PackedScene" uid="uid://u5nlq61scp6q" path="res://interfaces/layers/factory_building_ui.tscn" id="4_bncg7"]
 [ext_resource type="PackedScene" uid="uid://dgxpr0t4v73lm" path="res://interfaces/layers/emergent_ui.tscn" id="5_pqrs"]
 [ext_resource type="PackedScene" uid="uid://bg1u2yvhxn1tl" path="res://interfaces/layers/building_ui.tscn" id="6_jroq"]
 [ext_resource type="Resource" uid="uid://depiu46xbt4hi" path="res://resources/enemy_waves/testing_events.tres" id="8_epj5h"]

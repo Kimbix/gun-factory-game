@@ -1,4 +1,4 @@
-class_name InterfaceCanvasLayer
+class_name FactoryBuildingUI
 extends BaseInterface
 
 var opened_windows: Array[Control] = []
@@ -20,13 +20,6 @@ func open_window(window: InterfaceWindow, window_parent: InterfaceWindow = null)
 	return true
 
 
-func _focus_window(window: InterfaceWindow) -> void:
-	super._focus_window(window)
-	opened_windows.erase(window)
-	opened_windows.append(window)
-	focused_window = window
-
-
 func is_interface_open() -> bool:
 	return not opened_windows.is_empty()
 
@@ -37,6 +30,13 @@ func close_window(window: InterfaceWindow) -> void:
 		focused_window = opened_windows.back() if not opened_windows.is_empty() else null
 
 	super.close_window(window)
+
+
+func _focus_window(window: InterfaceWindow) -> void:
+	super._focus_window(window)
+	opened_windows.erase(window)
+	opened_windows.append(window)
+	focused_window = window
 
 
 func _on_window_gui_input(event: InputEvent, window: Control) -> void:

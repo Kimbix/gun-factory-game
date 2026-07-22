@@ -2,11 +2,11 @@
 
 [ext_resource type="Script" uid="uid://dixtq0mnswaf5" path="res://scripts/components/metal_processor.gd" id="1_hsiot"]
 [ext_resource type="Script" uid="uid://cxdyvqaslkwas" path="res://scripts/systems/port.gd" id="2_qa7on"]
-[ext_resource type="Script" uid="uid://da4yb3omv2567" path="res://resources/grid_components/grid_component_info.gd" id="3_4ov8w"]
+[ext_resource type="Script" uid="uid://da4yb3omv2567" path="res://resources/grid_components/scripts/grid_component_info.gd" id="3_4ov8w"]
 [ext_resource type="Texture2D" uid="uid://dp3r1chajoa7v" path="res://assets/factory_components/spr_metalProcessor.png" id="4_qa7on"]
 [ext_resource type="PackedScene" uid="uid://61ydd0a8m0ke" path="res://interfaces/metal_processor_interface.tscn" id="5_qw7e"]
 [ext_resource type="Resource" uid="uid://b3ctfw2jd14ta" path="res://resources/recipes/metal_processor_recipes.tres" id="6_ty8r"]
-[ext_resource type="Script" uid="uid://w53vcib2nn46" path="res://resources/grid_components/machine_config.gd" id="7_mcfg"]
+[ext_resource type="Script" uid="uid://w53vcib2nn46" path="res://resources/grid_components/scripts/machine_config.gd" id="7_mcfg"]
 
 [sub_resource type="Resource" id="Resource_mcfg"]
 script = ExtResource("7_mcfg")

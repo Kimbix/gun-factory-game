@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="PlayerGridData" format=4 uid="uid://cjxr4701xymuj"]
 
-[ext_resource type="Script" uid="uid://codwir1q0qp6b" path="res://resources/player_grid_data/building_entry.gd" id="1_gf46n"]
+[ext_resource type="Script" uid="uid://codwir1q0qp6b" path="res://resources/player_grid_data/scripts/building_entry.gd" id="1_gf46n"]
 [ext_resource type="Resource" uid="uid://delxbnrvtqsr4" path="res://resources/grid_components/ammo_assembler.tres" id="2_1goep"]
 [ext_resource type="Resource" uid="uid://buxq4518ft2jm" path="res://resources/recipes/casing_gunpowder_pellets.tres" id="3_tmoec"]
 [ext_resource type="Resource" uid="uid://c4wf626ege7cx" path="res://resources/factory_items/bullet_casing.tres" id="4_vi0lw"]
@@ -13,7 +13,7 @@
 [ext_resource type="Resource" uid="uid://b4hj3tlqd3od" path="res://resources/factory_items/raw_lead.tres" id="11_c6nro"]
 [ext_resource type="Resource" uid="uid://b41gow6t4rmgw" path="res://resources/grid_components/item_receiver.tres" id="12_c5iim"]
 [ext_resource type="Texture2D" uid="uid://bcxv8tx5ovn5l" path="res://assets/factory_components/spr_emptyCell.png" id="13_sh7ot"]
-[ext_resource type="Script" uid="uid://bprmcqf7sa0y8" path="res://resources/player_grid_data/player_grid_data.gd" id="14_1bc4u"]
+[ext_resource type="Script" uid="uid://bprmcqf7sa0y8" path="res://resources/player_grid_data/scripts/player_grid_data.gd" id="14_1bc4u"]
 
 [sub_resource type="Resource" id="Resource_5pu7b"]
 script = ExtResource("1_gf46n")

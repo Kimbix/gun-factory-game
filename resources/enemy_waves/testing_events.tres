@@ -1,8 +1,8 @@
 [gd_resource type="Resource" script_class="EnemyEvents" format=3 uid="uid://depiu46xbt4hi"]
 
-[ext_resource type="Script" uid="uid://dprfgvxtqh2t6" path="res://resources/enemy_waves/enemy_events.gd" id="1_events"]
-[ext_resource type="Script" uid="uid://c8s1yl6r3smd" path="res://resources/enemy_waves/enemy_event.gd" id="2_event"]
-[ext_resource type="Resource" uid="uid://d0i78waueks5g" path="res://resources/enemy_waves/enemy_info_boss_test.tres" id="3_boss_info"]
+[ext_resource type="Script" uid="uid://dprfgvxtqh2t6" path="res://resources/enemy_waves/scripts/enemy_events.gd" id="1_events"]
+[ext_resource type="Script" uid="uid://c8s1yl6r3smd" path="res://resources/enemy_waves/scripts/enemy_event.gd" id="2_event"]
+[ext_resource type="Resource" uid="uid://d0i78waueks5g" path="res://resources/enemy_info/enemy_info_boss_test.tres" id="3_boss_info"]
 
 [sub_resource type="Resource" id="Resource_event"]
 script = ExtResource("2_event")

@@ -1,10 +1,10 @@
 [gd_resource type="Resource" script_class="EnemyWaves" format=3 uid="uid://ciyco2se0tapx"]
 
-[ext_resource type="Script" uid="uid://dio5qgikhe7p1" path="res://resources/enemy_waves/enemy_waves.gd" id="1_q4fjt"]
-[ext_resource type="Script" uid="uid://ctf6nntqd8vvt" path="res://resources/enemy_waves/enemy_wave.gd" id="2_fhf8w"]
-[ext_resource type="Script" uid="uid://bsafh2yqkks57" path="res://resources/enemy_waves/enemy_info.gd" id="3_fhf8w"]
-[ext_resource type="Resource" uid="uid://cpsm4hp2ib03s" path="res://resources/enemy_waves/enemy_info_slime.tres" id="4_6e1dk"]
-[ext_resource type="Resource" uid="uid://v0tb8nhb3xj2" path="res://resources/enemy_waves/enemy_info_angry_robot.tres" id="5_uuh8f"]
+[ext_resource type="Script" uid="uid://dio5qgikhe7p1" path="res://resources/enemy_waves/scripts/enemy_waves.gd" id="1_q4fjt"]
+[ext_resource type="Script" uid="uid://ctf6nntqd8vvt" path="res://resources/enemy_waves/scripts/enemy_wave.gd" id="2_fhf8w"]
+[ext_resource type="Script" uid="uid://bsafh2yqkks57" path="res://resources/enemy_info/enemy_info.gd" id="3_fhf8w"]
+[ext_resource type="Resource" uid="uid://cpsm4hp2ib03s" path="res://resources/enemy_info/enemy_info_slime.tres" id="4_6e1dk"]
+[ext_resource type="Resource" uid="uid://v0tb8nhb3xj2" path="res://resources/enemy_info/enemy_info_angry_robot.tres" id="5_uuh8f"]
 
 [sub_resource type="Resource" id="Resource_8rb1r"]
 script = ExtResource("2_fhf8w")

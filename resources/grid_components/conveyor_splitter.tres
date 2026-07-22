@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://cnu5joyn4neul" path="res://scripts/components/conveyor_splitter.gd" id="1_xw4n7"]
 [ext_resource type="Script" uid="uid://cxdyvqaslkwas" path="res://scripts/systems/port.gd" id="2_qgkjk"]
 [ext_resource type="Texture2D" uid="uid://fdtc6nb6aapv" path="res://assets/factory_components/spr_conveyorSplitter.png" id="2_ulpo3"]
-[ext_resource type="Script" uid="uid://da4yb3omv2567" path="res://resources/grid_components/grid_component_info.gd" id="2_wxbsl"]
+[ext_resource type="Script" uid="uid://da4yb3omv2567" path="res://resources/grid_components/scripts/grid_component_info.gd" id="2_wxbsl"]
 
 [sub_resource type="Resource" id="Resource_fp60s"]
 script = ExtResource("2_qgkjk")

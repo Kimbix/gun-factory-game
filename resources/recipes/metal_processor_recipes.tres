@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="RecipeCatalogue" format=3 uid="uid://b3ctfw2jd14ta"]
 
-[ext_resource type="Script" uid="uid://0p8ni7rbeu6p" path="res://resources/recipes/item_recipe.gd" id="1_9se6p"]
-[ext_resource type="Script" uid="uid://buxsgr4u71mah" path="res://resources/recipes/recipe_catalogue.gd" id="2_btccb"]
+[ext_resource type="Script" uid="uid://0p8ni7rbeu6p" path="res://resources/recipes/scripts/item_recipe.gd" id="1_9se6p"]
+[ext_resource type="Script" uid="uid://buxsgr4u71mah" path="res://resources/recipes/scripts/recipe_catalogue.gd" id="2_btccb"]
 [ext_resource type="Resource" uid="uid://dyowbethxl8q1" path="res://resources/recipes/lead_to_pellets.tres" id="2_utyma"]
 [ext_resource type="Resource" uid="uid://i1ur6tqp6wwc" path="res://resources/recipes/lead_to_tip.tres" id="3_utyma"]
 [ext_resource type="Resource" uid="uid://vlx400moqi4b" path="res://resources/recipes/lead_to_rounded_tip.tres" id="4_utyma"]

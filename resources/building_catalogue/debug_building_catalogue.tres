@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="BuildingCatalogue" format=3 uid="uid://dr6nl610t14jj"]
 
-[ext_resource type="Script" uid="uid://da4yb3omv2567" path="res://resources/grid_components/grid_component_info.gd" id="1_3g68y"]
+[ext_resource type="Script" uid="uid://da4yb3omv2567" path="res://resources/grid_components/scripts/grid_component_info.gd" id="1_3g68y"]
 [ext_resource type="Resource" uid="uid://cxaf6asblr1t7" path="res://resources/grid_components/conveyor_belt.tres" id="2_312wq"]
 [ext_resource type="Script" uid="uid://bj46e0a68npcj" path="res://resources/building_catalogue/building_catalogue.gd" id="2_bss7p"]
 [ext_resource type="Resource" uid="uid://djspgv1yqiaky" path="res://resources/grid_components/combiner.tres" id="3_kxio0"]

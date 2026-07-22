@@ -1,8 +1,8 @@
 [gd_resource type="Resource" script_class="AmmoRecipe" format=3 uid="uid://cqks1oi0y6vx7"]
 
 [ext_resource type="Texture2D" uid="uid://xp8d6rtgs61m" path="res://assets/factory_items/spr_rifleRounds.png" id="1_h93nf"]
-[ext_resource type="Script" uid="uid://d3f4ru8ryeu14" path="res://resources/recipes/recipe_ingredient.gd" id="1_keo7j"]
-[ext_resource type="Script" uid="uid://kexpq7onpvuy" path="res://resources/recipes/ammo_recipe.gd" id="1_xj2cp"]
+[ext_resource type="Script" uid="uid://d3f4ru8ryeu14" path="res://resources/recipes/scripts/recipe_ingredient.gd" id="1_keo7j"]
+[ext_resource type="Script" uid="uid://kexpq7onpvuy" path="res://resources/recipes/scripts/ammo_recipe.gd" id="1_xj2cp"]
 [ext_resource type="Resource" uid="uid://c4wf626ege7cx" path="res://resources/factory_items/bullet_casing.tres" id="2_sh3nw"]
 [ext_resource type="Resource" uid="uid://cpg7snevhbi06" path="res://resources/factory_items/gunpowder.tres" id="3_wx4tf"]
 [ext_resource type="Resource" uid="uid://c22n2v8wi7hp5" path="res://resources/factory_items/pointy_lead_tip.tres" id="4_tpsek"]

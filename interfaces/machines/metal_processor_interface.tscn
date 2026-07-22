@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://61ydd0a8m0ke"]
 
-[ext_resource type="Script" uid="uid://bjw1s8ce852fv" path="res://interfaces/metal_processor_interface.gd" id="1_xee5u"]
+[ext_resource type="Script" uid="uid://bjw1s8ce852fv" path="res://interfaces/machines/metal_processor_interface.gd" id="1_xee5u"]
 [ext_resource type="Texture2D" uid="uid://c6bt6gw8v0nyi" path="res://assets/interface/spr_rightArrow.png" id="2_5h4rr"]
 
 [node name="MetalProcessorInterface" type="PanelContainer" unique_id=1955000705 node_paths=PackedStringArray("close_button", "selected_recipe", "items_in_inventory", "completion_label")]

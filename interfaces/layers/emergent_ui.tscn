@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dgxpr0t4v73lm"]
 
-[ext_resource type="Script" uid="uid://oxmkxl4mmx6g" path="res://interfaces/emergent_ui.gd" id="1_colon3"]
+[ext_resource type="Script" uid="uid://oxmkxl4mmx6g" path="res://interfaces/layers/emergent_ui.gd" id="1_colon3"]
 
 [node name="EmergentUI" type="CanvasLayer" unique_id=1047347485]
 script = ExtResource("1_colon3")

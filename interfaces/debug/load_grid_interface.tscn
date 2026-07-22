@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bpjbhpqjtay0c"]
 
-[ext_resource type="Script" uid="uid://cfmm8bqdd7ppy" path="res://interfaces/load_grid_interface.gd" id="1_7bndk"]
+[ext_resource type="Script" uid="uid://cfmm8bqdd7ppy" path="res://interfaces/debug/load_grid_interface.gd" id="1_7bndk"]
 
 [node name="LoadGridInterface" type="InterfaceWindow" unique_id=1494883158]
 custom_minimum_size = Vector2(360, 400)

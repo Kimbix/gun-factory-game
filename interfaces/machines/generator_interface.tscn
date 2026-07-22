@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://c8wqyeagxk100"]
 
-[ext_resource type="Script" uid="uid://kdipf8fij2im" path="res://interfaces/generator_interface.gd" id="1_255gi"]
-[ext_resource type="PackedScene" uid="uid://cq5f74b5ddssl" path="res://interfaces/item_button.tscn" id="2_ra787"]
+[ext_resource type="Script" uid="uid://kdipf8fij2im" path="res://interfaces/machines/generator_interface.gd" id="1_255gi"]
+[ext_resource type="PackedScene" uid="uid://cq5f74b5ddssl" path="res://interfaces/components/item_button.tscn" id="2_ra787"]
 
 [node name="GeneratorInterface" type="PanelContainer" unique_id=916866348 node_paths=PackedStringArray("close_button")]
 custom_minimum_size = Vector2(256, 128)

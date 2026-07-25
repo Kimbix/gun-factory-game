@@ -1,0 +1,44 @@
+[gd_scene format=3 uid="uid://c4neh8ke6t3c6"]
+
+[ext_resource type="Script" uid="uid://c3l031dy4hjj8" path="res://interfaces/menus/pause_menu.gd" id="1_pm"]
+
+[node name="PauseMenu" type="Control" unique_id=554893031 node_paths=PackedStringArray("resume_button", "quit_button")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_pm")
+resume_button = NodePath("ColorRect/OptionButtons/ResumeButton")
+quit_button = NodePath("ColorRect/OptionButtons/QuitButton")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=451286789]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.78431374)
+
+[node name="OptionButtons" type="VBoxContainer" parent="ColorRect" unique_id=148753052]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -35.0
+offset_top = -33.0
+offset_right = 35.0
+offset_bottom = 33.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ResumeButton" type="Button" parent="ColorRect/OptionButtons" unique_id=684387793]
+layout_mode = 2
+text = "Resume"
+
+[node name="QuitButton" type="Button" parent="ColorRect/OptionButtons" unique_id=1909766260]
+layout_mode = 2
+text = "Exit"

@@ -13,6 +13,7 @@ var _state_before_pause: GameState = GameState.GAMEPLAY
 var _state_before_level_up: GameState = GameState.GAMEPLAY
 var _active_player: SimpleCharacter
 var _interface_supervisor: InterfaceSupervisor
+var _pause_menu_instance: PauseMenu
 
 @onready var _building_ui: BuildingUI = $InterfaceSupervisor/BuildingUI
 @onready var _grid_builder: GridBuilder = (
@@ -106,6 +107,29 @@ func unpause_from_level_up() -> void:
 	_set_state(_state_before_level_up)
 
 
+func unpause() -> void:
+	if _state == GameState.PAUSED:
+		_set_state(_state_before_pause)
+
+
+func _show_pause_menu() -> void:
+	_pause_menu_instance = preload("res://interfaces/menus/pause_menu.tscn").instantiate()
+	_interface_supervisor.open_interface(
+		InterfaceSupervisor.InterfaceType.EMERGENT,
+		_pause_menu_instance,
+	)
+
+
+func _hide_pause_menu() -> void:
+	if not is_instance_valid(_pause_menu_instance):
+		return
+	_interface_supervisor.close_interface(
+		InterfaceSupervisor.InterfaceType.EMERGENT,
+		_pause_menu_instance,
+	)
+	_pause_menu_instance = null
+
+
 func _set_state(new_state: GameState) -> void:
 	if new_state == _state:
 		return
@@ -113,13 +137,17 @@ func _set_state(new_state: GameState) -> void:
 
 	match new_state:
 		GameState.GAMEPLAY:
+			_hide_pause_menu()
 			_interface_supervisor.close_building_interface()
 			%GameplayScene.process_mode = PROCESS_MODE_INHERIT
 		GameState.BUILDING:
+			_hide_pause_menu()
 			_interface_supervisor.open_building_interface()
 			%GameplayScene.process_mode = PROCESS_MODE_DISABLED
 		GameState.LEVEL_UP:
+			_hide_pause_menu()
 			%GameplayScene.process_mode = PROCESS_MODE_DISABLED
 			_building_ui.process_mode = PROCESS_MODE_DISABLED
 		GameState.PAUSED:
 			%GameplayScene.process_mode = PROCESS_MODE_DISABLED
+			_show_pause_menu()

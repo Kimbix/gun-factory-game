@@ -6,6 +6,7 @@ enum GameState {
 	BUILDING,
 	LEVEL_UP,
 	PAUSED,
+	GAME_OVER,
 }
 
 var _state: GameState = GameState.GAMEPLAY
@@ -14,6 +15,7 @@ var _state_before_level_up: GameState = GameState.GAMEPLAY
 var _active_player: SimpleCharacter
 var _interface_supervisor: InterfaceSupervisor
 var _pause_menu_instance: PauseMenu
+var _game_over_menu_instance: InterfaceWindow
 
 @onready var _building_ui: BuildingUI = $InterfaceSupervisor/BuildingUI
 @onready var _grid_builder: GridBuilder = (
@@ -44,6 +46,7 @@ func _ready() -> void:
 	_interface_supervisor.pause_requested.connect(pause_for_level_up)
 	_interface_supervisor.unpause_requested.connect(unpause_from_level_up)
 	_active_player.leveled_up.connect(_interface_supervisor.on_leveled_up)
+	_active_player.died.connect(_on_player_died)
 
 	if not InputMap.has_action("pause"):
 		var event := InputEventKey.new()
@@ -130,6 +133,30 @@ func _hide_pause_menu() -> void:
 	_pause_menu_instance = null
 
 
+func _show_game_over_menu() -> void:
+	if is_instance_valid(_game_over_menu_instance):
+		return
+	_game_over_menu_instance = preload("res://interfaces/menus/game_over_menu.tscn").instantiate()
+	_interface_supervisor.open_interface(
+		InterfaceSupervisor.InterfaceType.EMERGENT,
+		_game_over_menu_instance,
+	)
+
+
+func _hide_game_over_menu() -> void:
+	if not is_instance_valid(_game_over_menu_instance):
+		return
+	_interface_supervisor.close_interface(
+		InterfaceSupervisor.InterfaceType.EMERGENT,
+		_game_over_menu_instance,
+	)
+	_game_over_menu_instance = null
+
+
+func _on_player_died() -> void:
+	_set_state(GameState.GAME_OVER)
+
+
 func _set_state(new_state: GameState) -> void:
 	if new_state == _state:
 		return
@@ -151,3 +178,8 @@ func _set_state(new_state: GameState) -> void:
 		GameState.PAUSED:
 			%GameplayScene.process_mode = PROCESS_MODE_DISABLED
 			_show_pause_menu()
+		GameState.GAME_OVER:
+			_hide_pause_menu()
+			_interface_supervisor.close_building_interface()
+			%GameplayScene.process_mode = PROCESS_MODE_DISABLED
+			_show_game_over_menu()

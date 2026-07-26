@@ -3,10 +3,13 @@
 [ext_resource type="Texture2D" uid="uid://ceym0vtm257nj" path="res://assets/world_entities/spr_enemySlime.png" id="1_t7xr3"]
 [ext_resource type="Script" uid="uid://dtbuseh8mw7c1" path="res://objects/enemies/enemy_slime.gd" id="2_qu3vo"]
 [ext_resource type="PackedScene" path="res://objects/xp/experience_spawner.tscn" id="3_g5he2"]
+[ext_resource type="Script" uid="uid://dofvr0nc814r8" path="res://scripts/entities/enemy_hitbox.gd" id="4_s4axq"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_k111l"]
 radius = 5.0
 height = 20.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_6xohb"]
 
 [node name="EnemySlime" type="CharacterBody2D" unique_id=589975782]
 script = ExtResource("2_qu3vo")
@@ -19,5 +22,11 @@ rotation = -1.5707964
 shape = SubResource("CapsuleShape2D_k111l")
 
 [node name="ExperienceSpawner" parent="." unique_id=1642692828 instance=ExtResource("3_g5he2")]
+
+[node name="HitboxArea" type="Area2D" parent="." unique_id=351890760]
+script = ExtResource("4_s4axq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxArea" unique_id=311565219]
+shape = SubResource("CircleShape2D_6xohb")
 
 [connection signal="on_death" from="." to="ExperienceSpawner" method="spawn"]

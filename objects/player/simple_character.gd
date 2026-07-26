@@ -6,6 +6,8 @@ static var _actions_ready := false
 @export var starting_grid_data: PlayerGridData
 
 signal leveled_up(level: int)
+signal damaged(current_health: float)
+signal died
 
 var current_target: Node2D
 var player_grid: PlayerGrid
@@ -13,6 +15,7 @@ var building_inventory: PlayerBuildingInventory
 var level_system: LevelSystem
 var player_stats: PlayerStats
 var health: float
+var _dead: bool
 var _tick_timer: Timer
 var _regen_timer: Timer
 
@@ -181,6 +184,25 @@ func _apply_regen() -> void:
 	if regen <= 0:
 		return
 	health = minf(health + regen, max_hp)
+
+
+func take_damage(amount: float) -> void:
+	if _dead:
+		return
+	health -= amount
+	if health <= 0:
+		health = 0
+		_dead = true
+		died.emit()
+		_on_player_died()
+	damaged.emit(health)
+
+
+func _on_player_died() -> void:
+	_tick_timer.stop()
+	_regen_timer.stop()
+	set_physics_process(false)
+	set_process_input(false)
 
 
 func _shoot(item: FactoryItem = null) -> void:

@@ -3,9 +3,13 @@
 [ext_resource type="Script" uid="uid://dtbuseh8mw7c1" path="res://objects/enemies/enemy_slime.gd" id="1_nv0d7"]
 [ext_resource type="Texture2D" uid="uid://3q5vaxhvrsau" path="res://assets/world_entities/spr_bossTest.png" id="2_nv0d7"]
 [ext_resource type="PackedScene" path="res://objects/xp/experience_spawner.tscn" id="3_026nx"]
+[ext_resource type="Script" path="res://scripts/entities/enemy_hitbox.gd" id="4_p7x4y"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_o6wg8"]
 size = Vector2(33, 28.000002)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_6xohb"]
+radius = 18.0
 
 [node name="EnemySlime" type="CharacterBody2D" unique_id=589975782]
 script = ExtResource("1_nv0d7")
@@ -21,5 +25,11 @@ shape = SubResource("RectangleShape2D_o6wg8")
 [node name="ExperienceSpawner" parent="." unique_id=1642692828 instance=ExtResource("3_026nx")]
 base_xp = 1
 variance = 0.3
+
+[node name="HitboxArea" type="Area2D" parent="." unique_id=351890760]
+script = ExtResource("4_p7x4y")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxArea" unique_id=311565219]
+shape = SubResource("CircleShape2D_6xohb")
 
 [connection signal="on_death" from="." to="ExperienceSpawner" method="spawn"]

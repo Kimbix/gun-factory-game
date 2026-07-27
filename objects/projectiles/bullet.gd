@@ -27,5 +27,12 @@ func _on_body_entered(body: Node) -> void:
 		return
 	if body == shooter:
 		return
-	body.take_damage(damage)
+	var final_damage := damage
+	var player := shooter as SimpleCharacter
+	if player:
+		var stats := player.player_stats
+		if randf() < stats.stats[&"crit_chance"].value:
+			var bonus: float = stats.stats[&"crit_damage"].value
+			final_damage = ceili(damage * (1.0 + bonus))
+	body.take_damage(final_damage)
 	queue_free()

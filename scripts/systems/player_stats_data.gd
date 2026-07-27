@@ -20,8 +20,8 @@ extends Resource
 ## Increases the likelyhood of favorable events happening
 @export var luck: float = 0.0
 ## Chance of a bullet dealing a critical hit
-@export var crit_chance: float = 0.0
+@export var crit_chance: float = 1.0
 ## Percentage of additional damage dealt when a hit is critical
-@export var crit_damage: float = 0.0
+@export var crit_damage: float = 2.0
 ## Speed, strength and amount of enemies spawned
 @export var difficulty: float = 0.0

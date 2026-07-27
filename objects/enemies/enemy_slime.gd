@@ -18,6 +18,7 @@ func _physics_process(_delta: float) -> void:
 	move_and_collide(velocity * _delta)
 
 
+# TODO: This should not be on the slime's, should be base enemy's code
 func take_damage(amount: int) -> void:
 	if _dead:
 		return

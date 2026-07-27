@@ -8,10 +8,6 @@
 
 config_version=5
 
-[physics]
-
-common/physics_fps=30
-
 [application]
 
 config/name="Gun Factory Game"
@@ -41,6 +37,10 @@ folder_colors={
 "res://scripts/": "blue",
 "res://testing/": "pink"
 }
+
+[physics]
+
+common/physics_fps=30
 
 [rendering]
 

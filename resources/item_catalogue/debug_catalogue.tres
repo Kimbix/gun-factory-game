@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="ItemCatalogue" format=3 uid="uid://c0exr0s3v8uci"]
+
+[ext_resource type="Script" uid="uid://b3ij0uga7row5" path="res://resources/factory_items/factory_item_info.gd" id="1_r3bnv"]
+[ext_resource type="Resource" uid="uid://c4wf626ege7cx" path="res://resources/factory_items/bullet_casing.tres" id="2_4mcc2"]
+[ext_resource type="Resource" uid="uid://cpg7snevhbi06" path="res://resources/factory_items/gunpowder.tres" id="3_sfybx"]
+[ext_resource type="Resource" uid="uid://b4hj3tlqd3od" path="res://resources/factory_items/raw_lead.tres" id="4_5x1be"]
+[ext_resource type="Resource" path="res://resources/factory_items/rounded_lead_pellets.tres" id="5_g0ove"]
+[ext_resource type="Resource" uid="uid://c0nkegvlqof7" path="res://resources/factory_items/lead_plate.tres" id="6_6ekkj"]
+[ext_resource type="Resource" uid="uid://c22n2v8wi7hp5" path="res://resources/factory_items/pointy_lead_tip.tres" id="7_r2o3x"]
+[ext_resource type="Resource" uid="uid://bexcwplnas18e" path="res://resources/factory_items/rounded_lead_tip.tres" id="8_7p3uj"]
+[ext_resource type="Resource" uid="uid://cxut2uukg2odn" path="res://resources/factory_items/loaded_bullet.tres" id="9_rsl1p"]
+[ext_resource type="Resource" uid="uid://ch1p8rsf7lx2x" path="res://resources/factory_items/rifle_round.tres" id="10_81wsr"]
+[ext_resource type="Resource" uid="uid://b0o6kjka3f1is" path="res://resources/factory_items/shotgun_bullet.tres" id="11_g2w24"]
+[ext_resource type="Resource" uid="uid://dnlk33wh1plgp" path="res://resources/factory_items/rounded_lead_round.tres" id="12_7hc4b"]
+[ext_resource type="Script" uid="uid://tgtb7oldk48a" path="res://resources/item_catalogue/item_catalogue.gd" id="13_23toc"]
+
+[resource]
+script = ExtResource("13_23toc")
+items = Array[ExtResource("1_r3bnv")]([ExtResource("2_4mcc2"), ExtResource("3_sfybx"), ExtResource("4_5x1be"), ExtResource("5_g0ove"), ExtResource("6_6ekkj"), ExtResource("7_r2o3x"), ExtResource("8_7p3uj"), ExtResource("9_rsl1p"), ExtResource("10_81wsr"), ExtResource("11_g2w24"), ExtResource("12_7hc4b")])
+metadata/_custom_type_script = "uid://tgtb7oldk48a"

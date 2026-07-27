@@ -1,0 +1,9 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://interfaces/layers/overlay_ui.gd" id="1_abc"]
+[ext_resource type="PackedScene" path="res://interfaces/gameplay/player_level_bar.tscn" id="2_abc"]
+
+[node name="OverlayUI" type="CanvasLayer"]
+script = ExtResource("1_abc")
+
+[node name="PlayerLevelBar" parent="." instance=ExtResource("2_abc")]

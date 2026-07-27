@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://u5nlq61scp6q" path="res://interfaces/layers/factory_building_ui.tscn" id="4_bncg7"]
 [ext_resource type="PackedScene" uid="uid://dgxpr0t4v73lm" path="res://interfaces/layers/emergent_ui.tscn" id="5_pqrs"]
 [ext_resource type="PackedScene" uid="uid://bg1u2yvhxn1tl" path="res://interfaces/layers/building_ui.tscn" id="6_jroq"]
+[ext_resource type="PackedScene" path="res://interfaces/layers/overlay_ui.tscn" id="7_pqrs"]
 [ext_resource type="Resource" uid="uid://depiu46xbt4hi" path="res://resources/enemy_waves/testing_events.tres" id="8_epj5h"]
 
 [node name="GameSupervisor" type="Node" unique_id=1285082505]
@@ -22,6 +23,8 @@ script = ExtResource("3_r0dkg")
 [node name="EmergentUI" parent="InterfaceSupervisor" unique_id=217905485 instance=ExtResource("5_pqrs")]
 
 [node name="DebugUI" parent="InterfaceSupervisor" unique_id=1655867431 instance=ExtResource("4_abc")]
+
+[node name="OverlayUI" parent="InterfaceSupervisor" instance=ExtResource("7_pqrs")]
 
 [node name="GameplayScene" parent="." unique_id=367612 instance=ExtResource("2_gm3q9")]
 unique_name_in_owner = true

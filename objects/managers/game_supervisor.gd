@@ -24,6 +24,7 @@ var _game_over_menu_instance: InterfaceWindow
 @onready var _grid_interactor: GridInteractor = (
 		$InterfaceSupervisor/BuildingUI/PlayerGridViewer/GridInteractor
 )
+@onready var _overlay_ui: OverlayUI = $InterfaceSupervisor/OverlayUI
 
 
 func _ready() -> void:
@@ -47,6 +48,8 @@ func _ready() -> void:
 	_interface_supervisor.unpause_requested.connect(unpause_from_level_up)
 	_active_player.leveled_up.connect(_interface_supervisor.on_leveled_up)
 	_active_player.died.connect(_on_player_died)
+
+	_overlay_ui.setup(_active_player.level_system)
 
 	if not InputMap.has_action("pause"):
 		var event := InputEventKey.new()

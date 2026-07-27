@@ -3,6 +3,7 @@ extends Node
 
 signal leveled_up(level: int)
 signal gold_changed(amount: int)
+signal xp_changed(xp: int, limit: int)
 
 var level: int = 1
 var xp: int = 0
@@ -19,6 +20,8 @@ func add_xp(amount: int) -> void:
 		level += 1
 		xp_to_next_level = xp_required_for_level(level)
 		leveled_up.emit(level)
+
+	xp_changed.emit(xp, xp_to_next_level)
 
 
 func spend_gold(amount: int) -> bool:

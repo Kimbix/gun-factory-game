@@ -49,7 +49,7 @@ func _ready() -> void:
 	_active_player.leveled_up.connect(_interface_supervisor.on_leveled_up)
 	_active_player.died.connect(_on_player_died)
 
-	_overlay_ui.setup(_active_player)
+	_overlay_ui.setup(_active_player, %GameplayScene)
 
 	if not InputMap.has_action("pause"):
 		var event := InputEventKey.new()

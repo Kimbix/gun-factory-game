@@ -2,13 +2,26 @@
 
 [ext_resource type="Script" uid="uid://cubs5hciucc42" path="res://interfaces/layers/overlay_ui.gd" id="1_5rlsn"]
 [ext_resource type="PackedScene" uid="uid://b6ss81tip5wd6" path="res://interfaces/gameplay/player_level_bar.tscn" id="2_abc"]
-[ext_resource type="PackedScene" path="res://interfaces/gameplay/player_health_bar.tscn" id="3_abc"]
+[ext_resource type="PackedScene" uid="uid://dek7yy2cav3cq" path="res://interfaces/gameplay/player_health_bar.tscn" id="3_abc"]
+[ext_resource type="PackedScene" uid="uid://bg8dg8vpuk10t" path="res://interfaces/gameplay/game_timer.tscn" id="4_timer"]
 
 [node name="OverlayUI" type="CanvasLayer" unique_id=1036944228]
-mouse_filter = 2
 script = ExtResource("1_5rlsn")
 metadata/_custom_type_script = "uid://cubs5hciucc42"
 
 [node name="PlayerLevelBar" parent="." unique_id=593238294 instance=ExtResource("2_abc")]
 
-[node name="PlayerHealthBar" parent="." instance=ExtResource("3_abc")]
+[node name="PlayerHealthBar" parent="." unique_id=1316708334 instance=ExtResource("3_abc")]
+
+[node name="GameTimer" parent="." unique_id=1721559776 instance=ExtResource("4_timer")]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -58.0
+offset_top = -32.0
+offset_right = 58.0
+offset_bottom = 0.0
+grow_horizontal = 2
+grow_vertical = 0

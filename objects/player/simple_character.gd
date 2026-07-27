@@ -5,7 +5,7 @@ signal leveled_up(level: int)
 signal damaged(current_health: float)
 signal died
 
-const ARMOR_C := 50.0
+const ARMOR_C := 0.5
 
 static var _actions_ready := false
 

@@ -11,11 +11,11 @@ extends WorldEnvironment
 @export var spawn_distance_min := 250.0
 @export var spawn_distance_max := 400.0
 
-const HP_SCALE := 0.1
-const SPEED_SCALE := 0.05
-const DAMAGE_SCALE := 0.05
-const CAP_PER_DIFFICULTY := 10
-const RATE_SCALE := 0.02
+const HP_SCALE := 1.0
+const SPEED_SCALE := 0.5
+const DAMAGE_SCALE := 0.5
+const CAP_PER_DIFFICULTY := 50
+const RATE_SCALE := 0.2
 
 var elapsed_time: float
 var enemies: Array[BaseEnemy] = []

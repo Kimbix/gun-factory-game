@@ -6,6 +6,7 @@ const LIFETIME := 3.0
 var speed := 400.0
 var direction: Vector2
 var damage := 5
+var shooter: Node2D
 var _lifetime := 0.0
 
 
@@ -23,6 +24,8 @@ func _physics_process(delta: float) -> void:
 
 func _on_body_entered(body: Node) -> void:
 	if not body.has_method("take_damage"):
+		return
+	if body == shooter:
 		return
 	body.take_damage(damage)
 	queue_free()

@@ -6,6 +6,7 @@ const BULLET := preload("uid://b1u11et5c3n3")
 
 static func spawn_bullet(shooter: Node2D, dir: Vector2, speed: float, damage: int) -> Bullet:
 	var bullet := BULLET.instantiate()
+	bullet.shooter = shooter
 	bullet.direction = dir
 	bullet.global_position = shooter.global_position
 	bullet.speed = speed

@@ -11,6 +11,12 @@ extends WorldEnvironment
 @export var spawn_distance_min := 250.0
 @export var spawn_distance_max := 400.0
 
+const HP_SCALE := 0.1
+const SPEED_SCALE := 0.05
+const DAMAGE_SCALE := 0.05
+const CAP_PER_DIFFICULTY := 10
+const RATE_SCALE := 0.02
+
 var elapsed_time: float
 var enemies: Array[BaseEnemy] = []
 var active_wave: EnemyWave
@@ -59,14 +65,30 @@ func _spawn_player(spawn_pos: Vector2 = Vector2.ZERO) -> void:
 	add_child(player_instance)
 
 
+func _get_difficulty() -> float:
+	if not is_instance_valid(player_instance):
+		return 0.0
+	return player_instance.player_stats.stats[&"difficulty"].value
+
+
+func _apply_difficulty(instance: BaseEnemy, diff: float) -> void:
+	instance.health = maxi(1, ceili(instance.health * (1.0 + diff * HP_SCALE)))
+	instance.speed *= 1.0 + diff * SPEED_SCALE
+	instance.damage_multiplier = 1.0 + diff * DAMAGE_SCALE
+
+
 func _spawn_enemies() -> void:
-	if active_wave == null or enemies.size() >= enemy_cap:
+	var diff := _get_difficulty()
+	var effective_cap := ceili(enemy_cap + diff * CAP_PER_DIFFICULTY)
+	var effective_rate := spawn_per_wave_percent * (1.0 + diff * RATE_SCALE)
+
+	if active_wave == null or enemies.size() >= effective_cap:
 		return
 
-	var missing: int = enemy_cap - enemies.size()
-	var to_spawn := ceili(missing * spawn_per_wave_percent)
+	var missing: int = effective_cap - enemies.size()
+	var to_spawn := ceili(missing * effective_rate)
 	for i: Variant in to_spawn:
-		if enemies.size() >= enemy_cap:
+		if enemies.size() >= effective_cap:
 			return
 
 		var info: EnemyInfo = active_wave.enemies.pick_random()
@@ -81,6 +103,7 @@ func _spawn_enemies() -> void:
 
 		var xp_range := randf_range(1.0 - info.variance, 1.0 + info.variance)
 		instance.xp_amount = ceili(info.base_xp * xp_range)
+		_apply_difficulty(instance, diff)
 
 		add_child(instance)
 		enemies.append(instance)
@@ -96,6 +119,7 @@ func _handle_event(event: EnemyEvent) -> void:
 
 
 func _spawn_boss(event: EnemyEvent) -> void:
+	var diff := _get_difficulty()
 	print("GameDirector: spawning boss")
 	for i in event.count:
 		var instance: BaseEnemy = event.enemy_info.scene.instantiate()
@@ -111,6 +135,7 @@ func _spawn_boss(event: EnemyEvent) -> void:
 		var variance := event.enemy_info.variance
 		var xp_range := randf_range(1.0 - variance, 1.0 + variance)
 		instance.xp_amount = ceili(event.enemy_info.base_xp * xp_range)
+		_apply_difficulty(instance, diff)
 
 		add_child(instance)
 		enemies.append(instance)

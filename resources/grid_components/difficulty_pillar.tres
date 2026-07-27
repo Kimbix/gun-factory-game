@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="GridComponentInfo" format=3 uid="uid://c80v4vqlnn0sv"]
+
+[ext_resource type="Script" uid="uid://da4yb3omv2567" path="res://resources/grid_components/scripts/grid_component_info.gd" id="1_6h3k2"]
+[ext_resource type="Script" uid="uid://857ipmnllr5o" path="res://scripts/components/stat_pillar.gd" id="2_m4p8t"]
+[ext_resource type="Script" uid="uid://cxdyvqaslkwas" path="res://scripts/systems/port.gd" id="3_55lw8"]
+[ext_resource type="Script" uid="uid://gjwx0diquk71" path="res://resources/grid_components/scripts/pillar_config.gd" id="4_w9b5v"]
+
+[sub_resource type="Resource" id="Resource_dff"]
+script = ExtResource("4_w9b5v")
+stat_name = &"difficulty"
+boost_value = 0.05
+
+[sub_resource type="Resource" id="Resource_squbl"]
+metadata/__load_path__ = "res://assets/factory_components/spr_sprDifficultyPillar.png"
+
+[resource]
+script = ExtResource("1_6h3k2")
+name = &"difficulty_pillar"
+display_name = &"Difficulty Pillar"
+texture = SubResource("Resource_squbl")
+dimensions = Vector2i(1, 1)
+behaviour = ExtResource("2_m4p8t")
+color = Color(0.9, 0.1, 0.1, 1)
+config = SubResource("Resource_dff")

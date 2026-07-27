@@ -21,7 +21,11 @@ func _physics_process(_delta: float) -> void:
 	if _frame_count >= tick_interval_frames:
 		_frame_count = 0
 		if is_instance_valid(_player) and _player.has_method(&"take_damage"):
-			_player.take_damage(damage_per_tick)
+			var mult := 1.0
+			var parent := get_parent() as BaseEnemy
+			if parent != null:
+				mult = parent.damage_multiplier
+			_player.take_damage(damage_per_tick * mult)
 
 
 func _on_body_entered(body: Node2D) -> void:

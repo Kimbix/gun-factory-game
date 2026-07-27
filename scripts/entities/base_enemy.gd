@@ -6,13 +6,13 @@ signal on_death
 
 enum EnemyType { REGULAR, BOSS }
 
-const SPEED := 20.0
-
 @export var enemy_type: EnemyType = EnemyType.REGULAR
 
 var player: Node2D
 var game_world: Node
+var speed := 20.0
 var health := 30
+var damage_multiplier := 1.0
 var xp_amount: int
 var _dead: bool
 
@@ -26,7 +26,7 @@ func _physics_process(_delta: float) -> void:
 		return
 
 	var dir := (player.global_position - global_position).normalized()
-	velocity = dir * SPEED
+	velocity = dir * speed
 	move_and_collide(velocity * _delta)
 
 

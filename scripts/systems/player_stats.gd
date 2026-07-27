@@ -11,6 +11,13 @@ func _init(data: PlayerStatsData) -> void:
 	stats[&"tick_speed"] = Stat.new(data.tick_speed)
 	stats[&"health_regen"] = Stat.new(data.health_regen)
 	stats[&"pickup_range"] = Stat.new(data.pickup_range)
+	stats[&"xp_gain"] = Stat.new(data.xp_gain)
+	stats[&"gold_gain"] = Stat.new(data.gold_gain)
+	stats[&"armor"] = Stat.new(data.armor)
+	stats[&"luck"] = Stat.new(data.luck)
+	stats[&"crit_chance"] = Stat.new(data.crit_chance)
+	stats[&"crit_damage"] = Stat.new(data.crit_damage)
+	stats[&"difficulty"] = Stat.new(data.difficulty)
 	health = data.max_health
 
 

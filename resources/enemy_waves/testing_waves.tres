@@ -8,18 +8,11 @@
 
 [sub_resource type="Resource" id="Resource_8rb1r"]
 script = ExtResource("2_fhf8w")
-end_time_minutes = 1.0
-enemies = Array[ExtResource("3_fhf8w")]([ExtResource("4_6e1dk")])
-metadata/_custom_type_script = "uid://ctf6nntqd8vvt"
-
-[sub_resource type="Resource" id="Resource_r0dkg"]
-script = ExtResource("2_fhf8w")
-start_time_minutes = 1.0
-end_time_minutes = 2.0
-enemies = Array[ExtResource("3_fhf8w")]([ExtResource("5_uuh8f")])
+end_time_minutes = 30.0
+enemies = Array[ExtResource("3_fhf8w")]([ExtResource("4_6e1dk"), ExtResource("5_uuh8f")])
 metadata/_custom_type_script = "uid://ctf6nntqd8vvt"
 
 [resource]
 script = ExtResource("1_q4fjt")
-waves = Array[ExtResource("2_fhf8w")]([SubResource("Resource_8rb1r"), SubResource("Resource_r0dkg")])
+waves = Array[ExtResource("2_fhf8w")]([SubResource("Resource_8rb1r")])
 metadata/_custom_type_script = "uid://dio5qgikhe7p1"

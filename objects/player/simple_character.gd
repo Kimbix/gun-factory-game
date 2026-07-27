@@ -1,13 +1,13 @@
 class_name SimpleCharacter
 extends CharacterBody2D
 
-static var _actions_ready := false
-
-@export var starting_grid_data: PlayerGridData
-
 signal leveled_up(level: int)
 signal damaged(current_health: float)
 signal died
+
+static var _actions_ready := false
+
+@export var starting_grid_data: PlayerGridData
 
 var current_target: Node2D
 var player_grid: PlayerGrid
@@ -122,6 +122,18 @@ func find_target() -> Node2D:
 	return nearest
 
 
+func take_damage(amount: float) -> void:
+	if _dead:
+		return
+	health -= amount
+	if health <= 0:
+		health = 0
+		_dead = true
+		died.emit()
+		_on_player_died()
+	damaged.emit(health)
+
+
 func _on_collection_area_entered(area: Area2D) -> void:
 	var crystal := area as ExperienceCrystal
 	if crystal == null:
@@ -132,7 +144,9 @@ func _on_collection_area_entered(area: Area2D) -> void:
 
 
 func _on_crystal_collected(crystal: ExperienceCrystal) -> void:
-	level_system.add_xp(crystal.xp_value)
+	var xp_mult: float = player_stats.stats[&"xp_gain"].value
+	var gold_mult: float = player_stats.stats[&"gold_gain"].value
+	level_system.add_xp(crystal.xp_value, xp_mult, gold_mult)
 
 
 func _on_despawn_proximity_exited(body: Node2D) -> void:
@@ -184,18 +198,6 @@ func _apply_regen() -> void:
 	if regen <= 0:
 		return
 	health = minf(health + regen, max_hp)
-
-
-func take_damage(amount: float) -> void:
-	if _dead:
-		return
-	health -= amount
-	if health <= 0:
-		health = 0
-		_dead = true
-		died.emit()
-		_on_player_died()
-	damaged.emit(health)
 
 
 func _on_player_died() -> void:

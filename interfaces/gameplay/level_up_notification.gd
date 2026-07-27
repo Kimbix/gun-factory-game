@@ -9,6 +9,10 @@ const ALL_PILLARS: Array[GridComponentInfo] = [
 	preload("uid://s86vmfpi3w15"),
 	preload("uid://du6m2qkdv14nq"),
 	preload("uid://5h2vu81iay55"),
+	preload("uid://bqbpme0t32frd"),
+	preload("uid://ow4x6ndkrxfa"),
+	preload("uid://cllvvl6vpb1q5"),
+	preload("uid://da7gfhppawjyn"),
 ]
 
 var building_inventory: PlayerBuildingInventory

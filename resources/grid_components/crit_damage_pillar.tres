@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="GridComponentInfo" format=3 uid="uid://da7gfhppawjyn"]
+
+[ext_resource type="Script" uid="uid://da4yb3omv2567" path="res://resources/grid_components/scripts/grid_component_info.gd" id="1_7h3j2"]
+[ext_resource type="Script" uid="uid://857ipmnllr5o" path="res://scripts/components/stat_pillar.gd" id="2_m4p8t"]
+[ext_resource type="Script" uid="uid://cxdyvqaslkwas" path="res://scripts/systems/port.gd" id="3_amsjn"]
+[ext_resource type="Texture2D" uid="uid://cl348iyyf0nlf" path="res://assets/factory_components/spr_sprCritDamagePillar.png" id="3_w2k5r"]
+[ext_resource type="Script" uid="uid://gjwx0diquk71" path="res://resources/grid_components/scripts/pillar_config.gd" id="4_d9f6n"]
+
+[sub_resource type="Resource" id="Resource_cdm"]
+script = ExtResource("4_d9f6n")
+stat_name = &"crit_damage"
+boost_value = 0.1
+
+[resource]
+script = ExtResource("1_7h3j2")
+name = &"crit_damage_pillar"
+display_name = &"Crit Damage Pillar"
+texture = ExtResource("3_w2k5r")
+dimensions = Vector2i(1, 1)
+behaviour = ExtResource("2_m4p8t")
+color = Color(0.9, 0.6, 0.1, 1)
+config = SubResource("Resource_cdm")

@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="GridComponentInfo" format=3 uid="uid://cllvvl6vpb1q5"]
+
+[ext_resource type="Script" uid="uid://da4yb3omv2567" path="res://resources/grid_components/scripts/grid_component_info.gd" id="1_5f2h1"]
+[ext_resource type="Script" uid="uid://857ipmnllr5o" path="res://scripts/components/stat_pillar.gd" id="2_k8p3m"]
+[ext_resource type="Script" uid="uid://cxdyvqaslkwas" path="res://scripts/systems/port.gd" id="3_s7b8t"]
+[ext_resource type="Texture2D" uid="uid://bcb1pv13whrm8" path="res://assets/factory_components/spr_sprCritChancePillar.png" id="3_t9n4x"]
+[ext_resource type="Script" uid="uid://gjwx0diquk71" path="res://resources/grid_components/scripts/pillar_config.gd" id="4_r2b7v"]
+
+[sub_resource type="Resource" id="Resource_cch"]
+script = ExtResource("4_r2b7v")
+stat_name = &"crit_chance"
+boost_value = 0.05
+
+[resource]
+script = ExtResource("1_5f2h1")
+name = &"crit_chance_pillar"
+display_name = &"Crit Chance Pillar"
+texture = ExtResource("3_t9n4x")
+dimensions = Vector2i(1, 1)
+behaviour = ExtResource("2_k8p3m")
+color = Color(0.9, 0.2, 0.2, 1)
+config = SubResource("Resource_cch")

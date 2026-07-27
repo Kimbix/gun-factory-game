@@ -31,9 +31,9 @@ static func xp_required_for_level(lvl: int) -> int:
 	return 100 + maxi(0, lvl - 41) * 20
 
 
-func add_xp(amount: int) -> void:
-	xp += amount
-	gold += amount
+func add_xp(amount: int, xp_multiplier: float = 1.0, gold_multiplier: float = 1.0) -> void:
+	xp += ceili(amount * xp_multiplier)
+	gold += ceili(amount * gold_multiplier)
 	gold_changed.emit(gold)
 	while xp >= xp_to_next_level:
 		xp -= xp_to_next_level

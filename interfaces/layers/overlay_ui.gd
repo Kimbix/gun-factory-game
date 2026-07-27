@@ -7,6 +7,7 @@ extends CanvasLayer
 
 
 func setup(player: SimpleCharacter, game_director: GameDirector) -> void:
-	_level_bar.setup(player.level_system)
+	var ls := player.level_system
+	_level_bar.setup(ls)
 	_health_bar.setup(player)
 	_timer.setup(game_director)

@@ -3,9 +3,10 @@ extends BaseEnemy
 
 signal on_death
 
-const SPEED := 60.0
+const SPEED := 20.0
 
 var health := 30
+var _dead: bool
 
 
 func _physics_process(_delta: float) -> void:
@@ -15,9 +16,6 @@ func _physics_process(_delta: float) -> void:
 	var dir := (player.global_position - global_position).normalized()
 	velocity = dir * SPEED
 	move_and_collide(velocity * _delta)
-
-
-var _dead: bool
 
 
 func take_damage(amount: int) -> void:

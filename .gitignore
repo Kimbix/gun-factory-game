@@ -13,3 +13,6 @@ version.txt
 
 # Personal agent instructions
 AGENTS.md
+
+# Local justfile (task runner)
+justfile

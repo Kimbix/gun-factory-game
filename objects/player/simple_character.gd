@@ -218,4 +218,4 @@ func _shoot(item: FactoryItem = null) -> void:
 	current_target = find_target()
 	if current_target == null:
 		return
-	item.shooting_strategy.execute(self, current_target, item)
+	item.shooting_strategy.execute(self, current_target, item, player_stats)

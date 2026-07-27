@@ -7,7 +7,12 @@ const SPREAD_DEG := 60.0
 const DELAY := 0.05
 
 
-func execute(shooter: Node2D, target: Node2D, _item: FactoryItem) -> void:
+func execute(
+	shooter: Node2D,
+	target: Node2D,
+	_item: FactoryItem,
+	player_stats: PlayerStats = null,
+) -> void:
 	var spread_rad := deg_to_rad(SPREAD_DEG)
 
 	for i in BULLET_COUNT:
@@ -21,6 +26,6 @@ func execute(shooter: Node2D, target: Node2D, _item: FactoryItem) -> void:
 		var dir := base_dir.rotated(angle_offset)
 		var speed := 600.0 * randf_range(0.95, 1.05)
 
-		spawn_bullet(shooter, dir, speed, DAMAGE)
+		spawn_bullet(shooter, dir, speed, DAMAGE, player_stats)
 
 		await shooter.get_tree().create_timer(DELAY).timeout

@@ -6,7 +6,12 @@ const SPREAD_DEG := 45.0
 const DAMAGE := 5
 
 
-func execute(shooter: Node2D, target: Node2D, _item: FactoryItem) -> void:
+func execute(
+	shooter: Node2D,
+	target: Node2D,
+	_item: FactoryItem,
+	player_stats: PlayerStats = null,
+) -> void:
 	if not is_instance_valid(target):
 		return
 
@@ -18,4 +23,4 @@ func execute(shooter: Node2D, target: Node2D, _item: FactoryItem) -> void:
 		var dir := base_dir.rotated(angle_offset)
 		var speed := 600.0 * randf_range(0.75, 1.25)
 
-		spawn_bullet(shooter, dir, speed, DAMAGE)
+		spawn_bullet(shooter, dir, speed, DAMAGE, player_stats)

@@ -7,6 +7,7 @@ var speed := 400.0
 var direction: Vector2
 var damage := 5
 var shooter: Node2D
+var player_stats: PlayerStats
 var _lifetime := 0.0
 
 
@@ -28,11 +29,8 @@ func _on_body_entered(body: Node) -> void:
 	if body == shooter:
 		return
 	var final_damage := damage
-	var player := shooter as SimpleCharacter
-	if player:
-		var stats := player.player_stats
-		if randf() < stats.stats[&"crit_chance"].value:
-			var bonus: float = stats.stats[&"crit_damage"].value
-			final_damage = ceili(damage * (1.0 + bonus))
+	if player_stats != null and randf() < player_stats.stats[&"crit_chance"].value:
+		var bonus: float = player_stats.stats[&"crit_damage"].value
+		final_damage = ceili(damage * (1.0 + bonus))
 	body.take_damage(final_damage)
 	queue_free()

@@ -79,7 +79,8 @@ func _spawn_enemies() -> void:
 						.rotated(randf() * TAU))
 		)
 
-		instance.xp_amount = ceili(info.base_xp * randf_range(1.0 - info.variance, 1.0 + info.variance))
+		var xp_range := randf_range(1.0 - info.variance, 1.0 + info.variance)
+		instance.xp_amount = ceili(info.base_xp * xp_range)
 
 		add_child(instance)
 		enemies.append(instance)
@@ -107,7 +108,9 @@ func _spawn_boss(event: EnemyEvent) -> void:
 						.rotated(randf() * TAU))
 		)
 
-		instance.xp_amount = ceili(event.enemy_info.base_xp * randf_range(1.0 - event.enemy_info.variance, 1.0 + event.enemy_info.variance))
+		var variance := event.enemy_info.variance
+		var xp_range := randf_range(1.0 - variance, 1.0 + variance)
+		instance.xp_amount = ceili(event.enemy_info.base_xp * xp_range)
 
 		add_child(instance)
 		enemies.append(instance)

@@ -10,6 +10,8 @@ signal overlay_changed(position: Vector2i)
 
 @export var dimensions: Vector2i = Vector2i(10, 10)
 
+const _FLOOR_TEX := preload("uid://bcxv8tx5ovn5l")
+
 var _floor: Dictionary[Vector2i, Texture2D] = { }
 var _items: Array[FactoryItem] = []
 var _buildings: Dictionary[Vector2i, FactoryBuilding] = { }
@@ -131,7 +133,7 @@ func initialize_empty() -> void:
 	_clear_grid()
 
 	for v: Vector2i in VectorTools.vector2i_range(dimensions):
-		_floor[v] = preload("uid://bcxv8tx5ovn5l")
+		_floor[v] = _FLOOR_TEX
 
 
 func tick() -> void:
@@ -183,10 +185,9 @@ func from_data(data: PlayerGridData) -> void:
 			for v: Vector2i in to_remove:
 				_floor.erase(v)
 		else:
-			var default_tex := preload("uid://bcxv8tx5ovn5l")
 			for v: Vector2i in VectorTools.vector2i_range(dimensions):
 				if not _floor.has(v):
-					_floor[v] = default_tex
+					_floor[v] = _FLOOR_TEX
 
 		var buildings_to_remove: Array[Vector2i] = []
 		for v: Vector2i in _buildings:

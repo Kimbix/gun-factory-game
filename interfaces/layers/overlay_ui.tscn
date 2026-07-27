@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cubs5hciucc42" path="res://interfaces/layers/overlay_ui.gd" id="1_5rlsn"]
 [ext_resource type="PackedScene" uid="uid://b6ss81tip5wd6" path="res://interfaces/gameplay/player_level_bar.tscn" id="2_abc"]
+[ext_resource type="PackedScene" path="res://interfaces/gameplay/player_health_bar.tscn" id="3_abc"]
 
 [node name="OverlayUI" type="CanvasLayer" unique_id=1036944228]
 mouse_filter = 2
@@ -9,3 +10,5 @@ script = ExtResource("1_5rlsn")
 metadata/_custom_type_script = "uid://cubs5hciucc42"
 
 [node name="PlayerLevelBar" parent="." unique_id=593238294 instance=ExtResource("2_abc")]
+
+[node name="PlayerHealthBar" parent="." instance=ExtResource("3_abc")]

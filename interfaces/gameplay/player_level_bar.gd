@@ -3,11 +3,10 @@ extends Control
 
 @export var bg_color: Color = Color(0, 0, 0, 0.5)
 @export var fill_color: Color = Color(0.2, 0.6, 1.0)
+@export var _fill: ColorRect
+@export var _experience_label: Label
 
 var level_system: LevelSystem
-
-@onready var _background: ColorRect = %Background
-@onready var _fill: ColorRect = %Fill
 
 
 func setup(ls: LevelSystem) -> void:
@@ -22,6 +21,7 @@ func setup(ls: LevelSystem) -> void:
 func _refresh() -> void:
 	if level_system == null:
 		return
+	_experience_label.text = "Lv. %d" % level_system.level
 	if level_system.xp_to_next_level <= 0:
 		_fill.anchor_right = 1.0
 		return

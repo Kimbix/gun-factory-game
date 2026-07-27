@@ -5,12 +5,11 @@
 [ext_resource type="PackedScene" path="res://objects/xp/experience_spawner.tscn" id="3_g5he2"]
 [ext_resource type="Script" uid="uid://dofvr0nc814r8" path="res://scripts/entities/enemy_hitbox.gd" id="4_s4axq"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_k111l"]
-radius = 3.0
-height = 20.0
+[sub_resource type="CircleShape2D" id="CircleShape2D_body"]
+radius = 7.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_6xohb"]
-radius = 9.0
+radius = 8.0
 
 [node name="EnemySlime" type="CharacterBody2D" unique_id=589975782]
 script = ExtResource("2_qu3vo")
@@ -19,9 +18,7 @@ script = ExtResource("2_qu3vo")
 texture = ExtResource("1_t7xr3")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=284001717]
-position = Vector2(0, -1)
-rotation = -1.5707964
-shape = SubResource("CapsuleShape2D_k111l")
+shape = SubResource("CircleShape2D_body")
 
 [node name="ExperienceSpawner" parent="." unique_id=1642692828 instance=ExtResource("3_g5he2")]
 

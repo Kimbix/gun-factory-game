@@ -5,8 +5,8 @@
 [ext_resource type="PackedScene" path="res://objects/xp/experience_spawner.tscn" id="3_026nx"]
 [ext_resource type="Script" path="res://scripts/entities/enemy_hitbox.gd" id="4_p7x4y"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_o6wg8"]
-size = Vector2(33, 28.000002)
+[sub_resource type="CircleShape2D" id="CircleShape2D_body"]
+radius = 17.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_6xohb"]
 radius = 18.0
@@ -18,9 +18,7 @@ script = ExtResource("1_nv0d7")
 texture = ExtResource("2_nv0d7")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=284001717]
-position = Vector2(-4.7683716e-07, 0.5000005)
-rotation = -1.5707964
-shape = SubResource("RectangleShape2D_o6wg8")
+shape = SubResource("CircleShape2D_body")
 
 [node name="ExperienceSpawner" parent="." unique_id=1642692828 instance=ExtResource("3_026nx")]
 base_xp = 1

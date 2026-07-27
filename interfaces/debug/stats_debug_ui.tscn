@@ -44,3 +44,24 @@ text = "Health Regen: 0.0/s"
 
 [node name="PickupRange" type="Label" parent="."]
 text = "Pickup Range: 80.0"
+
+[node name="XPGain" type="Label" parent="."]
+text = "XP Gain: 1.0"
+
+[node name="GoldGain" type="Label" parent="."]
+text = "Gold Gain: 1.0"
+
+[node name="Armor" type="Label" parent="."]
+text = "Armor: 0.0"
+
+[node name="Luck" type="Label" parent="."]
+text = "Luck: 0.0"
+
+[node name="CritChance" type="Label" parent="."]
+text = "Crit Chance: 0.0"
+
+[node name="CritDamage" type="Label" parent="."]
+text = "Crit Damage: 0.0"
+
+[node name="Difficulty" type="Label" parent="."]
+text = "Difficulty: 0.0"

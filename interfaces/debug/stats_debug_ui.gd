@@ -13,6 +13,13 @@ var _elapsed: float
 @onready var _tick_speed_label := $TickSpeed
 @onready var _health_regen_label := $HealthRegen
 @onready var _pickup_range_label := $PickupRange
+@onready var _xp_gain_label := $XPGain
+@onready var _gold_gain_label := $GoldGain
+@onready var _armor_label := $Armor
+@onready var _luck_label := $Luck
+@onready var _crit_chance_label := $CritChance
+@onready var _crit_damage_label := $CritDamage
+@onready var _difficulty_label := $Difficulty
 
 
 func _process(delta: float) -> void:
@@ -38,3 +45,12 @@ func refresh(player: SimpleCharacter) -> void:
 	_tick_speed_label.text = "Tick Speed: %.4f" % stats.stats[&"tick_speed"].value
 	_health_regen_label.text = "Health Regen: %.1f/s" % stats.stats[&"health_regen"].value
 	_pickup_range_label.text = "Pickup Range: %.1f" % stats.stats[&"pickup_range"].value
+	_xp_gain_label.text = "XP Gain: %.2f" % stats.stats[&"xp_gain"].value
+	_gold_gain_label.text = "Gold Gain: %.2f" % stats.stats[&"gold_gain"].value
+	var armor_val: float = stats.stats[&"armor"].value
+	var reduction: float = armor_val / (armor_val + 0.5) * 100.0
+	_armor_label.text = "Armor: %.2f (%.1f%% reduction)" % [armor_val, reduction]
+	_luck_label.text = "Luck: %.2f" % stats.stats[&"luck"].value
+	_crit_chance_label.text = "Crit Chance: %.0f%%" % (stats.stats[&"crit_chance"].value * 100.0)
+	_crit_damage_label.text = "Crit Damage: +%.0f%%" % (stats.stats[&"crit_damage"].value * 100.0)
+	_difficulty_label.text = "Difficulty: %.2f" % stats.stats[&"difficulty"].value

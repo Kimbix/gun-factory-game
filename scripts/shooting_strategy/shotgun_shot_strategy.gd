@@ -7,10 +7,10 @@ const DAMAGE := 5
 
 
 func execute(
-	shooter: Node2D,
-	target: Node2D,
-	_item: FactoryItem,
-	player_stats: PlayerStats = null,
+		shooter: Node2D,
+		target: Node2D,
+		_item: FactoryItem,
+		player_stats: PlayerStats = null,
 ) -> void:
 	if not is_instance_valid(target):
 		return

@@ -9,10 +9,10 @@ const SPEED := 600.0
 
 
 func execute(
-	shooter: Node2D,
-	target: Node2D,
-	_item: FactoryItem,
-	player_stats: PlayerStats = null,
+		shooter: Node2D,
+		target: Node2D,
+		_item: FactoryItem,
+		player_stats: PlayerStats = null,
 ) -> void:
 	var spread_rad := deg_to_rad(SPREAD_DEG)
 

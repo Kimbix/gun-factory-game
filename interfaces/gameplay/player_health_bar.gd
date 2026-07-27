@@ -6,18 +6,9 @@ extends Control
 @export var y_offset: float = 24.0
 @export var bg_color: Color = Color(0, 0, 0, 0.7)
 @export var fill_color: Color = Color(0.8, 0.2, 0.2)
+@export var _fill: ColorRect
 
 var player: SimpleCharacter
-
-@onready var _background: ColorRect = %Background
-@onready var _fill: ColorRect = %Fill
-
-
-func setup(p: SimpleCharacter) -> void:
-	player = p
-	if player == null:
-		return
-	_refresh()
 
 
 func _process(_delta: float) -> void:
@@ -29,6 +20,13 @@ func _process(_delta: float) -> void:
 	var xform := camera.get_canvas_transform()
 	var screen_pos := xform * (player.global_position + Vector2(0.0, y_offset))
 	position = screen_pos - Vector2(bar_width / 2.0, 0.0)
+	_refresh()
+
+
+func setup(p: SimpleCharacter) -> void:
+	player = p
+	if player == null:
+		return
 	_refresh()
 
 

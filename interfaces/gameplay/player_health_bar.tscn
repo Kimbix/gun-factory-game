@@ -1,32 +1,32 @@
-[gd_scene format=3]
+[gd_scene format=3 uid="uid://dek7yy2cav3cq"]
 
-[ext_resource type="Script" path="res://interfaces/gameplay/player_health_bar.gd" id="1_abc"]
+[ext_resource type="Script" uid="uid://c534lsfsmi1dg" path="res://interfaces/gameplay/player_health_bar.gd" id="1_abc"]
 
-[node name="PlayerHealthBar" type="Control"]
-mouse_filter = 2
+[node name="PlayerHealthBar" type="Control" unique_id=173541864 node_paths=PackedStringArray("_fill")]
+layout_mode = 3
+anchors_preset = 0
 offset_right = 48.0
 offset_bottom = 6.0
-script = ExtResource("1_abc")
-
-[node name="Background" type="ColorRect" parent="."]
-unique_name_in_owner = true
 mouse_filter = 2
+script = ExtResource("1_abc")
+_fill = NodePath("Fill")
+
+[node name="Background" type="ColorRect" parent="." unique_id=233498843]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 color = Color(0, 0, 0, 0.7)
 
-[node name="Fill" type="ColorRect" parent="."]
-unique_name_in_owner = true
-mouse_filter = 2
+[node name="Fill" type="ColorRect" parent="." unique_id=1242100838]
 layout_mode = 1
-anchor_left = 0.0
-anchor_top = 0.0
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 0
 grow_vertical = 2
-color = Color(0.8, 0.2, 0.2, 1.0)
+mouse_filter = 2
+color = Color(0.8, 0.2, 0.2, 1)

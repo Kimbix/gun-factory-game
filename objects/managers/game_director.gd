@@ -4,7 +4,7 @@ extends WorldEnvironment
 @export var player_character_scene: PackedScene
 @export var enemy_waves: EnemyWaves
 @export var enemy_events: EnemyEvents
-@export var enemy_cap := 50
+@export var base_enemy_cap := 50
 @export_category("Spawn Specifications")
 @export var spawn_interval := 10.0
 @export var spawn_per_wave_percent := .05
@@ -79,7 +79,7 @@ func _apply_difficulty(instance: BaseEnemy, diff: float) -> void:
 
 func _spawn_enemies() -> void:
 	var diff := _get_difficulty()
-	var effective_cap := ceili(enemy_cap + diff * CAP_PER_DIFFICULTY)
+	var effective_cap := ceili(base_enemy_cap + diff * CAP_PER_DIFFICULTY)
 	var effective_rate := spawn_per_wave_percent * (1.0 + diff * RATE_SCALE)
 
 	if active_wave == null or enemies.size() >= effective_cap:

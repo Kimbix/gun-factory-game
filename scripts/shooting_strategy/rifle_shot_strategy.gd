@@ -6,6 +6,7 @@ const DAMAGE := 10
 const SPREAD_DEG := 5.0
 const DELAY := 0.1
 const SPEED := 600.0
+const BULLET_SCENE := preload("res://objects/projectiles/bullet_rifle.tscn")
 
 
 func execute(
@@ -26,6 +27,6 @@ func execute(
 		var angle_offset := randf_range(-spread_rad * 0.5, spread_rad * 0.5)
 		var dir := base_dir.rotated(angle_offset)
 
-		spawn_bullet(shooter, dir, SPEED, DAMAGE, player_stats)
+		spawn_bullet(BULLET_SCENE, shooter, dir, SPEED, DAMAGE, player_stats)
 
 		await shooter.get_tree().create_timer(DELAY).timeout

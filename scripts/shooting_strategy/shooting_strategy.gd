@@ -1,17 +1,15 @@
 class_name ShootingStrategy
 extends RefCounted
 
-const BULLET := preload("uid://b1u11et5c3n3")
-
-
 static func spawn_bullet(
+		bullet_scene: PackedScene,
 		shooter: Node2D,
 		dir: Vector2,
 		speed: float,
 		damage: int,
 		player_stats: PlayerStats = null,
 ) -> Bullet:
-	var bullet := BULLET.instantiate()
+	var bullet := bullet_scene.instantiate()
 	bullet.shooter = shooter
 	bullet.player_stats = player_stats
 	bullet.direction = dir

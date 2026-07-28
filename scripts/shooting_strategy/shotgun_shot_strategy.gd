@@ -4,6 +4,7 @@ extends ShootingStrategy
 const PELLET_COUNT := 9
 const SPREAD_DEG := 45.0
 const DAMAGE := 5
+const BULLET_SCENE := preload("res://objects/projectiles/bullet_shotgun.tscn")
 
 
 func execute(
@@ -23,4 +24,4 @@ func execute(
 		var dir := base_dir.rotated(angle_offset)
 		var speed := 600.0 * randf_range(0.75, 1.25)
 
-		spawn_bullet(shooter, dir, speed, DAMAGE, player_stats)
+		spawn_bullet(BULLET_SCENE, shooter, dir, speed, DAMAGE, player_stats)

@@ -11,6 +11,10 @@ var player_stats: PlayerStats
 var _lifetime := 0.0
 
 
+func _get_ammo_type() -> StringName:
+	return &""
+
+
 func _ready() -> void:
 	rotation = direction.angle()
 	body_entered.connect(_on_body_entered)
@@ -28,9 +32,16 @@ func _on_body_entered(body: Node) -> void:
 		return
 	if body == shooter:
 		return
+	var was_crit := false
 	var final_damage := damage
 	if player_stats != null and randf() < player_stats.stats[&"crit_chance"].value:
+		was_crit = true
 		var bonus: float = player_stats.stats[&"crit_damage"].value
 		final_damage = ceili(damage * (1.0 + bonus))
+	var enemy_type := &"unknown"
+	var enemy := body as BaseEnemy
+	if enemy != null:
+		enemy_type = StringName(enemy.get_class())
 	body.take_damage(final_damage)
+	SignalBus.damage_dealt.emit(final_damage, _get_ammo_type(), enemy_type, was_crit)
 	queue_free()

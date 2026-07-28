@@ -156,6 +156,11 @@ func _show_game_over_menu(is_win: bool = false) -> void:
 		return
 	_game_over_menu_instance = preload("res://interfaces/menus/game_over_menu.tscn").instantiate()
 	_game_over_menu_instance.is_win = is_win
+	_game_over_menu_instance.match_stats = match_stats
+	if is_instance_valid(_active_player) and _active_player.player_grid != null:
+		_game_over_menu_instance.grid_preview = (
+				_active_player.player_grid.to_data().preview
+		)
 	_interface_supervisor.open_interface(
 		InterfaceSupervisor.InterfaceType.EMERGENT,
 		_game_over_menu_instance,
@@ -189,6 +194,7 @@ func _on_damage_dealt(
 	)
 	if was_crit:
 		match_stats.critical_hits_landed += 1
+		match_stats.critical_damage_dealt += damage
 
 
 func _on_damage_taken(amount: int, enemy_type: StringName) -> void:

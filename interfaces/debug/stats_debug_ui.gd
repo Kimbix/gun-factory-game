@@ -47,9 +47,7 @@ func refresh(player: SimpleCharacter) -> void:
 	_pickup_range_label.text = "Pickup Range: %.1f" % stats.stats[&"pickup_range"].value
 	_xp_gain_label.text = "XP Gain: %.2f" % stats.stats[&"xp_gain"].value
 	_gold_gain_label.text = "Gold Gain: %.2f" % stats.stats[&"gold_gain"].value
-	var armor_val: float = stats.stats[&"armor"].value
-	var reduction: float = armor_val / (armor_val + 0.5) * 100.0
-	_armor_label.text = "Armor: %.2f (%.1f%% reduction)" % [armor_val, reduction]
+	_armor_label.text = "Armor: %.1f%%" % (stats.stats[&"armor"].value * 100.0)
 	_luck_label.text = "Luck: %.2f" % stats.stats[&"luck"].value
 	_crit_chance_label.text = "Crit Chance: %.0f%%" % (stats.stats[&"crit_chance"].value * 100.0)
 	_crit_damage_label.text = "Crit Damage: +%.0f%%" % (stats.stats[&"crit_damage"].value * 100.0)

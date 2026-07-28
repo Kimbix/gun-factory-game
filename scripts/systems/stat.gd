@@ -3,6 +3,7 @@ extends RefCounted
 
 var base: float
 var value: float
+var diminishing_asymptote: float = 0.0
 var _modifiers: Array[StatModifier] = []
 
 
@@ -36,4 +37,11 @@ func _recalculate() -> void:
 	var total: float = base
 	for modifier: StatModifier in _modifiers:
 		total += modifier.value
-	value = total
+	if diminishing_asymptote != base:
+		var max_delta := diminishing_asymptote - base
+		var raw_delta := total - base
+		var completion := clampf(raw_delta / max_delta, -1.0, 1.0) if max_delta != 0.0 else 0.0
+		var dim_ratio := 1.0 - exp(-abs(completion))
+		value = base + max_delta * signf(completion) * dim_ratio
+	else:
+		value = total

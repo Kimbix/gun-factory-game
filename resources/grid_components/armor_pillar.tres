@@ -9,7 +9,7 @@
 [sub_resource type="Resource" id="Resource_arm"]
 script = ExtResource("4_w2c6v")
 stat_name = &"armor"
-boost_value = 0.02
+boost_value = 0.05
 
 [resource]
 script = ExtResource("1_3f7k2")

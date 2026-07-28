@@ -5,8 +5,6 @@ signal leveled_up(level: int)
 signal damaged(current_health: float)
 signal died
 
-const ARMOR_C := 0.5
-
 static var _actions_ready := false
 
 @export var starting_grid_data: PlayerGridData
@@ -129,8 +127,7 @@ func find_target() -> Node2D:
 func take_damage(amount: float, enemy_type: StringName = &"") -> void:
 	if _dead:
 		return
-	var armor_value: float = player_stats.stats[&"armor"].value
-	var reduction: float = armor_value / (armor_value + ARMOR_C)
+	var reduction: float = player_stats.stats[&"armor"].value
 	var final_damage := maxf(amount * (1.0 - reduction), 1.0)
 	health -= final_damage
 	SignalBus.damage_taken.emit(ceili(final_damage), enemy_type)

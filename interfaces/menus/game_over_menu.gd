@@ -135,7 +135,7 @@ func _build_stats_ui() -> void:
 	_add_row(stats_grid, "Level", _format_number(match_stats.final_level))
 	_add_row(stats_grid, "Max HP", _format_number(match_stats.max_health))
 	_add_row(stats_grid, "Move Speed", _format_number(match_stats.move_speed))
-	_add_row(stats_grid, "Armor", _format_number(match_stats.armor))
+	_add_row(stats_grid, "Armor", "%.1f%%" % (match_stats.armor * 100.0))
 	_add_row(stats_grid, "Crit Chance", "%.0f%%" % (match_stats.crit_chance * 100.0))
 	_add_row(stats_grid, "Crit Damage", "+%.0f%%" % (match_stats.crit_damage * 100.0))
 	_add_row(stats_grid, "Health Regen", _format_number(match_stats.health_regen))

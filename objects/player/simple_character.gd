@@ -50,6 +50,8 @@ func _ready() -> void:
 	level_system = LevelSystem.new()
 	add_child(level_system)
 	level_system.leveled_up.connect(_on_level_up)
+	level_system.xp_changed.connect(_on_level_xp_changed)
+	level_system.gold_changed.connect(_on_level_gold_changed)
 
 	player_stats = PlayerStats.new(PlayerStatsData.new())
 	health = player_stats.stats[&"max_health"].value
@@ -124,13 +126,14 @@ func find_target() -> Node2D:
 	return nearest
 
 
-func take_damage(amount: float) -> void:
+func take_damage(amount: float, enemy_type: StringName = &"") -> void:
 	if _dead:
 		return
 	var armor_value: float = player_stats.stats[&"armor"].value
 	var reduction: float = armor_value / (armor_value + ARMOR_C)
 	var final_damage := maxf(amount * (1.0 - reduction), 1.0)
 	health -= final_damage
+	SignalBus.damage_taken.emit(ceili(final_damage), enemy_type)
 	if health <= 0:
 		health = 0
 		_dead = true
@@ -149,6 +152,7 @@ func _on_collection_area_entered(area: Area2D) -> void:
 
 
 func _on_crystal_collected(crystal: ExperienceCrystal) -> void:
+	SignalBus.crystal_collected.emit(crystal.xp_value)
 	var xp_mult: float = player_stats.stats[&"xp_gain"].value
 	var gold_mult: float = player_stats.stats[&"gold_gain"].value
 	level_system.add_xp(crystal.xp_value, xp_mult, gold_mult)
@@ -179,6 +183,14 @@ func _on_level_up(new_level: int) -> void:
 	leveled_up.emit(new_level)
 
 
+func _on_level_xp_changed(xp: int, limit: int) -> void:
+	SignalBus.xp_changed.emit(xp, limit)
+
+
+func _on_level_gold_changed(amount: int) -> void:
+	SignalBus.gold_changed.emit(amount)
+
+
 func _on_building_placed(building: FactoryBuilding) -> void:
 	var cfg := building.get_info().config
 	if cfg == null or cfg.get("stat_name") == null:
@@ -202,7 +214,11 @@ func _apply_regen() -> void:
 	var regen: float = player_stats.stats[&"health_regen"].value
 	if regen <= 0:
 		return
+	var prev_health := health
 	health = minf(health + regen, max_hp)
+	var healed_amount := ceili(health - prev_health)
+	if healed_amount > 0:
+		SignalBus.healed.emit(healed_amount, &"regen")
 
 
 func _on_player_died() -> void:

@@ -42,4 +42,5 @@ func take_damage(amount: int) -> void:
 	if health <= 0:
 		_dead = true
 		on_death.emit()
+		SignalBus.enemy_killed.emit(StringName(EnemyType.keys()[enemy_type]))
 		queue_free()

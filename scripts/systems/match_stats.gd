@@ -37,11 +37,6 @@ var xp_gain: float
 var gold_gain: float
 var difficulty: float
 
-## Economy & Building
-var buildings_placed: int
-var ammo_crafted: int
-var pillars_collected: int
-
 ## Match Context
 var time_survived: float
 var waves_completed: int
@@ -77,9 +72,6 @@ func reset() -> void:
 	xp_gain = 0.0
 	gold_gain = 0.0
 	difficulty = 0.0
-	buildings_placed = 0
-	ammo_crafted = 0
-	pillars_collected = 0
 	time_survived = 0.0
 	waves_completed = 0
 	difficulty_multiplier = 0.0

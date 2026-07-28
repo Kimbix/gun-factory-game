@@ -1,4 +1,16 @@
-class_name SignalBus
 extends Node
 
+@warning_ignore("unused_signal")
 signal damage_dealt(damage: int, ammo_type: StringName, enemy_type: StringName, was_crit: bool)
+@warning_ignore("unused_signal")
+signal damage_taken(amount: int, enemy_type: StringName)
+@warning_ignore("unused_signal")
+signal healed(amount: int, source: StringName)
+@warning_ignore("unused_signal")
+signal enemy_killed(enemy_type: StringName)
+@warning_ignore("unused_signal")
+signal xp_changed(xp: int, limit: int)
+@warning_ignore("unused_signal")
+signal gold_changed(amount: int)
+@warning_ignore("unused_signal")
+signal crystal_collected(xp_value: int)

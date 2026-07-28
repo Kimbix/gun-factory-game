@@ -22,10 +22,12 @@ func _physics_process(_delta: float) -> void:
 		_frame_count = 0
 		if is_instance_valid(_player) and _player.has_method(&"take_damage"):
 			var mult := 1.0
+			var enemy_type := &""
 			var parent := get_parent() as BaseEnemy
 			if parent != null:
 				mult = parent.damage_multiplier
-			_player.take_damage(damage_per_tick * mult)
+				enemy_type = StringName(BaseEnemy.EnemyType.keys()[parent.enemy_type])
+			_player.take_damage(damage_per_tick * mult, enemy_type)
 
 
 func _on_body_entered(body: Node2D) -> void:

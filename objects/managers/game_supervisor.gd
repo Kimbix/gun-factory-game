@@ -52,6 +52,12 @@ func _ready() -> void:
 	_active_player.leveled_up.connect(_interface_supervisor.on_leveled_up)
 	_active_player.died.connect(_on_player_died)
 	SignalBus.damage_dealt.connect(_on_damage_dealt)
+	SignalBus.damage_taken.connect(_on_damage_taken)
+	SignalBus.healed.connect(_on_healed)
+	SignalBus.enemy_killed.connect(_on_enemy_killed)
+	SignalBus.xp_changed.connect(_on_xp_changed)
+	SignalBus.gold_changed.connect(_on_gold_changed)
+	SignalBus.crystal_collected.connect(_on_crystal_collected)
 
 	_overlay_ui.setup(_active_player, %GameplayScene)
 
@@ -185,11 +191,81 @@ func _on_damage_dealt(
 		match_stats.critical_hits_landed += 1
 
 
+func _on_damage_taken(amount: int, enemy_type: StringName) -> void:
+	match_stats.total_damage_taken += amount
+	var key := String(enemy_type)
+	match_stats.damage_taken_by_enemy_type[key] = (
+			match_stats.damage_taken_by_enemy_type.get(key, 0.0) + amount
+	)
+
+
+func _on_healed(amount: int, source: StringName) -> void:
+	match_stats.total_healing_done += amount
+	var key := String(source)
+	match_stats.healing_by_source[key] = (
+			match_stats.healing_by_source.get(key, 0.0) + amount
+	)
+
+
+func _on_enemy_killed(enemy_type: StringName) -> void:
+	match_stats.total_enemies_killed += 1
+	var key := String(enemy_type)
+	match_stats.enemies_killed_by_type[key] = (
+			match_stats.enemies_killed_by_type.get(key, 0) + 1
+	)
+
+
+func _on_xp_changed(xp: int, _limit: int) -> void:
+	match_stats.xp_earned_total = xp
+
+
+func _on_gold_changed(amount: int) -> void:
+	match_stats.gold_earned_total = amount
+
+
+func _on_crystal_collected(xp_value: int) -> void:
+	match_stats.xp_earned_base += xp_value
+	match_stats.gold_earned_base += xp_value
+
+
 func _on_player_died() -> void:
-	var is_win := false
 	var director := %GameplayScene as GameDirector
+	var is_win := false
 	if director != null:
 		is_win = director.win_triggered
+		match_stats.time_survived = director.elapsed_time
+		match_stats.waves_completed = director.wave_index
+	match_stats.difficulty_multiplier = (
+			_active_player.player_stats.stats[&"difficulty"].value
+	)
+	match_stats.final_level = _active_player.level_system.level
+	for stat_name: StringName in _active_player.player_stats.stats:
+		var stat: Stat = _active_player.player_stats.stats[stat_name]
+		match stat_name:
+			&"max_health":
+				match_stats.max_health = stat.value
+			&"move_speed":
+				match_stats.move_speed = stat.value
+			&"armor":
+				match_stats.armor = stat.value
+			&"crit_chance":
+				match_stats.crit_chance = stat.value
+			&"crit_damage":
+				match_stats.crit_damage = stat.value
+			&"health_regen":
+				match_stats.health_regen = stat.value
+			&"tick_speed":
+				match_stats.tick_speed = stat.value
+			&"pickup_range":
+				match_stats.pickup_range = stat.value
+			&"luck":
+				match_stats.luck = stat.value
+			&"xp_gain":
+				match_stats.xp_gain = stat.value
+			&"gold_gain":
+				match_stats.gold_gain = stat.value
+			&"difficulty":
+				match_stats.difficulty = stat.value
 	_set_state(GameState.GAME_OVER, is_win)
 
 

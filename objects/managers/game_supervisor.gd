@@ -15,7 +15,7 @@ var _state_before_level_up: GameState = GameState.GAMEPLAY
 var _active_player: SimpleCharacter
 var _interface_supervisor: InterfaceSupervisor
 var _pause_menu_instance: PauseMenu
-var _game_over_menu_instance: InterfaceWindow
+var _game_over_menu_instance: GameOverMenu
 
 @onready var _building_ui: BuildingUI = $InterfaceSupervisor/BuildingUI
 @onready var _grid_builder: GridBuilder = (
@@ -71,6 +71,11 @@ func _ready() -> void:
 
 
 func _unhandled_input(event: InputEvent) -> void:
+	if event is InputEventKey and event.keycode == KEY_F4 and event.pressed and not event.echo:
+		var director := %GameplayScene as GameDirector
+		if director != null and not director.win_triggered:
+			director.elapsed_time = director.WIN_TIME - 1.0
+
 	if event.is_action_pressed("pause"):
 		if _state not in [GameState.GAMEPLAY, GameState.BUILDING, GameState.PAUSED]:
 			return
@@ -136,10 +141,11 @@ func _hide_pause_menu() -> void:
 	_pause_menu_instance = null
 
 
-func _show_game_over_menu() -> void:
+func _show_game_over_menu(is_win: bool = false) -> void:
 	if is_instance_valid(_game_over_menu_instance):
 		return
 	_game_over_menu_instance = preload("res://interfaces/menus/game_over_menu.tscn").instantiate()
+	_game_over_menu_instance.is_win = is_win
 	_interface_supervisor.open_interface(
 		InterfaceSupervisor.InterfaceType.EMERGENT,
 		_game_over_menu_instance,
@@ -157,10 +163,14 @@ func _hide_game_over_menu() -> void:
 
 
 func _on_player_died() -> void:
-	_set_state(GameState.GAME_OVER)
+	var is_win := false
+	var director := %GameplayScene as GameDirector
+	if director != null:
+		is_win = director.win_triggered
+	_set_state(GameState.GAME_OVER, is_win)
 
 
-func _set_state(new_state: GameState) -> void:
+func _set_state(new_state: GameState, is_win: bool = false) -> void:
 	if new_state == _state:
 		return
 	_state = new_state
@@ -185,4 +195,4 @@ func _set_state(new_state: GameState) -> void:
 			_hide_pause_menu()
 			_interface_supervisor.close_building_interface()
 			%GameplayScene.process_mode = PROCESS_MODE_DISABLED
-			_show_game_over_menu()
+			_show_game_over_menu(is_win)

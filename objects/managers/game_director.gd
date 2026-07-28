@@ -10,6 +10,7 @@ extends WorldEnvironment
 @export var spawn_per_wave_percent := .05
 @export var spawn_distance_min := 250.0
 @export var spawn_distance_max := 400.0
+@export var reaper_scene: PackedScene
 
 const HP_SCALE := 1.0
 const SPEED_SCALE := 0.5
@@ -17,7 +18,11 @@ const DAMAGE_SCALE := 0.5
 const CAP_PER_DIFFICULTY := 50
 const RATE_SCALE := 0.2
 
+## Will change per stage in the future.
+const WIN_TIME := 30.0 * 60.0
+
 var elapsed_time: float
+var win_triggered: bool
 var enemies: Array[BaseEnemy] = []
 var active_wave: EnemyWave
 var wave_index: int
@@ -45,7 +50,11 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
-	elapsed_time += delta
+	if not win_triggered and is_instance_valid(player_instance) and player_instance.health > 0:
+		elapsed_time += delta
+
+	if not win_triggered and elapsed_time >= WIN_TIME:
+		_trigger_win_condition()
 
 	if active_wave != null and elapsed_time >= active_wave.end_time_minutes * 60.0:
 		wave_index += 1
@@ -140,3 +149,27 @@ func _spawn_boss(event: EnemyEvent) -> void:
 		add_child(instance)
 		enemies.append(instance)
 		instance.tree_exited.connect(_on_enemy_killed.bind(instance))
+
+
+func _trigger_win_condition() -> void:
+	win_triggered = true
+	print("GameDirector: win condition triggered at ", elapsed_time, "s")
+	for enemy: BaseEnemy in enemies.duplicate():
+		if is_instance_valid(enemy):
+			enemy.die_silently()
+	_spawn_reaper()
+
+
+func _spawn_reaper() -> void:
+	var instance: BaseEnemy = reaper_scene.instantiate()
+	instance.player = player_instance
+	instance.game_world = self
+	instance.position = (
+			player_instance.position
+			+ ((Vector2.RIGHT * randf_range(spawn_distance_min, spawn_distance_max))
+					.rotated(randf() * TAU))
+	)
+
+	add_child(instance)
+	enemies.append(instance)
+	instance.tree_exited.connect(_on_enemy_killed.bind(instance))

@@ -42,6 +42,10 @@ folder_colors={
 
 common/physics_fps=30
 
+[autoload]
+
+SignalBus="*res://scripts/systems/signal_bus.gd"
+
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0

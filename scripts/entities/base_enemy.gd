@@ -10,11 +10,16 @@ enum EnemyType { REGULAR, BOSS }
 
 var player: Node2D
 var game_world: Node
-var speed := 20.0
-var health := 30
-var damage_multiplier := 1.0
+@export var speed := 20.0
+@export var health := 30
+@export var damage_multiplier := 1.0
 var xp_amount: int
 var _dead: bool
+
+
+func die_silently() -> void:
+	_dead = true
+	queue_free()
 
 
 func _ready() -> void:

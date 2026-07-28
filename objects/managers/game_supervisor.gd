@@ -12,6 +12,7 @@ enum GameState {
 var _state: GameState = GameState.GAMEPLAY
 var _state_before_pause: GameState = GameState.GAMEPLAY
 var _state_before_level_up: GameState = GameState.GAMEPLAY
+var match_stats: MatchStats
 var _active_player: SimpleCharacter
 var _interface_supervisor: InterfaceSupervisor
 var _pause_menu_instance: PauseMenu
@@ -28,6 +29,8 @@ var _game_over_menu_instance: GameOverMenu
 
 
 func _ready() -> void:
+	match_stats = MatchStats.new()
+	match_stats.reset()
 	_active_player = %GameplayScene.player_instance
 	_interface_supervisor = $InterfaceSupervisor
 
@@ -48,6 +51,7 @@ func _ready() -> void:
 	_interface_supervisor.unpause_requested.connect(unpause_from_level_up)
 	_active_player.leveled_up.connect(_interface_supervisor.on_leveled_up)
 	_active_player.died.connect(_on_player_died)
+	SignalBus.damage_dealt.connect(_on_damage_dealt)
 
 	_overlay_ui.setup(_active_player, %GameplayScene)
 
@@ -160,6 +164,25 @@ func _hide_game_over_menu() -> void:
 		_game_over_menu_instance,
 	)
 	_game_over_menu_instance = null
+
+
+func _on_damage_dealt(
+		damage: int,
+		ammo_type: StringName,
+		enemy_type: StringName,
+		was_crit: bool,
+) -> void:
+	match_stats.total_damage_dealt += damage
+	var ammo_key := String(ammo_type)
+	match_stats.damage_by_ammo_type[ammo_key] = (
+			match_stats.damage_by_ammo_type.get(ammo_key, 0.0) + damage
+	)
+	var enemy_key := String(enemy_type)
+	match_stats.damage_by_enemy_type[enemy_key] = (
+			match_stats.damage_by_enemy_type.get(enemy_key, 0.0) + damage
+	)
+	if was_crit:
+		match_stats.critical_hits_landed += 1
 
 
 func _on_player_died() -> void:

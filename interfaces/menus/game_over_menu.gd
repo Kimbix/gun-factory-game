@@ -1,11 +1,12 @@
 class_name GameOverMenu
 extends InterfaceWindow
 
+@export var return_button: Button
+
 var is_win: bool
 var grid_preview: Image
 var match_stats: MatchStats
 
-@export var return_button: Button
 @onready var _title_label: Label = $ColorRect/MainHBox/LeftVBox/TitleLabel
 @onready var _preview_texture: TextureRect = $ColorRect/MainHBox/RightVBox/GridPreview
 @onready var _stats_container: VBoxContainer = (
@@ -43,7 +44,7 @@ func _format_number(value: float) -> String:
 
 
 func _format_time(seconds: float) -> String:
-	var mins := int(seconds) / 60
+	var mins := int(seconds / 60.0)
 	var secs := int(seconds) % 60
 	return "%02d:%02d" % [mins, secs]
 

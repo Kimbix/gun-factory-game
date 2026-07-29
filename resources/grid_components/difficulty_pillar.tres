@@ -9,7 +9,7 @@
 [sub_resource type="Resource" id="Resource_dff"]
 script = ExtResource("4_w9b5v")
 stat_name = &"difficulty"
-boost_value = 1.0
+boost_value = 0.5
 
 [resource]
 script = ExtResource("1_6h3k2")

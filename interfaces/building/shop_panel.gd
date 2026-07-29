@@ -14,7 +14,7 @@ var _reroll_count: int = 0
 
 
 static func get_reroll_cost(reroll_count: int) -> int:
-	return 5 + reroll_count * 5
+	return ceili(5.0 * pow(1.1, reroll_count))
 
 
 static func _get_item_price(shop_item: ShopItem, _times_purchased: int) -> int:

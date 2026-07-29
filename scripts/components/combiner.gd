@@ -1,7 +1,7 @@
 class_name Combiner
 extends FactoryComponent
 
-const COOLDOWN := 20
+const COOLDOWN := 15
 
 var gunpowder_count: int = 0
 var shells_count: int = 0

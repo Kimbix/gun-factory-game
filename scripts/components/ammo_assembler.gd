@@ -1,7 +1,10 @@
 class_name AmmoAssembler
 extends FactoryComponent
 
-var inventory := BlockInventory.new(3)
+const CRAFT_TIME := 15
+const INVENTORY_SLOTS := 3
+
+var inventory := BlockInventory.new(INVENTORY_SLOTS)
 var recipe: ItemRecipe
 var _craft_progress: int = 0
 
@@ -32,12 +35,12 @@ func tick() -> void:
 		return
 
 	if not _can_output():
-		_notify_progress(int(_craft_progress * 100.0 / 40.0))
+		_notify_progress(int(_craft_progress * 100.0 / CRAFT_TIME))
 		return
 
 	_craft_progress += 1
-	_notify_progress(int(_craft_progress * 100.0 / 40.0))
-	if _craft_progress < 40:
+	_notify_progress(int(_craft_progress * 100.0 / CRAFT_TIME))
+	if _craft_progress < CRAFT_TIME:
 		return
 
 	_craft_progress = 0

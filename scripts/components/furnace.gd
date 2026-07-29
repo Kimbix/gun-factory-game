@@ -1,7 +1,7 @@
 class_name Furnace
 extends FactoryComponent
 
-const CRAFT_TIME := 20
+const CRAFT_TIME := 30
 
 var lead_count: int = 0
 var _cooldown: int = 0

@@ -1,7 +1,7 @@
 class_name MetalProcessor
 extends FactoryComponent
 
-const CRAFT_TIME := 20
+const CRAFT_TIME := 30
 
 var recipe: ItemRecipe
 var lead_plates: int = 0

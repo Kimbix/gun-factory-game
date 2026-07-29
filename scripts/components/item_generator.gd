@@ -1,7 +1,7 @@
 class_name ItemGenerator
 extends FactoryComponent
 
-const COOLDOWN := 20
+const COOLDOWN := 50
 
 var generating: FactoryItemInfo:
 	set(v):

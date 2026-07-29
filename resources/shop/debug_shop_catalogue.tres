@@ -3,8 +3,8 @@
 [ext_resource type="Resource" uid="uid://d0puxbrhw5ty7" path="res://resources/shop/rarities/common.tres" id="1_common"]
 [ext_resource type="Resource" uid="uid://dg83go6xt162r" path="res://resources/shop/rarities/uncommon.tres" id="2_uncommon"]
 [ext_resource type="Resource" uid="uid://c0eojr4amwqdb" path="res://resources/shop/rarities/rare.tres" id="3_rare"]
+[ext_resource type="Resource" uid="uid://bujvbbh2afy1y" path="res://resources/shop/rarities/epic.tres" id="8_kpl0i"]
 [ext_resource type="Resource" uid="uid://cxaf6asblr1t7" path="res://resources/grid_components/conveyor_belt.tres" id="b1"]
-[ext_resource type="Resource" uid="uid://djspgv1yqiaky" path="res://resources/grid_components/combiner.tres" id="b2"]
 [ext_resource type="Resource" uid="uid://d1wu3w33a0ds1" path="res://resources/grid_components/item_generator.tres" id="b3"]
 [ext_resource type="Resource" uid="uid://b41gow6t4rmgw" path="res://resources/grid_components/item_receiver.tres" id="b4"]
 [ext_resource type="Resource" uid="uid://dow1nfk5h5vv" path="res://resources/grid_components/furnace.tres" id="b5"]
@@ -38,16 +38,8 @@ stock = 3
 [sub_resource type="Resource" id="si_4"]
 script = ExtResource("shop_item_script")
 item = ExtResource("b4")
-base_price = 20
-rarity = ExtResource("2_uncommon")
-stock = 3
-
-[sub_resource type="Resource" id="si_5"]
-script = ExtResource("shop_item_script")
-item = ExtResource("b2")
-base_price = 25
-rarity = ExtResource("2_uncommon")
-stock = 2
+base_price = 100
+rarity = ExtResource("8_kpl0i")
 
 [sub_resource type="Resource" id="si_6"]
 script = ExtResource("shop_item_script")
@@ -72,4 +64,4 @@ stock = 2
 
 [resource]
 script = ExtResource("shop_cat_script")
-items = Array[ExtResource("shop_item_script")]([SubResource("si_1"), SubResource("si_2"), SubResource("si_3"), SubResource("si_4"), SubResource("si_5"), SubResource("si_6"), SubResource("si_7"), SubResource("si_8")])
+items = Array[ExtResource("shop_item_script")]([SubResource("si_1"), SubResource("si_2"), SubResource("si_3"), SubResource("si_4"), SubResource("si_6"), SubResource("si_7"), SubResource("si_8")])

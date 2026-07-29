@@ -27,7 +27,6 @@ func _ready() -> void:
 
 
 func refresh() -> void:
-	_reroll_count = 0
 	if _slots.is_empty():
 		_pick_random_items()
 	_update_ui()

@@ -44,4 +44,12 @@ func _on_body_entered(body: Node) -> void:
 		enemy_type = StringName(enemy.get_class())
 	body.take_damage(final_damage)
 	SignalBus.damage_dealt.emit(final_damage, _get_ammo_type(), enemy_type, was_crit)
+
+	var dn := DamageNumberPool.create()
+	var color := Color.YELLOW
+	if was_crit:
+		color = Color(0.9, 0.15, 0.05)
+	var text := str(final_damage) + ("!" if was_crit else "")
+	dn.play(text, color, body.global_position + Vector2(0, -16))
+
 	queue_free()

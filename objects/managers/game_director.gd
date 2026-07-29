@@ -46,6 +46,10 @@ func _ready() -> void:
 	timer.wait_time = spawn_interval
 	timer.autostart = true
 	add_child(timer)
+
+	var damage_pool := DamageNumberPool.new()
+	add_child(damage_pool)
+
 	_spawn_enemies()
 
 

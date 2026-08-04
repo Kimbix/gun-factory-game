@@ -2,6 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://twhkunlka03q" path="res://assets/world_entities/spr_lootBox.png" id="1_lootbox"]
 [ext_resource type="Script" uid="uid://dk5m1nf5u70i0" path="res://objects/loot_box/loot_box.gd" id="2_script"]
+[ext_resource type="Resource" uid="uid://dlt5mqb1xn7rk" path="res://resources/loot/loot_box_table_default.tres" id="3_loottable"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_loot"]
 size = Vector2(16, 16)
@@ -10,6 +11,7 @@ size = Vector2(16, 16)
 collision_layer = 2
 collision_mask = 0
 script = ExtResource("2_script")
+loot_table = ExtResource("3_loottable")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_lootbox")

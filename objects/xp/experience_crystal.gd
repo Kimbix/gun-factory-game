@@ -3,10 +3,20 @@ extends Area2D
 
 signal collected
 
+static var active_crystals: Array[ExperienceCrystal] = []
+
 @export var xp_value: int = 1
 
 var _player: Node2D = null
 var _speed: float = 300.0
+
+
+func _ready() -> void:
+	active_crystals.append(self)
+
+
+func _exit_tree() -> void:
+	active_crystals.erase(self)
 
 
 func start_follow(player: Node2D) -> void:

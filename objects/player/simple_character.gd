@@ -82,6 +82,7 @@ func _ready() -> void:
 	sync_stats()
 
 	$CollectionArea.area_entered.connect(_on_collection_area_entered)
+	$MagnetAttractionArea.area_entered.connect(_on_magnet_attraction_area_entered)
 	$DespawnProximity.body_exited.connect(_on_despawn_proximity_exited)
 	$BossProximity.body_exited.connect(_on_boss_proximity_exited)
 
@@ -153,6 +154,13 @@ func _on_crystal_collected(crystal: ExperienceCrystal) -> void:
 	var xp_mult: float = player_stats.stats[&"xp_gain"].value
 	var gold_mult: float = player_stats.stats[&"gold_gain"].value
 	level_system.add_xp(crystal.xp_value, xp_mult, gold_mult)
+
+
+func _on_magnet_attraction_area_entered(area: Area2D) -> void:
+	var magnet := area as MagnetItem
+	if magnet == null:
+		return
+	magnet.start_follow(self)
 
 
 func _on_despawn_proximity_exited(body: Node2D) -> void:

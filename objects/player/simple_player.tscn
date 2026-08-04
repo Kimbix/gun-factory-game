@@ -10,6 +10,9 @@ size = Vector2(13, 31)
 [sub_resource type="CircleShape2D" id="CircleShape2D_clctn"]
 radius = 20.0
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_magnet"]
+radius = 20.024984
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_dspwn"]
 radius = 500.0
 
@@ -35,6 +38,12 @@ zoom = Vector2(2, 2)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CollectionArea" unique_id=1942872774]
 shape = SubResource("CircleShape2D_clctn")
 debug_color = Color(0, 1, 0, 0.078431375)
+
+[node name="MagnetAttractionArea" type="Area2D" parent="." unique_id=1800000001]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MagnetAttractionArea" unique_id=1800000002]
+shape = SubResource("CircleShape2D_magnet")
+debug_color = Color(0.4, 0.7, 1, 0.078431375)
 
 [node name="DespawnProximity" type="Area2D" parent="." unique_id=148913011]
 

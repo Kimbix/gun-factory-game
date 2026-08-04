@@ -20,7 +20,7 @@ var game_world: Node
 ## Ring used to teleport a boss back into range when it strays too far.
 @export var spawn_distance_min := 250.0
 @export var spawn_distance_max := 400.0
-const MAX_PUSH_SPEED := 20.0
+const MAX_PUSH_SPEED := 40.0
 var xp_amount: int
 var _dead: bool
 
@@ -58,10 +58,12 @@ func take_damage(amount: int) -> void:
 ## separation comes entirely from this force.
 func _push_away() -> Vector2:
 	var push := Vector2.ZERO
+	var seen: Array[BaseEnemy] = []
 	for area: Area2D in get_overlapping_areas():
 		var other := _resolve_enemy(area)
-		if other == null or other == self:
+		if other == null or other == self or seen.has(other):
 			continue
+		seen.append(other)
 		var diff := global_position - other.global_position
 		var dist := diff.length()
 		if dist < 0.001:

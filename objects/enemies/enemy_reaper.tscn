@@ -10,7 +10,7 @@ radius = 30.016663
 [sub_resource type="CircleShape2D" id="CircleShape2D_hitbox"]
 radius = 33.01515
 
-[node name="EnemyReaper" type="CharacterBody2D" unique_id=1870735898]
+[node name="EnemyReaper" type="Area2D" unique_id=1870735898]
 script = ExtResource("2_x6sld")
 speed = 666.666
 health = 66666666666666

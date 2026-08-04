@@ -11,7 +11,7 @@ radius = 8.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_6xohb"]
 radius = 9.0
 
-[node name="AngryRobot" type="CharacterBody2D" unique_id=589975782]
+[node name="AngryRobot" type="Area2D" unique_id=589975782]
 script = ExtResource("1_ffwk4")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=954768743]

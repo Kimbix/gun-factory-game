@@ -83,8 +83,8 @@ func _ready() -> void:
 
 	$CollectionArea.area_entered.connect(_on_collection_area_entered)
 	$MagnetAttractionArea.area_entered.connect(_on_magnet_attraction_area_entered)
-	$DespawnProximity.body_exited.connect(_on_despawn_proximity_exited)
-	$BossProximity.body_exited.connect(_on_boss_proximity_exited)
+	$DespawnProximity.area_exited.connect(_on_despawn_proximity_area_exited)
+	$BossProximity.area_exited.connect(_on_boss_proximity_area_exited)
 
 
 func _physics_process(_delta: float) -> void:
@@ -163,24 +163,37 @@ func _on_magnet_attraction_area_entered(area: Area2D) -> void:
 	magnet.start_follow(self)
 
 
-func _on_despawn_proximity_exited(body: Node2D) -> void:
+func _on_despawn_proximity_area_exited(area: Area2D) -> void:
 	if not is_processing():
 		return
-	var enemy := body as BaseEnemy
-	if enemy == null or enemy.enemy_type != BaseEnemy.EnemyType.REGULAR:
+	var enemy := _resolve_enemy(area)
+	if enemy == null or not is_instance_valid(enemy):
+		return
+	if enemy.enemy_type != BaseEnemy.EnemyType.REGULAR:
 		return
 	enemy.queue_free()
 
 
-func _on_boss_proximity_exited(body: Node2D) -> void:
+func _on_boss_proximity_area_exited(area: Area2D) -> void:
 	if not is_processing():
 		return
-	var enemy := body as BaseEnemy
-	if enemy == null or enemy.enemy_type != BaseEnemy.EnemyType.BOSS:
+	var enemy := _resolve_enemy(area)
+	if enemy == null or not is_instance_valid(enemy):
+		return
+	if enemy.enemy_type != BaseEnemy.EnemyType.BOSS:
 		return
 	var angle := randf() * TAU
 	var radius := randf_range(enemy.spawn_distance_min, enemy.spawn_distance_max)
 	enemy.global_position = global_position + Vector2.RIGHT.rotated(angle) * radius
+
+
+func _resolve_enemy(area: Area2D) -> BaseEnemy:
+	if area is BaseEnemy:
+		return area
+	var parent := area.get_parent()
+	if parent is BaseEnemy:
+		return parent
+	return null
 
 
 func _on_level_up(new_level: int) -> void:

@@ -1,0 +1,48 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" uid="uid://b3jng6obs4wep" path="res://interfaces/machines/furnace_interface.gd" id="1_xee5u"]
+[ext_resource type="PackedScene" uid="uid://cq5f74b5ddssl" path="res://interfaces/components/item_button.tscn" id="2_x12ab"]
+
+[node name="FurnaceInterface" type="PanelContainer" node_paths=PackedStringArray("close_button", "output_item", "progress_label")]
+custom_minimum_size = Vector2(256, 128)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_xee5u")
+close_button = NodePath("MarginContainer/Close")
+output_item = NodePath("MarginContainer/VBox/OutputItem")
+progress_label = NodePath("MarginContainer/VBox/Progress")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="Close" type="Button" parent="MarginContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+text = "X"
+
+[node name="VBox" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+alignment = 1
+
+[node name="OutputItem" parent="MarginContainer/VBox" instance=ExtResource("2_x12ab")]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Progress" type="Label" parent="MarginContainer/VBox"]
+layout_mode = 2
+size_flags_horizontal = 4
+horizontal_alignment = 1
+text = "---"

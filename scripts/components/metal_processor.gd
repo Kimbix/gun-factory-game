@@ -1,8 +1,6 @@
 class_name MetalProcessor
 extends FactoryComponent
 
-const CRAFT_TIME := 30
-
 var recipe: ItemRecipe
 var lead_plates: int = 0
 var _cooldown: int = 0
@@ -21,7 +19,7 @@ func tick() -> void:
 
 	if _cooldown > 0:
 		_cooldown -= 1
-		_notify_progress(int((CRAFT_TIME - _cooldown) * 100.0 / CRAFT_TIME))
+		_notify_progress(int((recipe.craft_time - _cooldown) * 100.0 / recipe.craft_time))
 		if _cooldown == 0:
 			var g := grid
 			if g == null:
@@ -42,7 +40,7 @@ func tick() -> void:
 
 	if lead_plates >= recipe.inputs[0].amount:
 		lead_plates -= recipe.inputs[0].amount
-		_cooldown = CRAFT_TIME
+		_cooldown = recipe.craft_time
 
 
 func get_vars() -> Dictionary:

@@ -6,3 +6,4 @@ extends Resource
 @export var inputs: Array[RecipeIngredient]
 @export var outputs: Array[RecipeIngredient]
 @export var machine: GridComponentInfo
+@export var craft_time: int = 15

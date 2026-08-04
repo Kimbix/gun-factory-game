@@ -24,7 +24,6 @@ func _ready() -> void:
 	player_grid.initialize_empty()
 	grid_viewer.grid = player_grid
 	grid_interactor.interface_supervisor = interface_supervisor
-	grid_interactor.building_inventory = building_inventory
 	grid_builder.building_inventory = building_inventory
 	player_grid.output_item.connect(_on_output_item)
 	save_grid_button.pressed.connect(_on_save_grid_pressed)

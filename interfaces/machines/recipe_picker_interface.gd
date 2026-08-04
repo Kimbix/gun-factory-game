@@ -18,7 +18,7 @@ func _ready() -> void:
 		texture.set_anchors_preset(Control.PRESET_FULL_RECT)
 		texture.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		button.custom_minimum_size = Vector2.ONE * 32
-		button.tooltip_text = r.display_name
+		button.tooltip_text = "%s\n%d ticks" % [r.display_name, r.craft_time]
 		button.add_child(texture)
 		button.pressed.connect(_on_recipe_pressed.bind(r))
 		recipe_grid.add_child(button)

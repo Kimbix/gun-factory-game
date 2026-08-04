@@ -45,11 +45,11 @@ func generate_ui() -> void:
 		items_in_inventory.add_child(button)
 
 
-func update_completion(value: float) -> void:
-	if value < 0:
+func update_completion(progress: int, total: int) -> void:
+	if progress < 0:
 		completion_label.text = "---"
 	else:
-		completion_label.text = "%d%%" % value
+		completion_label.text = "%d / %d" % [progress, total]
 
 
 func _on_selected_recipe() -> void:

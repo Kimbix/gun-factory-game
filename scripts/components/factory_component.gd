@@ -57,9 +57,9 @@ func open_interface(_interface_supervisor: InterfaceSupervisor) -> void:
 var _progress_interface: RecipeMachineInterface
 
 
-func _notify_progress(value: int) -> void:
+func _notify_progress(progress: int, total: int) -> void:
 	if _progress_interface != null:
-		_progress_interface.update_completion(value)
+		_progress_interface.update_completion(progress, total)
 
 
 func _on_interface_closed() -> void:

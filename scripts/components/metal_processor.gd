@@ -14,12 +14,12 @@ func set_recipe(r: ItemRecipe) -> void:
 
 func tick() -> void:
 	if recipe == null:
-		_notify_progress(-1)
+		_notify_progress(-1, 0)
 		return
 
 	if _cooldown > 0:
 		_cooldown -= 1
-		_notify_progress(int((recipe.craft_time - _cooldown) * 100.0 / recipe.craft_time))
+		_notify_progress(recipe.craft_time - _cooldown, recipe.craft_time)
 		if _cooldown == 0:
 			var g := grid
 			if g == null:
@@ -83,7 +83,7 @@ func open_interface(interface_supervisor: InterfaceSupervisor) -> void:
 		return
 	_progress_interface = interface
 	interface.tree_exited.connect(_on_interface_closed)
-	_notify_progress(-1)
+	_notify_progress(-1, recipe.craft_time if recipe != null else 0)
 
 
 func _update_overlay_strategy() -> void:

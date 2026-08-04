@@ -30,15 +30,15 @@ func set_recipe(r: ItemRecipe) -> void:
 func tick() -> void:
 	if recipe == null or not inventory.has_all(recipe.inputs):
 		_craft_progress = 0
-		_notify_progress(-1)
+		_notify_progress(-1, recipe.craft_time if recipe != null else 0)
 		return
 
 	if not _can_output():
-		_notify_progress(int(_craft_progress * 100.0 / recipe.craft_time))
+		_notify_progress(_craft_progress, recipe.craft_time)
 		return
 
 	_craft_progress += 1
-	_notify_progress(int(_craft_progress * 100.0 / recipe.craft_time))
+	_notify_progress(_craft_progress, recipe.craft_time)
 	if _craft_progress < recipe.craft_time:
 		return
 
@@ -127,7 +127,7 @@ func open_interface(interface_supervisor: InterfaceSupervisor) -> void:
 		return
 	_progress_interface = interface
 	interface.tree_exited.connect(_on_interface_closed)
-	_notify_progress(-1)
+	_notify_progress(-1, recipe.craft_time if recipe != null else 0)
 
 
 func _update_overlay_strategy() -> void:

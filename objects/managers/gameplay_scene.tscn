@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://c0f7aja78bay4" path="res://objects/player/simple_player.tscn" id="2_rcs5u"]
 [ext_resource type="Resource" uid="uid://ciyco2se0tapx" path="res://resources/enemy_waves/testing_waves.tres" id="3_w28c3"]
 [ext_resource type="Texture2D" uid="uid://cfi1wpkmoebie" path="res://assets/world/spr_madForestBackground.png" id="4_6mirt"]
-[ext_resource type="PackedScene" path="res://objects/enemies/enemy_reaper.tscn" id="5_j5b23"]
+[ext_resource type="PackedScene" uid="uid://dfbcnltck4qtc" path="res://objects/enemies/enemy_reaper.tscn" id="5_j5b23"]
 [ext_resource type="PackedScene" uid="uid://bx7qwk4mp2rn8" path="res://objects/loot_box/loot_box.tscn" id="6_lootbox"]
 
 [sub_resource type="Environment" id="Environment_t7wo2"]

@@ -31,6 +31,10 @@ func _ready() -> void:
 
 
 func _process(_delta: float) -> void:
+	if not Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
+		_drag_place.stop()
+	if not Input.is_mouse_button_pressed(MOUSE_BUTTON_RIGHT):
+		_drag_delete.stop()
 	if selected_info == null:
 		_drag_place.stop()
 	var h := hovered_cell
@@ -159,6 +163,9 @@ func _on_delete_drag_entered(_cell: Vector2i) -> void:
 
 func _try_delete() -> void:
 	var cell := hovered_cell
+	if viewer.grid.dimensions.x <= cell.x or viewer.grid.dimensions.y <= cell.y \
+			or cell.x < 0 or cell.y < 0:
+		return
 	if not viewer.grid.has_building(cell):
 		return
 	var info := viewer.grid.get_building(cell).get_info()

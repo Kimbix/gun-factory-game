@@ -42,6 +42,11 @@ folder_colors={
 "res://testing/": "pink"
 }
 
+[layer_names]
+
+2d_physics/layer_1="World"
+2d_physics/layer_2="Destructible"
+
 [physics]
 
 common/physics_fps=30

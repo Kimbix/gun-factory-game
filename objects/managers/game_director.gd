@@ -5,12 +5,14 @@ extends WorldEnvironment
 @export var enemy_waves: EnemyWaves
 @export var enemy_events: EnemyEvents
 @export var base_enemy_cap := 50
+@export var base_loot_box_cap := 5
 @export_category("Spawn Specifications")
 @export var spawn_interval := 10.0
 @export var spawn_per_wave_percent := .05
 @export var spawn_distance_min := 250.0
 @export var spawn_distance_max := 400.0
 @export var reaper_scene: PackedScene
+@export var loot_box_scene: PackedScene
 
 const HP_SCALE := 1.0
 const SPEED_SCALE := 0.5
@@ -24,6 +26,7 @@ const WIN_TIME := 30.0 * 60.0
 var elapsed_time: float
 var win_triggered: bool
 var enemies: Array[BaseEnemy] = []
+var loot_boxes: Array[LootBox] = []
 var active_wave: EnemyWave
 var wave_index: int
 var player_instance: SimpleCharacter
@@ -43,6 +46,7 @@ func _ready() -> void:
 
 	var timer := Timer.new()
 	timer.timeout.connect(_spawn_enemies)
+	timer.timeout.connect(_spawn_loot_boxes)
 	timer.wait_time = spawn_interval
 	timer.autostart = true
 	add_child(timer)
@@ -51,6 +55,7 @@ func _ready() -> void:
 	add_child(damage_pool)
 
 	_spawn_enemies()
+	_spawn_loot_boxes()
 
 
 func _process(delta: float) -> void:
@@ -125,6 +130,34 @@ func _spawn_enemies() -> void:
 
 func _on_enemy_killed(which: BaseEnemy) -> void:
 	enemies.erase(which)
+
+
+func _spawn_loot_boxes() -> void:
+	if loot_box_scene == null or loot_boxes.size() >= base_loot_box_cap:
+		return
+
+	var diff := _get_difficulty()
+	var effective_rate := spawn_per_wave_percent * (1.0 + diff * RATE_SCALE)
+	var missing: int = base_loot_box_cap - loot_boxes.size()
+	var to_spawn := ceili(missing * effective_rate)
+	for i: int in to_spawn:
+		if loot_boxes.size() >= base_loot_box_cap:
+			return
+
+		var instance: LootBox = loot_box_scene.instantiate()
+		instance.position = (
+				player_instance.position
+				+ ((Vector2.RIGHT * randf_range(spawn_distance_min, spawn_distance_max))
+						.rotated(randf() * TAU))
+		)
+
+		add_child(instance)
+		loot_boxes.append(instance)
+		instance.tree_exited.connect(_on_loot_box_removed.bind(instance))
+
+
+func _on_loot_box_removed(which: LootBox) -> void:
+	loot_boxes.erase(which)
 
 
 func _handle_event(event: EnemyEvent) -> void:

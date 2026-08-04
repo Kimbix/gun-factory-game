@@ -5,6 +5,7 @@
 [ext_resource type="Resource" uid="uid://ciyco2se0tapx" path="res://resources/enemy_waves/testing_waves.tres" id="3_w28c3"]
 [ext_resource type="Texture2D" uid="uid://cfi1wpkmoebie" path="res://assets/world/spr_madForestBackground.png" id="4_6mirt"]
 [ext_resource type="PackedScene" path="res://objects/enemies/enemy_reaper.tscn" id="5_j5b23"]
+[ext_resource type="PackedScene" uid="uid://bx7qwk4mp2rn8" path="res://objects/loot_box/loot_box.tscn" id="6_lootbox"]
 
 [sub_resource type="Environment" id="Environment_t7wo2"]
 
@@ -14,6 +15,7 @@ script = ExtResource("1_tshmu")
 player_character_scene = ExtResource("2_rcs5u")
 enemy_waves = ExtResource("3_w28c3")
 reaper_scene = ExtResource("5_j5b23")
+loot_box_scene = ExtResource("6_lootbox")
 metadata/_custom_type_script = "uid://dqwaa3ln6a25"
 
 [node name="Background" type="Parallax2D" parent="." unique_id=1626368049]

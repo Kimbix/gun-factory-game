@@ -41,9 +41,7 @@ func _ready() -> void:
 	_grid_builder.building_inventory = _active_player.building_inventory
 	_grid_builder.building_ui = _building_ui
 
-	_grid_interactor.building_inventory = _active_player.building_inventory
 	_grid_interactor.builder = _grid_builder
-	_grid_interactor.building_ui = _building_ui
 	_grid_interactor.interface_supervisor = _interface_supervisor
 
 	_interface_supervisor.building_inventory = _active_player.building_inventory

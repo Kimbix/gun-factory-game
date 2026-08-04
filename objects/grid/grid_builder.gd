@@ -19,34 +19,51 @@ var hovered_cell: Vector2i:
 		return viewer.get_hovered_cell()
 var _last_hovered: Vector2i = Vector2i(-1, -1)
 
+var _drag_place := GridDragHandler.new()
+var _drag_delete := GridDragHandler.new()
+
 @onready var viewer: PlayerGridViewer = get_parent()
+
+
+func _ready() -> void:
+	_drag_place.entered.connect(_on_place_drag_entered)
+	_drag_delete.entered.connect(_on_delete_drag_entered)
 
 
 func _process(_delta: float) -> void:
 	if selected_info == null:
-		return
+		_drag_place.stop()
 	var h := hovered_cell
 	if h != _last_hovered:
 		_last_hovered = h
 		queue_redraw()
+	_drag_place.update(h)
+	_drag_delete.update(h)
 
 
 func _unhandled_input(event: InputEvent) -> void:
 	if viewer == null or viewer.grid == null:
 		return
-	if not (event is InputEventMouseButton and event.pressed):
+	if event is not InputEventMouseButton:
+		return
+	if not event.pressed:
+		if event.button_index == MOUSE_BUTTON_LEFT:
+			_drag_place.stop()
+		elif event.button_index == MOUSE_BUTTON_RIGHT:
+			_drag_delete.stop()
 		return
 
 	match event.button_index:
 		MOUSE_BUTTON_LEFT:
 			if selected_info == null:
 				return
-			_try_place()
+			_drag_place.start(hovered_cell)
 			get_viewport().set_input_as_handled()
 		MOUSE_BUTTON_RIGHT:
-			if selected_info == null:
-				return
-			deselect()
+			if selected_info != null:
+				deselect()
+			else:
+				_drag_delete.start(hovered_cell)
 			get_viewport().set_input_as_handled()
 		MOUSE_BUTTON_WHEEL_UP, MOUSE_BUTTON_WHEEL_DOWN:
 			if selected_info == null:
@@ -130,3 +147,23 @@ func _try_place() -> void:
 
 	if building_ui != null:
 		building_ui.refresh_building_list()
+
+
+func _on_place_drag_entered(_cell: Vector2i) -> void:
+	_try_place()
+
+
+func _on_delete_drag_entered(_cell: Vector2i) -> void:
+	_try_delete()
+
+
+func _try_delete() -> void:
+	var cell := hovered_cell
+	if not viewer.grid.has_building(cell):
+		return
+	var info := viewer.grid.get_building(cell).get_info()
+	viewer.grid.destroy_building(cell)
+	building_inventory.add(info)
+	if building_ui != null:
+		building_ui.refresh_building_list()
+	viewer.queue_redraw()

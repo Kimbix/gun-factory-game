@@ -72,7 +72,6 @@ func _explode() -> void:
 			var read_enemy_type := StringName(BaseEnemy.EnemyType.keys()[enemy_type])
 			player.take_damage(explosion_damage * damage_multiplier, read_enemy_type)
 	_dead = true
-	on_death.emit()
 	var enemy_type_name := StringName(BaseEnemy.EnemyType.keys()[enemy_type])
 	SignalBus.enemy_killed.emit(enemy_type_name)
 	queue_free()

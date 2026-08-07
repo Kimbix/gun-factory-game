@@ -1,10 +1,10 @@
 [gd_scene format=3 uid="uid://cr53oc23me6vk"]
 
-[ext_resource type="Script" uid="uid://cwbex2gk2erx6" path="res://objects/enemies/enemy_stationary_shooter.gd" id="1_tt83d"]
-[ext_resource type="Texture2D" uid="uid://due1shv73gww4" path="res://assets/world_entities/spr_enemyStationaryShooter.png" id="2_tt83d"]
-[ext_resource type="PackedScene" path="res://objects/xp/experience_spawner.tscn" id="3_tt83d"]
-[ext_resource type="Script" uid="uid://dofvr0nc814r8" path="res://scripts/entities/enemy_hitbox.gd" id="4_tt83d"]
-[ext_resource type="PackedScene" uid="uid://biftv7srv871o" path="res://objects/projectiles/enemy_bullet.tscn" id="5_tt83d"]
+[ext_resource type="Script" uid="uid://cwbex2gk2erx6" path="res://objects/enemies/enemy_stationary_shooter.gd" id="1_hlrac"]
+[ext_resource type="PackedScene" uid="uid://biftv7srv871o" path="res://objects/projectiles/enemy_bullet.tscn" id="2_l67yt"]
+[ext_resource type="Texture2D" uid="uid://due1shv73gww4" path="res://assets/world_entities/spr_enemyStationaryShooter.png" id="3_8rx1e"]
+[ext_resource type="PackedScene" path="res://objects/xp/experience_spawner.tscn" id="4_xg4yr"]
+[ext_resource type="Script" uid="uid://dofvr0nc814r8" path="res://scripts/entities/enemy_hitbox.gd" id="5_8q7k5"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_body"]
 radius = 7.0
@@ -13,21 +13,21 @@ radius = 7.0
 radius = 8.0
 
 [node name="EnemyStationaryShooter" type="Area2D" unique_id=589975782]
-script = ExtResource("1_tt83d")
-projectile_scene = ExtResource("5_tt83d")
+script = ExtResource("1_hlrac")
+projectile_scene = ExtResource("2_l67yt")
 shoot_interval = 5.0
 projectile_speed = 60.0
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=954768743]
-texture = ExtResource("2_tt83d")
+texture = ExtResource("3_8rx1e")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=284001717]
 shape = SubResource("CircleShape2D_body")
 
-[node name="ExperienceSpawner" parent="." unique_id=1642692828 instance=ExtResource("3_tt83d")]
+[node name="ExperienceSpawner" parent="." unique_id=1642692828 instance=ExtResource("4_xg4yr")]
 
 [node name="HitboxArea" type="Area2D" parent="." unique_id=351890760]
-script = ExtResource("4_tt83d")
+script = ExtResource("5_8q7k5")
 deal_contact_damage = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxArea" unique_id=311565219]

@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://c3krnxqtp0xbk"]
 
-[ext_resource type="Texture2D" uid="uid://ceym0vtm257nj" path="res://assets/world_entities/spr_enemySlime.png" id="1_t7xr3"]
-[ext_resource type="Script" uid="uid://dtbuseh8mw7c1" path="res://objects/enemies/enemy_slime.gd" id="2_qu3vo"]
-[ext_resource type="PackedScene" path="res://objects/xp/experience_spawner.tscn" id="3_g5he2"]
-[ext_resource type="Script" uid="uid://dofvr0nc814r8" path="res://scripts/entities/enemy_hitbox.gd" id="4_s4axq"]
+[ext_resource type="Script" uid="uid://dtbuseh8mw7c1" path="res://objects/enemies/enemy_slime.gd" id="1_vndwv"]
+[ext_resource type="Texture2D" uid="uid://ceym0vtm257nj" path="res://assets/world_entities/spr_enemySlime.png" id="2_735ny"]
+[ext_resource type="PackedScene" path="res://objects/xp/experience_spawner.tscn" id="3_qelp0"]
+[ext_resource type="Script" uid="uid://dofvr0nc814r8" path="res://scripts/entities/enemy_hitbox.gd" id="4_k30rq"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_body"]
 radius = 7.0
@@ -12,18 +12,18 @@ radius = 7.0
 radius = 8.0
 
 [node name="EnemySlime" type="Area2D" unique_id=589975782]
-script = ExtResource("2_qu3vo")
+script = ExtResource("1_vndwv")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=954768743]
-texture = ExtResource("1_t7xr3")
+texture = ExtResource("2_735ny")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=284001717]
 shape = SubResource("CircleShape2D_body")
 
-[node name="ExperienceSpawner" parent="." unique_id=1642692828 instance=ExtResource("3_g5he2")]
+[node name="ExperienceSpawner" parent="." unique_id=1642692828 instance=ExtResource("3_qelp0")]
 
 [node name="HitboxArea" type="Area2D" parent="." unique_id=351890760]
-script = ExtResource("4_s4axq")
+script = ExtResource("4_k30rq")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxArea" unique_id=311565219]
 shape = SubResource("CircleShape2D_6xohb")

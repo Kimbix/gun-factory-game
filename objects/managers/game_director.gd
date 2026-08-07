@@ -1,6 +1,14 @@
 class_name GameDirector
 extends WorldEnvironment
 
+const HP_SCALE := 1.0
+const SPEED_SCALE := 0.5
+const DAMAGE_SCALE := 0.5
+const CAP_PER_DIFFICULTY := 50
+const RATE_SCALE := 0.2
+## Will change per stage in the future.
+const WIN_TIME := 30.0 * 60.0
+
 @export var player_character_scene: PackedScene
 @export var enemy_waves: EnemyWaves
 @export var enemy_events: EnemyEvents
@@ -8,20 +16,12 @@ extends WorldEnvironment
 @export var base_loot_box_cap := 5
 @export_category("Spawn Specifications")
 @export var spawn_interval := 10.0
+@export var loot_box_spawn_interval := 10.0
 @export var spawn_per_wave_percent := .05
 @export var spawn_distance_min := 250.0
 @export var spawn_distance_max := 400.0
 @export var reaper_scene: PackedScene
 @export var loot_box_scene: PackedScene
-
-const HP_SCALE := 1.0
-const SPEED_SCALE := 0.5
-const DAMAGE_SCALE := 0.5
-const CAP_PER_DIFFICULTY := 50
-const RATE_SCALE := 0.2
-
-## Will change per stage in the future.
-const WIN_TIME := 30.0 * 60.0
 
 var elapsed_time: float
 var win_triggered: bool
@@ -46,10 +46,15 @@ func _ready() -> void:
 
 	var timer := Timer.new()
 	timer.timeout.connect(_spawn_enemies)
-	timer.timeout.connect(_spawn_loot_boxes)
 	timer.wait_time = spawn_interval
 	timer.autostart = true
 	add_child(timer)
+
+	var loot_box_timer := Timer.new()
+	loot_box_timer.timeout.connect(_spawn_loot_boxes)
+	loot_box_timer.wait_time = loot_box_spawn_interval
+	loot_box_timer.autostart = true
+	add_child(loot_box_timer)
 
 	var damage_pool := DamageNumberPool.new()
 	add_child(damage_pool)
@@ -111,6 +116,7 @@ func _spawn_enemies() -> void:
 
 		var info: EnemyInfo = active_wave.enemies.pick_random()
 		var instance: BaseEnemy = info.scene.instantiate()
+		instance.name = _enemy_name(info.scene, enemies.size())
 		instance.player = player_instance
 		instance.game_world = self
 		instance.position = (
@@ -128,20 +134,26 @@ func _spawn_enemies() -> void:
 		instance.tree_exited.connect(_on_enemy_killed.bind(instance))
 
 
+## Builds a debug-friendly name for a spawned enemy using its scene's file name
+## and its position (index) in the [member enemies] array.
+func _enemy_name(scene: PackedScene, spot_taken: int) -> String:
+	return "%s_%d" % [scene.resource_path.get_file().get_basename(), spot_taken]
+
+
 func _on_enemy_killed(which: BaseEnemy) -> void:
 	enemies.erase(which)
 
 
 func _spawn_loot_boxes() -> void:
-	if loot_box_scene == null or loot_boxes.size() >= base_loot_box_cap:
+	if loot_box_scene == null:
 		return
 
 	var diff := _get_difficulty()
 	var effective_rate := spawn_per_wave_percent * (1.0 + diff * RATE_SCALE)
 	var missing: int = base_loot_box_cap - loot_boxes.size()
-	var to_spawn := ceili(missing * effective_rate)
+	var to_spawn := ceili(maxf(missing, 1.0) * effective_rate)
 	for i: int in to_spawn:
-		if loot_boxes.size() >= base_loot_box_cap:
+		if loot_boxes.size() >= base_loot_box_cap and not _despawn_oldest_loot_box():
 			return
 
 		var instance: LootBox = loot_box_scene.instantiate()
@@ -154,6 +166,33 @@ func _spawn_loot_boxes() -> void:
 		add_child(instance)
 		loot_boxes.append(instance)
 		instance.tree_exited.connect(_on_loot_box_removed.bind(instance))
+
+
+## Despawns the oldest off-screen loot box to make room for a new one.
+## Returns `true` if a box was despawned, `false` if every box is on screen.
+func _despawn_oldest_loot_box() -> bool:
+	for index: int in loot_boxes.size():
+		var candidate: LootBox = loot_boxes[index]
+		if not is_instance_valid(candidate):
+			loot_boxes.remove_at(index)
+			return true
+		if not _is_on_screen(candidate):
+			loot_boxes.remove_at(index)
+			candidate.queue_free()
+			return true
+	return false
+
+
+func _is_on_screen(loot_box: LootBox) -> bool:
+	var camera := get_viewport().get_camera_2d()
+	if camera == null:
+		return true
+	var to_world := camera.get_canvas_transform().affine_inverse()
+	var view_size := get_viewport().get_visible_rect().size
+	var world_top_left := to_world * Vector2.ZERO
+	var world_bottom_right := to_world * view_size
+	var world_rect := Rect2(world_top_left, world_bottom_right - world_top_left)
+	return world_rect.has_point(loot_box.global_position)
 
 
 func _on_loot_box_removed(which: LootBox) -> void:
@@ -169,6 +208,7 @@ func _spawn_boss(event: EnemyEvent) -> void:
 	print("GameDirector: spawning boss")
 	for i in event.count:
 		var instance: BaseEnemy = event.enemy_info.scene.instantiate()
+		instance.name = _enemy_name(event.enemy_info.scene, enemies.size())
 		instance.enemy_type = BaseEnemy.EnemyType.BOSS
 		instance.player = player_instance
 		instance.game_world = self
@@ -199,6 +239,7 @@ func _trigger_win_condition() -> void:
 
 func _spawn_reaper() -> void:
 	var instance: BaseEnemy = reaper_scene.instantiate()
+	instance.name = _enemy_name(reaper_scene, enemies.size())
 	instance.player = player_instance
 	instance.game_world = self
 	instance.position = (

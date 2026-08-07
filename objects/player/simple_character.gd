@@ -164,9 +164,7 @@ func _on_magnet_attraction_area_entered(area: Area2D) -> void:
 
 
 func _on_despawn_proximity_area_exited(area: Area2D) -> void:
-	if not is_processing():
-		return
-	var enemy := _resolve_enemy(area)
+	var enemy := area if area is BaseEnemy else null
 	if enemy == null or not is_instance_valid(enemy):
 		return
 	if enemy.enemy_type != BaseEnemy.EnemyType.REGULAR:
@@ -175,9 +173,7 @@ func _on_despawn_proximity_area_exited(area: Area2D) -> void:
 
 
 func _on_boss_proximity_area_exited(area: Area2D) -> void:
-	if not is_processing():
-		return
-	var enemy := _resolve_enemy(area)
+	var enemy := area if area is BaseEnemy else null
 	if enemy == null or not is_instance_valid(enemy):
 		return
 	if enemy.enemy_type != BaseEnemy.EnemyType.BOSS:
@@ -185,15 +181,6 @@ func _on_boss_proximity_area_exited(area: Area2D) -> void:
 	var angle := randf() * TAU
 	var radius := randf_range(enemy.spawn_distance_min, enemy.spawn_distance_max)
 	enemy.global_position = global_position + Vector2.RIGHT.rotated(angle) * radius
-
-
-func _resolve_enemy(area: Area2D) -> BaseEnemy:
-	if area is BaseEnemy:
-		return area
-	var parent := area.get_parent()
-	if parent is BaseEnemy:
-		return parent
-	return null
 
 
 func _on_level_up(new_level: int) -> void:

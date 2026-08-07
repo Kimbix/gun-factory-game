@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://dfbcnltck4qtc"]
 
-[ext_resource type="Texture2D" uid="uid://cj4dioxi6pdjt" path="res://assets/factory_components/spr_enemyHim.png" id="1_6rqjh"]
-[ext_resource type="Script" uid="uid://dtbuseh8mw7c1" path="res://objects/enemies/enemy_slime.gd" id="2_x6sld"]
-[ext_resource type="Script" uid="uid://dofvr0nc814r8" path="res://scripts/entities/enemy_hitbox.gd" id="3_vfk4p"]
+[ext_resource type="Script" uid="uid://dtbuseh8mw7c1" path="res://objects/enemies/enemy_slime.gd" id="1_ahdsu"]
+[ext_resource type="Texture2D" uid="uid://cj4dioxi6pdjt" path="res://assets/factory_components/spr_enemyHim.png" id="2_81yl8"]
+[ext_resource type="Script" uid="uid://dofvr0nc814r8" path="res://scripts/entities/enemy_hitbox.gd" id="3_4ty8p"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_body"]
 radius = 30.016663
@@ -11,19 +11,19 @@ radius = 30.016663
 radius = 33.01515
 
 [node name="EnemyReaper" type="Area2D" unique_id=1870735898]
-script = ExtResource("2_x6sld")
+script = ExtResource("1_ahdsu")
 speed = 666.666
 health = 66666666666666
 damage_multiplier = 6.66
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1770118147]
-texture = ExtResource("1_6rqjh")
+texture = ExtResource("2_81yl8")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=221883216]
 shape = SubResource("CircleShape2D_body")
 
 [node name="HitboxArea" type="Area2D" parent="." unique_id=1603508096]
-script = ExtResource("3_vfk4p")
+script = ExtResource("3_4ty8p")
 damage_per_tick = 5.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxArea" unique_id=1115660977]

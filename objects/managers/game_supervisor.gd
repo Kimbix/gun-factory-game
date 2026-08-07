@@ -9,10 +9,10 @@ enum GameState {
 	GAME_OVER,
 }
 
+var match_stats: MatchStats
 var _state: GameState = GameState.GAMEPLAY
 var _state_before_pause: GameState = GameState.GAMEPLAY
 var _state_before_level_up: GameState = GameState.GAMEPLAY
-var match_stats: MatchStats
 var _active_player: SimpleCharacter
 var _interface_supervisor: InterfaceSupervisor
 var _pause_menu_instance: PauseMenu
@@ -282,20 +282,20 @@ func _set_state(new_state: GameState, is_win: bool = false) -> void:
 		GameState.GAMEPLAY:
 			_hide_pause_menu()
 			_interface_supervisor.close_building_interface()
-			%GameplayScene.process_mode = PROCESS_MODE_INHERIT
+			%GameplayScene.call_deferred("set_process_mode", PROCESS_MODE_INHERIT)
 		GameState.BUILDING:
 			_hide_pause_menu()
 			_interface_supervisor.open_building_interface()
-			%GameplayScene.process_mode = PROCESS_MODE_DISABLED
+			%GameplayScene.call_deferred("set_process_mode", PROCESS_MODE_DISABLED)
 		GameState.LEVEL_UP:
 			_hide_pause_menu()
-			%GameplayScene.process_mode = PROCESS_MODE_DISABLED
+			%GameplayScene.call_deferred("set_process_mode", PROCESS_MODE_DISABLED)
 			_building_ui.process_mode = PROCESS_MODE_DISABLED
 		GameState.PAUSED:
-			%GameplayScene.process_mode = PROCESS_MODE_DISABLED
+			%GameplayScene.call_deferred("set_process_mode", PROCESS_MODE_DISABLED)
 			_show_pause_menu()
 		GameState.GAME_OVER:
 			_hide_pause_menu()
 			_interface_supervisor.close_building_interface()
-			%GameplayScene.process_mode = PROCESS_MODE_DISABLED
+			%GameplayScene.call_deferred("set_process_mode", PROCESS_MODE_DISABLED)
 			_show_game_over_menu(is_win)

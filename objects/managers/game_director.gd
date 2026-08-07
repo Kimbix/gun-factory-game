@@ -10,6 +10,10 @@ const RATE_SCALE := 0.1
 ## Will change per stage in the future.
 const WIN_TIME := 30.0 * 60.0
 
+# TEMP: Passive difficulty ramp reaching 5.0 by the end of the match.
+const TEMP_DIFFICULTY_PER_MIN := 5.0 / (WIN_TIME / 60.0)
+const TEMP_MAX_DIFFICULTY := 5.0
+
 @export var player_character_scene: PackedScene
 @export var enemy_waves: EnemyWaves
 @export var enemy_events: EnemyEvents
@@ -69,6 +73,12 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if not win_triggered and is_instance_valid(player_instance) and player_instance.health > 0:
 		elapsed_time += delta
+		# TEMP: passively ramp difficulty without the player knowing.
+		var difficulty_stat: Stat = player_instance.player_stats.stats[&"difficulty"]
+		difficulty_stat.value = minf(
+			difficulty_stat.value + TEMP_DIFFICULTY_PER_MIN * (delta / 60.0),
+			TEMP_MAX_DIFFICULTY,
+		)
 
 	if not win_triggered and elapsed_time >= WIN_TIME:
 		_trigger_win_condition()

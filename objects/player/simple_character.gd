@@ -164,6 +164,8 @@ func _on_magnet_attraction_area_entered(area: Area2D) -> void:
 
 
 func _on_despawn_proximity_area_exited(area: Area2D) -> void:
+	if not can_process():
+		return
 	var enemy := area if area is BaseEnemy else null
 	if enemy == null or not is_instance_valid(enemy):
 		return
@@ -173,6 +175,8 @@ func _on_despawn_proximity_area_exited(area: Area2D) -> void:
 
 
 func _on_boss_proximity_area_exited(area: Area2D) -> void:
+	if not can_process():
+		return
 	var enemy := area if area is BaseEnemy else null
 	if enemy == null or not is_instance_valid(enemy):
 		return

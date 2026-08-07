@@ -6,7 +6,8 @@ BUTLER="${BUTLER:-butler}"
 
 ITCH_USER="meatboxdev"
 ITCH_GAME="kimbixs-secret-factory-game-project"
-ITCH_CHANNEL="linux"
+LINUX_CHANNEL="linux"
+WINDOWS_CHANNEL="windows"
 DISCORD_WEBHOOK_FILE="$(dirname "$0")/../.discord_webhook"
 if [ -f "$DISCORD_WEBHOOK_FILE" ]; then
   DISCORD_WEBHOOK=$(cat "$DISCORD_WEBHOOK_FILE")
@@ -17,22 +18,27 @@ fi
 BUILD_DIR="bin"
 
 VERSION=$(cat version.txt)
-EXPORT_PATH="$BUILD_DIR/game_prototype_$VERSION.x86_64"
+LINUX_EXPORT_PATH="$BUILD_DIR/linux/game_prototype_$VERSION.x86_64"
+WINDOWS_EXPORT_PATH="$BUILD_DIR/windows/game_prototype_$VERSION.exe"
 
 echo ""
-echo "=== Deploying $ITCH_USER/$ITCH_GAME:$ITCH_CHANNEL (version: $VERSION) ==="
+echo "=== Deploying $ITCH_USER/$ITCH_GAME (version: $VERSION) ==="
 echo ""
 
 echo "$VERSION" > version.txt
 
 echo "--- Exporting Linux build ---"
 rm -rf "$BUILD_DIR"
-mkdir -p "$BUILD_DIR"
-$GODOT --headless --export-release "Linux Prototype Build" "$EXPORT_PATH"
+mkdir -p "$BUILD_DIR/linux" "$BUILD_DIR/windows"
+$GODOT --headless --export-release "Linux Prototype Build" "$LINUX_EXPORT_PATH"
+
+echo "--- Exporting Windows build ---"
+$GODOT --headless --export-release "Windows Desktop" "$WINDOWS_EXPORT_PATH"
 
 echo ""
 echo "--- Pushing to itch.io ---"
-$BUTLER push "$BUILD_DIR" "$ITCH_USER/$ITCH_GAME:$ITCH_CHANNEL" --userversion "$VERSION"
+$BUTLER push "$BUILD_DIR/linux" "$ITCH_USER/$ITCH_GAME:$LINUX_CHANNEL" --userversion "$VERSION"
+$BUTLER push "$BUILD_DIR/windows" "$ITCH_USER/$ITCH_GAME:$WINDOWS_CHANNEL" --userversion "$VERSION"
 
 echo ""
 echo "--- Notifying Discord ---"

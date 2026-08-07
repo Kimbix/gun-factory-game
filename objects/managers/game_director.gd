@@ -1,11 +1,12 @@
 class_name GameDirector
 extends WorldEnvironment
 
-const HP_SCALE := 1.0
+const HP_SCALE := 0.5
 const SPEED_SCALE := 0.5
 const DAMAGE_SCALE := 0.5
 const CAP_PER_DIFFICULTY := 50
-const RATE_SCALE := 0.2
+## Fraction by which the enemy spawn interval shrinks per difficulty point.
+const RATE_SCALE := 0.1
 ## Will change per stage in the future.
 const WIN_TIME := 30.0 * 60.0
 
@@ -18,6 +19,7 @@ const WIN_TIME := 30.0 * 60.0
 @export var spawn_interval := 10.0
 @export var loot_box_spawn_interval := 10.0
 @export var spawn_per_wave_percent := .05
+@export var loot_box_spawn_per_wave := 1
 @export var spawn_distance_min := 250.0
 @export var spawn_distance_max := 400.0
 @export var reaper_scene: PackedScene
@@ -30,6 +32,7 @@ var loot_boxes: Array[LootBox] = []
 var active_wave: EnemyWave
 var wave_index: int
 var player_instance: SimpleCharacter
+var _enemy_spawn_timer: Timer
 
 
 func _ready() -> void:
@@ -44,11 +47,11 @@ func _ready() -> void:
 	else:
 		print("GameDirector: enemy_events is null")
 
-	var timer := Timer.new()
-	timer.timeout.connect(_spawn_enemies)
-	timer.wait_time = spawn_interval
-	timer.autostart = true
-	add_child(timer)
+	_enemy_spawn_timer = Timer.new()
+	_enemy_spawn_timer.timeout.connect(_spawn_enemies)
+	_enemy_spawn_timer.wait_time = spawn_interval
+	_enemy_spawn_timer.autostart = true
+	add_child(_enemy_spawn_timer)
 
 	var loot_box_timer := Timer.new()
 	loot_box_timer.timeout.connect(_spawn_loot_boxes)
@@ -103,13 +106,13 @@ func _apply_difficulty(instance: BaseEnemy, diff: float) -> void:
 func _spawn_enemies() -> void:
 	var diff := _get_difficulty()
 	var effective_cap := ceili(base_enemy_cap + diff * CAP_PER_DIFFICULTY)
-	var effective_rate := spawn_per_wave_percent * (1.0 + diff * RATE_SCALE)
+	_enemy_spawn_timer.wait_time = spawn_interval * pow(1.0 - RATE_SCALE, diff)
 
 	if active_wave == null or enemies.size() >= effective_cap:
 		return
 
 	var missing: int = effective_cap - enemies.size()
-	var to_spawn := ceili(missing * effective_rate)
+	var to_spawn := ceili(missing * spawn_per_wave_percent)
 	for i: Variant in to_spawn:
 		if enemies.size() >= effective_cap:
 			return
@@ -148,10 +151,7 @@ func _spawn_loot_boxes() -> void:
 	if loot_box_scene == null:
 		return
 
-	var diff := _get_difficulty()
-	var effective_rate := spawn_per_wave_percent * (1.0 + diff * RATE_SCALE)
-	var missing: int = base_loot_box_cap - loot_boxes.size()
-	var to_spawn := ceili(maxf(missing, 1.0) * effective_rate)
+	var to_spawn: int = loot_box_spawn_per_wave
 	for i: int in to_spawn:
 		if loot_boxes.size() >= base_loot_box_cap and not _despawn_oldest_loot_box():
 			return

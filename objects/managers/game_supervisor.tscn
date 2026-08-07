@@ -29,7 +29,9 @@ script = ExtResource("3_r0dkg")
 [node name="GameplayScene" parent="." unique_id=367612 instance=ExtResource("2_gm3q9")]
 unique_name_in_owner = true
 enemy_events = ExtResource("8_epj5h")
+base_enemy_cap = 100
 spawn_interval = 0.5
 loot_box_spawn_interval = 15.0
+spawn_per_wave_percent = 0.1
 spawn_distance_min = 600.0
 spawn_distance_max = 750.0

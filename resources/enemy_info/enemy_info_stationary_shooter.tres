@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="EnemyInfo" format=3 uid="uid://b53pqhxcwsgbq"]
+
+[ext_resource type="PackedScene" uid="uid://cr53oc23me6vk" path="res://objects/enemies/enemy_stationary_shooter.tscn" id="1_srtt"]
+[ext_resource type="Script" uid="uid://bsafh2yqkks57" path="res://resources/enemy_info/enemy_info.gd" id="2_srtt"]
+
+[resource]
+script = ExtResource("2_srtt")
+scene = ExtResource("1_srtt")
+base_xp = 1
+metadata/_custom_type_script = "uid://bsafh2yqkks57"

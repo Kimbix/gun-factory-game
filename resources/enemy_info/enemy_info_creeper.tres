@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="EnemyInfo" format=3 uid="uid://de8k2wvke5maj"]
+
+[ext_resource type="PackedScene" uid="uid://diiymno7a4k78" path="res://objects/enemies/enemy_creeper.tscn" id="1_4jtna"]
+[ext_resource type="Script" uid="uid://bsafh2yqkks57" path="res://resources/enemy_info/enemy_info.gd" id="2_id01e"]
+
+[resource]
+script = ExtResource("2_id01e")
+scene = ExtResource("1_4jtna")
+base_xp = 1
+metadata/_custom_type_script = "uid://bsafh2yqkks57"

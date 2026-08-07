@@ -5,11 +5,12 @@
 [ext_resource type="Script" uid="uid://bsafh2yqkks57" path="res://resources/enemy_info/enemy_info.gd" id="3_fhf8w"]
 [ext_resource type="Resource" uid="uid://cpsm4hp2ib03s" path="res://resources/enemy_info/enemy_info_slime.tres" id="4_6e1dk"]
 [ext_resource type="Resource" uid="uid://v0tb8nhb3xj2" path="res://resources/enemy_info/enemy_info_angry_robot.tres" id="5_uuh8f"]
+[ext_resource type="Resource" uid="uid://de8k2wvke5maj" path="res://resources/enemy_info/enemy_info_creeper.tres" id="6_ufs8i"]
 
 [sub_resource type="Resource" id="Resource_8rb1r"]
 script = ExtResource("2_fhf8w")
 end_time_minutes = 30.0
-enemies = Array[ExtResource("3_fhf8w")]([ExtResource("4_6e1dk"), ExtResource("5_uuh8f")])
+enemies = Array[ExtResource("3_fhf8w")]([ExtResource("4_6e1dk"), ExtResource("5_uuh8f"), ExtResource("6_ufs8i")])
 metadata/_custom_type_script = "uid://ctf6nntqd8vvt"
 
 [resource]

@@ -2,6 +2,7 @@ class_name BuildingUI
 extends BaseInterface
 
 var _building := false
+var _selected_button: Button = null
 
 @export var player_grid: PlayerGrid
 @export var grid_builder: GridBuilder
@@ -23,6 +24,8 @@ func open_building_interface() -> void:
 	shop_panel.show()
 	if not building_inventory.changed.is_connected(refresh_building_list):
 		building_inventory.changed.connect(refresh_building_list)
+	if not grid_builder.selection_changed.is_connected(_on_selection_changed):
+		grid_builder.selection_changed.connect(_on_selection_changed)
 	_populate_building_list()
 	_building = true
 
@@ -35,6 +38,8 @@ func close_building_interface() -> void:
 	close_factory_interface()
 	if building_inventory.changed.is_connected(refresh_building_list):
 		building_inventory.changed.disconnect(refresh_building_list)
+	if grid_builder != null and grid_builder.selection_changed.is_connected(_on_selection_changed):
+		grid_builder.selection_changed.disconnect(_on_selection_changed)
 	_clear_building_list()
 	shop_panel.hide()
 	_building = false
@@ -68,15 +73,22 @@ func _populate_building_list() -> void:
 		btn.expand_icon = true
 		btn.custom_minimum_size = Vector2(64, 64)
 		btn.size_flags_horizontal = 0
+		btn.set_meta("building_info", stack.info)
 		btn.pressed.connect(
 			func() -> void:
 				if grid_builder == null:
 					return
 				if grid_builder.selected_info == stack.info:
 					grid_builder.deselect()
+					_highlight_button(null)
 				else:
 					grid_builder.select(stack.info)
+					_highlight_button(btn)
 		)
+
+		if grid_builder.selected_info == stack.info:
+			_selected_button = btn
+			btn.modulate = Color(0.6, 1, 0.6)
 
 		var count_label := Label.new()
 		count_label.text = "x" + str(stack.count)
@@ -94,7 +106,26 @@ func refresh_building_list() -> void:
 	_populate_building_list()
 
 
+func _highlight_button(btn: Button) -> void:
+	if _selected_button != null:
+		_selected_button.modulate = Color.WHITE
+	_selected_button = btn
+	if _selected_button != null:
+		_selected_button.modulate = Color(0.6, 1, 0.6)
+
+
+func _on_selection_changed(info: GridComponentInfo) -> void:
+	if info == null:
+		_highlight_button(null)
+		return
+	for btn in building_list.get_children():
+		if btn is Button and btn.get_meta("building_info", null) == info:
+			_highlight_button(btn)
+			return
+
+
 func _clear_building_list() -> void:
 	for child in building_list.get_children():
 		child.queue_free()
 	building_panel.hide()
+	_selected_button = null

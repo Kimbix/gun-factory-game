@@ -5,6 +5,8 @@ extends Node2D
 
 const GHOST_MODULATE := Color(1, 1, 1, 0.4)
 
+signal selection_changed(info: GridComponentInfo)
+
 var building_inventory: PlayerBuildingInventory
 @export var building_ui: BuildingUI
 
@@ -12,6 +14,7 @@ var selected_info: GridComponentInfo:
 	set(v):
 		selected_info = v
 		pending_rotation = FactoryBuilding.Rotation.NORMAL
+		selection_changed.emit(v)
 		queue_redraw()
 var pending_rotation: int = FactoryBuilding.Rotation.NORMAL
 var hovered_cell: Vector2i:

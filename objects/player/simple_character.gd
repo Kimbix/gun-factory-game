@@ -18,6 +18,9 @@ var health: float
 var _dead: bool
 var _tick_timer: Timer
 var _regen_timer: Timer
+var _sprite: Sprite2D
+var _flash_tween: Tween
+var _shader_material: ShaderMaterial
 
 
 static func _setup_input_actions() -> void:
@@ -43,6 +46,13 @@ func _ready() -> void:
 	if not _actions_ready:
 		_setup_input_actions()
 		_actions_ready = true
+
+	_sprite = $Sprite2D
+
+	var shader := load("res://objects/player/hit_flash.gdshader") as Shader
+	_shader_material = ShaderMaterial.new()
+	_shader_material.shader = shader
+	_sprite.material = _shader_material
 
 	building_inventory = PlayerBuildingInventory.new()
 	level_system = LevelSystem.new()
@@ -132,12 +142,24 @@ func take_damage(amount: float, enemy_type: StringName = &"") -> void:
 	var final_damage := maxf(amount * (1.0 - reduction), 1.0)
 	health -= final_damage
 	SignalBus.damage_taken.emit(ceili(final_damage), enemy_type)
+	_flash_hit()
 	if health <= 0:
 		health = 0
 		_dead = true
 		died.emit()
 		_on_player_died()
 	damaged.emit(health)
+
+
+func _flash_hit() -> void:
+	if _shader_material == null:
+		return
+	if _flash_tween != null and _flash_tween.is_valid():
+		_flash_tween.kill()
+	_shader_material.set_shader_parameter("hit_amount", 0.0)
+	_flash_tween = create_tween()
+	_flash_tween.tween_property(_shader_material, "shader_parameter/hit_amount", 1.0, 0.05)
+	_flash_tween.tween_property(_shader_material, "shader_parameter/hit_amount", 0.0, 0.15)
 
 
 func _on_collection_area_entered(area: Area2D) -> void:

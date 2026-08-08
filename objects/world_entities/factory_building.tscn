@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://baa2hx32qstst"]
+
+[ext_resource type="Script" uid="uid://bgdi3x3fsb360" path="res://objects/world_entities/factory_building.gd" id="1_script"]
+[ext_resource type="Texture2D" uid="uid://ceu6n1kd44tle" path="res://assets/world_entities/spr_factoryEditor.png" id="2_sprite"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_proximity"]
+radius = 200.0
+
+[node name="FactoryBuilding" type="Area2D" unique_id=813008854]
+script = ExtResource("1_script")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1505044590]
+texture = ExtResource("2_sprite")
+
+[node name="ProximityArea" type="CollisionShape2D" parent="." unique_id=277107276]
+shape = SubResource("CircleShape2D_proximity")
+
+[node name="Prompt" type="Label" parent="." unique_id=900474113]
+visible = false
+offset_top = -80.0
+offset_bottom = -80.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 6
+horizontal_alignment = 2
+
+[node name="CooldownTimer" type="Timer" parent="." unique_id=600227972]
+one_shot = true

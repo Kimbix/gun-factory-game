@@ -26,6 +26,7 @@ var _game_over_menu_instance: GameOverMenu
 		$InterfaceSupervisor/BuildingUI/PlayerGridViewer/GridInteractor
 )
 @onready var _overlay_ui: OverlayUI = $InterfaceSupervisor/OverlayUI
+@onready var _factory_workshop: FactoryWorkshop = %GameplayScene/FactoryBuilding
 
 
 func _ready() -> void:
@@ -100,6 +101,9 @@ func _unhandled_input(event: InputEvent) -> void:
 			return
 		match _state:
 			GameState.GAMEPLAY:
+				if not _factory_workshop.can_be_used():
+					return
+				_factory_workshop.mark_used()
 				_set_state(GameState.BUILDING)
 			GameState.BUILDING:
 				_set_state(GameState.GAMEPLAY)

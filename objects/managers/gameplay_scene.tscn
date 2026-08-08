@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://cfi1wpkmoebie" path="res://assets/world/spr_madForestBackground.png" id="4_6mirt"]
 [ext_resource type="PackedScene" uid="uid://dfbcnltck4qtc" path="res://objects/enemies/enmScn_reaper.tscn" id="5_j5b23"]
 [ext_resource type="PackedScene" uid="uid://bx7qwk4mp2rn8" path="res://objects/loot_box/loot_box.tscn" id="6_lootbox"]
+[ext_resource type="PackedScene" uid="uid://baa2hx32qstst" path="res://objects/world_entities/factory_building.tscn" id="7_gxnhj"]
 
 [sub_resource type="Environment" id="Environment_t7wo2"]
 
@@ -25,3 +26,5 @@ repeat_times = 32
 [node name="BackgroundSprite" type="Sprite2D" parent="Background" unique_id=1240994281]
 scale = Vector2(2, 2)
 texture = ExtResource("4_6mirt")
+
+[node name="FactoryBuilding" parent="." unique_id=813008854 instance=ExtResource("7_gxnhj")]

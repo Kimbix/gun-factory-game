@@ -13,9 +13,9 @@ anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_xee5u")
-close_button = NodePath("MarginContainer/Close")
-output_item = NodePath("MarginContainer/VBox/OutputItem")
-progress_label = NodePath("MarginContainer/VBox/Progress")
+close_button = NodePath("MarginContainer/VBoxContainer/TopBar/Close")
+output_item = NodePath("MarginContainer/VBoxContainer/Content/OutputItem")
+progress_label = NodePath("MarginContainer/VBoxContainer/Content/Progress")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 2
@@ -24,24 +24,36 @@ theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 5
 
-[node name="Close" type="Button" parent="MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="TopBar" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="MarginContainer/VBoxContainer/TopBar"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Furnace"
+
+[node name="Close" type="Button" parent="MarginContainer/VBoxContainer/TopBar"]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
-size_flags_horizontal = 8
-size_flags_vertical = 0
 text = "X"
 
-[node name="VBox" type="VBoxContainer" parent="MarginContainer"]
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Content" type="VBoxContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 alignment = 1
 
-[node name="OutputItem" parent="MarginContainer/VBox" instance=ExtResource("2_x12ab")]
+[node name="OutputItem" parent="MarginContainer/VBoxContainer/Content" instance=ExtResource("2_x12ab")]
 layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="Progress" type="Label" parent="MarginContainer/VBox"]
+[node name="Progress" type="Label" parent="MarginContainer/VBoxContainer/Content"]
 layout_mode = 2
 size_flags_horizontal = 4
 horizontal_alignment = 1

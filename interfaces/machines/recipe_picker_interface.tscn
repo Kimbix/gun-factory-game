@@ -12,8 +12,8 @@ anchor_bottom = 0.69753087
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_5jkj8")
-close_button = NodePath("MarginContainer/Close")
-recipe_grid = NodePath("MarginContainer/RecipeGrid")
+close_button = NodePath("MarginContainer/VBoxContainer/TopBar/Close")
+recipe_grid = NodePath("MarginContainer/VBoxContainer/RecipeGrid")
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=2068560443]
 layout_mode = 2
@@ -22,14 +22,27 @@ theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 5
 
-[node name="Close" type="Button" parent="MarginContainer" unique_id=1444202499]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="TopBar" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="MarginContainer/VBoxContainer/TopBar"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Recipe Picker"
+
+[node name="Close" type="Button" parent="MarginContainer/VBoxContainer/TopBar" unique_id=1444202499]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
-size_flags_horizontal = 8
-size_flags_vertical = 0
 text = "X"
 
-[node name="RecipeGrid" type="GridContainer" parent="MarginContainer" unique_id=101474768]
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 0
+
+[node name="RecipeGrid" type="GridContainer" parent="MarginContainer/VBoxContainer" unique_id=101474768]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 columns = 6

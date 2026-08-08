@@ -18,8 +18,8 @@ func _ready() -> void:
 		texture.set_anchors_preset(Control.PRESET_FULL_RECT)
 		texture.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		button.custom_minimum_size = Vector2.ONE * 32
-		var tooltip_text := "%s\n%d ticks" % [r.display_name, r.craft_time]
-		button.mouse_entered.connect(TooltipCanvas.show_tooltip.bind(tooltip_text))
+		var tooltip_str := "%s\n%s ticks" % [r.display_name, r.craft_time]
+		button.mouse_entered.connect(TooltipCanvas.show_tooltip.bind(tooltip_str))
 		button.mouse_exited.connect(TooltipCanvas.hide_tooltip)
 		button.add_child(texture)
 		button.pressed.connect(_on_recipe_pressed.bind(r))

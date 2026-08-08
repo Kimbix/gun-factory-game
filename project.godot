@@ -18,6 +18,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 SignalBus="*res://scripts/systems/signal_bus.gd"
+TooltipCanvas="*res://interfaces/components/tooltip_canvas.tscn"
 
 [display]
 

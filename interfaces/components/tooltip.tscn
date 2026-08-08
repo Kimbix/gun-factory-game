@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://cvqwglrao0p5n"]
+
+[ext_resource type="Script" uid="uid://dsmdvjx3n73rq" path="res://interfaces/components/tooltip.gd" id="1_script"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tooltip"]
+content_margin_left = 8.0
+content_margin_top = 4.0
+content_margin_right = 8.0
+content_margin_bottom = 4.0
+bg_color = Color(0.1, 0.1, 0.1, 0.9)
+
+[node name="Tooltip" type="PanelContainer" unique_id=52362856]
+offset_right = 17.0
+offset_bottom = 31.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_tooltip")
+script = ExtResource("1_script")
+
+[node name="Label" type="Label" parent="." unique_id=126880780]
+layout_mode = 2

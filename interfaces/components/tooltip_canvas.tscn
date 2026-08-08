@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene format=3 uid="uid://x3tk312y8br7"]
 
 [ext_resource type="Script" uid="uid://boayonnlwvlx2" path="res://interfaces/components/tooltip_canvas.gd" id="1_script"]
 
-[node name="TooltipCanvas" type="CanvasLayer"]
+[node name="TooltipCanvas" type="CanvasLayer" unique_id=1731841870]
+layer = 99
 script = ExtResource("1_script")

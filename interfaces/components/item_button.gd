@@ -21,15 +21,26 @@ func _update_display() -> void:
 	if _item == null or texture_rect == null:
 		return
 	texture_rect.texture = _item.texture
-	var display := _item.display_name if not _item.display_name.is_empty() else _item.name
-	tooltip_text = display
 
 
 func _ready() -> void:
 	texture_rect = $ItemImage
 	texture_rect.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	pressed.connect(_on_pressed)
+	mouse_entered.connect(_on_mouse_entered)
+	mouse_exited.connect(_on_mouse_exited)
 	_update_display()
+
+
+func _on_mouse_entered() -> void:
+	if _item == null:
+		return
+	var display := _item.display_name if not _item.display_name.is_empty() else _item.name
+	TooltipCanvas.show_tooltip(display)
+
+
+func _on_mouse_exited() -> void:
+	TooltipCanvas.hide_tooltip()
 
 
 func _on_pressed() -> void:

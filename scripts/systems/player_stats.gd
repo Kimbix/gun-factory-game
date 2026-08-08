@@ -10,6 +10,7 @@ func _init(data: PlayerStatsData) -> void:
 	stats[&"move_speed"] = Stat.new(data.move_speed)
 	var ts := Stat.new(data.tick_speed)
 	ts.diminishing_asymptote = 0.001
+	ts.use_diminishing = true
 	stats[&"tick_speed"] = ts
 	stats[&"health_regen"] = Stat.new(data.health_regen)
 	stats[&"pickup_range"] = Stat.new(data.pickup_range)
@@ -17,6 +18,7 @@ func _init(data: PlayerStatsData) -> void:
 	stats[&"gold_gain"] = Stat.new(data.gold_gain)
 	var ar := Stat.new(data.armor)
 	ar.diminishing_asymptote = 1.0
+	ar.use_diminishing = true
 	stats[&"armor"] = ar
 	stats[&"luck"] = Stat.new(data.luck)
 	stats[&"crit_chance"] = Stat.new(data.crit_chance)

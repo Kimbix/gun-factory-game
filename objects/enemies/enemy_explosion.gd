@@ -71,7 +71,14 @@ func _explode() -> void:
 		if dist <= explosion_radius:
 			var read_enemy_type := StringName(BaseEnemy.EnemyType.keys()[enemy_type])
 			player.take_damage(explosion_damage * damage_multiplier, read_enemy_type)
+	_spawn_explosion_effect()
 	_dead = true
 	var enemy_type_name := StringName(BaseEnemy.EnemyType.keys()[enemy_type])
 	SignalBus.enemy_killed.emit(enemy_type_name)
 	queue_free()
+
+
+func _spawn_explosion_effect() -> void:
+	var effect := preload("res://objects/effects/explosion_effect.tscn").instantiate()
+	effect.global_position = global_position
+	get_parent().add_child(effect)

@@ -20,6 +20,16 @@ static func spawn_bullet(
 	return bullet
 
 
+func _wait(shooter: Node2D, seconds: float) -> void:
+	var timer := Timer.new()
+	timer.wait_time = seconds
+	timer.one_shot = true
+	shooter.add_child(timer)
+	timer.start()
+	await timer.timeout
+	timer.queue_free()
+
+
 func execute(
 		_shooter: Node2D,
 		_target: Node2D,

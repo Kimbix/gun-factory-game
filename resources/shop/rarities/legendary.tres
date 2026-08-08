@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="Rarity" format=3 uid="uid://b5e1lax7f3r2a"]
+
+[ext_resource type="Script" uid="uid://c6tswfd57rg3p" path="res://resources/shop/rarity.gd" id="1_0e7hn"]
+
+[resource]
+script = ExtResource("1_0e7hn")
+name = &"legendary"
+weight = 1.0
+color = Color(1.0, 0.8, 0.0, 1)

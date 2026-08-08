@@ -1,0 +1,17 @@
+[gd_scene format=3]
+
+[ext_resource type="Texture2D" path="res://assets/factory_items/spr_grenadeShell.png" id="1_tex"]
+[ext_resource type="Script" path="res://objects/projectiles/grenade.gd" id="2_script"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_grenade"]
+radius = 6.0
+
+[node name="Grenade" type="Area2D"]
+collision_mask = 3
+script = ExtResource("2_script")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_tex")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_grenade")

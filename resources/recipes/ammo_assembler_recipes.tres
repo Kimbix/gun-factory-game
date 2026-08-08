@@ -5,7 +5,9 @@
 [ext_resource type="Resource" uid="uid://buxq4518ft2jm" path="res://resources/recipes/casing_gunpowder_pellets.tres" id="2_utyma"]
 [ext_resource type="Resource" uid="uid://cqks1oi0y6vx7" path="res://resources/recipes/casing_gunpowder_pointy_tip.tres" id="3_utyma"]
 [ext_resource type="Resource" uid="uid://qovh4etc7h1q" path="res://resources/recipes/casing_gunpowder_rounded_tip.tres" id="4_utyma"]
+[ext_resource type="Resource" path="res://resources/recipes/explosive_casing_gunpowder_spark_cap.tres" id="5_explosive"]
+[ext_resource type="Resource" path="res://resources/recipes/explosive_casing_gunpowder_pressure_trigger.tres" id="6_explosive"]
 
 [resource]
 script = ExtResource("2_btccb")
-recipes = Array[ExtResource("1_9se6p")]([ExtResource("2_utyma"), ExtResource("3_utyma"), ExtResource("4_utyma")])
+recipes = Array[ExtResource("1_9se6p")]([ExtResource("2_utyma"), ExtResource("3_utyma"), ExtResource("4_utyma"), ExtResource("5_explosive"), ExtResource("6_explosive")])

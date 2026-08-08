@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="FactoryItemInfo" format=3 uid="uid://wdmh2rnw7a5g"]
+
+[ext_resource type="Script" uid="uid://b3ij0uga7row5" path="res://resources/factory_items/factory_item_info.gd" id="1_lwxet"]
+[ext_resource type="Texture2D" uid="uid://piidl8vcgeem" path="res://assets/factory_items/spr_explosiveCasing.png" id="2_qtwox"]
+
+[resource]
+script = ExtResource("1_lwxet")
+name = &"explosive_casing"
+display_name = "Explosive Casing"
+texture = ExtResource("2_qtwox")
+metadata/_custom_type_script = "uid://b3ij0uga7row5"

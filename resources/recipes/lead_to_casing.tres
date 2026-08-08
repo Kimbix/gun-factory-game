@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="ItemRecipe" format=3 uid="uid://cxdhium7rn7ps"]
+
+[ext_resource type="Texture2D" uid="uid://piidl8vcgeem" path="res://assets/factory_items/spr_explosiveCasing.png" id="1_gobah"]
+[ext_resource type="Script" uid="uid://d3f4ru8ryeu14" path="res://resources/recipes/scripts/recipe_ingredient.gd" id="2_ingredient"]
+[ext_resource type="Script" uid="uid://0p8ni7rbeu6p" path="res://resources/recipes/scripts/item_recipe.gd" id="3_recipe"]
+[ext_resource type="Resource" uid="uid://c0nkegvlqof7" path="res://resources/factory_items/lead_plate.tres" id="4_input"]
+[ext_resource type="Resource" uid="uid://wdmh2rnw7a5g" path="res://resources/factory_items/explosive_casing.tres" id="5_output"]
+
+[sub_resource type="Resource" id="Resource_lead"]
+script = ExtResource("2_ingredient")
+item = ExtResource("4_input")
+amount = 2
+
+[sub_resource type="Resource" id="Resource_casing"]
+script = ExtResource("2_ingredient")
+item = ExtResource("5_output")
+
+[resource]
+script = ExtResource("3_recipe")
+display_name = "Explosive Casing"
+icon = ExtResource("1_gobah")
+inputs = Array[ExtResource("2_ingredient")]([SubResource("Resource_lead")])
+outputs = Array[ExtResource("2_ingredient")]([SubResource("Resource_casing")])

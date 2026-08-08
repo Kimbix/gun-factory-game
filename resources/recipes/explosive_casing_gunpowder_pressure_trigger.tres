@@ -1,0 +1,34 @@
+[gd_resource type="Resource" script_class="AmmoRecipe" format=3 uid="uid://clvk1fqf0pi4c"]
+
+[ext_resource type="Texture2D" uid="uid://rd5f3x472hyk" path="res://assets/factory_items/spr_mine.png" id="1_icon"]
+[ext_resource type="Script" uid="uid://d3f4ru8ryeu14" path="res://resources/recipes/scripts/recipe_ingredient.gd" id="2_ingredient"]
+[ext_resource type="Script" uid="uid://kexpq7onpvuy" path="res://resources/recipes/scripts/ammo_recipe.gd" id="3_recipe"]
+[ext_resource type="Resource" uid="uid://wdmh2rnw7a5g" path="res://resources/factory_items/explosive_casing.tres" id="4_casing"]
+[ext_resource type="Resource" uid="uid://cpg7snevhbi06" path="res://resources/factory_items/gunpowder.tres" id="5_gunpowder"]
+[ext_resource type="Resource" path="res://resources/factory_items/pressure_trigger.tres" id="6_trigger"]
+[ext_resource type="Resource" path="res://resources/factory_items/mine.tres" id="7_output"]
+[ext_resource type="Script" uid="uid://cqgl708ylgdij" path="res://scripts/shooting_strategy/mine_shot_strategy.gd" id="8_strategy"]
+
+[sub_resource type="Resource" id="Resource_casing"]
+script = ExtResource("2_ingredient")
+item = ExtResource("4_casing")
+
+[sub_resource type="Resource" id="Resource_gunpowder"]
+script = ExtResource("2_ingredient")
+item = ExtResource("5_gunpowder")
+
+[sub_resource type="Resource" id="Resource_trigger"]
+script = ExtResource("2_ingredient")
+item = ExtResource("6_trigger")
+
+[sub_resource type="Resource" id="Resource_output"]
+script = ExtResource("2_ingredient")
+item = ExtResource("7_output")
+
+[resource]
+script = ExtResource("3_recipe")
+strategy = ExtResource("8_strategy")
+display_name = "Mine"
+icon = ExtResource("1_icon")
+inputs = Array[ExtResource("2_ingredient")]([SubResource("Resource_casing"), SubResource("Resource_gunpowder"), SubResource("Resource_trigger")])
+outputs = Array[ExtResource("2_ingredient")]([SubResource("Resource_output")])

@@ -30,6 +30,10 @@ func setup() -> void:
 	pass
 
 
+func free_resources() -> void:
+	pass
+
+
 func tick() -> void:
 	pass
 

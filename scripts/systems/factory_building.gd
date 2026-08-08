@@ -78,6 +78,7 @@ func _init(
 
 func free_resources() -> void:
 	if behaviour:
+		behaviour.free_resources()
 		behaviour.building = null
 		behaviour = null
 	grid = null

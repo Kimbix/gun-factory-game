@@ -6,6 +6,14 @@ const ITEM_SPEED := 0.05
 var items: Array[FactoryItem] = []
 
 
+func free_resources() -> void:
+	var g := grid
+	if g != null:
+		for item: FactoryItem in items:
+			g.destroy_item(item)
+	items.clear()
+
+
 func tick() -> void:
 	for i: int in range(items.size() - 1, -1, -1):
 		var cur := items[i]

@@ -8,8 +8,14 @@ const ITEM_BUTTON := preload("uid://cq5f74b5ddssl")
 
 @export var close_button: Button
 
-@onready var grid_container: GridContainer = $GridContainer
-@onready var current_output: ItemButton = $ItemButton
+@onready var grid_container: GridContainer = \
+		$MarginContainer/VBoxContainer/Content/GridContainer
+@onready var current_output: ItemButton = \
+		$MarginContainer/VBoxContainer/Content/OutputPanel/VBoxContainer/OutputItem
+@onready var time_label: Label = \
+		$MarginContainer/VBoxContainer/Content/OutputPanel/VBoxContainer/TimeLabel
+
+var _total_ticks: int = 0
 
 
 func _ready() -> void:
@@ -21,8 +27,18 @@ func _ready() -> void:
 	close_button.pressed.connect(close_self)
 
 
-func change_output(item: FactoryItemInfo) -> void:
+func change_output(item: FactoryItemInfo, total_ticks: int = 0) -> void:
 	current_output.item = item
+	_total_ticks = total_ticks
+	_update_tick_label()
+
+
+func update_remaining_ticks(remaining: int) -> void:
+	time_label.text = "Ticks: %d" % remaining
+
+
+func _update_tick_label() -> void:
+	time_label.text = "Ticks: %d" % _total_ticks
 
 
 func _on_item_pressed(item: FactoryItemInfo) -> void:

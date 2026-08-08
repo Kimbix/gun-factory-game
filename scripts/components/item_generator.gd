@@ -3,6 +3,8 @@ extends FactoryComponent
 
 const COOLDOWN := 50
 
+signal ticks_changed(remaining: int)
+
 var generating: FactoryItemInfo:
 	set(v):
 		generating = v
@@ -18,6 +20,7 @@ func tick() -> void:
 		return
 	if _cooldown > 0:
 		_cooldown -= 1
+		ticks_changed.emit(_cooldown)
 		return
 	if not _can_output():
 		return
@@ -47,9 +50,14 @@ func open_interface(interface_supervisor: InterfaceSupervisor) -> void:
 		return
 	var _on_item_pressed: Callable = func(item: FactoryItemInfo) -> void:
 		generating = item
-		interface.change_output(generating)
+		interface.change_output(generating, COOLDOWN)
 	interface.item_pressed.connect(_on_item_pressed)
-	interface.change_output(generating)
+	interface.change_output(generating, COOLDOWN)
+	ticks_changed.connect(interface.update_remaining_ticks)
+
+
+func get_remaining_ticks() -> int:
+	return _cooldown
 
 
 func get_vars() -> Dictionary:

@@ -20,6 +20,7 @@ radius = 500.0
 radius = 1024.0
 
 [node name="CharacterBody2D" type="CharacterBody2D" unique_id=800432502]
+collision_layer = 5
 script = ExtResource("1_yj3so")
 starting_grid_data = ExtResource("2_sx0qt")
 

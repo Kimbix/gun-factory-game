@@ -25,6 +25,7 @@ base_xp = 1
 variance = 0.3
 
 [node name="HitboxArea" type="Area2D" parent="." unique_id=351890760]
+collision_mask = 4
 script = ExtResource("4_p7x4y")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxArea" unique_id=311565219]

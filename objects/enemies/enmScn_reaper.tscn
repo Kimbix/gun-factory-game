@@ -23,6 +23,7 @@ texture = ExtResource("2_81yl8")
 shape = SubResource("CircleShape2D_body")
 
 [node name="HitboxArea" type="Area2D" parent="." unique_id=1603508096]
+collision_mask = 4
 script = ExtResource("3_4ty8p")
 damage_per_tick = 5.0
 

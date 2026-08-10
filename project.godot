@@ -47,6 +47,7 @@ folder_colors={
 
 2d_physics/layer_1="World"
 2d_physics/layer_2="Destructible"
+2d_physics/layer_3="Player"
 
 [physics]
 

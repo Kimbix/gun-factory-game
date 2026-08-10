@@ -27,6 +27,7 @@ shape = SubResource("CircleShape2D_body")
 [node name="ExperienceSpawner" parent="." unique_id=1642692828 instance=ExtResource("4_xg4yr")]
 
 [node name="HitboxArea" type="Area2D" parent="." unique_id=351890760]
+collision_mask = 4
 script = ExtResource("5_8q7k5")
 deal_contact_damage = false
 

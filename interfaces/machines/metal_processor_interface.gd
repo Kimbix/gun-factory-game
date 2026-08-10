@@ -15,3 +15,11 @@ func _get_recipe() -> ItemRecipe:
 
 func _set_recipe(r: ItemRecipe) -> void:
 	metal_processor.set_recipe(r)
+
+
+func _get_inventory_count(item: FactoryItemInfo) -> int:
+	if metal_processor == null:
+		return 0
+	if item.name == &"lead_plate":
+		return metal_processor.lead_plates
+	return 0

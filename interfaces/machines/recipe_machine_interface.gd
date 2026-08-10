@@ -1,7 +1,7 @@
 class_name RecipeMachineInterface
 extends InterfaceWindow
 
-const ITEM_BUTTON := preload("uid://cq5f74b5ddssl")
+const ITEM_WITH_COUNT := preload("res://interfaces/components/item_with_count.tscn")
 const RECIPE_PICKER := preload("uid://0xiqunpp8bx8")
 
 @export var close_button: Button
@@ -13,6 +13,7 @@ const RECIPE_PICKER := preload("uid://0xiqunpp8bx8")
 var recipes: BaseRecipeCatalogue
 var _picker: RecipePickerInterface
 var machine: Variant
+var _ingredient_displays: Array[ItemWithCount] = []
 
 
 func _ready() -> void:
@@ -23,6 +24,7 @@ func _ready() -> void:
 func generate_ui() -> void:
 	for child in items_in_inventory.get_children():
 		child.queue_free()
+	_ingredient_displays.clear()
 
 	var current_recipe := _get_recipe()
 	if current_recipe == null:
@@ -40,9 +42,17 @@ func generate_ui() -> void:
 	selected_recipe.icon_alignment = HORIZONTAL_ALIGNMENT_CENTER
 
 	for ingredient in current_recipe.inputs:
-		var button: ItemButton = ITEM_BUTTON.instantiate()
-		button.item = ingredient.item
-		items_in_inventory.add_child(button)
+		var display: ItemWithCount = ITEM_WITH_COUNT.instantiate()
+		display.item = ingredient.item
+		display.required = ingredient.amount
+		display.count = _get_inventory_count(ingredient.item)
+		items_in_inventory.add_child(display)
+		_ingredient_displays.append(display)
+
+
+func update_inventory() -> void:
+	for display in _ingredient_displays:
+		display.count = _get_inventory_count(display.item)
 
 
 func update_completion(progress: int, total: int) -> void:
@@ -76,3 +86,7 @@ func _get_recipe() -> ItemRecipe:
 
 func _set_recipe(_r: ItemRecipe) -> void:
 	pass
+
+
+func _get_inventory_count(_item: FactoryItemInfo) -> int:
+	return 0

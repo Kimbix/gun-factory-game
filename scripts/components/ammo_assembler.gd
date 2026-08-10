@@ -31,14 +31,17 @@ func tick() -> void:
 	if recipe == null or not inventory.has_all(recipe.inputs):
 		_craft_progress = 0
 		_notify_progress(-1, recipe.craft_time if recipe != null else 0)
+		_notify_inventory()
 		return
 
 	if not _can_output():
 		_notify_progress(_craft_progress, recipe.craft_time)
+		_notify_inventory()
 		return
 
 	_craft_progress += 1
 	_notify_progress(_craft_progress, recipe.craft_time)
+	_notify_inventory()
 	if _craft_progress < recipe.craft_time:
 		return
 

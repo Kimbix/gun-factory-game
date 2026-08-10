@@ -1,9 +1,9 @@
-[gd_scene format=3]
+[gd_scene format=3 uid="uid://b0q8nobn0pe51"]
 
 [ext_resource type="Script" uid="uid://b3jng6obs4wep" path="res://interfaces/machines/furnace_interface.gd" id="1_xee5u"]
-[ext_resource type="PackedScene" uid="uid://cq5f74b5ddssl" path="res://interfaces/components/item_button.tscn" id="2_x12ab"]
+[ext_resource type="PackedScene" path="res://interfaces/components/item_with_count.tscn" id="2_iwcount"]
 
-[node name="FurnaceInterface" type="PanelContainer" node_paths=PackedStringArray("close_button", "output_item", "progress_label")]
+[node name="FurnaceInterface" type="PanelContainer" unique_id=1747301875 node_paths=PackedStringArray("close_button", "input_display", "output_display", "progress_label")]
 custom_minimum_size = Vector2(256, 128)
 anchors_preset = 8
 anchor_left = 0.5
@@ -14,47 +14,54 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_xee5u")
 close_button = NodePath("MarginContainer/VBoxContainer/TopBar/Close")
-output_item = NodePath("MarginContainer/VBoxContainer/Content/OutputItem")
-progress_label = NodePath("MarginContainer/VBoxContainer/Content/Progress")
+input_display = NodePath("MarginContainer/VBoxContainer/Content/InputDisplay")
+output_display = NodePath("MarginContainer/VBoxContainer/Content/OutputDisplay")
+progress_label = NodePath("MarginContainer/VBoxContainer/Progress")
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=2065410203]
 layout_mode = 2
 theme_override_constants/margin_left = 5
 theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 5
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=1259417705]
 layout_mode = 2
 
-[node name="TopBar" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+[node name="TopBar" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=456395587]
 layout_mode = 2
 
-[node name="Title" type="Label" parent="MarginContainer/VBoxContainer/TopBar"]
+[node name="Title" type="Label" parent="MarginContainer/VBoxContainer/TopBar" unique_id=172006971]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Furnace"
 
-[node name="Close" type="Button" parent="MarginContainer/VBoxContainer/TopBar"]
+[node name="Close" type="Button" parent="MarginContainer/VBoxContainer/TopBar" unique_id=846510253]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 text = "X"
 
-[node name="HSeparator" type="HSeparator" parent="MarginContainer/VBoxContainer"]
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/VBoxContainer" unique_id=1960355596]
 layout_mode = 2
 
-[node name="Content" type="VBoxContainer" parent="MarginContainer/VBoxContainer"]
+[node name="Content" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=1227896699]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 alignment = 1
 
-[node name="OutputItem" parent="MarginContainer/VBoxContainer/Content" instance=ExtResource("2_x12ab")]
+[node name="InputDisplay" parent="MarginContainer/VBoxContainer/Content" unique_id=916610272 instance=ExtResource("2_iwcount")]
 layout_mode = 2
-size_flags_horizontal = 4
 
-[node name="Progress" type="Label" parent="MarginContainer/VBoxContainer/Content"]
+[node name="Arrow" type="Label" parent="MarginContainer/VBoxContainer/Content" unique_id=1421739921]
+layout_mode = 2
+text = "→"
+
+[node name="OutputDisplay" parent="MarginContainer/VBoxContainer/Content" unique_id=427408350 instance=ExtResource("2_iwcount")]
+layout_mode = 2
+
+[node name="Progress" type="Label" parent="MarginContainer/VBoxContainer" unique_id=1162846206]
 layout_mode = 2
 size_flags_horizontal = 4
-horizontal_alignment = 1
 text = "---"
+horizontal_alignment = 1

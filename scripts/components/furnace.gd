@@ -5,7 +5,6 @@ const CRAFT_TIME := 30
 
 var lead_count: int = 0
 var _cooldown: int = 0
-var _interface: FurnaceInterface
 
 
 func setup() -> void:
@@ -63,6 +62,10 @@ func receive_item(item: FactoryItem) -> void:
 	g.destroy_item(item)
 
 
+func get_input_count() -> int:
+	return lead_count
+
+
 func open_interface(interface_supervisor: InterfaceSupervisor) -> void:
 	var cfg := building.get_info().config as MachineConfig
 	var interface: FurnaceInterface = cfg.interface_scene.instantiate()
@@ -73,17 +76,14 @@ func open_interface(interface_supervisor: InterfaceSupervisor) -> void:
 		interface,
 	):
 		return
-	_interface = interface
-	interface.tree_exited.connect(_on_furnace_interface_closed)
+	_progress_interface = interface
+	interface.tree_exited.connect(_on_interface_closed)
 	_update_progress()
 
 
-func _on_furnace_interface_closed() -> void:
-	_interface = null
-
-
 func _update_progress() -> void:
-	if _interface == null:
+	if _progress_interface == null:
 		return
 	var progress := CRAFT_TIME - _cooldown if _cooldown > 0 else -1
-	_interface.update_completion(progress, CRAFT_TIME)
+	_progress_interface.update_completion(progress, CRAFT_TIME)
+	_notify_inventory()

@@ -4,3 +4,4 @@ extends Resource
 @export var interface_scene: PackedScene
 @export var recipe_catalogue: BaseRecipeCatalogue
 @export var output_item: FactoryItemInfo
+@export var input_item: FactoryItemInfo

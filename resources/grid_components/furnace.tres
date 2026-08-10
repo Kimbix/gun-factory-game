@@ -6,12 +6,14 @@
 [ext_resource type="Texture2D" uid="uid://c7vrijdudkahf" path="res://assets/factory_components/spr_furnace.png" id="4_qa7on"]
 [ext_resource type="Resource" uid="uid://c0nkegvlqof7" path="res://resources/factory_items/lead_plate.tres" id="5_ou8i"]
 [ext_resource type="Script" uid="uid://w53vcib2nn46" path="res://resources/grid_components/scripts/machine_config.gd" id="6_mcfg"]
-[ext_resource type="PackedScene" path="res://interfaces/machines/furnace_interface.tscn" id="7_xq7t"]
+[ext_resource type="PackedScene" uid="uid://b0q8nobn0pe51" path="res://interfaces/machines/furnace_interface.tscn" id="7_xq7t"]
+[ext_resource type="Resource" uid="uid://b4hj3tlqd3od" path="res://resources/factory_items/raw_lead.tres" id="8_rawld"]
 
 [sub_resource type="Resource" id="Resource_mcfg"]
 script = ExtResource("6_mcfg")
 interface_scene = ExtResource("7_xq7t")
 output_item = ExtResource("5_ou8i")
+input_item = ExtResource("8_rawld")
 
 [sub_resource type="Resource" id="Resource_4ayqg"]
 script = ExtResource("2_qa7on")

@@ -15,6 +15,7 @@ func set_recipe(r: ItemRecipe) -> void:
 func tick() -> void:
 	if recipe == null:
 		_notify_progress(-1, 0)
+		_notify_inventory()
 		return
 
 	if _cooldown > 0:
@@ -36,11 +37,14 @@ func tick() -> void:
 					_do_output(port)
 					return
 			_cooldown = 1
+		_notify_inventory()
 		return
 
 	if lead_plates >= recipe.inputs[0].amount:
 		lead_plates -= recipe.inputs[0].amount
 		_cooldown = recipe.craft_time
+
+	_notify_inventory()
 
 
 func get_vars() -> Dictionary:

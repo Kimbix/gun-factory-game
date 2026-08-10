@@ -21,6 +21,8 @@ var _regen_timer: Timer
 var _sprite: Sprite2D
 var _flash_tween: Tween
 var _shader_material: ShaderMaterial
+var _invincible_until: float
+var _blink_timer: float
 
 
 static func _setup_input_actions() -> void:
@@ -101,6 +103,12 @@ func _physics_process(_delta: float) -> void:
 	var direction := Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	velocity = direction * player_stats.stats[&"move_speed"].value
 	move_and_slide()
+	if Time.get_ticks_msec() < _invincible_until:
+		_blink_timer += _delta
+		_sprite.visible = fmod(_blink_timer, 0.08) < 0.04
+	else:
+		_sprite.visible = true
+		_blink_timer = 0.0
 
 
 func sync_stats() -> void:
@@ -138,8 +146,13 @@ func find_target() -> Node2D:
 func take_damage(amount: float, enemy_type: StringName = &"") -> void:
 	if _dead:
 		return
+	var now := Time.get_ticks_msec()
+	if now < _invincible_until:
+		return
 	var reduction: float = player_stats.stats[&"armor"].value
 	var final_damage := maxf(amount * (1.0 - reduction), 1.0)
+	var duration: float = player_stats.stats[&"invincibility_duration"].value
+	_invincible_until = Time.get_ticks_msec() + duration * 1000.0
 	health -= final_damage
 	SignalBus.damage_taken.emit(ceili(final_damage), enemy_type)
 	_flash_hit()

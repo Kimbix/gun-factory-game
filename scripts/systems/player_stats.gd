@@ -24,6 +24,7 @@ func _init(data: PlayerStatsData) -> void:
 	stats[&"crit_chance"] = Stat.new(data.crit_chance)
 	stats[&"crit_damage"] = Stat.new(data.crit_damage)
 	stats[&"difficulty"] = Stat.new(data.difficulty)
+	stats[&"invincibility_duration"] = Stat.new(data.invincibility_duration)
 	health = data.max_health
 
 

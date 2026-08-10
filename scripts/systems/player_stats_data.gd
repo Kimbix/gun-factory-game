@@ -17,6 +17,8 @@ extends Resource
 @export var gold_gain: float = 1.0
 ## Percentage reduction of received damage
 @export var armor: float = 0.0
+## Duration in seconds of invincibility after taking damage
+@export var invincibility_duration: float = 0.1
 ## Increases the likelyhood of favorable events happening
 @export var luck: float = 0.0
 ## Chance of a bullet dealing a critical hit

@@ -5,7 +5,7 @@
 [ext_resource type="Resource" uid="uid://dyowbethxl8q1" path="res://resources/recipes/lead_to_pellets.tres" id="2_utyma"]
 [ext_resource type="Resource" uid="uid://i1ur6tqp6wwc" path="res://resources/recipes/lead_to_tip.tres" id="3_utyma"]
 [ext_resource type="Resource" uid="uid://vlx400moqi4b" path="res://resources/recipes/lead_to_rounded_tip.tres" id="4_utyma"]
-[ext_resource type="Resource" path="res://resources/recipes/lead_to_casing.tres" id="5_casing"]
+[ext_resource type="Resource" uid="uid://cxdhium7rn7ps" path="res://resources/recipes/lead_to_casing.tres" id="5_casing"]
 
 [resource]
 script = ExtResource("2_btccb")

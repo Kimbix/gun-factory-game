@@ -1,7 +1,7 @@
-[gd_resource type="Resource" script_class="FactoryItemInfo" format=3]
+[gd_resource type="Resource" script_class="FactoryItemInfo" format=3 uid="uid://b4is4c0kjwpnb"]
 
 [ext_resource type="Script" uid="uid://b3ij0uga7row5" path="res://resources/factory_items/factory_item_info.gd" id="1_lwxet"]
-[ext_resource type="Texture2D" path="res://assets/factory_items/spr_grenadeShell.png" id="2_et85g"]
+[ext_resource type="Texture2D" uid="uid://v4w0dd5s8oi3" path="res://assets/factory_items/spr_grenadeShell.png" id="2_et85g"]
 
 [resource]
 script = ExtResource("1_lwxet")

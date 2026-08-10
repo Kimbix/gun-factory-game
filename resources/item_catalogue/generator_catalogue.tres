@@ -5,8 +5,8 @@
 [ext_resource type="Resource" uid="uid://cpg7snevhbi06" path="res://resources/factory_items/gunpowder.tres" id="3_sd46n"]
 [ext_resource type="Resource" uid="uid://b4hj3tlqd3od" path="res://resources/factory_items/raw_lead.tres" id="4_d46n"]
 [ext_resource type="Resource" uid="uid://c4wf626ege7cx" path="res://resources/factory_items/bullet_casing.tres" id="5_casing"]
-[ext_resource type="Resource" path="res://resources/factory_items/spark_cap.tres" id="6_spark"]
-[ext_resource type="Resource" path="res://resources/factory_items/pressure_trigger.tres" id="7_trigger"]
+[ext_resource type="Resource" uid="uid://b7x2462ft8mns" path="res://resources/factory_items/spark_cap.tres" id="6_spark"]
+[ext_resource type="Resource" uid="uid://crub3df8l3k5f" path="res://resources/factory_items/pressure_trigger.tres" id="7_trigger"]
 
 [resource]
 script = ExtResource("2_7mr05")

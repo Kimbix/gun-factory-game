@@ -5,8 +5,8 @@
 [ext_resource type="Script" uid="uid://kexpq7onpvuy" path="res://resources/recipes/scripts/ammo_recipe.gd" id="3_recipe"]
 [ext_resource type="Resource" uid="uid://wdmh2rnw7a5g" path="res://resources/factory_items/explosive_casing.tres" id="4_casing"]
 [ext_resource type="Resource" uid="uid://cpg7snevhbi06" path="res://resources/factory_items/gunpowder.tres" id="5_gunpowder"]
-[ext_resource type="Resource" path="res://resources/factory_items/spark_cap.tres" id="6_spark"]
-[ext_resource type="Resource" path="res://resources/factory_items/grenade_shell.tres" id="7_output"]
+[ext_resource type="Resource" uid="uid://b7x2462ft8mns" path="res://resources/factory_items/spark_cap.tres" id="6_spark"]
+[ext_resource type="Resource" uid="uid://b4is4c0kjwpnb" path="res://resources/factory_items/grenade_shell.tres" id="7_output"]
 [ext_resource type="Script" uid="uid://dgd8lhspgbf3q" path="res://scripts/shooting_strategy/grenade_shot_strategy.gd" id="8_strategy"]
 
 [sub_resource type="Resource" id="Resource_casing"]

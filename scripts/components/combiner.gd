@@ -14,18 +14,13 @@ func tick() -> void:
 	if _cooldown > 0:
 		_cooldown -= 1
 		if _cooldown == 0:
-			var port := _get_available_out_port()
-			if port != null and _can_output() and _can_output_to(output, port):
-				_do_output()
-			else:
+			if not (_can_output() and _output_item(output)):
 				_pending += 1
 		return
 
 	if _pending > 0:
-		var port := _get_available_out_port()
-		if port != null and _can_output() and _can_output_to(output, port):
+		if _can_output() and _output_item(output):
 			_pending -= 1
-			_do_output()
 		return
 
 	if gunpowder_count >= 1 and shells_count >= 1:
@@ -53,15 +48,3 @@ func receive_item(item: FactoryItem) -> void:
 	if g == null:
 		return
 	g.destroy_item(item)
-
-
-func _do_output() -> void:
-	var p := _get_available_out_port()
-	if p == null:
-		return
-	var g := grid
-	if g == null:
-		return
-	var output := (building.get_info().config as MachineConfig).output_item
-	var where_to: Vector2 = position + p.position + p.facing
-	g.place_item(FactoryItem.new(output, where_to))

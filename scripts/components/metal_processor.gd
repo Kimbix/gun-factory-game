@@ -32,9 +32,8 @@ func tick() -> void:
 			for i in ports.size():
 				var idx := (_next_out_port + i) % ports.size()
 				var port: Port = ports[idx]
-				if _can_output_to(recipe.outputs[0].item, port):
+				if _output_item(recipe.outputs[0].item, port):
 					_next_out_port = (idx + 1) % ports.size()
-					_do_output(port)
 					return
 			_cooldown = 1
 		_notify_inventory()
@@ -97,11 +96,3 @@ func _update_overlay_strategy() -> void:
 	var s := ItemOverlayStrategy.new()
 	s.item_info = recipe.outputs[0].item
 	overlay_strategy = s
-
-
-func _do_output(port: Port) -> void:
-	var g := grid
-	if g == null:
-		return
-	var where_to: Vector2 = position + port.position + port.facing
-	g.place_item(FactoryItem.new(recipe.outputs[0].item, where_to))

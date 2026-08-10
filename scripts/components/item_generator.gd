@@ -22,21 +22,8 @@ func tick() -> void:
 		_cooldown -= 1
 		ticks_changed.emit(_cooldown)
 		return
-	if not _can_output():
-		return
-	var output_port := _get_available_out_port()
-	if output_port == null:
-		return
-	var where_to := (
-			Vector2(position + output_port.position + output_port.facing) + _offsets[rotation]
-	)
-	if not _can_output_to(generating, output_port, where_to):
-		return
-	var g := grid
-	if g == null:
-		return
-	g.place_item(FactoryItem.new(generating, where_to))
-	_cooldown = COOLDOWN
+	if _output_item(generating, null, _offsets[rotation]):
+		_cooldown = COOLDOWN
 
 
 func open_interface(interface_supervisor: InterfaceSupervisor) -> void:

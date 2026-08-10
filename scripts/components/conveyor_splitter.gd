@@ -44,16 +44,14 @@ func tick() -> void:
 	var gs := info.grid_size
 	var facing := port.facing
 
-	var where_to := Vector2(position + port.position + port.facing)
+	var offset := Vector2.ZERO
 	if facing.x != 0:
-		where_to.x += 0.0 if facing.x > 0 else 1.0 - gs.x
-		where_to.y += 0.5 - gs.y * 0.5
+		offset.x = 0.0 if facing.x > 0 else 1.0 - gs.x
+		offset.y = 0.5 - gs.y * 0.5
 	else:
-		where_to.x += 0.5 - gs.x * 0.5
-		where_to.y += 0.0 if facing.y > 0 else 1.0 - gs.y
+		offset.x = 0.5 - gs.x * 0.5
+		offset.y = 0.0 if facing.y > 0 else 1.0 - gs.y
 
-	if not _can_output_to(info, port, where_to):
-		return
-
-	g.place_item(FactoryItem.new(_items.pop_front(), where_to))
-	_cooldown = COOLDOWN
+	if _output_item(info, port, offset):
+		_items.pop_front()
+		_cooldown = COOLDOWN

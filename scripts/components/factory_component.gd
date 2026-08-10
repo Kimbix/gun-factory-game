@@ -133,3 +133,22 @@ func _can_output() -> bool:
 			if give_block_position == receive_from:
 				return true
 	return false
+
+
+func _output_item(
+		item_info: FactoryItemInfo,
+		port: Port = null,
+		offset: Vector2 = Vector2.ZERO,
+) -> bool:
+	var g := grid
+	if g == null:
+		return false
+	if port == null:
+		port = _get_available_out_port()
+	if port == null:
+		return false
+	var where_to: Vector2 = Vector2(position + port.position + port.facing) + offset
+	if not _can_output_to(item_info, port, where_to):
+		return false
+	g.place_item(FactoryItem.new(item_info, where_to))
+	return true

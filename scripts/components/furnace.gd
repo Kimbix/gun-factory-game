@@ -19,10 +19,7 @@ func tick() -> void:
 		_cooldown -= 1
 		_update_progress()
 		if _cooldown == 0:
-			var port := _get_available_out_port()
-			if port != null and _can_output() and _can_output_to(output, port):
-				_do_output()
-			else:
+			if not (_can_output() and _output_item(output)):
 				_cooldown = 1
 				_update_progress()
 		return
@@ -32,18 +29,6 @@ func tick() -> void:
 		_cooldown = CRAFT_TIME
 	else:
 		_update_progress()
-
-
-func _do_output() -> void:
-	var p := _get_available_out_port()
-	if p == null:
-		return
-	var g := grid
-	if g == null:
-		return
-	var output := (building.get_info().config as MachineConfig).output_item
-	var where_to: Vector2 = position + p.position + p.facing
-	g.place_item(FactoryItem.new(output, where_to))
 
 
 func get_vars() -> Dictionary:

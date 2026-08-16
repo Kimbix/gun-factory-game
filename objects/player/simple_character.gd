@@ -74,6 +74,7 @@ func _ready() -> void:
 	player_grid.building_removed.connect(_on_building_removed)
 
 	_tick_timer = Timer.new()
+	_tick_timer.process_mode = Node.PROCESS_MODE_ALWAYS
 	_tick_timer.timeout.connect(player_grid.tick)
 	_tick_timer.wait_time = player_stats.stats[&"tick_speed"].value
 	add_child(_tick_timer)

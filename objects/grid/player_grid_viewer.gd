@@ -7,23 +7,14 @@ const GRID_TEXTURE_SIZE := 16.0
 	set(v):
 		if grid != null and grid.overlay_changed.is_connected(_on_overlay_changed):
 			grid.overlay_changed.disconnect(_on_overlay_changed)
+			grid.overlay_changed.disconnect(queue_redraw)
 		grid = v
 		if grid != null:
 			grid.overlay_changed.connect(_on_overlay_changed)
+			grid.ticked.connect(queue_redraw)
 @export var view_ports: bool
 @export var building_overlay: bool
 @export var overlay_font: Font
-
-
-func get_hovered_cell() -> Vector2i:
-	var screen_mouse := get_global_mouse_position()
-	var canvas_mouse := get_canvas_transform().affine_inverse() * screen_mouse
-	var local_mouse := to_local(canvas_mouse)
-	return Vector2i(local_mouse / GRID_TEXTURE_SIZE)
-
-
-func _on_overlay_changed(_position: Vector2i) -> void:
-	queue_redraw()
 
 
 func _draw() -> void:
@@ -62,6 +53,13 @@ func _draw() -> void:
 		_draw_overlays()
 
 
+func get_hovered_cell() -> Vector2i:
+	var screen_mouse := get_global_mouse_position()
+	var canvas_mouse := get_canvas_transform().affine_inverse() * screen_mouse
+	var local_mouse := to_local(canvas_mouse)
+	return Vector2i(local_mouse / GRID_TEXTURE_SIZE)
+
+
 func get_width() -> float:
 	return grid.dimensions.x * GRID_TEXTURE_SIZE * self.scale.x
 
@@ -76,6 +74,10 @@ func set_final_size(size: Vector2) -> void:
 	var new_scale := size / curr_size
 	self.scale *= new_scale
 	print(new_scale)
+
+
+func _on_overlay_changed(_position: Vector2i) -> void:
+	queue_redraw()
 
 
 func _draw_overlays() -> void:

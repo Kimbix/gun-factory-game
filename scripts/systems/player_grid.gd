@@ -5,12 +5,13 @@ extends Node
 signal output_item(item: FactoryItem)
 signal building_placed(building: FactoryBuilding)
 signal building_removed(building: FactoryBuilding)
+signal ticked
 @warning_ignore("unused_signal")
 signal overlay_changed(position: Vector2i)
 
-@export var dimensions: Vector2i = Vector2i(10, 10)
-
 const _FLOOR_TEX := preload("uid://bcxv8tx5ovn5l")
+
+@export var dimensions: Vector2i = Vector2i(10, 10)
 
 var _floor: Dictionary[Vector2i, Texture2D] = { }
 var _items: Array[FactoryItem] = []
@@ -140,6 +141,7 @@ func tick() -> void:
 	for v: Vector2i in _buildings.keys():
 		var building := _buildings[v]
 		building.tick()
+	ticked.emit()
 
 
 func set_building_var(n: StringName, v: Variant, p: Vector2i) -> void:

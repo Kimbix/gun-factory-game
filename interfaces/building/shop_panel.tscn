@@ -9,10 +9,9 @@ content_margin_right = 8.0
 content_margin_bottom = 8.0
 bg_color = Color(0, 0, 0, 0.7)
 
-[node name="ShopPanel" type="PanelContainer"]
+[node name="ShopPanel" type="PanelContainer" unique_id=1615865921]
 visible = false
 anchors_preset = -1
-anchor_left = 0.0
 anchor_right = 0.18
 anchor_bottom = 1.0
 grow_horizontal = 0
@@ -20,43 +19,42 @@ grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_shop_panel")
 script = ExtResource("1_pu5lt")
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=995542939]
 layout_mode = 2
 theme_override_constants/margin_left = 5
 theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 5
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=837670461]
 layout_mode = 2
 
-[node name="Header" type="Label" parent="MarginContainer/VBoxContainer"]
+[node name="Header" type="Label" parent="MarginContainer/VBoxContainer" unique_id=1699113015]
 layout_mode = 2
 theme_override_font_sizes/font_size = 16
 text = "Shop"
 
-[node name="GoldLabel" type="Label" parent="MarginContainer/VBoxContainer"]
+[node name="GoldLabel" type="Label" parent="MarginContainer/VBoxContainer" unique_id=1336526230]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Gold: 0"
 
-[node name="SlotContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer"]
+[node name="SlotContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=1508683150]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="EmptyLabel" type="Label" parent="MarginContainer/VBoxContainer"]
+[node name="EmptyLabel" type="Label" parent="MarginContainer/VBoxContainer" unique_id=478338212]
 unique_name_in_owner = true
+visible = false
 layout_mode = 2
 text = "Sold out!"
-visible = false
 
-[node name="RerollButton" type="Button" parent="MarginContainer/VBoxContainer"]
+[node name="RerollButton" type="Button" parent="MarginContainer/VBoxContainer" unique_id=1709014961]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Reroll"
 
-[node name="RerollCostLabel" type="Label" parent="MarginContainer/VBoxContainer"]
+[node name="RerollCostLabel" type="Label" parent="MarginContainer/VBoxContainer" unique_id=369746459]
 unique_name_in_owner = true
 layout_mode = 2
-text = ""

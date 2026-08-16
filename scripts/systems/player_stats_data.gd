@@ -10,7 +10,7 @@ extends Resource
 ## Amount of health recovered per second
 @export var health_regen: float = 0.0
 ## Radius of the pickup range for dropped items
-@export var pickup_range: float = 20.0
+@export var pickup_range: float = 30.0
 ## Percentage of XP that is gained per crystal
 @export var xp_gain: float = 1.0
 ## Percentage of gold that is gained per crystal

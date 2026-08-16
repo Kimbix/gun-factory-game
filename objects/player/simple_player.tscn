@@ -8,10 +8,10 @@
 size = Vector2(13, 31)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_clctn"]
-radius = 20.0
+radius = 30.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_magnet"]
-radius = 20.024984
+radius = 30.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_dspwn"]
 radius = 500.0

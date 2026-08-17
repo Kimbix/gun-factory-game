@@ -12,6 +12,8 @@ radius = 7.0
 radius = 8.0
 
 [node name="EnemySlime" type="Area2D" unique_id=589975782]
+collision_layer = 8
+collision_mask = 8
 script = ExtResource("1_vndwv")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=954768743]

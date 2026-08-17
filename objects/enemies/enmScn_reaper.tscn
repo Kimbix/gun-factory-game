@@ -11,6 +11,8 @@ radius = 30.016663
 radius = 33.01515
 
 [node name="EnemyReaper" type="Area2D" unique_id=1870735898]
+collision_layer = 8
+collision_mask = 8
 script = ExtResource("1_ahdsu")
 speed = 666.666
 health = 66666666666666

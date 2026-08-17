@@ -13,6 +13,8 @@ radius = 7.0
 radius = 8.0
 
 [node name="EnemyStationaryShooter" type="Area2D" unique_id=589975782]
+collision_layer = 8
+collision_mask = 8
 script = ExtResource("1_hlrac")
 projectile_scene = ExtResource("2_l67yt")
 shoot_interval = 5.0

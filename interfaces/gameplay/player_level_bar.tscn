@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://7ym8fmi2eh31" path="res://interfaces/gameplay/player_level_bar.gd" id="1_abc"]
 
-[node name="PlayerLevelBar" type="Control" unique_id=1294717099 node_paths=PackedStringArray("_fill", "_experience_label")]
+[node name="PlayerLevelBar" type="Control" unique_id=1294717099 node_paths=PackedStringArray("_fill", "_experience_label", "_current_gold")]
 layout_mode = 3
 anchors_preset = 10
 anchor_right = 1.0
@@ -11,29 +11,29 @@ grow_horizontal = 2
 mouse_filter = 2
 script = ExtResource("1_abc")
 _fill = NodePath("Fill")
-_experience_label = NodePath("Label")
+_experience_label = NodePath("CurrentLevel")
+_current_gold = NodePath("CurrentGold")
 
 [node name="Background" type="ColorRect" parent="." unique_id=1724475709]
-mouse_filter = 2
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 color = Color(0, 0, 0, 0.5)
 
 [node name="Fill" type="ColorRect" parent="." unique_id=488362665]
-mouse_filter = 2
 layout_mode = 1
 anchors_preset = 9
 anchor_bottom = 1.0
 grow_horizontal = 0
 grow_vertical = 2
+mouse_filter = 2
 color = Color(0.2, 0.6, 1, 1)
 
-[node name="Label" type="Label" parent="." unique_id=58828401]
-mouse_filter = 2
+[node name="CurrentLevel" type="Label" parent="." unique_id=58828401]
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
@@ -46,3 +46,14 @@ offset_bottom = 11.5
 grow_horizontal = 0
 grow_vertical = 2
 text = "N / N"
+
+[node name="CurrentGold" type="Label" parent="." unique_id=1750830654]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -11.5
+offset_right = 40.0
+offset_bottom = 11.5
+grow_vertical = 2
+text = "GOLD"

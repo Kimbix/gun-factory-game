@@ -58,8 +58,3 @@ func total_count() -> int:
 
 func is_empty() -> bool:
 	return _stacks.is_empty()
-
-
-class BuildingStack:
-	var info: GridComponentInfo
-	var count: int

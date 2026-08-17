@@ -1,17 +1,17 @@
 [gd_scene format=3 uid="uid://xaqapvc7eck7"]
 
 [ext_resource type="Texture2D" uid="uid://dkg0m42x74owq" path="res://assets/world_entities/spr_projectileBullet.png" id="1_6hf3c"]
-[ext_resource type="Script" path="res://objects/projectiles/bullet_spread.gd" id="2_f9qs3"]
+[ext_resource type="Script" uid="uid://ciw3qbpe07xph" path="res://objects/projectiles/bullet_spread.gd" id="2_f9qs3"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ks7dt"]
 radius = 4.0
 
-[node name="BulletSpread" type="Area2D"]
-collision_mask = 3
+[node name="BulletSpread" type="Area2D" unique_id=441300628]
+collision_mask = 8
 script = ExtResource("2_f9qs3")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2045453004]
 texture = ExtResource("1_6hf3c")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=501471061]
 shape = SubResource("CircleShape2D_ks7dt")

@@ -19,12 +19,14 @@ damage_area = NodePath("DamageArea")
 texture = ExtResource("1_tex")
 
 [node name="DamageArea" type="Area2D" parent="." unique_id=627057458]
+collision_mask = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DamageArea" unique_id=408760926]
 shape = SubResource("CircleShape2D_r0w8j")
 debug_color = Color(0.972549, 0, 0, 0.41960785)
 
 [node name="DetectionArea" type="Area2D" parent="." unique_id=425222374]
+collision_mask = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea" unique_id=718157024]
 shape = SubResource("CircleShape2D_x0ron")

@@ -11,8 +11,8 @@ const RECIPE_PICKER := preload("uid://0xiqunpp8bx8")
 @export var interface_supervisor: InterfaceSupervisor
 
 var recipes: BaseRecipeCatalogue
-var _picker: RecipePickerInterface
 var machine: Variant
+var _picker: RecipePickerInterface
 var _ingredient_displays: Array[ItemWithCount] = []
 
 
@@ -56,10 +56,7 @@ func update_inventory() -> void:
 
 
 func update_completion(progress: int, total: int) -> void:
-	if progress < 0:
-		completion_label.text = "---"
-	else:
-		completion_label.text = "%d / %d" % [progress, total]
+	completion_label.text = "%d / %d" % [progress, total]
 
 
 func _on_selected_recipe() -> void:

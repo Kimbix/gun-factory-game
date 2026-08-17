@@ -25,17 +25,10 @@ func _ready() -> void:
 	grid_viewer.grid = player_grid
 	grid_interactor.interface_supervisor = interface_supervisor
 	grid_builder.building_inventory = building_inventory
-	player_grid.output_item.connect(_on_output_item)
+	player_grid.generated_item.connect(_on_output_item)
 	save_grid_button.pressed.connect(_on_save_grid_pressed)
 	load_grid_button.pressed.connect(_on_load_grid_pressed)
 	_fit_grid_to_screen()
-
-
-func _fit_grid_to_screen() -> void:
-	var view := get_viewport().get_visible_rect().size
-	var new_size := Vector2(min(view.x, view.y), min(view.x, view.y))
-	grid_viewer.set_final_size(new_size)
-	grid_viewer.position = Vector2.ZERO
 
 
 func _input(event: InputEvent) -> void:
@@ -69,6 +62,13 @@ func _input(event: InputEvent) -> void:
 			player_grid.from_data(data)
 			grid_viewer.queue_redraw()
 			print("Grid loaded from %s" % SAVE_PATH)
+
+
+func _fit_grid_to_screen() -> void:
+	var view := get_viewport().get_visible_rect().size
+	var new_size := Vector2(min(view.x, view.y), min(view.x, view.y))
+	grid_viewer.set_final_size(new_size)
+	grid_viewer.position = Vector2.ZERO
 
 
 func _on_save_grid_pressed() -> void:

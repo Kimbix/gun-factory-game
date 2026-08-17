@@ -6,6 +6,7 @@ var building_inventory: PlayerBuildingInventory
 var _slots: Array[Dictionary] = []
 var _reroll_count: int = 0
 
+# TODO: Make this not use %; instead either export or $
 @onready var _gold_label: Label = %GoldLabel
 @onready var _slot_container: VBoxContainer = %SlotContainer
 @onready var _reroll_button: Button = %RerollButton
@@ -86,41 +87,14 @@ func _update_ui() -> void:
 		var si: ShopItem = slot.item
 		var price: int = _get_item_price(si, 0)
 
-		var btn := Button.new()
-		btn.custom_minimum_size = Vector2(0, 32)
-		btn.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-
-		var hbox := HBoxContainer.new()
-		hbox.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-
-		var icon := TextureRect.new()
-		icon.texture = si.item.texture
-		icon.custom_minimum_size = Vector2(24, 24)
-		icon.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
-		icon.size_flags_horizontal = Control.SIZE_SHRINK_BEGIN
-		hbox.add_child(icon)
-
-		var name_label := Label.new()
-		name_label.text = si.item.display_name
-		name_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-		name_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-		name_label.add_theme_font_size_override("font_size", 12)
-		hbox.add_child(name_label)
-
-		var details := Label.new()
-		details.text = "%dg  (x%d)" % [price, slot.stock]
-		details.add_theme_color_override("font_color", si.rarity.color)
-		details.add_theme_font_size_override("font_size", 11)
-		details.size_flags_horizontal = Control.SIZE_SHRINK_END
-		hbox.add_child(details)
-
-		btn.add_child(hbox)
-
-		var can_afford: bool = player != null and player.level_system.gold >= price
-		btn.disabled = not can_afford
-
-		btn.pressed.connect(_on_slot_pressed.bind(slot))
-		_slot_container.add_child(btn)
+		const SHOP_ENTRY_UI := preload("uid://c2wbtyck2ydt1")
+		var instance: ShopEntryUI = SHOP_ENTRY_UI.instantiate()
+		var can_afford := player != null and player.level_system.gold >= price
+		instance.set_item(slot.item)
+		instance.disabled = not can_afford
+		instance.pressed.connect(_on_slot_pressed.bind(slot))
+		instance.name = "ShopEntry"
+		_slot_container.add_child(instance)
 
 	var cost: int = get_reroll_cost(_reroll_count)
 	if has_available:

@@ -31,6 +31,7 @@ metadata/_custom_type_script = "uid://cxdyvqaslkwas"
 [resource]
 script = ExtResource("2_wxbsl")
 name = &"conveyor_splitter"
+display_name = &"Router"
 texture = ExtResource("2_ulpo3")
 dimensions = Vector2i(1, 1)
 behaviour = ExtResource("1_xw4n7")

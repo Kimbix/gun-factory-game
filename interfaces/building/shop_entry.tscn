@@ -1,0 +1,56 @@
+[gd_scene format=3 uid="uid://c2wbtyck2ydt1"]
+
+[ext_resource type="Script" uid="uid://dcf5wxvfp4bri" path="res://interfaces/building/shop_entry.gd" id="1_q8230"]
+[ext_resource type="Texture2D" uid="uid://c32abh8epl7ve" path="res://assets/factory_components/spr_generator.png" id="2_tnfwn"]
+
+[node name="ShopEntryUI" type="Button" unique_id=707188768]
+custom_minimum_size = Vector2(0, 32)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+script = ExtResource("1_q8230")
+metadata/_custom_type_script = "uid://dcf5wxvfp4bri"
+
+[node name="Container" type="HBoxContainer" parent="." unique_id=870229133]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="EntryImage" type="TextureRect" parent="Container" unique_id=2055625091]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+texture = ExtResource("2_tnfwn")
+stretch_mode = 5
+
+[node name="InformationContainer" type="VBoxContainer" parent="Container" unique_id=1191288570]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ItemName" type="Label" parent="Container/InformationContainer" unique_id=1323189158]
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_vertical = 6
+theme_override_font_sizes/font_size = 12
+text = "Generator"
+
+[node name="StockAndPrice" type="HBoxContainer" parent="Container/InformationContainer" unique_id=304406097]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="StockCount" type="Label" parent="Container/InformationContainer/StockAndPrice" unique_id=1790579848]
+layout_mode = 2
+size_flags_horizontal = 2
+theme_override_font_sizes/font_size = 12
+text = "0x"
+
+[node name="Price" type="Label" parent="Container/InformationContainer/StockAndPrice" unique_id=1929073419]
+layout_mode = 2
+size_flags_horizontal = 10
+theme_override_font_sizes/font_size = 12
+text = "10g"

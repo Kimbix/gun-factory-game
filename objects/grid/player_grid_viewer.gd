@@ -5,8 +5,12 @@ const GRID_TEXTURE_SIZE := 16.0
 
 @export var grid: PlayerGrid = null:
 	set(v):
+		# TODO: These should not happen, check where the re-connection
+		# is happening for both of this and ensure it doesnt happen
 		if grid != null and grid.overlay_changed.is_connected(_on_overlay_changed):
 			grid.overlay_changed.disconnect(_on_overlay_changed)
+		if grid != null and grid.ticked.is_connected(queue_redraw):
+			grid.ticked.disconnect(queue_redraw)
 		grid = v
 		if grid != null:
 			grid.overlay_changed.connect(_on_overlay_changed)

@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://b0q8nobn0pe51"]
 
 [ext_resource type="Script" uid="uid://b3jng6obs4wep" path="res://interfaces/machines/furnace_interface.gd" id="1_xee5u"]
-[ext_resource type="PackedScene" path="res://interfaces/components/item_with_count.tscn" id="2_iwcount"]
+[ext_resource type="PackedScene" uid="uid://ceu7kru2m3nph" path="res://interfaces/components/item_with_count.tscn" id="2_iwcount"]
 
 [node name="FurnaceInterface" type="PanelContainer" unique_id=1747301875 node_paths=PackedStringArray("close_button", "input_display", "output_display", "progress_label")]
 custom_minimum_size = Vector2(256, 128)
@@ -46,19 +46,23 @@ layout_mode = 2
 
 [node name="Content" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=1227896699]
 layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
+size_flags_vertical = 3
 alignment = 1
 
 [node name="InputDisplay" parent="MarginContainer/VBoxContainer/Content" unique_id=916610272 instance=ExtResource("2_iwcount")]
 layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
 
 [node name="Arrow" type="Label" parent="MarginContainer/VBoxContainer/Content" unique_id=1421739921]
 layout_mode = 2
+size_flags_horizontal = 6
 text = "→"
 
 [node name="OutputDisplay" parent="MarginContainer/VBoxContainer/Content" unique_id=427408350 instance=ExtResource("2_iwcount")]
 layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
 
 [node name="Progress" type="Label" parent="MarginContainer/VBoxContainer" unique_id=1162846206]
 layout_mode = 2

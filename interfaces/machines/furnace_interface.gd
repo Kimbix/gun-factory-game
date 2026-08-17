@@ -6,13 +6,13 @@ extends InterfaceWindow
 @export var output_display: ItemWithCount
 @export var progress_label: Label
 
-var _furnace: Furnace
 var furnace: Furnace:
 	get():
 		return _furnace
 	set(v):
 		_furnace = v
 		generate_ui()
+var _furnace: Furnace
 
 
 func _ready() -> void:
@@ -36,7 +36,5 @@ func update_inventory() -> void:
 
 
 func update_completion(progress: int, total: int) -> void:
-	if progress < 0:
-		progress_label.text = "---"
-	else:
-		progress_label.text = "%d / %d" % [progress, total]
+	progress = max(0, progress)
+	progress_label.text = "%d / %d" % [progress, total]

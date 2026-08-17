@@ -165,6 +165,14 @@ func take_damage(amount: float, enemy_type: StringName = &"") -> void:
 	damaged.emit(health)
 
 
+func heal(heal_amount: float, source: StringName) -> void:
+	var max_hp: float = player_stats.stats[&"max_health"].value
+	var previous_health := health
+	health = minf(health + heal_amount, max_hp)
+	if health > previous_health:
+		SignalBus.healed.emit(heal_amount, source)
+
+
 func _flash_hit() -> void:
 	if _shader_material == null:
 		return

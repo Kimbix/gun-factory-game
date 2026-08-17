@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://dvkjsc0kdw2h4"]
+
+[ext_resource type="Script" uid="uid://bqvdkisu7e6n7" path="res://objects/world_entities/food_item.gd" id="1_rl8v1"]
+[ext_resource type="Texture2D" uid="uid://bevmlsau63ej3" path="res://assets/world_entities/spr_foodItemBig.png" id="2_rl8v1"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_body"]
+radius = 9.0
+
+[node name="BigFoodItem" type="Area2D" unique_id=1606641075]
+script = ExtResource("1_rl8v1")
+source_name = &"big_food"
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1548477649]
+texture = ExtResource("2_rl8v1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=761231578]
+shape = SubResource("CircleShape2D_body")

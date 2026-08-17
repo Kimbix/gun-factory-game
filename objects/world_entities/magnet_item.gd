@@ -1,21 +1,11 @@
 class_name MagnetItem
 extends Area2D
-## A pickup that, when collected, pulls every [ExperienceCrystal] currently
-## on the floor toward the player as if it had been picked up. Mirrors the
-## [ExperienceCrystal] flow: the player detects it through their
-## [code]MagnetAttractionArea[/code] and calls [method start_follow]; once
-## the magnet reaches the player it fires [signal collected] and triggers
-## the crystal-pull effect.
 
 signal collected
 
 @export var speed: float = 400.0
 
 var _player: Node2D = null
-
-
-func start_follow(player: Node2D) -> void:
-	_player = player
 
 
 func _physics_process(delta: float) -> void:
@@ -26,6 +16,10 @@ func _physics_process(delta: float) -> void:
 
 	if global_position.distance_squared_to(_player.global_position) < 16.0:
 		_collect()
+
+
+func start_follow(player: Node2D) -> void:
+	_player = player
 
 
 func _collect() -> void:

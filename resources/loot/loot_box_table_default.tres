@@ -2,12 +2,27 @@
 
 [ext_resource type="Script" uid="uid://bvff3ui1i3ryd" path="res://resources/loot/loot_box_table.gd" id="1_table"]
 [ext_resource type="Script" uid="uid://bttgqefi6vjd5" path="res://resources/loot/loot_box_entry.gd" id="2_entry"]
-[ext_resource type="PackedScene" uid="uid://cm6gnt1qxb8m2" path="res://objects/xp/magnet_item.tscn" id="3_magnet"]
+[ext_resource type="PackedScene" uid="uid://cm6gnt1qxb8m2" path="res://objects/world_entities/magnet_item.tscn" id="3_magnet"]
+[ext_resource type="PackedScene" uid="uid://qylaabfmlpx2" path="res://objects/world_entities/food_item_small.tscn" id="3_qdtms"]
+[ext_resource type="PackedScene" uid="uid://dvkjsc0kdw2h4" path="res://objects/world_entities/food_item_big.tscn" id="4_ojmj4"]
 
 [sub_resource type="Resource" id="Resource_magnet"]
 script = ExtResource("2_entry")
 scene = ExtResource("3_magnet")
+weight = 5.0
+
+[sub_resource type="Resource" id="Resource_so0xp"]
+script = ExtResource("2_entry")
+scene = ExtResource("4_ojmj4")
+weight = 15.0
+metadata/_custom_type_script = "uid://bttgqefi6vjd5"
+
+[sub_resource type="Resource" id="Resource_rl8v1"]
+script = ExtResource("2_entry")
+scene = ExtResource("3_qdtms")
+weight = 50.0
+metadata/_custom_type_script = "uid://bttgqefi6vjd5"
 
 [resource]
 script = ExtResource("1_table")
-entries = Array[ExtResource("2_entry")]([SubResource("Resource_magnet")])
+entries = Array[ExtResource("2_entry")]([SubResource("Resource_magnet"), SubResource("Resource_so0xp"), SubResource("Resource_rl8v1")])

@@ -4,6 +4,7 @@ const FRAME_WIDTH := 71
 const FRAME_COUNT := 17
 
 
+# TODO: use the AnimatedSprite2D instead of doing this
 func _ready() -> void:
 	var tex := preload("res://assets/effects/spr_realExplosion.png")
 	var frames := SpriteFrames.new()

@@ -1,10 +1,31 @@
-[gd_scene format=3]
+[gd_scene format=3 uid="uid://c4hskgkcrrgnt"]
 
-[ext_resource type="Texture2D" path="res://assets/factory_items/spr_mine.png" id="1_tex"]
-[ext_resource type="Script" path="res://objects/projectiles/mine.gd" id="2_script"]
+[ext_resource type="Texture2D" uid="uid://rd5f3x472hyk" path="res://assets/factory_items/spr_mine.png" id="1_tex"]
+[ext_resource type="Script" uid="uid://dwfuqjeb3xm6l" path="res://objects/projectiles/mine.gd" id="2_script"]
 
-[node name="Mine" type="Node2D"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_r0w8j"]
+radius = 48.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_x0ron"]
+radius = 24.0
+
+[node name="Mine" type="Node2D" unique_id=682216473 node_paths=PackedStringArray("_sprite", "detection_area", "damage_area")]
 script = ExtResource("2_script")
+_sprite = NodePath("Sprite2D")
+detection_area = NodePath("DetectionArea")
+damage_area = NodePath("DamageArea")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=328819122]
 texture = ExtResource("1_tex")
+
+[node name="DamageArea" type="Area2D" parent="." unique_id=627057458]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DamageArea" unique_id=408760926]
+shape = SubResource("CircleShape2D_r0w8j")
+debug_color = Color(0.972549, 0, 0, 0.41960785)
+
+[node name="DetectionArea" type="Area2D" parent="." unique_id=425222374]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea" unique_id=718157024]
+shape = SubResource("CircleShape2D_x0ron")
+debug_color = Color(0.4833157, 0.58687747, 0, 0.41960785)

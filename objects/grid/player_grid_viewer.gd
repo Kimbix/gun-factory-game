@@ -7,7 +7,6 @@ const GRID_TEXTURE_SIZE := 16.0
 	set(v):
 		if grid != null and grid.overlay_changed.is_connected(_on_overlay_changed):
 			grid.overlay_changed.disconnect(_on_overlay_changed)
-			grid.overlay_changed.disconnect(queue_redraw)
 		grid = v
 		if grid != null:
 			grid.overlay_changed.connect(_on_overlay_changed)

@@ -6,10 +6,9 @@ signal on_death
 
 enum EnemyType { REGULAR, BOSS }
 
-@export var enemy_type: EnemyType = EnemyType.REGULAR
+const MAX_PUSH_SPEED := 40.0
 
-var player: Node2D
-var game_world: Node
+@export var enemy_type: EnemyType = EnemyType.REGULAR
 @export var speed := 20.0
 @export var health := 30
 @export var damage_multiplier := 1.0
@@ -20,14 +19,11 @@ var game_world: Node
 ## Ring used to teleport a boss back into range when it strays too far.
 @export var spawn_distance_min := 250.0
 @export var spawn_distance_max := 400.0
-const MAX_PUSH_SPEED := 40.0
+
+var player: Node2D
+var game_world: Node
 var xp_amount: int
 var _dead: bool
-
-
-func die_silently() -> void:
-	_dead = true
-	queue_free()
 
 
 func _ready() -> void:
@@ -42,6 +38,11 @@ func _physics_process(delta: float) -> void:
 	global_position += (dir * speed + _push_away()) * delta
 
 
+func die_silently() -> void:
+	_dead = true
+	queue_free()
+
+
 func take_damage(amount: int) -> void:
 	if _dead:
 		return
@@ -50,7 +51,7 @@ func take_damage(amount: int) -> void:
 		_dead = true
 		on_death.emit()
 		SignalBus.enemy_killed.emit(StringName(EnemyType.keys()[enemy_type]))
-		queue_free()
+		call_deferred("queue_free")
 
 
 ## Queries the physics server for overlapping [Area2D]s and pushes away from

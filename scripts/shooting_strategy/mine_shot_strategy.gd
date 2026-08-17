@@ -2,7 +2,6 @@ class_name MineShotStrategy
 extends ShootingStrategy
 
 const DAMAGE := 20
-const BLAST_RADIUS := 48.0
 const MINE_SCENE := preload("res://objects/projectiles/mine.tscn")
 
 
@@ -19,6 +18,5 @@ func execute(
 	mine.shooter = shooter
 	mine.player_stats = player_stats
 	mine.damage = DAMAGE
-	mine.blast_radius = BLAST_RADIUS
 	mine.global_position = shooter.global_position
 	shooter.get_parent().add_child(mine)

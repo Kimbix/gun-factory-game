@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://0xiqunpp8bx8"]
 
 [ext_resource type="Script" uid="uid://18d2wy6wwdlu" path="res://interfaces/machines/recipe_picker_interface.gd" id="1_5jkj8"]
+[ext_resource type="Script" uid="uid://5mp2xuvd86hm" path="res://interfaces/machines/interface_top_bar.gd" id="2_robk1"]
 
 [node name="RecipePicker" type="PanelContainer" unique_id=358233224 node_paths=PackedStringArray("close_button", "recipe_grid")]
 custom_minimum_size = Vector2(384, 256)
@@ -25,8 +26,10 @@ theme_override_constants/margin_bottom = 5
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=1901283499]
 layout_mode = 2
 
-[node name="TopBar" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=937472013]
+[node name="TopBar" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=1584665233]
 layout_mode = 2
+script = ExtResource("2_robk1")
+metadata/_custom_type_script = "uid://5mp2xuvd86hm"
 
 [node name="Title" type="Label" parent="MarginContainer/VBoxContainer/TopBar" unique_id=490755714]
 layout_mode = 2

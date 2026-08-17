@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bjw1s8ce852fv" path="res://interfaces/machines/metal_processor_interface.gd" id="1_xee5u"]
 [ext_resource type="Texture2D" uid="uid://c6bt6gw8v0nyi" path="res://assets/interface/spr_rightArrow.png" id="2_5h4rr"]
+[ext_resource type="Script" uid="uid://5mp2xuvd86hm" path="res://interfaces/machines/interface_top_bar.gd" id="2_wsauu"]
 
 [node name="MetalProcessorInterface" type="PanelContainer" unique_id=1955000705 node_paths=PackedStringArray("close_button", "selected_recipe", "items_in_inventory", "completion_label")]
 custom_minimum_size = Vector2(384, 256)
@@ -26,13 +27,15 @@ theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 5
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=11628096]
 layout_mode = 2
 
-[node name="TopBar" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+[node name="TopBar" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=642822226]
 layout_mode = 2
+script = ExtResource("2_wsauu")
+metadata/_custom_type_script = "uid://5mp2xuvd86hm"
 
-[node name="Title" type="Label" parent="MarginContainer/VBoxContainer/TopBar"]
+[node name="Title" type="Label" parent="MarginContainer/VBoxContainer/TopBar" unique_id=569300322]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Metal Processor"
@@ -42,7 +45,7 @@ custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 text = "X"
 
-[node name="HSeparator" type="HSeparator" parent="MarginContainer/VBoxContainer"]
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/VBoxContainer" unique_id=869734084]
 layout_mode = 2
 
 [node name="ItemsInInventory" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=1005620539]

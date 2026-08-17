@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://6urqctt20tsg" path="res://interfaces/machines/ammo_assembler_interface.gd" id="1_xee5u"]
 [ext_resource type="Texture2D" uid="uid://c6bt6gw8v0nyi" path="res://assets/interface/spr_rightArrow.png" id="2_5h4rr"]
+[ext_resource type="Script" uid="uid://5mp2xuvd86hm" path="res://interfaces/machines/interface_top_bar.gd" id="2_tsfcd"]
 
 [node name="AmmoAssemblerInterface" type="PanelContainer" unique_id=116905570 node_paths=PackedStringArray("close_button", "selected_recipe", "items_in_inventory", "completion_label")]
 custom_minimum_size = Vector2(384, 256)
@@ -30,8 +31,10 @@ theme_override_constants/margin_bottom = 5
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=239030685]
 layout_mode = 2
 
-[node name="TopBar" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=617548579]
+[node name="TopBar" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=698053090]
 layout_mode = 2
+script = ExtResource("2_tsfcd")
+metadata/_custom_type_script = "uid://5mp2xuvd86hm"
 
 [node name="Title" type="Label" parent="MarginContainer/VBoxContainer/TopBar" unique_id=819117358]
 layout_mode = 2
@@ -65,6 +68,8 @@ texture = ExtResource("2_5h4rr")
 
 [node name="Completion" type="Label" parent="MarginContainer/VBoxContainer/Transition" unique_id=1900226564]
 layout_mode = 2
+text = "---"
+horizontal_alignment = 1
 
 [node name="SelectedRecipe" type="Button" parent="MarginContainer/VBoxContainer" unique_id=1852405594]
 custom_minimum_size = Vector2(32, 32)

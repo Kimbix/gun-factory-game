@@ -6,20 +6,20 @@ enum DraggingState {
 	DRAGGING,
 }
 
-@export var _panel_parent: Control
-@export var _title: String:
-	get():
-		return _title
-	set(v):
-		_title = v
-		if is_instance_valid(_panel_label):
-			_panel_label.text = v
-
+var _panel_parent: Control
 var _dragging_state: DraggingState = DraggingState.DROPPED
 
-## This works with the scene "res://interfaces/machines/interface_top_bar.tscn"
-@onready var _panel_label: Label = $Tilte
-@onready var _close_button: Button = $Close
+
+func _ready() -> void:
+	var looking: Control = self
+	self.mouse_default_cursor_shape = Control.CURSOR_DRAG
+	while true:
+		if looking is InterfaceWindow:
+			_panel_parent = looking
+			break
+		if looking is not Control or looking == null:
+			break
+		looking = looking.get_parent()
 
 
 func _input(event: InputEvent) -> void:

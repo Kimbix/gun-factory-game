@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://c2wbtyck2ydt1"]
 
-[ext_resource type="Script" uid="uid://dcf5wxvfp4bri" path="res://interfaces/building/shop_entry.gd" id="1_q8230"]
+[ext_resource type="Script" uid="uid://dcf5wxvfp4bri" path="res://interfaces/components/shop_entry.gd" id="1_q8230"]
 [ext_resource type="Texture2D" uid="uid://c32abh8epl7ve" path="res://assets/factory_components/spr_generator.png" id="2_tnfwn"]
 
 [node name="ShopEntryUI" type="Button" unique_id=707188768]

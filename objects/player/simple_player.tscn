@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://c78eu1huc66n7" path="res://assets/world_entities/spr_playerCharacter.png" id="3_8nbjm"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_r3t7o"]
-size = Vector2(13, 31)
+size = Vector2(10, 21)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_clctn"]
 radius = 30.0
@@ -28,7 +28,7 @@ starting_grid_data = ExtResource("2_sx0qt")
 texture = ExtResource("3_8nbjm")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1225916189]
-position = Vector2(1.5, -0.5)
+position = Vector2(0, 4.5)
 shape = SubResource("RectangleShape2D_r3t7o")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1089392001]

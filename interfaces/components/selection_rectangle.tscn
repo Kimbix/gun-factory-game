@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://sdop7ejadnma"]
+
+[ext_resource type="Texture2D" uid="uid://bl7ijvfayftce" path="res://assets/interface/spr_selectedBuildingsIndicator.png" id="1_d4p5h"]
+
+[node name="SelectionRectangle" type="NinePatchRect" unique_id=1242119007]
+mouse_filter = 2
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_d4p5h")
+region_rect = Rect2(0, 0, 16, 16)
+patch_margin_left = 1
+patch_margin_top = 1
+patch_margin_right = 1
+patch_margin_bottom = 1
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1

@@ -1,5 +1,6 @@
 class_name VectorTools
 
+
 ## Generates an array of all Vector2i in a range[br]
 ## vector2i_range(Vector2i(3, 3)) will generate [(0, 0), (1, 0), (2, 0), (0, 1), (1, 1), ...]
 ## and so on[br]

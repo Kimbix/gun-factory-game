@@ -23,8 +23,8 @@ func start(cell: Vector2i) -> void:
 func update(cell: Vector2i) -> void:
 	if not is_dragging or cell == last_cell:
 		return
-	last_cell = cell
 	entered.emit(cell)
+	last_cell = cell
 
 
 func stop() -> void:

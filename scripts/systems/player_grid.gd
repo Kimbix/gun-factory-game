@@ -26,8 +26,51 @@ func destroy_building(v: Vector2i) -> void:
 	var building := _buildings[v]
 	building_removed.emit(building)
 	building.free_resources()
-	print("Erasing building at %s" % v)
 	_buildings.erase(v)
+
+
+func move_buildings(origins: Array[Vector2i], delta: Vector2i) -> Array[GridComponentInfo]:
+	var buildings_to_move: Array[FactoryBuilding] = []
+	for v: Vector2i in origins:
+		if has_building(v):
+			var b := get_building(v)
+			if b not in buildings_to_move:
+				buildings_to_move.append(b)
+
+	if buildings_to_move.is_empty():
+		var erased: Array[GridComponentInfo] = []
+		for v: Vector2i in origins:
+			var to := v + delta
+			if has_building(to):
+				erased.append(get_building(to).get_info())
+				destroy_building(to)
+		return erased
+
+	for b: FactoryBuilding in buildings_to_move:
+		_buildings.erase(b.position)
+
+	_destroy_items_on(origins)
+
+	var overridden: Array[GridComponentInfo] = []
+	for b: FactoryBuilding in buildings_to_move:
+		var to := b.position + delta
+		if has_building(to):
+			overridden.append(get_building(to).get_info())
+			destroy_building(to)
+		_buildings[to] = b
+		b.position = to
+		b.rect = Rect2(to, b.get_info().dimensions)
+
+	return overridden
+
+
+func _destroy_items_on(cells: Array[Vector2i]) -> void:
+	var to_remove: Array[FactoryItem] = []
+	for item: FactoryItem in _items:
+		if cells.has(item.position.floor()):
+			to_remove.append(item)
+	for item: FactoryItem in to_remove:
+		destroy_item(item)
 
 
 func rotate_building(v: Vector2i, clockwise: bool = true) -> void:

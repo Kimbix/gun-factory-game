@@ -1,15 +1,15 @@
 [gd_scene format=3 uid="uid://le1juys13dem"]
 
-[ext_resource type="Texture2D" uid="uid://bhsnln51pdcp8" path="res://icon.svg" id="1_jsdj3"]
-[ext_resource type="Script" uid="uid://docufmv06oaja" path="res://interfaces/components/building_inventory_entry.gd" id="2_vnhas"]
+[ext_resource type="Texture2D" uid="uid://bhsnln51pdcp8" path="res://icon.svg" id="1_yyhu4"]
+[ext_resource type="Script" uid="uid://docufmv06oaja" path="res://interfaces/components/building_inventory_entry.gd" id="2_sy4t6"]
 
 [node name="BuildingInventoryEntry" type="Button" unique_id=81989025 node_paths=PackedStringArray("count_label")]
 custom_minimum_size = Vector2(48, 48)
 offset_right = 32.0
 offset_bottom = 32.0
-icon = ExtResource("1_jsdj3")
+icon = ExtResource("1_yyhu4")
 expand_icon = true
-script = ExtResource("2_vnhas")
+script = ExtResource("2_sy4t6")
 count_label = NodePath("Label")
 
 [node name="Label" type="Label" parent="." unique_id=500137567]

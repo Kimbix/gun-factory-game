@@ -24,6 +24,7 @@ var position: Vector2i:
 var rect: Rect2:
 	get():
 		return building.rect
+var _progress_interface: InterfaceWindow
 
 
 func setup() -> void:
@@ -56,9 +57,6 @@ func receive_item(_item: FactoryItem) -> void:
 
 func open_interface(_interface_supervisor: InterfaceSupervisor) -> void:
 	pass
-
-
-var _progress_interface: InterfaceWindow
 
 
 func _notify_progress(progress: int, total: int) -> void:

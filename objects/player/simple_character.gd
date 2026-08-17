@@ -69,7 +69,7 @@ func _ready() -> void:
 	add_to_group("player")
 
 	player_grid = PlayerGrid.new()
-	player_grid.output_item.connect(_shoot)
+	player_grid.generated_item.connect(_shoot)
 	player_grid.building_placed.connect(_on_building_placed)
 	player_grid.building_removed.connect(_on_building_removed)
 

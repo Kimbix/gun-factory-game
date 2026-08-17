@@ -1,13 +1,11 @@
 class_name ItemReceiver
 extends FactoryComponent
 
+
 func tick() -> void:
 	pass
 
 
 func receive_item(_item: FactoryItem) -> void:
-	var g := grid
-	if g == null:
-		return
-	g.destroy_item(_item)
-	_notify("output_item", [_item])
+	grid.destroy_item(_item)
+	grid.output_item(_item)

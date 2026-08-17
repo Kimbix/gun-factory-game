@@ -286,10 +286,12 @@ func _set_state(new_state: GameState, is_win: bool = false) -> void:
 		GameState.GAMEPLAY:
 			_hide_pause_menu()
 			_interface_supervisor.close_building_interface()
+			_active_player.player_grid.is_outputting = true
 			%GameplayScene.call_deferred("set_process_mode", PROCESS_MODE_INHERIT)
 		GameState.BUILDING:
 			_hide_pause_menu()
 			_interface_supervisor.open_building_interface()
+			_active_player.player_grid.is_outputting = false
 			%GameplayScene.call_deferred("set_process_mode", PROCESS_MODE_DISABLED)
 		GameState.LEVEL_UP:
 			_hide_pause_menu()

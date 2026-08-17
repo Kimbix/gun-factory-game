@@ -2,7 +2,7 @@ class_name PlayerGrid
 extends Node
 
 @warning_ignore("unused_signal")
-signal output_item(item: FactoryItem)
+signal generated_item(item: FactoryItem)
 signal building_placed(building: FactoryBuilding)
 signal building_removed(building: FactoryBuilding)
 signal ticked
@@ -13,6 +13,7 @@ const _FLOOR_TEX := preload("uid://bcxv8tx5ovn5l")
 
 @export var dimensions: Vector2i = Vector2i(10, 10)
 
+var is_outputting: bool = true
 var _floor: Dictionary[Vector2i, Texture2D] = { }
 var _items: Array[FactoryItem] = []
 var _buildings: Dictionary[Vector2i, FactoryBuilding] = { }
@@ -204,6 +205,12 @@ func from_data(data: PlayerGridData) -> void:
 		place_building(entry.info, entry.position, rotation)
 		for n: StringName in entry.variables:
 			set_building_var(n, entry.variables[n], entry.position)
+
+
+func output_item(_item: FactoryItem) -> void:
+	if not is_outputting:
+		return
+	generated_item.emit(_item)
 
 
 func _generate_preview() -> Image:

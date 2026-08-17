@@ -1,16 +1,14 @@
-[gd_scene format=3]
+[gd_scene format=3 uid="uid://ceu7kru2m3nph"]
 
-[ext_resource type="Script" path="res://interfaces/components/item_with_count.gd" id="1_script"]
+[ext_resource type="Script" uid="uid://btginr7f8d0xx" path="res://interfaces/components/item_with_count.gd" id="1_script"]
 
-[node name="ItemWithCount" type="Control"]
+[node name="ItemWithCount" type="Control" unique_id=3392010]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 3
 anchors_preset = 0
-grow_horizontal = 1
-grow_vertical = 1
 script = ExtResource("1_script")
 
-[node name="ItemImage" type="TextureRect" parent="."]
+[node name="ItemImage" type="TextureRect" parent="." unique_id=1777125485]
 custom_minimum_size = Vector2(24, 24)
 layout_mode = 1
 anchors_preset = 8
@@ -25,7 +23,7 @@ offset_bottom = 12.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="CountLabel" type="Label" parent="."]
+[node name="CountLabel" type="Label" parent="." unique_id=300273081]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
@@ -36,6 +34,7 @@ offset_left = -20.0
 offset_top = -12.0
 grow_horizontal = 0
 grow_vertical = 0
+theme_override_font_sizes/font_size = 12
 text = "0"
 horizontal_alignment = 2
 vertical_alignment = 2

@@ -1,5 +1,5 @@
 class_name LootBox
-extends StaticBody2D
+extends Area2D
 ## A hittable, intangible container placed in the world.
 ##
 ## Player attacks deal damage to it through [method take_damage]. It lives on

@@ -7,14 +7,14 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_loot"]
 size = Vector2(16, 16)
 
-[node name="LootBox" type="StaticBody2D"]
+[node name="LootBox" type="Area2D" unique_id=163289491]
 collision_layer = 2
 collision_mask = 0
 script = ExtResource("2_script")
 loot_table = ExtResource("3_loottable")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1169850326]
 texture = ExtResource("1_lootbox")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1146671681]
 shape = SubResource("RectangleShape2D_loot")

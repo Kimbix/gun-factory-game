@@ -14,7 +14,6 @@ var _fired := false
 
 func _ready() -> void:
 	rotation = direction.angle()
-	body_entered.connect(_on_body_entered)
 	area_entered.connect(_on_area_entered)
 
 
@@ -29,20 +28,13 @@ func _get_ammo_type() -> StringName:
 	return &""
 
 
-func _on_body_entered(body: Node) -> void:
-	if body == shooter:
-		return
-	if body.has_method(&"take_damage"):
-		_deal_damage(body)
-
-
 func _on_area_entered(area: Area2D) -> void:
-	if area is not BaseEnemy or not is_instance_valid(area):
+	if not is_instance_valid(area) or not area.has_method(&"take_damage"):
 		return
 	_deal_damage(area)
 
 
-func _deal_damage(target: BaseEnemy) -> void:
+func _deal_damage(target: Node2D) -> void:
 	if _fired:
 		return
 	_fired = true

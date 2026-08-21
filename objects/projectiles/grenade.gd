@@ -45,30 +45,14 @@ func _explode() -> void:
 		return
 	_fired = true
 
+	var roll := DamageUtil.roll_crit(damage, player_stats)
 	var enemies := get_tree().get_nodes_in_group(&"enemy")
 	for enemy in enemies:
 		if not enemy.has_method(&"take_damage"):
 			continue
 		var distance := global_position.distance_to(enemy.global_position)
 		if distance <= blast_radius:
-			var was_crit := false
-			var final_damage := damage
-			if player_stats != null and randf() < player_stats.stats[&"crit_chance"].value:
-				was_crit = true
-				var bonus: float = player_stats.stats[&"crit_damage"].value
-				final_damage = ceili(damage * (1.0 + bonus))
-			enemy.take_damage(final_damage)
-			var enemy_type := &"unknown"
-			if enemy is BaseEnemy:
-				enemy_type = StringName(enemy.get_class())
-			SignalBus.damage_dealt.emit(final_damage, &"grenade", enemy_type, was_crit)
-
-			var dn := DamageNumberPool.create()
-			var color := Color.YELLOW
-			if was_crit:
-				color = Color(0.9, 0.15, 0.05)
-			var text := str(final_damage) + ("!" if was_crit else "")
-			dn.play(text, color, enemy.global_position + Vector2(0, -16))
+			enemy.take_damage(roll.damage, &"grenade", roll.crit)
 
 	var effect := EXPLOSION_EFFECT.instantiate()
 	effect.global_position = global_position

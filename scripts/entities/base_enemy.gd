@@ -43,10 +43,13 @@ func die_silently() -> void:
 	queue_free()
 
 
-func take_damage(amount: int) -> void:
+func take_damage(amount: int, ammo_type: StringName = &"", crit: bool = false) -> void:
 	if _dead:
 		return
 	health -= amount
+	var enemy_type_name := StringName(get_class())
+	SignalBus.damage_dealt.emit(amount, ammo_type, enemy_type_name, crit)
+	DamageNumberPool.show(amount, crit, global_position + Vector2(0, -16))
 	if health <= 0:
 		_dead = true
 		on_death.emit()

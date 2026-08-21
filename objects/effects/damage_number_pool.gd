@@ -21,6 +21,13 @@ static func create() -> DamageNumber:
 	return dn
 
 
+static func show(amount: int, crit: bool, world_pos: Vector2) -> void:
+	var dn := create()
+	var color := Color.YELLOW if not crit else Color(0.9, 0.15, 0.05)
+	var text := str(amount) + ("!" if crit else "")
+	dn.play(text, color, world_pos)
+
+
 static func free_number(node: DamageNumber) -> void:
 	if _instance == null:
 		node.queue_free()

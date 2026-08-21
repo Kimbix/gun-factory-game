@@ -23,6 +23,7 @@ var _dead: bool = false
 
 func _ready() -> void:
 	_health = max_health
+	add_to_group("destructible")
 
 
 func take_damage(amount: int) -> void:

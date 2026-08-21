@@ -46,13 +46,17 @@ func _explode() -> void:
 	_fired = true
 
 	var roll := DamageUtil.roll_crit(damage, player_stats)
-	var enemies := get_tree().get_nodes_in_group(&"enemy")
-	for enemy in enemies:
-		if not enemy.has_method(&"take_damage"):
+	var targets := get_tree().get_nodes_in_group(&"enemy")
+	targets.append_array(get_tree().get_nodes_in_group(&"destructible"))
+	for target in targets:
+		if not target.has_method(&"take_damage"):
 			continue
-		var distance := global_position.distance_to(enemy.global_position)
+		var distance := global_position.distance_to(target.global_position)
 		if distance <= blast_radius:
-			enemy.take_damage(roll.damage, &"grenade", roll.crit)
+			if target is BaseEnemy:
+				target.take_damage(roll.damage, &"grenade", roll.crit)
+			else:
+				target.take_damage(roll.damage)
 
 	var effect := EXPLOSION_EFFECT.instantiate()
 	effect.global_position = global_position

@@ -78,9 +78,12 @@ func _detonate() -> void:
 
 	var roll := DamageUtil.roll_crit(damage, player_stats)
 	for n: Node in damage_area.get_overlapping_areas():
-		if n is not BaseEnemy:
+		if not n.has_method(&"take_damage"):
 			continue
-		n.take_damage(roll.damage, &"mine", roll.crit)
+		if n is BaseEnemy:
+			n.take_damage(roll.damage, &"mine", roll.crit)
+		else:
+			n.take_damage(roll.damage)
 
 	var effect := EXPLOSION_EFFECT.instantiate()
 	effect.global_position = global_position

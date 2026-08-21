@@ -1,7 +1,7 @@
 class_name PlayerStats
 extends RefCounted
 
-var stats: Dictionary = { }
+var stats: Dictionary[StringName, Stat] = { }
 var health: float
 
 

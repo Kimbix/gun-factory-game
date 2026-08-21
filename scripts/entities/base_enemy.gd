@@ -60,6 +60,8 @@ func take_damage(amount: int) -> void:
 func _push_away() -> Vector2:
 	var push := Vector2.ZERO
 	for area: Area2D in get_overlapping_areas():
+		if area is not BaseEnemy:
+			continue
 		var other := area
 		var diff := global_position - other.global_position
 		var dist := diff.length()

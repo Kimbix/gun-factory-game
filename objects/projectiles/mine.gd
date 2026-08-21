@@ -47,9 +47,9 @@ func _on_body_entered(body: Node) -> void:
 
 
 func _on_area_entered(area: Area2D) -> void:
-	var enemy := _resolve_enemy(area)
-	if enemy != null:
-		_detonate()
+	if area is not BaseEnemy or not is_instance_valid(area):
+		return
+	_detonate()
 
 
 ## TODO: Extract this big ass damage function to something simpler
@@ -108,12 +108,3 @@ func _detonate() -> void:
 
 	_active_mines.erase(self)
 	queue_free()
-
-
-func _resolve_enemy(area: Area2D) -> BaseEnemy:
-	if area is BaseEnemy:
-		return area
-	var parent := area.get_parent()
-	if parent is BaseEnemy:
-		return parent
-	return null

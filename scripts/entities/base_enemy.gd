@@ -60,7 +60,7 @@ func take_damage(amount: int) -> void:
 func _push_away() -> Vector2:
 	var push := Vector2.ZERO
 	for area: Area2D in get_overlapping_areas():
-		var other := _resolve_enemy(area)
+		var other := area
 		var diff := global_position - other.global_position
 		var dist := diff.length()
 		if dist < 0.001:
@@ -69,14 +69,3 @@ func _push_away() -> Vector2:
 		var overlap := maxf(separation_radius + other.separation_radius - dist, 0.0)
 		push += diff / dist * minf(overlap * separation_strength, MAX_PUSH_SPEED)
 	return push
-
-
-## Maps an overlapping [Area2D] to the [BaseEnemy] it belongs to. Both the
-## enemy root itself and its child [EnemyHitbox] resolve to the same enemy.
-func _resolve_enemy(area: Area2D) -> BaseEnemy:
-	if area is BaseEnemy:
-		return area
-	var parent := area.get_parent()
-	if parent is BaseEnemy:
-		return parent
-	return null

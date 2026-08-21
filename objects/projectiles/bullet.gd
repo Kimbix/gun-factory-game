@@ -12,10 +12,6 @@ var _lifetime := 0.0
 var _fired := false
 
 
-func _get_ammo_type() -> StringName:
-	return &""
-
-
 func _ready() -> void:
 	rotation = direction.angle()
 	body_entered.connect(_on_body_entered)
@@ -29,6 +25,10 @@ func _physics_process(delta: float) -> void:
 		queue_free()
 
 
+func _get_ammo_type() -> StringName:
+	return &""
+
+
 func _on_body_entered(body: Node) -> void:
 	if body == shooter:
 		return
@@ -37,12 +37,12 @@ func _on_body_entered(body: Node) -> void:
 
 
 func _on_area_entered(area: Area2D) -> void:
-	var enemy := _resolve_enemy(area)
-	if enemy != null:
-		_deal_damage(enemy)
+	if area is not BaseEnemy or not is_instance_valid(area):
+		return
+	_deal_damage(area)
 
 
-func _deal_damage(target: Node2D) -> void:
+func _deal_damage(target: BaseEnemy) -> void:
 	if _fired:
 		return
 	_fired = true
@@ -67,12 +67,3 @@ func _deal_damage(target: Node2D) -> void:
 	dn.play(text, color, target.global_position + Vector2(0, -16))
 
 	queue_free()
-
-
-func _resolve_enemy(area: Area2D) -> BaseEnemy:
-	if area is BaseEnemy:
-		return area
-	var parent := area.get_parent()
-	if parent is BaseEnemy:
-		return parent
-	return null

@@ -35,9 +35,9 @@ func _on_body_entered(body: Node) -> void:
 
 
 func _on_area_entered(area: Area2D) -> void:
-	var enemy := _resolve_enemy(area)
-	if enemy != null:
-		_explode()
+	if area is not BaseEnemy or not is_instance_valid(area):
+		return
+	_explode()
 
 
 func _explode() -> void:
@@ -75,12 +75,3 @@ func _explode() -> void:
 	get_parent().add_child(effect)
 
 	queue_free()
-
-
-func _resolve_enemy(area: Area2D) -> BaseEnemy:
-	if area is BaseEnemy:
-		return area
-	var parent := area.get_parent()
-	if parent is BaseEnemy:
-		return parent
-	return null

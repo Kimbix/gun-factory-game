@@ -184,13 +184,18 @@ func _flash_hit() -> void:
 	_flash_tween.tween_property(_shader_material, "shader_parameter/hit_amount", 0.0, 0.15)
 
 
+# TODO: refactor collectibles to share a common interface so this doesn't grow into an if/else chain
 func _on_collection_area_entered(area: Area2D) -> void:
 	var crystal := area as ExperienceCrystal
-	if crystal == null:
+	if crystal != null:
+		if not crystal.collected.is_connected(_on_crystal_collected):
+			crystal.collected.connect(_on_crystal_collected.bind(crystal), CONNECT_ONE_SHOT)
+		crystal.start_follow(self)
 		return
-	if not crystal.collected.is_connected(_on_crystal_collected):
-		crystal.collected.connect(_on_crystal_collected.bind(crystal), CONNECT_ONE_SHOT)
-	crystal.start_follow(self)
+	var food := area as FoodItem
+	if food != null:
+		food.start_follow(self)
+		return
 
 
 func _on_crystal_collected(crystal: ExperienceCrystal) -> void:

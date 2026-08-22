@@ -31,7 +31,7 @@ func tick() -> void:
 		_update_progress()
 
 
-func get_vars() -> Dictionary:
+func get_vars() -> Dictionary[StringName, Variant]:
 	return {
 		&"lead_count": lead_count,
 		&"_cooldown": _cooldown,

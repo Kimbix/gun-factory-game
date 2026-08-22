@@ -20,10 +20,10 @@
 script = ExtResource("1_6qbpj")
 position = Vector2i(3, 10)
 info = ExtResource("2_i7url")
-variables = {
+variables = Dictionary[StringName, Variant]({
 &"_cooldown": 0,
 &"generating": ExtResource("3_e3oc1")
-}
+})
 
 [sub_resource type="Resource" id="Resource_kec8h"]
 script = ExtResource("1_6qbpj")
@@ -34,21 +34,21 @@ info = ExtResource("4_p1714")
 script = ExtResource("1_6qbpj")
 position = Vector2i(5, 10)
 info = ExtResource("5_u0ncu")
-variables = {
+variables = Dictionary[StringName, Variant]({
 &"_cooldown": 0,
 &"lead_count": 0
-}
+})
 
 [sub_resource type="Resource" id="Resource_j6l2o"]
 script = ExtResource("1_6qbpj")
 position = Vector2i(7, 10)
 info = ExtResource("6_2kk6m")
-variables = {
+variables = Dictionary[StringName, Variant]({
 &"_cooldown": 0,
 &"_next_out_port": 0,
 &"lead_plates": 0,
 &"recipe": ExtResource("7_81jua")
-}
+})
 
 [sub_resource type="Resource" id="Resource_0hehw"]
 script = ExtResource("1_6qbpj")
@@ -64,12 +64,12 @@ info = ExtResource("4_p1714")
 script = ExtResource("1_6qbpj")
 position = Vector2i(9, 10)
 info = ExtResource("8_4fai4")
-variables = {
+variables = Dictionary[StringName, Variant]({
 &"_craft_progress": 0,
 &"_inventory_accepted": [ExtResource("10_xi0iy"), ExtResource("11_eybxd"), ExtResource("12_lmjli")],
 &"_inventory_slots": Array[Dictionary]([]),
 &"recipe": ExtResource("9_l7duk")
-}
+})
 
 [sub_resource type="Resource" id="Resource_aoeka"]
 script = ExtResource("1_6qbpj")
@@ -97,19 +97,19 @@ info = ExtResource("4_p1714")
 script = ExtResource("1_6qbpj")
 position = Vector2i(7, 9)
 info = ExtResource("2_i7url")
-variables = {
+variables = Dictionary[StringName, Variant]({
 &"_cooldown": 0,
 &"generating": ExtResource("10_xi0iy")
-}
+})
 
 [sub_resource type="Resource" id="Resource_v15s4"]
 script = ExtResource("1_6qbpj")
 position = Vector2i(7, 11)
 info = ExtResource("2_i7url")
-variables = {
+variables = Dictionary[StringName, Variant]({
 &"_cooldown": 0,
 &"generating": ExtResource("11_eybxd")
-}
+})
 
 [sub_resource type="Resource" id="Resource_83r6d"]
 script = ExtResource("1_6qbpj")
@@ -133,7 +133,7 @@ data = {
 [resource]
 script = ExtResource("15_3l3ho")
 dimensions = Vector2i(25, 25)
-floor_textures = {
+floor_textures = Dictionary[Vector2i, Texture2D]({
 Vector2i(0, 0): ExtResource("14_g60v0"),
 Vector2i(0, 1): ExtResource("14_g60v0"),
 Vector2i(0, 2): ExtResource("14_g60v0"),
@@ -759,6 +759,6 @@ Vector2i(24, 21): ExtResource("14_g60v0"),
 Vector2i(24, 22): ExtResource("14_g60v0"),
 Vector2i(24, 23): ExtResource("14_g60v0"),
 Vector2i(24, 24): ExtResource("14_g60v0")
-}
+})
 buildings = Array[ExtResource("1_6qbpj")]([SubResource("Resource_k2ynh"), SubResource("Resource_kec8h"), SubResource("Resource_nhdg0"), SubResource("Resource_j6l2o"), SubResource("Resource_0hehw"), SubResource("Resource_c3s1r"), SubResource("Resource_eqsas"), SubResource("Resource_aoeka"), SubResource("Resource_xfy11"), SubResource("Resource_blqf0"), SubResource("Resource_wviuf"), SubResource("Resource_43aov"), SubResource("Resource_v15s4"), SubResource("Resource_83r6d"), SubResource("Resource_qe4vg")])
 preview = SubResource("Image_6y3q2")

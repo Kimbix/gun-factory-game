@@ -29,7 +29,7 @@ func tick() -> void:
 		_cooldown = COOLDOWN
 
 
-func get_vars() -> Dictionary:
+func get_vars() -> Dictionary[StringName, Variant]:
 	return {
 		&"gunpowder_count": gunpowder_count,
 		&"shells_count": shells_count,

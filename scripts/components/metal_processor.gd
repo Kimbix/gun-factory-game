@@ -46,7 +46,7 @@ func tick() -> void:
 	_notify_inventory()
 
 
-func get_vars() -> Dictionary:
+func get_vars() -> Dictionary[StringName, Variant]:
 	return {
 		&"recipe": recipe,
 		&"lead_plates": lead_plates,

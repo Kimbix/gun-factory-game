@@ -43,7 +43,7 @@ func set_var(n: StringName, v: Variant) -> void:
 	set(n, v)
 
 
-func get_vars() -> Dictionary:
+func get_vars() -> Dictionary[StringName, Variant]:
 	return { }
 
 

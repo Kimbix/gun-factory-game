@@ -76,16 +76,16 @@ func _init(
 		behaviour.setup()
 
 
+func _to_string() -> String:
+	return "<FactoryBuilding %s>" % [_info.name]
+
+
 func free_resources() -> void:
 	if behaviour:
 		behaviour.free_resources()
 		behaviour.building = null
 		behaviour = null
 	grid = null
-
-
-func _to_string() -> String:
-	return "<FactoryBuilding %s>" % [_info.name]
 
 
 func tick() -> void:
@@ -104,7 +104,7 @@ func get_info() -> GridComponentInfo:
 	return _info
 
 
-func get_vars() -> Dictionary:
+func get_vars() -> Dictionary[StringName, Variant]:
 	return behaviour.get_vars() if behaviour else { }
 
 

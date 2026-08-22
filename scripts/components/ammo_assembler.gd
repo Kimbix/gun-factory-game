@@ -70,7 +70,7 @@ func tick() -> void:
 		g.place_item(item)
 
 
-func get_vars() -> Dictionary:
+func get_vars() -> Dictionary[StringName, Variant]:
 	var slots_data: Array[Dictionary] = []
 	for idx in inventory.slots:
 		var slot := inventory.slots[idx]

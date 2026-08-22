@@ -92,7 +92,8 @@ func _update_ui() -> void:
 		var can_afford := player != null and player.level_system.gold >= price
 		instance.set_item(slot.item, slot.stock)
 		instance.disabled = not can_afford
-		instance.pressed.connect(_on_slot_pressed.bind(slot))
+		instance.left_clicked.connect(_on_slot_pressed.bind(slot))
+		instance.right_clicked.connect(_on_slot_right_clicked.bind(slot))
 		instance.name = "ShopEntry"
 		_slot_container.add_child(instance)
 
@@ -120,6 +121,18 @@ func _on_slot_pressed(slot: Dictionary) -> void:
 		return
 	building_inventory.add(si.item, 1)
 	slot.stock -= 1
+	_update_ui()
+
+
+func _on_slot_right_clicked(slot: Dictionary) -> void:
+	var player := _get_player()
+	if player == null:
+		return
+	var si: ShopItem = slot.item
+	var price: int = _get_item_price(si, 0)
+	while slot.stock > 0 and player.level_system.spend_gold(price):
+		building_inventory.add(si.item, 1)
+		slot.stock -= 1
 	_update_ui()
 
 

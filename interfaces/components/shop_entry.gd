@@ -1,10 +1,24 @@
 class_name ShopEntryUI
 extends Button
 
+signal left_clicked
+signal right_clicked
+
 @onready var _entry_texture: TextureRect = $Container/EntryImage
 @onready var _stock_count_label: Label = $Container/InformationContainer/StockAndPrice/StockCount
 @onready var _item_name_label: Label = $Container/InformationContainer/ItemName
 @onready var _price_label: Label = $Container/InformationContainer/StockAndPrice/Price
+
+
+func _gui_input(event: InputEvent) -> void:
+	if event is InputEventMouseButton and event.pressed:
+		match event.button_index:
+			MOUSE_BUTTON_LEFT:
+				left_clicked.emit()
+				get_viewport().set_input_as_handled()
+			MOUSE_BUTTON_RIGHT:
+				right_clicked.emit()
+				get_viewport().set_input_as_handled()
 
 
 func set_rarity(rarity: Rarity) -> void:

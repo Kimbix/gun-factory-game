@@ -41,17 +41,7 @@ func tick() -> void:
 	_next_out_port = (_next_out_port + 1) % ports.size()
 
 	var info := _items[0]
-	var gs := info.grid_size
-	var facing := port.facing
 
-	var offset := Vector2.ZERO
-	if facing.x != 0:
-		offset.x = 0.0 if facing.x > 0 else 1.0 - gs.x
-		offset.y = 0.5 - gs.y * 0.5
-	else:
-		offset.x = 0.5 - gs.x * 0.5
-		offset.y = 0.0 if facing.y > 0 else 1.0 - gs.y
-
-	if _output_item(info, port, offset):
+	if _output_item(info, port):
 		_items.pop_front()
 		_cooldown = COOLDOWN

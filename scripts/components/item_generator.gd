@@ -8,11 +8,9 @@ signal ticks_changed(remaining: int)
 var generating: FactoryItemInfo:
 	set(v):
 		generating = v
-		_precompute_offsets()
 		_cooldown = 0
 		_update_overlay_strategy()
 var _cooldown: int = 0
-var _offsets: Dictionary[FactoryBuilding.Rotation, Vector2] = { }
 
 
 func tick() -> void:
@@ -22,7 +20,7 @@ func tick() -> void:
 		_cooldown -= 1
 		ticks_changed.emit(_cooldown)
 		return
-	if _output_item(generating, null, _offsets[rotation]):
+	if _output_item(generating):
 		_cooldown = COOLDOWN
 
 
@@ -64,18 +62,3 @@ func _update_overlay_strategy() -> void:
 	var s := ItemOverlayStrategy.new()
 	s.item_info = generating
 	overlay_strategy = s
-
-
-func _precompute_offsets() -> void:
-	if generating == null:
-		return
-	_offsets[FactoryBuilding.Rotation.NORMAL] = (
-			Vector2.DOWN * .5 + Vector2.UP * generating.grid_size.y * .5)
-	_offsets[FactoryBuilding.Rotation.CLOCKWISE] = (
-			Vector2.RIGHT * .5 + Vector2.LEFT * generating.grid_size.x * .5)
-	_offsets[FactoryBuilding.Rotation.COUNTERCLOCKWISE] = (
-			Vector2.DOWN + Vector2.UP * generating.grid_size.y +
-			Vector2.RIGHT * .5 + Vector2.LEFT * generating.grid_size.x * .5)
-	_offsets[FactoryBuilding.Rotation.FLIPPED] = (
-			Vector2.RIGHT + Vector2.LEFT * generating.grid_size.x +
-			Vector2.DOWN * .5 + Vector2.UP * generating.grid_size.y * .5)

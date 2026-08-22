@@ -50,24 +50,8 @@ func tick() -> void:
 	for ingredient in recipe.inputs:
 		inventory.remove(ingredient.item, ingredient.amount)
 
-	var output_port := _get_available_out_port()
-	if output_port == null:
-		return
-
-	var g := grid
-	if g == null:
-		return
-
 	for output in recipe.outputs:
-		if not _can_output_to(output.item, output_port):
-			continue
-		var where := position + output_port.position + output_port.facing
-		var item := FactoryItem.new(output.item, where)
-		if recipe is AmmoRecipe:
-			var ammo_recipe := recipe as AmmoRecipe
-			if ammo_recipe.strategy != null:
-				item.shooting_strategy = ammo_recipe.strategy.new()
-		g.place_item(item)
+		_output_item(output.item)
 
 
 func get_vars() -> Dictionary[StringName, Variant]:
@@ -140,3 +124,10 @@ func _update_overlay_strategy() -> void:
 	var s := ItemOverlayStrategy.new()
 	s.item_info = recipe.outputs[0].item
 	overlay_strategy = s
+
+
+func _configure_output_item(item: FactoryItem) -> void:
+	if recipe is AmmoRecipe:
+		var ammo_recipe := recipe as AmmoRecipe
+		if ammo_recipe.strategy != null:
+			item.shooting_strategy = ammo_recipe.strategy.new()

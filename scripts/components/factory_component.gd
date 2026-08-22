@@ -133,10 +133,21 @@ func _can_output() -> bool:
 	return false
 
 
+func _compute_output_offset(item_info: FactoryItemInfo, port: Port) -> Vector2:
+	var gs := item_info.grid_size
+	var f := port.facing
+	if f.x != 0:
+		return Vector2(0.0 if f.x > 0 else 1.0 - gs.x, (1.0 - gs.y) * 0.5)
+	return Vector2((1.0 - gs.x) * 0.5, 0.0 if f.y > 0 else 1.0 - gs.y)
+
+
+func _configure_output_item(_item: FactoryItem) -> void:
+	pass
+
+
 func _output_item(
 		item_info: FactoryItemInfo,
 		port: Port = null,
-		offset: Vector2 = Vector2.ZERO,
 ) -> bool:
 	var g := grid
 	if g == null:
@@ -145,8 +156,11 @@ func _output_item(
 		port = _get_available_out_port()
 	if port == null:
 		return false
-	var where_to: Vector2 = Vector2(position + port.position + port.facing) + offset
+	var where_to := Vector2(position + port.position + port.facing)
+	where_to += _compute_output_offset(item_info, port)
 	if not _can_output_to(item_info, port, where_to):
 		return false
-	g.place_item(FactoryItem.new(item_info, where_to))
+	var item := FactoryItem.new(item_info, where_to)
+	_configure_output_item(item)
+	g.place_item(item)
 	return true

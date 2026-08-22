@@ -90,7 +90,7 @@ func _update_ui() -> void:
 		const SHOP_ENTRY_UI := preload("uid://c2wbtyck2ydt1")
 		var instance: ShopEntryUI = SHOP_ENTRY_UI.instantiate()
 		var can_afford := player != null and player.level_system.gold >= price
-		instance.set_item(slot.item)
+		instance.set_item(slot.item, slot.stock)
 		instance.disabled = not can_afford
 		instance.pressed.connect(_on_slot_pressed.bind(slot))
 		instance.name = "ShopEntry"

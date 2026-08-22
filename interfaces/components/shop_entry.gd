@@ -13,13 +13,13 @@ func set_rarity(rarity: Rarity) -> void:
 	_price_label.add_theme_color_override("font_color", rarity.color)
 
 
-func set_item(item: ShopItem) -> void:
+func set_item(item: ShopItem, stock: int) -> void:
 	_setup()
 	set_rarity(item.rarity)
 	_entry_texture.texture = item.item.texture
 	_item_name_label.text = item.item.display_name
 	_price_label.text = "%sg" % str(item.base_price)
-	_stock_count_label.text = "Stock: %sx" % str(item.stock)
+	_stock_count_label.text = "Stock: %sx" % str(stock)
 
 
 func _setup() -> void:

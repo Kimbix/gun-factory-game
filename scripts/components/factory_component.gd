@@ -47,8 +47,19 @@ func get_vars() -> Dictionary[StringName, Variant]:
 	return { }
 
 
-func can_accept(_item: FactoryItem) -> bool:
-	return true
+func can_accept(_item: FactoryItem, _from: Vector2i) -> bool:
+	return _has_input_port_facing(_from)
+
+
+func _has_input_port_facing(from: Vector2i) -> bool:
+	var g := grid
+	if g == null:
+		return false
+	var my_ports := g.get_building_ports(position).filter(Port.input_mode_filter)
+	for p: Port in my_ports:
+		if position + p.position + p.facing == from:
+			return true
+	return false
 
 
 func receive_item(_item: FactoryItem) -> void:
@@ -86,7 +97,8 @@ func _can_output_to(item: FactoryItemInfo, port: Port, at_position: Vector2 = Ve
 	var target := g.get_building(where.floor())
 	if target == null:
 		return false
-	return target.behaviour.can_accept(FactoryItem.new(item, where))
+	var from := position + port.position
+	return target.behaviour.can_accept(FactoryItem.new(item, where), from)
 
 
 func _get_available_out_port() -> Port:
@@ -162,5 +174,6 @@ func _output_item(
 		return false
 	var item := FactoryItem.new(item_info, where_to)
 	_configure_output_item(item)
-	g.place_item(item)
+	var from := position + port.position
+	g.place_item(item, from)
 	return true

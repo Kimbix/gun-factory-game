@@ -9,8 +9,8 @@ var _next_out_port: int = 0
 var _cooldown: int = 0
 
 
-func can_accept(_item: FactoryItem) -> bool:
-	return _items.size() < MAX_STORED
+func can_accept(_item: FactoryItem, from: Vector2i) -> bool:
+	return _has_input_port_facing(from) and _items.size() < MAX_STORED
 
 
 func receive_item(item: FactoryItem) -> void:

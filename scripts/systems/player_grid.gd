@@ -154,7 +154,7 @@ func place_building(
 	building_placed.emit(building)
 
 
-func place_item(item: FactoryItem) -> void:
+func place_item(item: FactoryItem, from: Vector2i) -> void:
 	if item == null:
 		print("Item cannot be null")
 		return
@@ -167,7 +167,7 @@ func place_item(item: FactoryItem) -> void:
 	var building_to_check := pos.floor()
 	var building := get_building(building_to_check)
 
-	if building != null and not building.behaviour.can_accept(item):
+	if building != null and not building.behaviour.can_accept(item, from):
 		return
 	_items.append(item)
 	if building != null:

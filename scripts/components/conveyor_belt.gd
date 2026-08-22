@@ -30,8 +30,10 @@ func tick() -> void:
 
 		if _dist_to_exit(cur) < cur.rect.size.x:
 			var build := _next_building()
-			if build != null and not build.behaviour.can_accept(cur):
-				continue
+			if build != null:
+				var from := position + _get_available_out_port().position
+				if not build.behaviour.can_accept(cur, from):
+					continue
 
 		if _will_exit(next_pos, cur):
 			var build := _next_building()
@@ -43,7 +45,9 @@ func tick() -> void:
 		cur.position = next_pos
 
 
-func can_accept(item: FactoryItem) -> bool:
+func can_accept(item: FactoryItem, from: Vector2i) -> bool:
+	if not _has_input_port_facing(from):
+		return false
 	for existing: FactoryItem in items:
 		if _calc_gap(item.position, existing) < item.rect.size.x:
 			return false

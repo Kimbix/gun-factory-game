@@ -1,6 +1,8 @@
 class_name FactoryBuilding
 extends RefCounted
 
+signal rotated
+
 enum Rotation {
 	NORMAL = 0,
 	CLOCKWISE = 1,
@@ -29,6 +31,7 @@ var rotation: Rotation = Rotation.NORMAL:
 					p.facing = Vector2i(p.facing.y, -p.facing.x)
 				Rotation.FLIPPED:
 					p.facing = Vector2i(-p.facing.x, -p.facing.y)
+		rotated.emit()
 var rect: Rect2
 var position: Vector2i
 var behaviour: FactoryComponent

@@ -15,9 +15,16 @@ func free_resources() -> void:
 
 
 func tick() -> void:
+	var next_build := _next_building()
 	for i: int in range(items.size() - 1, -1, -1):
 		var cur := items[i]
 		var ahead := items[i + 1] if i + 1 < items.size() else null
+
+		if ahead == null and next_build != null \
+				and next_build.behaviour is ConveyorBelt \
+				and next_build.rotation == rotation \
+				and next_build.behaviour.items.size() > 0:
+			ahead = next_build.behaviour.items[0]
 
 		if not _is_centered(cur):
 			cur.position = _step_toward_center(cur)
@@ -25,21 +32,17 @@ func tick() -> void:
 
 		var next_pos := cur.position + _move_dir() * ITEM_SPEED
 
-		if _would_collide(next_pos, ahead):
+		if _would_collide(next_pos, ahead, cur.rect.size):
 			continue
 
-		if _dist_to_exit(cur) < cur.rect.size.x:
-			var build := _next_building()
-			if build != null:
-				var from := position + _get_available_out_port().position
-				if not build.behaviour.can_accept(cur, from):
-					continue
-
 		if _will_exit(next_pos, cur):
-			var build := _next_building()
-			if build != null:
-				items.remove_at(i)
-				build.receive_item(cur)
+			if next_build != null:
+				var from := position + _get_available_out_port().position
+				if next_build.behaviour.can_accept(cur, from):
+					items.remove_at(i)
+					next_build.receive_item(cur)
+					continue
+			cur.position = _clamp_to_exit(cur)
 			continue
 
 		cur.position = next_pos
@@ -106,6 +109,20 @@ func _dist_to_exit(cur: FactoryItem) -> float:
 			return 0.0
 
 
+func _clamp_to_exit(cur: FactoryItem) -> Vector2:
+	var pos := cur.position
+	match rotation:
+		FactoryBuilding.Rotation.NORMAL:
+			pos.x = rect.position.x + rect.size.x - cur.rect.size.x
+		FactoryBuilding.Rotation.FLIPPED:
+			pos.x = rect.position.x
+		FactoryBuilding.Rotation.CLOCKWISE:
+			pos.y = rect.position.y + rect.size.y - cur.rect.size.y
+		FactoryBuilding.Rotation.COUNTERCLOCKWISE:
+			pos.y = rect.position.y
+	return pos
+
+
 func _next_building() -> FactoryBuilding:
 	var p := _get_available_out_port()
 	if p == null:
@@ -145,24 +162,23 @@ func _progress(item: FactoryItem) -> float:
 
 
 func _will_exit(next_pos: Vector2, cur: FactoryItem) -> bool:
-	var center := next_pos + cur.rect.size * 0.5
 	match rotation:
 		FactoryBuilding.Rotation.NORMAL:
-			return center.x >= rect.position.x + rect.size.x
+			return next_pos.x + cur.rect.size.x >= rect.position.x + rect.size.x
 		FactoryBuilding.Rotation.FLIPPED:
-			return center.x <= rect.position.x
+			return next_pos.x <= rect.position.x
 		FactoryBuilding.Rotation.CLOCKWISE:
-			return center.y >= rect.position.y + rect.size.y
+			return next_pos.y + cur.rect.size.y >= rect.position.y + rect.size.y
 		FactoryBuilding.Rotation.COUNTERCLOCKWISE:
-			return center.y <= rect.position.y
+			return next_pos.y <= rect.position.y
 		_:
 			return false
 
 
-func _would_collide(next_pos: Vector2, ahead: FactoryItem) -> bool:
+func _would_collide(next_pos: Vector2, ahead: FactoryItem, item_size: Vector2) -> bool:
 	if ahead == null:
 		return false
-	return _calc_gap(next_pos, ahead) < ahead.rect.size.x
+	return _calc_gap(next_pos, ahead) < item_size.x
 
 
 func _calc_gap(next_pos: Vector2, ahead: FactoryItem) -> float:

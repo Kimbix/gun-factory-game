@@ -35,7 +35,8 @@ func _handle_mouse_button(event: InputEventMouseButton) -> void:
 	if event.is_released():
 		_dragging_state = DraggingState.DROPPED
 		return
-	var self_rect: Rect2 = self.get_viewport_rect()
-	if event.is_pressed() and self_rect.has_point(event.position):
+	var self_rect: Rect2 = self.get_rect()
+	if event.is_pressed() and self_rect.has_point(event.position - global_position):
 		_dragging_state = DraggingState.DRAGGING
+		accept_event()
 		return

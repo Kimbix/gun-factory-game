@@ -18,6 +18,7 @@ var _interface_supervisor: InterfaceSupervisor
 var _pause_menu_instance: PauseMenu
 var _game_over_menu_instance: GameOverMenu
 
+@onready var _gameplay_scene: GameDirector = $GameplayScene
 @onready var _building_ui: BuildingUI = $InterfaceSupervisor/BuildingUI
 @onready var _grid_builder: GridBuilder = (
 		$InterfaceSupervisor/BuildingUI/PlayerGridViewer/GridBuilder
@@ -32,7 +33,7 @@ var _game_over_menu_instance: GameOverMenu
 func _ready() -> void:
 	match_stats = MatchStats.new()
 	match_stats.reset()
-	_active_player = %GameplayScene.player_instance
+	_active_player = _gameplay_scene.player_instance
 	_interface_supervisor = $InterfaceSupervisor
 
 	_building_ui.player_grid = _active_player.player_grid
@@ -59,7 +60,7 @@ func _ready() -> void:
 	SignalBus.gold_changed.connect(_on_gold_changed)
 	SignalBus.crystal_collected.connect(_on_crystal_collected)
 
-	_overlay_ui.setup(_active_player, %GameplayScene)
+	_overlay_ui.setup(_active_player, _gameplay_scene)
 
 	if not InputMap.has_action("pause"):
 		var event := InputEventKey.new()
@@ -82,7 +83,7 @@ func _ready() -> void:
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventKey and event.keycode == KEY_F4 and event.pressed and not event.echo:
-		var director := %GameplayScene as GameDirector
+		var director := _gameplay_scene as GameDirector
 		if director != null and not director.win_triggered:
 			director.elapsed_time = director.WIN_TIME - 1.0
 
@@ -142,6 +143,7 @@ func quit_game() -> void:
 
 func _show_pause_menu() -> void:
 	_pause_menu_instance = preload("res://interfaces/menus/pause_menu.tscn").instantiate()
+	_pause_menu_instance.minimap.world = _gameplay_scene
 	_interface_supervisor.open_interface(
 		InterfaceSupervisor.InterfaceType.EMERGENT,
 		_pause_menu_instance,
@@ -245,7 +247,7 @@ func _on_crystal_collected(xp_value: int) -> void:
 
 
 func _on_player_died() -> void:
-	var director := %GameplayScene as GameDirector
+	var director := _gameplay_scene as GameDirector
 	var is_win := false
 	if director != null:
 		is_win = director.win_triggered
@@ -296,26 +298,26 @@ func _set_state(new_state: GameState, is_win: bool = false) -> void:
 			_interface_supervisor.close_building_interface()
 			_active_player._tick_timer.start()
 			_active_player.player_grid.is_outputting = true
-			%GameplayScene.call_deferred("set_process_mode", PROCESS_MODE_INHERIT)
+			_gameplay_scene.call_deferred("set_process_mode", PROCESS_MODE_INHERIT)
 		GameState.BUILDING:
 			_hide_pause_menu()
 			_interface_supervisor.open_building_interface()
 			_active_player._tick_timer.start()
 			_active_player.player_grid.is_outputting = false
-			%GameplayScene.call_deferred("set_process_mode", PROCESS_MODE_DISABLED)
+			_gameplay_scene.call_deferred("set_process_mode", PROCESS_MODE_DISABLED)
 		GameState.LEVEL_UP:
 			_hide_pause_menu()
 			_active_player._tick_timer.stop()
 			_active_player.player_grid.is_outputting = false
-			%GameplayScene.call_deferred("set_process_mode", PROCESS_MODE_DISABLED)
+			_gameplay_scene.call_deferred("set_process_mode", PROCESS_MODE_DISABLED)
 			_building_ui.process_mode = PROCESS_MODE_DISABLED
 		GameState.PAUSED:
 			_active_player._tick_timer.stop()
 			_active_player.player_grid.is_outputting = false
-			%GameplayScene.call_deferred("set_process_mode", PROCESS_MODE_DISABLED)
+			_gameplay_scene.call_deferred("set_process_mode", PROCESS_MODE_DISABLED)
 			_show_pause_menu()
 		GameState.GAME_OVER:
 			_hide_pause_menu()
 			_interface_supervisor.close_building_interface()
-			%GameplayScene.call_deferred("set_process_mode", PROCESS_MODE_DISABLED)
+			_gameplay_scene.call_deferred("set_process_mode", PROCESS_MODE_DISABLED)
 			_show_game_over_menu(is_win)

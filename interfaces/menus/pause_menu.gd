@@ -6,8 +6,10 @@ signal request_quit
 
 @export var resume_button: Button
 @export var quit_button: Button
+@export var minimap: Minimap
 
 
 func _ready() -> void:
 	resume_button.pressed.connect(request_resume.emit)
 	quit_button.pressed.connect(request_quit.emit)
+	minimap.generate()

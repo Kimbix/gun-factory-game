@@ -3,6 +3,8 @@
 [ext_resource type="Script" uid="uid://blaeku3hh6pnr" path="res://objects/player/simple_character.gd" id="1_yj3so"]
 [ext_resource type="Resource" uid="uid://bvqabweo4xd0o" path="res://resources/player_grid_data/starting_shotgun_grid.tres" id="2_sx0qt"]
 [ext_resource type="Texture2D" uid="uid://c78eu1huc66n7" path="res://assets/world_entities/spr_playerCharacter.png" id="3_8nbjm"]
+[ext_resource type="Script" uid="uid://d0mgxr7eyx1a6" path="res://scripts/systems/minimap_positioner.gd" id="4_tnlkx"]
+[ext_resource type="Texture2D" uid="uid://ck5f3apuhr4tw" path="res://assets/interface/Minimap/spr_minimapPlayerIndicator.png" id="5_qbtty"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_r3t7o"]
 size = Vector2(10, 21)
@@ -58,3 +60,8 @@ process_mode = 1
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BossProximity" unique_id=1132822082]
 shape = SubResource("CircleShape2D_boss")
 debug_color = Color(0.99607843, 0, 0.20392157, 0.078431375)
+
+[node name="MinimapPositioner" type="Node" parent="." unique_id=749382972]
+script = ExtResource("4_tnlkx")
+minimap_texture = ExtResource("5_qbtty")
+metadata/_custom_type_script = "uid://d0mgxr7eyx1a6"

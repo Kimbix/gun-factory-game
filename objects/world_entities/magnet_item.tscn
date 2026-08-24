@@ -2,6 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://bmv6j1r0k7hle" path="res://assets/world_entities/spr_magnetItem.png" id="1_magnet"]
 [ext_resource type="Script" uid="uid://b5o815bo0fx8h" path="res://objects/world_entities/magnet_item.gd" id="2_script"]
+[ext_resource type="Script" uid="uid://d0mgxr7eyx1a6" path="res://scripts/systems/minimap_positioner.gd" id="3_1cles"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_body"]
 radius = 4.0
@@ -14,3 +15,8 @@ texture = ExtResource("1_magnet")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=761231578]
 shape = SubResource("CircleShape2D_body")
+
+[node name="MinimapPositioner" type="Node" parent="." unique_id=187845845]
+script = ExtResource("3_1cles")
+minimap_texture = ExtResource("1_magnet")
+metadata/_custom_type_script = "uid://d0mgxr7eyx1a6"

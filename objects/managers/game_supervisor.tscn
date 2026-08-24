@@ -8,7 +8,6 @@
 [ext_resource type="PackedScene" uid="uid://dgxpr0t4v73lm" path="res://interfaces/layers/emergent_ui.tscn" id="5_pqrs"]
 [ext_resource type="PackedScene" uid="uid://bg1u2yvhxn1tl" path="res://interfaces/layers/building_ui.tscn" id="6_jroq"]
 [ext_resource type="PackedScene" uid="uid://c6iys0cbb3umc" path="res://interfaces/layers/overlay_ui.tscn" id="7_pqrs"]
-[ext_resource type="Resource" uid="uid://depiu46xbt4hi" path="res://resources/enemy_waves/testing_events.tres" id="8_epj5h"]
 
 [node name="GameSupervisor" type="Node" unique_id=1285082505]
 script = ExtResource("1_7xq2v")
@@ -28,7 +27,6 @@ script = ExtResource("3_r0dkg")
 
 [node name="GameplayScene" parent="." unique_id=367612 instance=ExtResource("2_gm3q9")]
 unique_name_in_owner = true
-enemy_events = ExtResource("8_epj5h")
 base_enemy_cap = 100
 spawn_interval = 0.5
 loot_box_spawn_interval = 15.0

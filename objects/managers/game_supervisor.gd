@@ -136,12 +136,19 @@ func unpause() -> void:
 		_set_state(_state_before_pause)
 
 
+func quit_game() -> void:
+	get_tree().change_scene_to_file(&"uid://c0f8gqiflva8v")
+
+
 func _show_pause_menu() -> void:
 	_pause_menu_instance = preload("res://interfaces/menus/pause_menu.tscn").instantiate()
 	_interface_supervisor.open_interface(
 		InterfaceSupervisor.InterfaceType.EMERGENT,
 		_pause_menu_instance,
 	)
+
+	_pause_menu_instance.request_resume.connect(unpause)
+	_pause_menu_instance.request_quit.connect(quit_game)
 
 
 func _hide_pause_menu() -> void:

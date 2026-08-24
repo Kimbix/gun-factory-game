@@ -1,16 +1,16 @@
 [gd_scene format=3 uid="uid://baa2hx32qstst"]
 
-[ext_resource type="Script" uid="uid://bgdi3x3fsb360" path="res://objects/world_entities/factory_building.gd" id="1_script"]
-[ext_resource type="Texture2D" uid="uid://ceu6n1kd44tle" path="res://assets/world_entities/spr_factoryEditor.png" id="2_sprite"]
+[ext_resource type="Script" uid="uid://bgdi3x3fsb360" path="res://objects/world_entities/factory_workshop.gd" id="1_mbri8"]
+[ext_resource type="Texture2D" uid="uid://ceu6n1kd44tle" path="res://assets/world_entities/spr_factoryEditor.png" id="2_vwrnx"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_proximity"]
 radius = 200.0
 
-[node name="FactoryBuilding" type="Area2D" unique_id=813008854]
-script = ExtResource("1_script")
+[node name="FactoryWorkshop" type="Area2D" unique_id=813008854]
+script = ExtResource("1_mbri8")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1505044590]
-texture = ExtResource("2_sprite")
+texture = ExtResource("2_vwrnx")
 
 [node name="ProximityArea" type="CollisionShape2D" parent="." unique_id=277107276]
 shape = SubResource("CircleShape2D_proximity")

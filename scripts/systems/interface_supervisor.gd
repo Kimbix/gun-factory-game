@@ -34,11 +34,6 @@ func _ready() -> void:
 				interfaces[InterfaceType.DEBUG] = n
 
 
-func _unhandled_input(event: InputEvent) -> void:
-	if event is InputEventKey and event.keycode == KEY_F3 and event.pressed and not event.echo:
-		(interfaces[InterfaceType.DEBUG] as DebugUI).toggle_stats_debug()
-
-
 func open_interface(
 		layer: InterfaceType,
 		window: InterfaceWindow,

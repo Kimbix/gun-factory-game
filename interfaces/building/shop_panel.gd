@@ -3,6 +3,7 @@ extends PanelContainer
 
 var catalogue: ShopCatalogue
 var building_inventory: PlayerBuildingInventory
+var level_system: LevelSystem
 var _slots: Array[Dictionary] = []
 var _reroll_count: int = 0
 
@@ -70,11 +71,7 @@ func _pick_random_items() -> void:
 
 
 func _update_ui() -> void:
-	var player := _get_player()
-	var gold: int = 0
-	if player != null:
-		gold = player.level_system.gold
-	_gold_label.text = "Gold: %d" % gold
+	_gold_label.text = "Gold: %d" % level_system.gold
 
 	for child: Node in _slot_container.get_children():
 		child.queue_free()
@@ -89,7 +86,7 @@ func _update_ui() -> void:
 
 		const SHOP_ENTRY_UI := preload("uid://c2wbtyck2ydt1")
 		var instance: ShopEntryUI = SHOP_ENTRY_UI.instantiate()
-		var can_afford := player != null and player.level_system.gold >= price
+		var can_afford := level_system.gold >= price
 		instance.set_item(slot.item, slot.stock)
 		instance.disabled = not can_afford
 		instance.left_clicked.connect(_on_slot_pressed.bind(slot))
@@ -107,17 +104,14 @@ func _update_ui() -> void:
 		_reroll_cost_label.text = ""
 		_empty_label.show()
 
-	var can_reroll: bool = player != null and player.level_system.gold >= cost
+	var can_reroll: bool = level_system.gold >= cost
 	_reroll_button.disabled = not can_reroll
 
 
 func _on_slot_pressed(slot: Dictionary) -> void:
-	var player := _get_player()
-	if player == null:
-		return
 	var si: ShopItem = slot.item
 	var price: int = _get_item_price(si, 0)
-	if not player.level_system.spend_gold(price):
+	if not level_system.spend_gold(price):
 		return
 	building_inventory.add(si.item, 1)
 	slot.stock -= 1
@@ -125,28 +119,18 @@ func _on_slot_pressed(slot: Dictionary) -> void:
 
 
 func _on_slot_right_clicked(slot: Dictionary) -> void:
-	var player := _get_player()
-	if player == null:
-		return
 	var si: ShopItem = slot.item
 	var price: int = _get_item_price(si, 0)
-	while slot.stock > 0 and player.level_system.spend_gold(price):
+	while slot.stock > 0 and level_system.spend_gold(price):
 		building_inventory.add(si.item, 1)
 		slot.stock -= 1
 	_update_ui()
 
 
 func _on_reroll_pressed() -> void:
-	var player := _get_player()
-	if player == null:
-		return
 	var cost: int = get_reroll_cost(_reroll_count)
-	if not player.level_system.spend_gold(cost):
+	if not level_system.spend_gold(cost):
 		return
 	_reroll_count += 1
 	_pick_random_items()
 	_update_ui()
-
-
-func _get_player() -> SimpleCharacter:
-	return get_tree().get_first_node_in_group("player") as SimpleCharacter

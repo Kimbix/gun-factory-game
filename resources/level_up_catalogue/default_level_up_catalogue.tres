@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="LevelUpCatalogue" format=3]
+
+[ext_resource type="Script" uid="uid://da4yb3omv2567" path="res://resources/grid_components/scripts/grid_component_info.gd" id="1_script"]
+[ext_resource type="Script" path="res://resources/level_up_catalogue/level_up_catalogue.gd" id="2_catalogue"]
+[ext_resource type="Resource" uid="uid://bcal2r5lkeamc" path="res://resources/grid_components/max_health_pillar.tres" id="3_p1"]
+[ext_resource type="Resource" uid="uid://bqpqfr2jxp4t3" path="res://resources/grid_components/move_speed_pillar.tres" id="4_p2"]
+[ext_resource type="Resource" uid="uid://s86vmfpi3w15" path="res://resources/grid_components/tick_speed_pillar.tres" id="5_p3"]
+[ext_resource type="Resource" uid="uid://du6m2qkdv14nq" path="res://resources/grid_components/health_regen_pillar.tres" id="6_p4"]
+[ext_resource type="Resource" uid="uid://5h2vu81iay55" path="res://resources/grid_components/pickup_range_pillar.tres" id="7_p5"]
+[ext_resource type="Resource" uid="uid://bqbpme0t32frd" path="res://resources/grid_components/gold_gain_pillar.tres" id="8_p6"]
+[ext_resource type="Resource" uid="uid://ow4x6ndkrxfa" path="res://resources/grid_components/xp_gain_pillar.tres" id="9_p7"]
+[ext_resource type="Resource" uid="uid://cllvvl6vpb1q5" path="res://resources/grid_components/crit_chance_pillar.tres" id="10_p8"]
+[ext_resource type="Resource" uid="uid://da7gfhppawjyn" path="res://resources/grid_components/crit_damage_pillar.tres" id="11_p9"]
+[ext_resource type="Resource" uid="uid://bsf5enuerer77" path="res://resources/grid_components/armor_pillar.tres" id="12_p10"]
+[ext_resource type="Resource" uid="uid://d1t06rym3phod" path="res://resources/grid_components/luck_pillar.tres" id="13_p11"]
+[ext_resource type="Resource" uid="uid://c80v4vqlnn0sv" path="res://resources/grid_components/difficulty_pillar.tres" id="14_p12"]
+
+[resource]
+script = ExtResource("2_catalogue")
+items = Array[ExtResource("1_script")]([ExtResource("3_p1"), ExtResource("4_p2"), ExtResource("5_p3"), ExtResource("6_p4"), ExtResource("7_p5"), ExtResource("8_p6"), ExtResource("9_p7"), ExtResource("10_p8"), ExtResource("11_p9"), ExtResource("12_p10"), ExtResource("13_p11"), ExtResource("14_p12")])

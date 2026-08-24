@@ -3,20 +3,7 @@ extends InterfaceWindow
 
 signal reward_chosen(info: GridComponentInfo)
 
-const ALL_PILLARS: Array[GridComponentInfo] = [
-	preload("uid://bcal2r5lkeamc"),
-	preload("uid://bqpqfr2jxp4t3"),
-	preload("uid://s86vmfpi3w15"),
-	preload("uid://du6m2qkdv14nq"),
-	preload("uid://5h2vu81iay55"),
-	preload("uid://bqbpme0t32frd"),
-	preload("uid://ow4x6ndkrxfa"),
-	preload("uid://cllvvl6vpb1q5"),
-	preload("uid://da7gfhppawjyn"),
-	preload("uid://bsf5enuerer77"),
-	preload("uid://d1t06rym3phod"),
-	preload("uid://c80v4vqlnn0sv"),
-]
+@export var level_up_catalogue: LevelUpCatalogue
 
 var building_inventory: PlayerBuildingInventory
 var on_closed: Callable
@@ -35,7 +22,7 @@ func _ready() -> void:
 
 
 func show_options() -> void:
-	var pool: Array[GridComponentInfo] = ALL_PILLARS.duplicate()
+	var pool: Array[GridComponentInfo] = level_up_catalogue.items.duplicate()
 	pool.shuffle()
 	_options = pool.slice(0, 3)
 

@@ -1,7 +1,7 @@
-[gd_resource type="Resource" script_class="LevelUpCatalogue" format=3]
+[gd_resource type="Resource" script_class="LevelUpCatalogue" format=3 uid="uid://e2faekbat264"]
 
 [ext_resource type="Script" uid="uid://da4yb3omv2567" path="res://resources/grid_components/scripts/grid_component_info.gd" id="1_script"]
-[ext_resource type="Script" path="res://resources/level_up_catalogue/level_up_catalogue.gd" id="2_catalogue"]
+[ext_resource type="Script" uid="uid://ddtyfrijujta" path="res://resources/level_up_catalogue/level_up_catalogue.gd" id="2_catalogue"]
 [ext_resource type="Resource" uid="uid://bcal2r5lkeamc" path="res://resources/grid_components/max_health_pillar.tres" id="3_p1"]
 [ext_resource type="Resource" uid="uid://bqpqfr2jxp4t3" path="res://resources/grid_components/move_speed_pillar.tres" id="4_p2"]
 [ext_resource type="Resource" uid="uid://s86vmfpi3w15" path="res://resources/grid_components/tick_speed_pillar.tres" id="5_p3"]

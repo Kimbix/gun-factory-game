@@ -1,5 +1,5 @@
 class_name GameDirector
-extends WorldEnvironment
+extends Node
 
 const HP_SCALE := 0.5
 const SPEED_SCALE := 0.5
@@ -9,7 +9,6 @@ const CAP_PER_DIFFICULTY := 50
 const RATE_SCALE := 0.1
 ## Will change per stage in the future.
 const WIN_TIME := 30.0 * 60.0
-
 # TEMP: Passive difficulty ramp reaching 5.0 by the end of the match.
 const TEMP_DIFFICULTY_PER_MIN := 5.0 / (WIN_TIME / 60.0)
 const TEMP_MAX_DIFFICULTY := 5.0
@@ -37,9 +36,16 @@ var active_wave: EnemyWave
 var wave_index: int
 var player_instance: SimpleCharacter
 var _enemy_spawn_timer: Timer
+var _world_enemies: Node
+var _spawn_loot_boxes_node: Node
+var world_crystals: Node
+static var _next_loot_box_id: int = 0
 
 
 func _ready() -> void:
+	_world_enemies = get_node("WorldEnemies")
+	_spawn_loot_boxes_node = get_node("SpawnedLootBoxes")
+	world_crystals = get_node("ExperienceCrystals")
 	_spawn_player()
 	elapsed_time = 0.0
 	wave_index = 0
@@ -142,7 +148,7 @@ func _spawn_enemies() -> void:
 		instance.xp_amount = ceili(info.base_xp * xp_range)
 		_apply_difficulty(instance, diff)
 
-		add_child(instance)
+		_world_enemies.add_child(instance)
 		enemies.append(instance)
 		instance.tree_exited.connect(_on_enemy_killed.bind(instance))
 
@@ -167,13 +173,15 @@ func _spawn_loot_boxes() -> void:
 			return
 
 		var instance: LootBox = loot_box_scene.instantiate()
+		instance.name = "LootBox_%d" % _next_loot_box_id
+		_next_loot_box_id += 1
 		instance.position = (
 				player_instance.position
 				+ ((Vector2.RIGHT * randf_range(spawn_distance_min, spawn_distance_max))
 						.rotated(randf() * TAU))
 		)
 
-		add_child(instance)
+		_spawn_loot_boxes_node.add_child(instance)
 		loot_boxes.append(instance)
 		instance.tree_exited.connect(_on_loot_box_removed.bind(instance))
 
@@ -233,7 +241,7 @@ func _spawn_boss(event: EnemyEvent) -> void:
 		instance.xp_amount = ceili(event.enemy_info.base_xp * xp_range)
 		_apply_difficulty(instance, diff)
 
-		add_child(instance)
+		_world_enemies.add_child(instance)
 		enemies.append(instance)
 		instance.tree_exited.connect(_on_enemy_killed.bind(instance))
 
@@ -258,6 +266,6 @@ func _spawn_reaper() -> void:
 					.rotated(randf() * TAU))
 	)
 
-	add_child(instance)
+	_world_enemies.add_child(instance)
 	enemies.append(instance)
 	instance.tree_exited.connect(_on_enemy_killed.bind(instance))

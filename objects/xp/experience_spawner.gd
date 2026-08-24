@@ -4,6 +4,7 @@ extends Node2D
 static var crystals: Dictionary[int, PackedScene] = {
 	1: preload("uid://r5gdpvcp6gx3"),
 }
+static var _next_id: int = 0
 
 @export var spawn_radius: float = 16.0
 
@@ -39,9 +40,11 @@ func _do_spawn_deferred(amount: int, origin: Vector2) -> void:
 			if crystal == null:
 				continue
 			crystal.xp_value = value
+			crystal.name = "ExperienceCrystal_%d" % _next_id
+			_next_id += 1
 			var offset := Vector2.RIGHT.rotated(randf() * TAU) * randf() * spawn_radius
 			crystal.global_position = origin + offset
 			var enemy := get_parent() as BaseEnemy
-			if enemy == null or enemy.game_world == null:
+			if enemy == null or enemy.game_world == null or enemy.game_world.world_crystals == null:
 				continue
-			enemy.game_world.add_child(crystal)
+			enemy.game_world.world_crystals.add_child(crystal)

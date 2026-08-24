@@ -1,17 +1,17 @@
 class_name BuildingUI
 extends BaseInterface
 
-@export var player_grid: PlayerGrid
-@export var grid_builder: GridBuilder
+@export var building_panel: BuildingInventoryPanel
+@export var shop_panel: ShopPanel
+@export var player_grid_viewer: PlayerGridViewer
 
-var building_inventory: PlayerBuildingInventory
+var player_grid: PlayerGrid
+var _building_inventory: PlayerBuildingInventory
+var _grid_builder: GridBuilder
 var _building := false
 var _selected_button: Button = null
 
-@onready var player_grid_viewer := $PlayerGridViewer
-@onready var building_panel := $BuildingInventoryPanel
-@onready var building_list := %BuildingList
-@onready var shop_panel := $ShopPanel
+@onready var building_list := building_panel.building_list
 
 
 func open_building_interface() -> void:
@@ -19,13 +19,13 @@ func open_building_interface() -> void:
 		return
 	process_mode = PROCESS_MODE_INHERIT
 	open_factory_interface()
-	shop_panel.building_inventory = building_inventory
+	shop_panel.building_inventory = _building_inventory
 	shop_panel.refresh()
 	shop_panel.show()
-	if not building_inventory.changed.is_connected(refresh_building_list):
-		building_inventory.changed.connect(refresh_building_list)
-	if not grid_builder.selection_changed.is_connected(_on_selection_changed):
-		grid_builder.selection_changed.connect(_on_selection_changed)
+	if not _building_inventory.changed.is_connected(refresh_building_list):
+		_building_inventory.changed.connect(refresh_building_list)
+	if not _grid_builder.selection_changed.is_connected(_on_selection_changed):
+		_grid_builder.selection_changed.connect(_on_selection_changed)
 	_populate_building_list()
 	_building = true
 
@@ -33,13 +33,13 @@ func open_building_interface() -> void:
 func close_building_interface() -> void:
 	if not _building:
 		return
-	if grid_builder != null:
-		grid_builder.deselect()
+	if _grid_builder != null:
+		_grid_builder.deselect()
 	close_factory_interface()
-	if building_inventory.changed.is_connected(refresh_building_list):
-		building_inventory.changed.disconnect(refresh_building_list)
-	if grid_builder != null and grid_builder.selection_changed.is_connected(_on_selection_changed):
-		grid_builder.selection_changed.disconnect(_on_selection_changed)
+	if _building_inventory.changed.is_connected(refresh_building_list):
+		_building_inventory.changed.disconnect(refresh_building_list)
+	if _grid_builder != null and _grid_builder.selection_changed.is_connected(_on_selection_changed):
+		_grid_builder.selection_changed.disconnect(_on_selection_changed)
 	_clear_building_list()
 	shop_panel.hide()
 	_building = false
@@ -72,23 +72,23 @@ func refresh_building_list() -> void:
 
 
 func _on_building_entry_pressed(stack: BuildingStack, btn: BuildingInventoryEntry) -> void:
-	if grid_builder == null:
+	if _grid_builder == null:
 		return
-	if grid_builder.selected_info == stack.info:
-		grid_builder.deselect()
+	if _grid_builder.selected_info == stack.info:
+		_grid_builder.deselect()
 		_highlight_button(null)
 	else:
-		grid_builder.select(stack.info)
+		_grid_builder.select(stack.info)
 		_highlight_button(btn)
 
 
 func _populate_building_list() -> void:
-	for stack: BuildingStack in building_inventory.get_stacks():
+	for stack: BuildingStack in _building_inventory.get_stacks():
 		const BUILDING_INVENTORY_ENTRY := preload("uid://le1juys13dem")
 		var btn: BuildingInventoryEntry = BUILDING_INVENTORY_ENTRY.instantiate()
 		btn.setup(stack)
 		btn.pressed.connect(_on_building_entry_pressed.bind(stack, btn))
-		if grid_builder.selected_info == stack.info:
+		if _grid_builder.selected_info == stack.info:
 			_selected_button = btn
 			btn.modulate = Color(0.6, 1, 0.6)
 		building_list.add_child(btn)

@@ -36,8 +36,8 @@ func _ready() -> void:
 	_interface_supervisor = $InterfaceSupervisor
 
 	_building_ui.player_grid = _active_player.player_grid
-	_building_ui.building_inventory = _active_player.building_inventory
-	_building_ui.grid_builder = _grid_builder
+	_building_ui._building_inventory = _active_player.building_inventory
+	_building_ui._grid_builder = _grid_builder
 
 	_grid_builder.building_inventory = _active_player.building_inventory
 	_grid_builder.building_ui = _building_ui

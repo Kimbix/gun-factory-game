@@ -9,6 +9,8 @@ enum DraggingState {
 var _panel_parent: Control
 var _dragging_state: DraggingState = DraggingState.DROPPED
 
+@onready var _title_label: Label = $Title
+
 
 func _ready() -> void:
 	var looking: Control = self
@@ -35,8 +37,9 @@ func _handle_mouse_button(event: InputEventMouseButton) -> void:
 	if event.is_released():
 		_dragging_state = DraggingState.DROPPED
 		return
-	var self_rect: Rect2 = self.get_rect()
-	if event.is_pressed() and self_rect.has_point(event.position - global_position):
+	var self_rect: Rect2 = _title_label.get_rect()
+	var event_pos: Vector2 = event.position - _title_label.global_position
+	if event.is_pressed() and self_rect.has_point(event_pos):
 		_dragging_state = DraggingState.DRAGGING
 		accept_event()
 		return

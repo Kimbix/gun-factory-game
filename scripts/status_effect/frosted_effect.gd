@@ -25,5 +25,8 @@ func on_remove(enemy: BaseEnemy) -> void:
 	enemy.speed_multiplier = 1.0
 	if _particles:
 		_particles.emitting = false
-		_particles.get_tree().create_timer(_particles.lifetime).timeout.connect(_particles.queue_free)
+		var tree := _particles.get_tree()
+		tree.create_timer(_particles.lifetime).timeout.connect(
+			_particles.queue_free,
+		)
 		_particles = null

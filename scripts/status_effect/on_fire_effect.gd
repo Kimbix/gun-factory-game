@@ -16,13 +16,16 @@ func on_afflict(enemy: BaseEnemy) -> void:
 	enemy.add_child(_particles)
 
 
-func apply_effect(magnitude: float, delta: float, enemy: BaseEnemy) -> void:
+func apply_effect(magnitude: float, _delta: float, enemy: BaseEnemy) -> void:
 	var dps := ceili(magnitude)
 	enemy.take_damage(dps, &"on_fire")
 
 
-func on_remove(enemy: BaseEnemy) -> void:
+func on_remove(_enemy: BaseEnemy) -> void:
 	if _particles:
 		_particles.emitting = false
-		_particles.get_tree().create_timer(_particles.lifetime).timeout.connect(_particles.queue_free)
+		var tree := _particles.get_tree()
+		tree.create_timer(_particles.lifetime).timeout.connect(
+			_particles.queue_free,
+		)
 		_particles = null

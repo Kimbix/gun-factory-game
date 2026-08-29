@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ItemCatalogue" format=3 uid="uid://bal1rlmqpbytq"]
+
+[ext_resource type="Script" uid="uid://b3ij0uga7row5" path="res://resources/factory_items/factory_item_info.gd" id="1_0pnas"]
+[ext_resource type="Resource" uid="uid://b4hj3tlqd3od" path="res://resources/factory_items/raw_lead.tres" id="2_krfcq"]
+[ext_resource type="Resource" uid="uid://cpg7snevhbi06" path="res://resources/factory_items/gunpowder.tres" id="3_0pnas"]
+[ext_resource type="Script" uid="uid://tgtb7oldk48a" path="res://resources/item_catalogue/item_catalogue.gd" id="5_ncg2b"]
+
+[resource]
+script = ExtResource("5_ncg2b")
+items = Array[ExtResource("1_0pnas")]([ExtResource("2_krfcq"), ExtResource("3_0pnas")])
+metadata/_custom_type_script = "uid://tgtb7oldk48a"

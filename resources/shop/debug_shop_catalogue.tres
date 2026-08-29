@@ -4,8 +4,9 @@
 [ext_resource type="Resource" uid="uid://dg83go6xt162r" path="res://resources/shop/rarities/uncommon.tres" id="2_uncommon"]
 [ext_resource type="Resource" uid="uid://c0eojr4amwqdb" path="res://resources/shop/rarities/rare.tres" id="3_rare"]
 [ext_resource type="Resource" uid="uid://b5e1lax7f3r2a" path="res://resources/shop/rarities/legendary.tres" id="8_kpl0i"]
+[ext_resource type="Resource" uid="uid://bulvxyqhvfn6d" path="res://resources/grid_components/warehouse_generator.tres" id="11_kpl0i"]
+[ext_resource type="Resource" uid="uid://c102bb4lr5uog" path="res://resources/grid_components/mining_generator.tres" id="13_gkbny"]
 [ext_resource type="Resource" uid="uid://cxaf6asblr1t7" path="res://resources/grid_components/conveyor_belt.tres" id="b1"]
-[ext_resource type="Resource" uid="uid://d1wu3w33a0ds1" path="res://resources/grid_components/item_generator.tres" id="b3"]
 [ext_resource type="Resource" uid="uid://b41gow6t4rmgw" path="res://resources/grid_components/item_receiver.tres" id="b4"]
 [ext_resource type="Resource" uid="uid://dow1nfk5h5vv" path="res://resources/grid_components/furnace.tres" id="b5"]
 [ext_resource type="Resource" uid="uid://bfbl3v4bs23as" path="res://resources/grid_components/metal_processor.tres" id="b6"]
@@ -27,13 +28,6 @@ item = ExtResource("b8")
 base_price = 5
 rarity = ExtResource("1_common")
 stock = 2
-
-[sub_resource type="Resource" id="si_3"]
-script = ExtResource("shop_item_script")
-item = ExtResource("b3")
-base_price = 20
-rarity = ExtResource("2_uncommon")
-stock = 3
 
 [sub_resource type="Resource" id="si_4"]
 script = ExtResource("shop_item_script")
@@ -62,6 +56,22 @@ base_price = 40
 rarity = ExtResource("3_rare")
 stock = 2
 
+[sub_resource type="Resource" id="Resource_r3bnv"]
+script = ExtResource("shop_item_script")
+item = ExtResource("11_kpl0i")
+base_price = 25
+rarity = ExtResource("2_uncommon")
+stock = 3
+metadata/_custom_type_script = "uid://csy8bw6jxylg3"
+
+[sub_resource type="Resource" id="Resource_wvarx"]
+script = ExtResource("shop_item_script")
+item = ExtResource("13_gkbny")
+base_price = 15
+rarity = ExtResource("2_uncommon")
+stock = 3
+metadata/_custom_type_script = "uid://csy8bw6jxylg3"
+
 [resource]
 script = ExtResource("shop_cat_script")
-items = Array[ExtResource("shop_item_script")]([SubResource("si_1"), SubResource("si_2"), SubResource("si_3"), SubResource("si_4"), SubResource("si_6"), SubResource("si_7"), SubResource("si_8")])
+items = Array[ExtResource("shop_item_script")]([SubResource("si_1"), SubResource("si_2"), SubResource("si_4"), SubResource("si_6"), SubResource("si_7"), SubResource("si_8"), SubResource("Resource_r3bnv"), SubResource("Resource_wvarx")])

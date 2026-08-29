@@ -3,10 +3,12 @@ extends InterfaceWindow
 
 signal item_pressed(item: FactoryItemInfo)
 
-const ITEM_CATALOGUE := preload("uid://me3tk3q2kkm5")
 const ITEM_BUTTON := preload("uid://cq5f74b5ddssl")
 
 @export var close_button: Button
+
+var selected_catalogue: ItemCatalogue
+var _total_ticks: int = 0
 
 @onready var grid_container: GridContainer = \
 		$MarginContainer/VBoxContainer/Content/GridContainer
@@ -15,11 +17,9 @@ const ITEM_BUTTON := preload("uid://cq5f74b5ddssl")
 @onready var time_label: Label = \
 		$MarginContainer/VBoxContainer/Content/OutputPanel/VBoxContainer/TimeLabel
 
-var _total_ticks: int = 0
-
 
 func _ready() -> void:
-	for item: FactoryItemInfo in ITEM_CATALOGUE.items:
+	for item: FactoryItemInfo in selected_catalogue.items:
 		var instance: ItemButton = ITEM_BUTTON.instantiate()
 		self.grid_container.add_child(instance)
 		instance.item = item

@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="ItemCatalogue" format=3 uid="uid://cgyqmb1meva6g"]
+
+[ext_resource type="Script" uid="uid://b3ij0uga7row5" path="res://resources/factory_items/factory_item_info.gd" id="1_reqxt"]
+[ext_resource type="Resource" uid="uid://c4wf626ege7cx" path="res://resources/factory_items/bullet_casing.tres" id="4_i0toa"]
+[ext_resource type="Resource" uid="uid://b7x2462ft8mns" path="res://resources/factory_items/spark_cap.tres" id="5_r5gjd"]
+[ext_resource type="Resource" uid="uid://crub3df8l3k5f" path="res://resources/factory_items/pressure_trigger.tres" id="6_g48md"]
+[ext_resource type="Script" uid="uid://tgtb7oldk48a" path="res://resources/item_catalogue/item_catalogue.gd" id="7_6x1e6"]
+
+[resource]
+script = ExtResource("7_6x1e6")
+items = Array[ExtResource("1_reqxt")]([ExtResource("4_i0toa"), ExtResource("5_r5gjd"), ExtResource("6_g48md")])
+metadata/_custom_type_script = "uid://tgtb7oldk48a"

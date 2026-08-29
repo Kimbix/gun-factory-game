@@ -5,3 +5,4 @@ extends Resource
 @export var recipe_catalogue: BaseRecipeCatalogue
 @export var output_item: FactoryItemInfo
 @export var input_item: FactoryItemInfo
+@export var generator_item_list: ItemCatalogue

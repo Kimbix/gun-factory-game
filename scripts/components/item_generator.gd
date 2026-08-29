@@ -1,9 +1,9 @@
 class_name ItemGenerator
 extends FactoryComponent
 
-const COOLDOWN := 50
-
 signal ticks_changed(remaining: int)
+
+const COOLDOWN := 50
 
 var generating: FactoryItemInfo:
 	set(v):
@@ -27,6 +27,7 @@ func tick() -> void:
 func open_interface(interface_supervisor: InterfaceSupervisor) -> void:
 	var cfg := building.get_info().config as MachineConfig
 	var interface: GeneratorInterface = cfg.interface_scene.instantiate()
+	interface.selected_catalogue = cfg.generator_item_list
 	interface.source = self
 	if not interface_supervisor.open_interface(
 		InterfaceSupervisor.InterfaceType.FACTORY_BUILDING,

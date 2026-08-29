@@ -10,6 +10,7 @@ var damage := 25
 var blast_radius := 64.0
 var shooter: Node2D
 var player_stats: PlayerStats
+var effects: Array[EffectStrategy] = []
 var _fired := false
 
 
@@ -25,6 +26,8 @@ func _physics_process(delta: float) -> void:
 
 	global_position += direction * speed * delta
 	speed = maxf(speed - DECELERATION * delta, 0.0)
+	for e in effects:
+		e.update(delta, self)
 
 
 func _on_body_entered(body: Node) -> void:
@@ -57,9 +60,11 @@ func _explode() -> void:
 				target.take_damage(roll.damage, &"grenade", roll.crit)
 			else:
 				target.take_damage(roll.damage)
+			for e in effects:
+				e.apply_on_hit(target, self)
 
-	var effect := EXPLOSION_EFFECT.instantiate()
-	effect.global_position = global_position
-	get_parent().add_child(effect)
+	var explosion := EXPLOSION_EFFECT.instantiate()
+	explosion.global_position = global_position
+	get_parent().add_child(explosion)
 
 	queue_free()

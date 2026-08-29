@@ -24,4 +24,4 @@ func execute(
 		var dir := base_dir.rotated(angle_offset)
 		var speed := 600.0 * randf_range(0.75, 1.25)
 
-		spawn_bullet(BULLET_SCENE, shooter, dir, speed, DAMAGE, player_stats)
+		spawn_bullet(BULLET_SCENE, shooter, dir, speed, DAMAGE, player_stats, _item.effects)

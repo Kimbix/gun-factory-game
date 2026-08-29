@@ -37,7 +37,7 @@ func execute(
 		var dir := base_dir.rotated(angle_offset)
 		var speed := 600.0 * randf_range(0.95, 1.05)
 
-		spawn_bullet(BULLET_SCENE, shooter, dir, speed, DAMAGE, player_stats)
+		spawn_bullet(BULLET_SCENE, shooter, dir, speed, DAMAGE, player_stats, _item.effects)
 
 		if i < BULLET_COUNT - 1:
 			await _wait(shooter, DELAY)

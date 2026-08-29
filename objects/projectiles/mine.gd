@@ -17,6 +17,7 @@ static var _active_mines: Array[Mine] = []
 var damage := 20
 var shooter: Node2D
 var player_stats: PlayerStats
+var effects: Array[EffectStrategy] = []
 var _triggered := false
 
 
@@ -84,10 +85,12 @@ func _detonate() -> void:
 			n.take_damage(roll.damage, &"mine", roll.crit)
 		else:
 			n.take_damage(roll.damage)
+		for e in effects:
+			e.apply_on_hit(n, self)
 
-	var effect := EXPLOSION_EFFECT.instantiate()
-	effect.global_position = global_position
-	get_parent().add_child(effect)
+	var explosion := EXPLOSION_EFFECT.instantiate()
+	explosion.global_position = global_position
+	get_parent().add_child(explosion)
 
 	_active_mines.erase(self)
 	queue_free()

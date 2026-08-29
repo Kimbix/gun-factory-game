@@ -1,0 +1,40 @@
+[gd_resource type="Resource" script_class="EnhancementCatalogue" format=3 uid="uid://dpj81ojs8os5j"]
+
+[ext_resource type="Script" uid="uid://x4jefiwbupp" path="res://resources/grid_components/scripts/enhancement_catalogue.gd" id="1_cat"]
+[ext_resource type="Script" uid="uid://2xfymxq13qyp" path="res://resources/grid_components/scripts/enhancement_entry.gd" id="2_entry"]
+[ext_resource type="Script" uid="uid://n3wdllsccsht" path="res://scripts/effect_strategy/fire_bullet_effect.gd" id="3_fbe"]
+[ext_resource type="Script" uid="uid://cl8abix743nvc" path="res://scripts/effect_strategy/fire_grenade_effect.gd" id="4_fge"]
+[ext_resource type="Script" uid="uid://dxhgt8m743iom" path="res://scripts/effect_strategy/fire_mine_effect.gd" id="5_fme"]
+
+[sub_resource type="Resource" id="entry_rifle"]
+script = ExtResource("2_entry")
+item_name = &"rifle_round"
+effect_script = ExtResource("3_fbe")
+craft_time = 20
+
+[sub_resource type="Resource" id="entry_shotgun"]
+script = ExtResource("2_entry")
+item_name = &"shotgun_bullet"
+effect_script = ExtResource("3_fbe")
+craft_time = 20
+
+[sub_resource type="Resource" id="entry_loaded"]
+script = ExtResource("2_entry")
+item_name = &"loaded_bullet"
+effect_script = ExtResource("3_fbe")
+craft_time = 20
+
+[sub_resource type="Resource" id="entry_grenade"]
+script = ExtResource("2_entry")
+item_name = &"grenade_shell"
+effect_script = ExtResource("4_fge")
+craft_time = 40
+
+[sub_resource type="Resource" id="entry_mine"]
+script = ExtResource("2_entry")
+item_name = &"mine"
+effect_script = ExtResource("5_fme")
+
+[resource]
+script = ExtResource("1_cat")
+entries = Array[ExtResource("2_entry")]([SubResource("entry_rifle"), SubResource("entry_shotgun"), SubResource("entry_loaded"), SubResource("entry_grenade"), SubResource("entry_mine")])

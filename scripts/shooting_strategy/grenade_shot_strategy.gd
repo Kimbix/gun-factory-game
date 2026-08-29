@@ -25,4 +25,5 @@ func execute(
 	grenade.speed = SPEED
 	grenade.damage = DAMAGE
 	grenade.blast_radius = BLAST_RADIUS
+	grenade.effects = _item.effects.duplicate()
 	shooter.get_parent().add_child(grenade)

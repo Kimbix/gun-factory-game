@@ -8,6 +8,7 @@ var direction: Vector2
 var damage := 5
 var shooter: Node2D
 var player_stats: PlayerStats
+var effects: Array[EffectStrategy] = []
 var _lifetime := 0.0
 var _fired := false
 
@@ -20,6 +21,8 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	position += direction * speed * delta
 	_lifetime += delta
+	for e in effects:
+		e.update(delta, self)
 	if _lifetime >= LIFETIME:
 		queue_free()
 
@@ -43,4 +46,6 @@ func _deal_damage(target: Node2D) -> void:
 		target.take_damage(roll.damage, _get_ammo_type(), roll.crit)
 	else:
 		target.take_damage(roll.damage)
+	for e in effects:
+		e.apply_on_hit(target, self)
 	queue_free()

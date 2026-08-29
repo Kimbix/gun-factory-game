@@ -19,4 +19,5 @@ func execute(
 	mine.player_stats = player_stats
 	mine.damage = DAMAGE
 	mine.global_position = shooter.global_position
+	mine.effects = _item.effects.duplicate()
 	shooter.get_parent().add_child(mine)

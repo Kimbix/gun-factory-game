@@ -8,6 +8,7 @@ static func spawn_bullet(
 		speed: float,
 		damage: int,
 		player_stats: PlayerStats = null,
+		effects: Array[EffectStrategy] = [],
 ) -> Bullet:
 	var bullet := bullet_scene.instantiate()
 	bullet.shooter = shooter
@@ -16,6 +17,7 @@ static func spawn_bullet(
 	bullet.global_position = shooter.global_position
 	bullet.speed = speed
 	bullet.damage = damage
+	bullet.effects = effects.duplicate()
 	shooter.get_parent().add_child(bullet)
 	return bullet
 

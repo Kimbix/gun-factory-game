@@ -12,6 +12,7 @@ var name: String:
 	get():
 		return _info.name
 var shooting_strategy: ShootingStrategy
+var effects: Array[EffectStrategy] = []
 var _info: FactoryItemInfo
 
 

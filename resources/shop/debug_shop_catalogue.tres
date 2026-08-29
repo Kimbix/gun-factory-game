@@ -12,6 +12,9 @@
 [ext_resource type="Resource" uid="uid://bfbl3v4bs23as" path="res://resources/grid_components/metal_processor.tres" id="b6"]
 [ext_resource type="Resource" uid="uid://delxbnrvtqsr4" path="res://resources/grid_components/ammo_assembler.tres" id="b7"]
 [ext_resource type="Resource" uid="uid://dsn4h7kwi2ca2" path="res://resources/grid_components/conveyor_splitter.tres" id="b8"]
+[ext_resource type="Resource" path="res://resources/grid_components/fire_enhancer.tres" id="b_fire"]
+[ext_resource type="Resource" path="res://resources/grid_components/ice_enhancer.tres" id="b_ice"]
+[ext_resource type="Resource" path="res://resources/grid_components/toxic_enhancer.tres" id="b_toxic"]
 [ext_resource type="Script" uid="uid://dk761p6ithagt" path="res://resources/shop/shop_catalogue.gd" id="shop_cat_script"]
 [ext_resource type="Script" uid="uid://csy8bw6jxylg3" path="res://resources/shop/shop_item.gd" id="shop_item_script"]
 
@@ -72,6 +75,27 @@ rarity = ExtResource("2_uncommon")
 stock = 3
 metadata/_custom_type_script = "uid://csy8bw6jxylg3"
 
+[sub_resource type="Resource" id="si_ice"]
+script = ExtResource("shop_item_script")
+item = ExtResource("b_ice")
+base_price = 50
+rarity = ExtResource("3_rare")
+metadata/_custom_type_script = "uid://csy8bw6jxylg3"
+
+[sub_resource type="Resource" id="si_fire"]
+script = ExtResource("shop_item_script")
+item = ExtResource("b_fire")
+base_price = 50
+rarity = ExtResource("3_rare")
+metadata/_custom_type_script = "uid://csy8bw6jxylg3"
+
+[sub_resource type="Resource" id="si_toxic"]
+script = ExtResource("shop_item_script")
+item = ExtResource("b_toxic")
+base_price = 50
+rarity = ExtResource("3_rare")
+metadata/_custom_type_script = "uid://csy8bw6jxylg3"
+
 [resource]
 script = ExtResource("shop_cat_script")
-items = Array[ExtResource("shop_item_script")]([SubResource("si_1"), SubResource("si_2"), SubResource("si_4"), SubResource("si_6"), SubResource("si_7"), SubResource("si_8"), SubResource("Resource_r3bnv"), SubResource("Resource_wvarx")])
+items = Array[ExtResource("shop_item_script")]([SubResource("si_1"), SubResource("si_2"), SubResource("si_4"), SubResource("si_6"), SubResource("si_7"), SubResource("si_8"), SubResource("Resource_r3bnv"), SubResource("Resource_wvarx"), SubResource("si_ice"), SubResource("si_fire"), SubResource("si_toxic")])

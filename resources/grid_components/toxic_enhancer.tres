@@ -1,0 +1,35 @@
+[gd_resource type="Resource" script_class="GridComponentInfo" format=3 uid="uid://nttrdii6j4c6"]
+
+[ext_resource type="Script" uid="uid://do281dkc60xgp" path="res://scripts/components/enhancer.gd" id="1_beh"]
+[ext_resource type="Script" uid="uid://cxdyvqaslkwas" path="res://scripts/systems/port.gd" id="2_port"]
+[ext_resource type="Script" uid="uid://da4yb3omv2567" path="res://resources/grid_components/scripts/grid_component_info.gd" id="3_gci"]
+[ext_resource type="Texture2D" uid="uid://dxjpyomarjkwh" path="res://assets/factory_components/spr_toxicEnhancer.png" id="4_tex"]
+[ext_resource type="Script" uid="uid://2r0ppiudhlw8" path="res://resources/grid_components/scripts/enhancer_config.gd" id="5_cfg"]
+[ext_resource type="Resource" uid="uid://bc27x8jf8vq3" path="res://resources/grid_components/toxic_enhancement_catalogue.tres" id="6_cat"]
+
+[sub_resource type="Resource" id="Resource_cfg"]
+script = ExtResource("5_cfg")
+catalogue = ExtResource("6_cat")
+
+[sub_resource type="Resource" id="Resource_in"]
+script = ExtResource("2_port")
+facing = Vector2i(-1, 0)
+metadata/_custom_type_script = "uid://cxdyvqaslkwas"
+
+[sub_resource type="Resource" id="Resource_out"]
+script = ExtResource("2_port")
+facing = Vector2i(1, 0)
+mode = 1
+metadata/_custom_type_script = "uid://cxdyvqaslkwas"
+
+[resource]
+script = ExtResource("3_gci")
+name = &"toxic_enhancer"
+display_name = &"Toxic Enhancer"
+texture = ExtResource("4_tex")
+dimensions = Vector2i(1, 1)
+behaviour = ExtResource("1_beh")
+color = Color(0.8, 0.9, 0.1, 1)
+ports = Array[ExtResource("2_port")]([SubResource("Resource_in"), SubResource("Resource_out")])
+config = SubResource("Resource_cfg")
+metadata/_custom_type_script = "uid://da4yb3omv2567"

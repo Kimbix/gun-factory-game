@@ -14,7 +14,7 @@ var pending_rotation: int = FactoryBuilding.Rotation.NORMAL
 var _selected_building_index: int = 0
 var _last_hovered: Vector2i = Vector2i(-1, -1)
 
-@onready var grid := $VBoxContainer/BuildingsList
+@onready var grid := $VBoxContainer/BuildingsScroll/BuildingsList
 
 
 func _ready() -> void:
@@ -100,7 +100,7 @@ func _initialize_catalogue_viewer() -> void:
 
 		var text := TextureButton.new()
 		text.texture_normal = building.texture
-		text.custom_minimum_size = Vector2.ONE * 128
+		text.custom_minimum_size = Vector2.ONE * 48
 		text.stretch_mode = TextureButton.STRETCH_KEEP_ASPECT_CENTERED
 		text.button_down.connect(
 			func() -> void:
@@ -113,7 +113,7 @@ func _initialize_catalogue_viewer() -> void:
 		label.text = (building.display_name
 				if not building.display_name.is_empty()
 				else building.name)
-		label.custom_minimum_size = Vector2(128, 0)
+		label.custom_minimum_size = Vector2(48, 0)
 		label.autowrap_mode = TextServer.AUTOWRAP_WORD
 		label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 		container.add_child(label)

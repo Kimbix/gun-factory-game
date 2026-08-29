@@ -19,7 +19,7 @@ view_ports = true
 
 [node name="PlayerGrid" type="Node" parent="PlayerGridViewer" unique_id=1269156065]
 script = ExtResource("7_d0b6t")
-dimensions = Vector2i(25, 25)
+dimensions = Vector2i(20, 20)
 
 [node name="InterfaceSupervisor" type="Node" parent="." unique_id=1915036764]
 script = ExtResource("8_yo2k4")
@@ -43,11 +43,13 @@ metadata/_custom_type_script = "uid://c42oxf66vw7sk"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="DebugLayer/DebugPlayerGridBuilder" unique_id=102239719]
 layout_mode = 1
-anchors_preset = -1
-anchor_bottom = 0.041666668
-offset_left = -254.0
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -191.0
 grow_horizontal = 0
-metadata/_edit_use_anchors_ = true
+grow_vertical = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="DebugLayer/DebugPlayerGridBuilder/VBoxContainer" unique_id=1744198410]
 layout_mode = 2
@@ -66,6 +68,11 @@ icon = ExtResource("5_fp60s")
 layout_mode = 2
 icon = ExtResource("6_5wuod")
 
-[node name="BuildingsList" type="GridContainer" parent="DebugLayer/DebugPlayerGridBuilder/VBoxContainer" unique_id=892556118]
+[node name="BuildingsScroll" type="ScrollContainer" parent="DebugLayer/DebugPlayerGridBuilder/VBoxContainer" unique_id=892556118]
 layout_mode = 2
+size_flags_vertical = 3
+
+[node name="BuildingsList" type="GridContainer" parent="DebugLayer/DebugPlayerGridBuilder/VBoxContainer/BuildingsScroll" unique_id=931499277]
+layout_mode = 2
+size_flags_horizontal = 3
 columns = 3

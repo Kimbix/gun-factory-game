@@ -15,8 +15,17 @@
 [ext_resource type="Resource" uid="uid://s86vmfpi3w15" path="res://resources/grid_components/tick_speed_pillar.tres" id="12_ghi"]
 [ext_resource type="Resource" uid="uid://du6m2qkdv14nq" path="res://resources/grid_components/health_regen_pillar.tres" id="13_jkl"]
 [ext_resource type="Resource" uid="uid://5h2vu81iay55" path="res://resources/grid_components/pickup_range_pillar.tres" id="14_mno"]
+[ext_resource type="Resource" uid="uid://bqbpme0t32frd" path="res://resources/grid_components/gold_gain_pillar.tres" id="15_ggp"]
+[ext_resource type="Resource" uid="uid://ow4x6ndkrxfa" path="res://resources/grid_components/xp_gain_pillar.tres" id="16_xgp"]
+[ext_resource type="Resource" uid="uid://cllvvl6vpb1q5" path="res://resources/grid_components/crit_chance_pillar.tres" id="17_ccp"]
+[ext_resource type="Resource" uid="uid://da7gfhppawjyn" path="res://resources/grid_components/crit_damage_pillar.tres" id="18_cdp"]
+[ext_resource type="Resource" uid="uid://bsf5enuerer77" path="res://resources/grid_components/armor_pillar.tres" id="19_arm"]
+[ext_resource type="Resource" uid="uid://d1t06rym3phod" path="res://resources/grid_components/luck_pillar.tres" id="20_lck"]
+[ext_resource type="Resource" uid="uid://c80v4vqlnn0sv" path="res://resources/grid_components/difficulty_pillar.tres" id="21_dff"]
+[ext_resource type="Resource" uid="uid://bulvxyqhvfn6d" path="res://resources/grid_components/warehouse_generator.tres" id="22_wgn"]
+[ext_resource type="Resource" uid="uid://c102bb4lr5uog" path="res://resources/grid_components/mining_generator.tres" id="23_mgn"]
 
 [resource]
 script = ExtResource("2_bss7p")
-buildings = Array[ExtResource("1_3g68y")]([ExtResource("4_nkpgx"), ExtResource("3_kxio0"), ExtResource("2_312wq"), ExtResource("5_1u43t"), ExtResource("9_5wq31"), ExtResource("6_2wq31"), ExtResource("7_3wq31"), ExtResource("8_4wq31"), ExtResource("10_abc"), ExtResource("11_def"), ExtResource("12_ghi"), ExtResource("13_jkl"), ExtResource("14_mno")])
+buildings = Array[ExtResource("1_3g68y")]([ExtResource("4_nkpgx"), ExtResource("3_kxio0"), ExtResource("2_312wq"), ExtResource("5_1u43t"), ExtResource("9_5wq31"), ExtResource("6_2wq31"), ExtResource("7_3wq31"), ExtResource("8_4wq31"), ExtResource("10_abc"), ExtResource("11_def"), ExtResource("12_ghi"), ExtResource("13_jkl"), ExtResource("14_mno"), ExtResource("15_ggp"), ExtResource("16_xgp"), ExtResource("17_ccp"), ExtResource("18_cdp"), ExtResource("19_arm"), ExtResource("20_lck"), ExtResource("21_dff"), ExtResource("22_wgn"), ExtResource("23_mgn")])
 metadata/_custom_type_script = "uid://bj46e0a68npcj"

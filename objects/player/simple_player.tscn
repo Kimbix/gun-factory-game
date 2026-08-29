@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://c0f7aja78bay4"]
 
 [ext_resource type="Script" uid="uid://blaeku3hh6pnr" path="res://objects/player/simple_character.gd" id="1_yj3so"]
-[ext_resource type="Resource" uid="uid://bvqabweo4xd0o" path="res://resources/player_grid_data/starting_shotgun_grid.tres" id="2_sx0qt"]
+[ext_resource type="Resource" uid="uid://picj733uhyqn" path="res://resources/player_grid_data/shotgun_starting_grid.tres" id="2_qbtty"]
 [ext_resource type="Texture2D" uid="uid://c78eu1huc66n7" path="res://assets/world_entities/spr_playerCharacter.png" id="3_8nbjm"]
 [ext_resource type="Script" uid="uid://d0mgxr7eyx1a6" path="res://scripts/systems/minimap_positioner.gd" id="4_tnlkx"]
 [ext_resource type="Texture2D" uid="uid://ck5f3apuhr4tw" path="res://assets/interface/Minimap/spr_minimapPlayerIndicator.png" id="5_qbtty"]
@@ -24,7 +24,7 @@ radius = 1024.0
 [node name="CharacterBody2D" type="CharacterBody2D" unique_id=800432502]
 collision_layer = 5
 script = ExtResource("1_yj3so")
-starting_grid_data = ExtResource("2_sx0qt")
+starting_grid_data = ExtResource("2_qbtty")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=339485483]
 texture = ExtResource("3_8nbjm")

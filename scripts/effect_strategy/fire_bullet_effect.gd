@@ -7,5 +7,6 @@ func _init() -> void:
 	incompatible_with = []
 
 
-func apply_on_hit(_target: Node2D, _projectile: Node2D) -> void:
-	print("FIRE_BULLET_ENHANCEMENT")
+func apply_on_hit(target: Node2D, _projectile: Node2D) -> void:
+	if target is BaseEnemy:
+		target.add_status_effect(OnFireEffect.new())

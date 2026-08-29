@@ -7,5 +7,6 @@ func _init() -> void:
 	incompatible_with = []
 
 
-func apply_on_hit(_target: Node2D, _projectile: Node2D) -> void:
-	print("ICE_GRENADE_ENHANCEMENT")
+func apply_on_hit(target: Node2D, _projectile: Node2D) -> void:
+	if target is BaseEnemy:
+		target.add_status_effect(FrostedEffect.new())
